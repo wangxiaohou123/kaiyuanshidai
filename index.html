@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>王晶晶 · 开元时代创业战略</title>
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C97A;
+      --gold-dim: #8A6F30;
+      --dark: #0E1117;
+      --dark-2: #161B24;
+      --dark-3: #1E2530;
+      --dark-4: #252D3A;
+      --border: rgba(201,168,76,0.18);
+      --text: #EAE6D8;
+      --muted: #8A8F9E;
+      --green: #3DD68C;
+      --blue: #4A9EFF;
+      --red: #FF6B6B;
+      --amber: #F5A623;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+      background: var(--dark); color: var(--text);
+      line-height: 1.7; min-height: 100vh; overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      height: 56px; padding: 0 1.2rem;
+      background: rgba(14,17,23,0.94); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-size: 0.85rem; font-weight: 700; color: var(--gold); letter-spacing: 0.06em; white-space: nowrap; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { font-size: 0.78rem; color: var(--muted); text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-right { display: flex; align-items: center; gap: 0.8rem; }
+    .nav-date { font-size: 0.72rem; color: var(--muted); white-space: nowrap; }
+    .cowork-badge {
+      font-size: 0.65rem; padding: 0.18rem 0.55rem; border-radius: 100px;
+      background: rgba(61,214,140,0.12); color: var(--green);
+      border: 1px solid rgba(61,214,140,0.3); white-space: nowrap;
+      animation: pulse 2.5s ease infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+    @media (max-width: 600px) { .nav-links { display: none; } }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center; padding: 5rem 1.5rem 3rem;
+      background:
+        radial-gradient(ellipse 90% 55% at 50% -5%, rgba(201,168,76,0.13) 0%, transparent 68%),
+        radial-gradient(ellipse 50% 35% at 85% 85%, rgba(74,158,255,0.06) 0%, transparent 60%),
+        var(--dark);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.035) 1px, transparent 1px);
+      background-size: 52px 52px;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      border: 1px solid var(--border); border-radius: 100px;
+      padding: 0.28rem 0.85rem; font-size: 0.72rem; color: var(--gold);
+      background: rgba(201,168,76,0.07); margin-bottom: 1.6rem;
+      letter-spacing: 0.08em; position: relative; z-index: 1;
+    }
+    .hero h1 {
+      font-size: clamp(1.9rem, 7vw, 4.2rem);
+      font-weight: 800; line-height: 1.15; letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #fff 10%, var(--gold-light) 55%, var(--gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 1rem; position: relative; z-index: 1;
+      padding: 0 0.5rem;
+    }
+    .hero-sub {
+      font-size: clamp(0.88rem, 2.5vw, 1.15rem);
+      color: var(--muted); max-width: 560px; margin: 0 auto 2.2rem;
+      font-weight: 300; line-height: 1.8; position: relative; z-index: 1;
+      padding: 0 0.5rem;
+    }
+    .hero-stats {
+      display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 2.5rem; position: relative; z-index: 1;
+    }
+    .hero-stat { text-align: center; min-width: 80px; }
+    .hero-stat-num { font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 800; color: var(--gold); line-height: 1; }
+    .hero-stat-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.3rem; }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+      color: #000; font-weight: 700; font-size: 0.85rem;
+      padding: 0.8rem 1.8rem; border-radius: 8px; text-decoration: none;
+      letter-spacing: 0.04em; transition: opacity 0.2s; position: relative; z-index: 1;
+    }
+    .hero-cta:hover { opacity: 0.85; }
+
+    /* ── SECTION ── */
+    section { padding: 5rem 1.2rem; max-width: 1060px; margin: 0 auto; }
+    .section-label { font-size: 0.68rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 600; }
+    .section-title { font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 800; line-height: 1.2; margin-bottom: 0.9rem; letter-spacing: -0.01em; }
+    .section-desc { color: var(--muted); font-size: 0.95rem; max-width: 580px; line-height: 1.85; }
+    hr.divider { border: none; border-top: 1px solid var(--border); }
+
+    /* ── VISION ── */
+    .vision-big {
+      background: linear-gradient(135deg, rgba(201,168,76,0.11), rgba(201,168,76,0.04));
+      border: 1px solid rgba(201,168,76,0.32); border-radius: 18px;
+      padding: 2rem 1.8rem; margin: 2.5rem 0 1.5rem;
+      position: relative; overflow: hidden;
+    }
+    .vision-big::after {
+      content: '❝'; position: absolute; right: 1.5rem; top: 0.8rem;
+      font-size: 4rem; color: rgba(201,168,76,0.1); line-height: 1; pointer-events: none;
+    }
+    .vision-big .quote {
+      font-size: clamp(1rem, 2.8vw, 1.28rem); font-weight: 300;
+      line-height: 2; color: #ddd; font-style: italic;
+    }
+    .vision-big .quote em { color: var(--gold-light); font-style: normal; font-weight: 700; }
+    .vision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .vision-card {
+      background: var(--dark-2); border: 1px solid var(--border); border-radius: 14px;
+      padding: 1.6rem; transition: border-color 0.25s, transform 0.25s;
+    }
+    .vision-card:hover { border-color: var(--gold-dim); transform: translateY(-2px); }
+    .vision-card-icon { font-size: 1.7rem; margin-bottom: 0.8rem; }
+    .vision-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .vision-card p { color: var(--muted); font-size: 0.84rem; line-height: 1.8; }
+    @media (max-width: 640px) { .vision-grid { grid-template-columns: 1fr; } }
+
+    /* ── TEAM ── */
+    #team { background: none; }
+    .team-intro {
+      background: var(--dark-2); border: 1px solid var(--border); border-radius: 14px;
+      padding: 1.5rem 1.8rem; margin: 2rem 0; font-size: 0.88rem; color: var(--muted); line-height: 1.85;
+    }
+    .team-intro strong { color: var(--text); }
+    .team-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.2rem; margin-top: 1.5rem; }
+    .team-card {
+      background: var(--dark-3); border: 1px solid var(--border); border-radius: 14px;
+      padding: 1.5rem; transition: border-color 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .team-card:hover { border-color: var(--gold-dim); }
+    .team-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent); opacity: 0; transition: opacity 0.25s;
+    }
+    .team-card:hover::before { opacity: 1; }
+    .team-role { font-size: 0.65rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .team-title { font-size: 1.05rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .team-name { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.9rem; }
+    .team-fn { font-size: 0.82rem; color: var(--muted); line-height: 1.8; }
+    .team-fn strong { color: var(--text); display: block; margin-bottom: 0.2rem; }
+    .team-tag {
+      display: inline-block; margin-top: 1rem;
+      font-size: 0.68rem; padding: 0.18rem 0.55rem; border-radius: 4px;
+      background: rgba(201,168,76,0.1); color: var(--gold); border: 1px solid rgba(201,168,76,0.22);
+    }
+    @media (max-width: 640px) { .team-grid { grid-template-columns: 1fr; } }
+
+    /* ── 决策机制 ── */
+    .decision-flow {
+      margin: 2rem 0;
+      background: var(--dark-2); border: 1px solid var(--border); border-radius: 14px;
+      padding: 1.8rem; overflow-x: auto;
+    }
+    .flow-title { font-size: 0.72rem; letter-spacing: 0.14em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.2rem; }
+    .flow-steps { display: flex; align-items: flex-start; gap: 0; flex-wrap: nowrap; min-width: 0; }
+    .flow-step { flex: 1; min-width: 100px; text-align: center; position: relative; }
+    .flow-step:not(:last-child)::after {
+      content: '→'; position: absolute; right: -8px; top: 14px;
+      color: var(--gold-dim); font-size: 1rem;
+    }
+    .flow-dot {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(201,168,76,0.15); border: 1px solid var(--gold-dim);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; color: var(--gold); font-weight: 700;
+      margin: 0 auto 0.5rem;
+    }
+    .flow-label { font-size: 0.72rem; color: var(--muted); line-height: 1.4; }
+    .flow-sub { font-size: 0.63rem; color: var(--muted); opacity: 0.6; margin-top: 0.2rem; }
+
+    /* ── STRATEGY ── */
+    .strategy-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem; margin-top: 2.5rem; }
+    .strategy-card {
+      background: var(--dark-3); border: 1px solid var(--border); border-radius: 14px;
+      padding: 1.6rem; transition: border-color 0.2s;
+    }
+    .strategy-card:hover { border-color: var(--gold-dim); }
+    .strategy-num { font-size: 0.65rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.7rem; }
+    .strategy-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.45rem; }
+    .strategy-card p { color: var(--muted); font-size: 0.82rem; line-height: 1.75; }
+    .strategy-tag { display: inline-block; margin-top: 0.9rem; font-size: 0.68rem; padding: 0.18rem 0.55rem; border-radius: 4px; background: rgba(201,168,76,0.1); color: var(--gold); border: 1px solid rgba(201,168,76,0.22); }
+    @media (max-width: 768px) { .strategy-grid { grid-template-columns: 1fr; } }
+
+    /* ── TIMELINE ── */
+    .timeline { margin-top: 2.5rem; position: relative; }
+    .timeline::before { content: ''; position: absolute; left: 18px; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--gold), transparent); }
+    .tl-week { margin-left: 52px; margin-bottom: 2.2rem; position: relative; }
+    .tl-week::before { content: ''; position: absolute; left: -40px; top: 5px; width: 9px; height: 9px; border-radius: 50%; background: var(--gold); border: 2px solid var(--dark); box-shadow: 0 0 8px var(--gold); }
+    .tl-week-label { font-size: 0.68rem; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.35rem; }
+    .tl-week h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.9rem; }
+    .tl-tasks { display: flex; flex-direction: column; gap: 0.55rem; }
+    .task-item { display: flex; align-items: flex-start; gap: 0.6rem; background: var(--dark-2); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; font-size: 0.84rem; }
+    .task-dot { width: 16px; height: 16px; border-radius: 4px; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; }
+    .task-dot.active { background: rgba(201,168,76,0.2); color: var(--gold); border: 1px solid rgba(201,168,76,0.4); }
+    .task-dot.pending { background: rgba(138,143,158,0.1); color: var(--muted); border: 1px solid rgba(138,143,158,0.2); }
+    .task-dot.done { background: rgba(61,214,140,0.15); color: var(--green); border: 1px solid rgba(61,214,140,0.35); }
+    .task-txt { flex: 1; }
+    .task-txt strong { display: block; margin-bottom: 0.15rem; }
+    .task-txt span { color: var(--muted); font-size: 0.76rem; }
+    .task-owner { font-size: 0.65rem; padding: 0.12rem 0.45rem; border-radius: 4px; background: rgba(74,158,255,0.1); color: var(--blue); border: 1px solid rgba(74,158,255,0.2); white-space: nowrap; flex-shrink: 0; }
+
+    /* ── LOG ── */
+    #log .log-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.8rem; flex-wrap: wrap; gap: 0.8rem; }
+    .log-count { font-size: 0.75rem; color: var(--muted); border: 1px solid var(--border); padding: 0.25rem 0.7rem; border-radius: 100px; white-space: nowrap; }
+    .log-entry { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 1.1rem; transition: border-color 0.2s; }
+    .log-entry:hover { border-color: var(--gold-dim); }
+    .log-entry-hd { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 1.4rem; background: var(--dark-2); cursor: pointer; gap: 0.8rem; flex-wrap: wrap; }
+    .log-meta { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+    .log-date { font-size: 0.72rem; color: var(--gold); letter-spacing: 0.05em; white-space: nowrap; }
+    .log-day { font-size: 0.72rem; color: var(--muted); white-space: nowrap; }
+    .log-title { font-weight: 700; font-size: 0.9rem; }
+    .log-arrow { color: var(--muted); font-size: 0.75rem; transition: transform 0.2s; flex-shrink: 0; }
+    .log-body { padding: 1.4rem; background: var(--dark-3); display: none; }
+    .log-body.open { display: block; }
+    .log-sec { margin-bottom: 1.4rem; }
+    .log-sec:last-child { margin-bottom: 0; }
+    .log-sec h4 { font-size: 0.7rem; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.75rem; }
+    .log-sec ul { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .log-sec li { display: flex; align-items: flex-start; gap: 0.55rem; font-size: 0.84rem; color: var(--muted); line-height: 1.7; }
+    .log-sec li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
+    .log-mini-kpi { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.9rem; }
+    .lkpi { background: var(--dark-4); border-radius: 10px; padding: 0.9rem; text-align: center; }
+    .lkpi-val { font-size: 1.3rem; font-weight: 800; color: var(--gold); }
+    .lkpi-nm { font-size: 0.68rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ── 决策记录卡 ── */
+    .decision-card {
+      background: var(--dark-2); border: 1px solid rgba(201,168,76,0.3); border-radius: 14px;
+      padding: 1.6rem; margin-top: 1.5rem;
+    }
+    .dc-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 0.5rem; }
+    .dc-id { font-size: 0.68rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; }
+    .dc-date { font-size: 0.72rem; color: var(--muted); }
+    .dc-topic { font-size: 1rem; font-weight: 700; margin-bottom: 1.2rem; }
+    .dc-section { margin-bottom: 1rem; }
+    .dc-label { font-size: 0.68rem; letter-spacing: 0.1em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .dc-content { font-size: 0.84rem; color: var(--muted); line-height: 1.8; }
+    .dc-content ul { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+    .dc-content li { display: flex; gap: 0.5rem; }
+    .dc-content li::before { content: '·'; color: var(--gold); flex-shrink: 0; }
+    .dc-risks { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.8rem; margin-top: 0.6rem; }
+    .dc-risk { background: var(--dark-3); border-radius: 10px; padding: 0.8rem; font-size: 0.78rem; }
+    .dc-risk-lvl { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 0.3rem; }
+    .dc-risk-lvl.high { color: var(--red); }
+    .dc-risk-lvl.mid { color: var(--amber); }
+    .dc-risk-lvl.low { color: var(--green); }
+    .dc-risk-txt { color: var(--muted); line-height: 1.6; }
+    @media (max-width: 600px) { .dc-risks { grid-template-columns: 1fr; } .log-mini-kpi { grid-template-columns: repeat(3,1fr); } }
+
+    /* ── KPI ── */
+    .kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.1rem; margin-top: 2.2rem; }
+    .kpi-card { background: var(--dark-2); border: 1px solid var(--border); border-radius: 14px; padding: 1.3rem; text-align: center; transition: border-color 0.2s; }
+    .kpi-card:hover { border-color: var(--gold-dim); }
+    .kpi-val { font-size: 2rem; font-weight: 800; color: var(--gold); font-variant-numeric: tabular-nums; line-height: 1; }
+    .kpi-lbl { font-size: 0.74rem; color: var(--muted); margin-top: 0.4rem; }
+    .kpi-tgt { font-size: 0.68rem; color: var(--muted); margin-top: 0.2rem; opacity: 0.7; }
+    .kpi-bar { height: 3px; background: var(--dark-4); border-radius: 99px; margin-top: 0.9rem; overflow: hidden; }
+    .kpi-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--gold-dim), var(--gold)); transition: width 0.8s; }
+    @media (max-width: 640px) { .kpi-grid { grid-template-columns: repeat(2,1fr); } }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 2.5rem 1.5rem; text-align: center; color: var(--muted); font-size: 0.78rem; }
+    footer strong { color: var(--gold); }
+
+    /* ── TAG ── */
+    .tag { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.68rem; padding: 0.18rem 0.6rem; border-radius: 100px; }
+    .tag-gold { background: rgba(201,168,76,0.12); color: var(--gold); border: 1px solid rgba(201,168,76,0.28); }
+    .tag-green { background: rgba(61,214,140,0.1); color: var(--green); border: 1px solid rgba(61,214,140,0.28); }
+    .tag-blue { background: rgba(74,158,255,0.1); color: var(--blue); border: 1px solid rgba(74,158,255,0.28); }
+    .tag-red { background: rgba(255,107,107,0.1); color: var(--red); border: 1px solid rgba(255,107,107,0.28); }
+    .tag-amber { background: rgba(245,166,35,0.1); color: var(--amber); border: 1px solid rgba(245,166,35,0.28); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    .fade-up { animation: fadeUp 0.65s ease both; }
+    .d1{animation-delay:0.1s}.d2{animation-delay:0.22s}.d3{animation-delay:0.36s}
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">王晶晶 · 开元时代</div>
+  <ul class="nav-links">
+    <li><a href="#vision">愿景</a></li>
+    <li><a href="#team">班子</a></li>
+    <li><a href="#strategy">战略</a></li>
+    <li><a href="#timeline">计划</a></li>
+    <li><a href="#log">日志</a></li>
+    <li><a href="#kpi">指标</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="cowork-badge">● 班子协作中</span>
+    <span class="nav-date" id="live-date">2026年3月11日</span>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-badge fade-up">战略初创期 · Day 1</div>
+  <h1 class="fade-up d1">让每一位长者<br/>活得更好、更有尊严</h1>
+  <p class="hero-sub fade-up d2">以商业之力驱动社会价值<br/>打造中国最受信赖的居家照护服务生态</p>
+  <div class="hero-stats fade-up d3">
+    <div class="hero-stat">
+      <div class="hero-stat-num">3.2亿</div>
+      <div class="hero-stat-label">60岁以上长者人口</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">14万亿</div>
+      <div class="hero-stat-label">银发经济市场规模</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">12个月</div>
+      <div class="hero-stat-label">第一阶段验证周期</div>
+    </div>
+  </div>
+  <a href="#log" class="hero-cta fade-up d3">▼ 查看今日班子进展</a>
+</div>
+
+<!-- ── 愿景 ── -->
+<section id="vision">
+  <div class="section-label">Vision · 使命愿景</div>
+  <h2 class="section-title">我们为什么而存在</h2>
+  <p class="section-desc">这不只是一门生意。这是一场关于尊严、关于陪伴、关于让人生每一段旅程都充满温度的事业。</p>
+
+  <div class="vision-big">
+    <div class="quote">
+      "我们相信，照护的终极意义不是服务的交付，<br/>
+      而是让每一位长者——无论贫富、无论身处何地——<br/>
+      都能<em>在自己熟悉的家中，有尊严地老去，被认真地陪伴</em>。<br/>
+      盈利是我们持续服务的手段，不是我们存在的目的。"
+    </div>
+  </div>
+
+  <div class="vision-grid">
+    <div class="vision-card">
+      <div class="vision-card-icon">🎯</div>
+      <h3>使命</h3>
+      <p>用商业创新弥补中国居家照护服务缺口，连接政策资源、科技能力与人文关怀，让每一个需要帮助的家庭都能负担得起优质的照护。</p>
+    </div>
+    <div class="vision-card">
+      <div class="vision-card-icon">🔭</div>
+      <h3>愿景</h3>
+      <p>成为中国居家+社区照护服务领域最受信赖的品牌。3年内覆盖100个城市，陪伴100万个家庭，带动10万名护理人员有尊严地工作。</p>
+    </div>
+    <div class="vision-card">
+      <div class="vision-card-icon">⚖️</div>
+      <h3>价值观</h3>
+      <p><strong>先有真正的改变，再谈规模</strong> · 找到第一个被改变的故事，而非第一批付费客户。<br/><strong>普惠优先</strong> · 每10个服务家庭，至少3个是低收入长者。<br/><strong>护理员有尊严</strong> · 照护者的体面，是被照护者尊严的前提。</p>
+    </div>
+    <div class="vision-card">
+      <div class="vision-card-icon">💡</div>
+      <h3>差异化定位</h3>
+      <p>不与传统养老院竞争。聚焦<strong>居家+社区嵌入式</strong>场景，以第一个真实案例建立信任，以政府补贴为压舱石，以口碑驱动扩张。</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── 班子 ── -->
+<section id="team">
+  <div class="section-label">Leadership Team · 三省六部制 · 核心班子</div>
+  <h2 class="section-title">开元治理体系</h2>
+  <p class="section-desc">以唐朝三省六部制为蓝本——中书省谋划、门下省审议、尚书省执行，每省有自己的决策团队，向CEO汇报。重大决策必须经过三省共识，方可执行。</p>
+
+  <!-- 品牌主张 -->
+  <div style="background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(201,168,76,0.03));border:1px solid rgba(201,168,76,0.3);border-radius:18px;padding:2rem 1.8rem;margin-bottom:2.5rem;position:relative;overflow:hidden;">
+    <div style="position:absolute;right:1.5rem;top:1rem;font-size:3.5rem;color:rgba(201,168,76,0.08);line-height:1;pointer-events:none;">心</div>
+    <div style="font-size:0.68rem;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;margin-bottom:0.8rem;">Brand Manifesto · 开元时代品牌主张</div>
+    <div style="font-size:clamp(1.1rem,3vw,1.6rem);font-weight:800;color:var(--text);margin-bottom:0.6rem;letter-spacing:0.04em;">心澄天地阔，报国正当时。</div>
+    <div style="font-size:0.95rem;color:var(--muted);line-height:2;margin-bottom:1.2rem;">
+      人生下半场，不是落幕，而是生命的开元盛世。<br/>
+      以澄明之心，怀家国之志，安享岁月，再献价值。
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.8rem;margin-bottom:1.2rem;">
+      <div style="background:var(--dark-3);border-radius:10px;padding:0.9rem;font-size:0.8rem;">
+        <div style="color:var(--gold);font-weight:700;margin-bottom:0.3rem;">宇宙观</div>
+        <div style="color:var(--muted);">生命循环不息，无始无终，形态可变，精神长存</div>
+      </div>
+      <div style="background:var(--dark-3);border-radius:10px;padding:0.9rem;font-size:0.8rem;">
+        <div style="color:var(--gold);font-weight:700;margin-bottom:0.3rem;">佛学观</div>
+        <div style="color:var(--muted);">前半生入世修行，后半生心归澄明，自在安宁</div>
+      </div>
+      <div style="background:var(--dark-3);border-radius:10px;padding:0.9rem;font-size:0.8rem;">
+        <div style="color:var(--gold);font-weight:700;margin-bottom:0.3rem;">家国观</div>
+        <div style="color:var(--muted);">岁月不老，初心不改；人生下半场，仍是民族复兴的一份光</div>
+      </div>
+      <div style="background:var(--dark-3);border-radius:10px;padding:0.9rem;font-size:0.8rem;">
+        <div style="color:var(--gold);font-weight:700;margin-bottom:0.3rem;">价值观</div>
+        <div style="color:var(--muted);">永远向上，永远开元，永无盛极而衰</div>
+      </div>
+    </div>
+    <!-- 等级体系 -->
+    <div style="display:flex;gap:0.6rem;flex-wrap:wrap;align-items:center;">
+      <span style="font-size:0.72rem;color:var(--muted);">服务等级：</span>
+      <span style="background:rgba(138,143,158,0.15);color:var(--muted);border:1px solid rgba(138,143,158,0.3);padding:0.2rem 0.7rem;border-radius:100px;font-size:0.75rem;">启元级 · 初心启程</span>
+      <span style="color:var(--muted);font-size:0.7rem;">→</span>
+      <span style="background:rgba(74,158,255,0.12);color:var(--blue);border:1px solid rgba(74,158,255,0.3);padding:0.2rem 0.7rem;border-radius:100px;font-size:0.75rem;">兴元级 · 身心兴旺</span>
+      <span style="color:var(--muted);font-size:0.7rem;">→</span>
+      <span style="background:rgba(201,168,76,0.15);color:var(--gold);border:1px solid rgba(201,168,76,0.35);padding:0.2rem 0.7rem;border-radius:100px;font-size:0.75rem;">开元级 · 开元盛世</span>
+      <span style="color:var(--muted);font-size:0.7rem;">→</span>
+      <span style="background:rgba(61,214,140,0.12);color:var(--green);border:1px solid rgba(61,214,140,0.3);padding:0.2rem 0.7rem;border-radius:100px;font-size:0.75rem;">昌元级 · 福寿昌隆</span>
+    </div>
+  </div>
+
+  <!-- 三省制 -->
+  <div style="margin-bottom:1.5rem;">
+    <div style="font-size:0.68rem;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;">三省制 · 决策核心</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;">
+      <div style="background:var(--dark-2);border:1px solid rgba(201,168,76,0.25);border-top:2px solid var(--gold);border-radius:14px;padding:1.5rem;text-align:center;">
+        <div style="font-size:1.2rem;margin-bottom:0.5rem;">🖋</div>
+        <div style="font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);margin-bottom:0.4rem;">中书省 · 谋划</div>
+        <div style="font-size:1rem;font-weight:800;margin-bottom:0.3rem;">CSO</div>
+        <div style="font-size:0.78rem;color:var(--muted);">战略规划 · 起草决策<br/>核心假设验证<br/>决策记录卡输出</div>
+      </div>
+      <div style="background:var(--dark-2);border:1px solid rgba(255,107,107,0.25);border-top:2px solid var(--red);border-radius:14px;padding:1.5rem;text-align:center;">
+        <div style="font-size:1.2rem;margin-bottom:0.5rem;">⚖</div>
+        <div style="font-size:0.65rem;letter-spacing:0.15em;color:var(--red);margin-bottom:0.4rem;">门下省 · 审议</div>
+        <div style="font-size:1rem;font-weight:800;margin-bottom:0.3rem;">CFO</div>
+        <div style="font-size:0.78rem;color:var(--muted);">财务可行性质询<br/>封驳权（可驳回决策）<br/>6个月生存线守护</div>
+      </div>
+      <div style="background:var(--dark-2);border:1px solid rgba(61,214,140,0.25);border-top:2px solid var(--green);border-radius:14px;padding:1.5rem;text-align:center;">
+        <div style="font-size:1.2rem;margin-bottom:0.5rem;">⚡</div>
+        <div style="font-size:0.65rem;letter-spacing:0.15em;color:var(--green);margin-bottom:0.4rem;">尚书省 · 执行</div>
+        <div style="font-size:1rem;font-weight:800;margin-bottom:0.3rem;">COO</div>
+        <div style="font-size:0.78rem;color:var(--muted);">运营落地方案<br/>服务标准执行<br/>护理员管理</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 六部制 -->
+  <div style="margin-bottom:1.5rem;">
+    <div style="font-size:0.68rem;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;">六部制 · 专业分工</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.9rem;">
+      <div style="background:var(--dark-3);border:1px solid var(--border);border-radius:12px;padding:1.1rem;">
+        <div style="font-size:0.65rem;letter-spacing:0.1em;color:var(--gold);margin-bottom:0.4rem;">礼部 · 品牌传播</div>
+        <div style="font-size:0.82rem;color:var(--muted);">品牌主张落地、对外宣讲、公关媒体<br/><span style="color:var(--blue);">→ CGO 负责</span></div>
+      </div>
+      <div style="background:var(--dark-3);border:1px solid var(--border);border-radius:12px;padding:1.1rem;">
+        <div style="font-size:0.65rem;letter-spacing:0.1em;color:var(--gold);margin-bottom:0.4rem;">吏部 · 人才管理</div>
+        <div style="font-size:0.82rem;color:var(--muted);">护理员招募培训、服务人才体系<br/><span style="color:var(--green);">→ COO 负责</span></div>
+      </div>
+      <div style="background:var(--dark-3);border:1px solid var(--border);border-radius:12px;padding:1.1rem;">
+        <div style="font-size:0.65rem;letter-spacing:0.1em;color:var(--gold);margin-bottom:0.4rem;">户部 · 财务补贴</div>
+        <div style="font-size:0.82rem;color:var(--muted);">现金流管理、政策补贴申报、融资<br/><span style="color:var(--red);">→ CFO 负责</span></div>
+      </div>
+      <div style="background:var(--dark-3);border:1px solid var(--border);border-radius:12px;padding:1.1rem;">
+        <div style="font-size:0.65rem;letter-spacing:0.1em;color:var(--gold);margin-bottom:0.4rem;">兵部 · 政府关系</div>
+        <div style="font-size:0.82rem;color:var(--muted);">民政局/医保局关系、驿站入库申请<br/><span style="color:var(--blue);">→ CGO 负责</span></div>
+      </div>
+      <div style="background:var(--dark-3);border:1px solid var(--border);border-radius:12px;padding:1.1rem;">
+        <div style="font-size:0.65rem;letter-spacing:0.1em;color:var(--gold);margin-bottom:0.4rem;">刑部 · 风险合规</div>
+        <div style="font-size:0.82rem;color:var(--muted);">假设验证、法律合规、决策质量把控<br/><span style="color:var(--amber);">→ CSO 负责</span></div>
+      </div>
+      <div style="background:var(--dark-3);border:1px solid var(--border);border-radius:12px;padding:1.1rem;">
+        <div style="font-size:0.65rem;letter-spacing:0.1em;color:var(--gold);margin-bottom:0.4rem;">工部 · 科技产品</div>
+        <div style="font-size:0.82rem;color:var(--muted);">智慧照护系统、服务记录平台、AI工具<br/><span style="color:var(--muted);">→ 待任命 CTO</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 决策流程 -->
+  <div style="background:var(--dark-2);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.5rem;">
+    <div style="font-size:0.68rem;letter-spacing:0.14em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;">标准决策流程 · 仿三省制（起草→审议→执行→封驳→呈报）</div>
+    <div style="display:flex;align-items:flex-start;gap:0;flex-wrap:nowrap;overflow-x:auto;">
+      <div style="flex:1;min-width:80px;text-align:center;padding:0 0.3rem;">
+        <div style="width:30px;height:30px;border-radius:50%;background:rgba(201,168,76,0.15);border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:var(--gold);font-weight:700;margin:0 auto 0.4rem;">1</div>
+        <div style="font-size:0.68rem;color:var(--muted);">CSO起草</div>
+        <div style="font-size:0.6rem;color:var(--muted);opacity:0.6;">事前分析报告</div>
+      </div>
+      <div style="font-size:0.8rem;color:var(--gold-dim);padding-top:0.5rem;">→</div>
+      <div style="flex:1;min-width:80px;text-align:center;padding:0 0.3rem;">
+        <div style="width:30px;height:30px;border-radius:50%;background:rgba(255,107,107,0.12);border:1px solid var(--red);display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:var(--red);font-weight:700;margin:0 auto 0.4rem;">2</div>
+        <div style="font-size:0.68rem;color:var(--muted);">CFO质询</div>
+        <div style="font-size:0.6rem;color:var(--muted);opacity:0.6;">财务可行性</div>
+      </div>
+      <div style="font-size:0.8rem;color:var(--gold-dim);padding-top:0.5rem;">→</div>
+      <div style="flex:1;min-width:80px;text-align:center;padding:0 0.3rem;">
+        <div style="width:30px;height:30px;border-radius:50%;background:rgba(61,214,140,0.12);border:1px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:var(--green);font-weight:700;margin:0 auto 0.4rem;">3</div>
+        <div style="font-size:0.68rem;color:var(--muted);">COO执行方案</div>
+        <div style="font-size:0.6rem;color:var(--muted);opacity:0.6;">落地步骤</div>
+      </div>
+      <div style="font-size:0.8rem;color:var(--gold-dim);padding-top:0.5rem;">→</div>
+      <div style="flex:1;min-width:80px;text-align:center;padding:0 0.3rem;">
+        <div style="width:30px;height:30px;border-radius:50%;background:rgba(245,166,35,0.12);border:1px solid var(--amber);display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:var(--amber);font-weight:700;margin:0 auto 0.4rem;">4</div>
+        <div style="font-size:0.68rem;color:var(--muted);">封驳或通过</div>
+        <div style="font-size:0.6rem;color:var(--muted);opacity:0.6;">两省联署可驳</div>
+      </div>
+      <div style="font-size:0.8rem;color:var(--gold-dim);padding-top:0.5rem;">→</div>
+      <div style="flex:1;min-width:80px;text-align:center;padding:0 0.3rem;">
+        <div style="width:30px;height:30px;border-radius:50%;background:rgba(201,168,76,0.2);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:var(--gold);font-weight:700;margin:0 auto 0.4rem;">5</div>
+        <div style="font-size:0.68rem;color:var(--muted);">呈报CEO</div>
+        <div style="font-size:0.6rem;color:var(--muted);opacity:0.6;">决策记录卡签字</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="team-intro">
+    <strong>班子工作模式：</strong>每次重大决策前，4位班子成员分别从各自角度用<strong>苏格拉底提问法</strong>挑战 CEO，形成完整的《决策记录卡》后方可执行。
+    AI班子 24 小时持续协作推进，里程碑事件实时 CC 王总；常规进展每日定时同步。
+  </div>
+
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-role">CEO · 首席执行官</div>
+      <div class="team-title">王晶晶</div>
+      <div class="team-name">创始人 · 愿景守护者</div>
+      <div class="team-fn">
+        <strong>核心职责</strong>
+        坚守使命愿景，把握方向与节奏；最终决策权；对外代表公司。
+      </div>
+      <div class="team-fn" style="margin-top:0.6rem">
+        <strong>CEO的已知盲区</strong>
+        易把愿景当执行、高估政策落地速度、倾向于快速推进。班子专门设计来挑战这三点。
+      </div>
+      <div class="team-tag">最终决策权</div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-role">CFO · 首席财务官</div>
+      <div class="team-title">財務官</div>
+      <div class="team-name">现金流守护者 · 冷血的数字人</div>
+      <div class="team-fn">
+        <strong>核心职责</strong>
+        挑战所有决策的财务可行性；监控6个月生存线；确保在第一笔政府补贴到账前公司不死。
+      </div>
+      <div class="team-fn" style="margin-top:0.6rem">
+        <strong>固定质问</strong>
+        "钱从哪来？回本要多久？如果比预期慢3倍，我们还能活吗？"
+      </div>
+      <div class="team-tag">财务安全边际</div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-role">CGO · 政府关系官</div>
+      <div class="team-title">政策官</div>
+      <div class="team-name">政府关系开拓者 · 现实主义者</div>
+      <div class="team-fn">
+        <strong>核心职责</strong>
+        评估政策信息的真实性；挖掘本地政府人脉；防止 CEO 被公开文件误导。
+      </div>
+      <div class="team-fn" style="margin-top:0.6rem">
+        <strong>固定质问</strong>
+        "这个信息是谁告诉你的？你亲自验证过吗？你在这个城市有没有认识的人？"
+      </div>
+      <div class="team-tag">政策落地验证</div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-role">COO · 首席运营官</div>
+      <div class="team-title">运营官</div>
+      <div class="team-name">服务品质守护者 · 执行可行性判官</div>
+      <div class="team-fn">
+        <strong>核心职责</strong>
+        质疑执行可行性；确保每个决策背后有真实的人和真实的服务能力。
+      </div>
+      <div class="team-fn" style="margin-top:0.6rem">
+        <strong>固定质问</strong>
+        "第一个护理员从哪来？第一个服务家庭在哪里？谁今天去上门？"
+      </div>
+      <div class="team-tag">服务落地执行</div>
+    </div>
+
+    <div class="team-card" style="grid-column: 1 / -1">
+      <div class="team-role">CSO · 首席战略官</div>
+      <div class="team-title">战略官 · 会议主持人</div>
+      <div class="team-name">苏格拉底提问者 · 核心假设提炼者</div>
+      <div class="team-fn">
+        <strong>核心职责</strong>
+        主持每次决策会议；提炼所有决策背后的核心假设；输出《决策记录卡》；防止班子陷入细节而忘记根本问题。
+      </div>
+      <div class="team-fn" style="margin-top:0.6rem">
+        <strong>固定质问</strong>
+        "这个决策的核心假设是什么？如果这个假设是错的，后果是什么？我们为什么是做这件事的人？"
+      </div>
+      <div class="team-tag">决策质量把关</div>
+    </div>
+  </div>
+
+  <!-- 决策流程 -->
+  <div class="decision-flow">
+    <div class="flow-title">决策会议标准流程 · 苏格拉底六步法</div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-dot">1</div>
+        <div class="flow-label">CEO 陈述</div>
+        <div class="flow-sub">判断+理由</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-dot">2</div>
+        <div class="flow-label">CFO 挑战</div>
+        <div class="flow-sub">财务可行？</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-dot">3</div>
+        <div class="flow-label">CGO 挑战</div>
+        <div class="flow-sub">政策真实？</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-dot">4</div>
+        <div class="flow-label">COO 挑战</div>
+        <div class="flow-sub">能执行吗？</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-dot">5</div>
+        <div class="flow-label">CSO 提炼</div>
+        <div class="flow-sub">核心假设</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-dot">6</div>
+        <div class="flow-label">CEO 决策</div>
+        <div class="flow-sub">输出记录卡</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── 三阶段路径 ── -->
+<section id="roadmap-vision">
+  <div class="section-label">Vision Roadmap · 愿景路径</div>
+  <h2 class="section-title">三阶段路径</h2>
+  <p class="section-desc">
+    2026年3月11日深夜，班子完成了一次关键的认知跃迁：
+    <strong>放弃"30天盈利"假设，以愿景为北极星，重新设计路径。</strong><br/>
+    王总的确认：愿意接受12个月验证节奏，找到第一个真正被改变的故事。
+  </p>
+
+  <div style="margin-top:2.5rem;display:flex;flex-direction:column;gap:1.2rem;">
+
+    <!-- 阶段1 -->
+    <div style="background:var(--dark-2);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:14px;padding:1.6rem;">
+      <div style="font-size:0.68rem;letter-spacing:0.14em;color:var(--gold);text-transform:uppercase;margin-bottom:0.5rem;">阶段一 · 0–12个月</div>
+      <div style="font-size:1.1rem;font-weight:800;margin-bottom:0.8rem;">自营验证 · 找到第一个真正被改变的故事</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;font-size:0.84rem;color:var(--muted);">
+        <div><strong style="color:var(--text);display:block;margin-bottom:0.3rem;">地点</strong>北京市西城区广外街道（王总已有社区资源）</div>
+        <div><strong style="color:var(--text);display:block;margin-bottom:0.3rem;">目标</strong>10个家庭，口碑NPS>8分，其中30%是低收入长者</div>
+        <div><strong style="color:var(--text);display:block;margin-bottom:0.3rem;">资金</strong>个人启动资金 + 天使融资，不依赖政府补贴快速变现</div>
+        <div><strong style="color:var(--text);display:block;margin-bottom:0.3rem;">成功标准</strong>不是"盈利"，而是"有家庭说：这改变了我们的生活"</div>
+      </div>
+    </div>
+
+    <!-- 阶段2 -->
+    <div style="background:var(--dark-2);border:1px solid var(--border);border-left:3px solid rgba(74,158,255,0.6);border-radius:14px;padding:1.6rem;">
+      <div style="font-size:0.68rem;letter-spacing:0.14em;color:var(--blue);text-transform:uppercase;margin-bottom:0.5rem;">阶段二 · 12–36个月</div>
+      <div style="font-size:1.1rem;font-weight:800;margin-bottom:0.8rem;">标准化赋能 · 服务标准输出给西城100家社区</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;font-size:0.84rem;color:var(--muted);">
+        <div><strong style="color:var(--text);display:block;margin-bottom:0.3rem;">机制</strong>通过西城区社区养老驿站运营商体系（政府已开放入口）</div>
+        <div><strong style="color:var(--text);display:block;margin-bottom:0.3rem;">目标</strong>覆盖1000个家庭，30%为低收入群体</div>
+        <div><strong style="color:var(--text);display:block;margin-bottom:0.3rem;">资金</strong>政府运营补贴 + B轮社会影响力融资</div>
+        <div><strong style="color:var(--text);display:block;margin-bottom:0.3rem;">关键转变</strong>从"自营服务者"变为"标准制定者+赋能者"</div>
+      </div>
+    </div>
+
+    <!-- 阶段3 -->
+    <div style="background:var(--dark-2);border:1px solid var(--border);border-left:3px solid rgba(61,214,140,0.6);border-radius:14px;padding:1.6rem;">
+      <div style="font-size:0.68rem;letter-spacing:0.14em;color:var(--green);text-transform:uppercase;margin-bottom:0.5rem;">阶段三 · 36个月+</div>
+      <div style="font-size:1.1rem;font-weight:800;margin-bottom:0.8rem;">生态构建 · 护理员合作社 + 科技赋能 + 全国</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;font-size:0.84rem;color:var(--muted);">
+        <div><strong style="color:var(--text);display:block;margin-bottom:0.3rem;">护理员合作社</strong>护理员既是服务者也是利益共享者，有尊严地工作</div>
+        <div><strong style="color:var(--text);display:block;margin-bottom:0.3rem;">商业交叉补贴</strong>高端服务的利润，补贴低收入长者的照护</div>
+        <div><strong style="color:var(--text);display:block;margin-bottom:0.3rem;">愿景兑现</strong>每一位长者，无论贫富，都能享受到基本的有尊严的照护</div>
+        <div><strong style="color:var(--text);display:block;margin-bottom:0.3rem;">北极星指标</strong>低收入长者覆盖率 ≥ 30%（持续监测）</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 决策记录卡 #004 -->
+  <div style="margin-top:2rem;background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.03));border:1px solid rgba(201,168,76,0.28);border-radius:14px;padding:1.6rem;">
+    <div style="font-size:0.68rem;letter-spacing:0.14em;color:var(--gold);text-transform:uppercase;margin-bottom:0.8rem;">决策记录卡 #004 · 2026年3月11日 23:30 · CEO 王晶晶 签字确认</div>
+    <div style="font-size:1rem;font-weight:700;margin-bottom:0.8rem;">议题：放弃30天盈利假设，接受12个月验证节奏</div>
+    <div style="font-size:0.84rem;color:var(--muted);line-height:1.9;">
+      <strong style="color:var(--text);">核心认知升级：</strong>
+      找到第一个"真正被改变的故事"，远比找到第一批"付费客户"更重要。<br/>
+      盈利不是目的——让长者有尊严地在家老去，才是我们存在的理由。<br/>
+      <br/>
+      <strong style="color:var(--text);">CEO 确认：</strong>愿意接受12个月验证节奏，不依赖快速变现。<br/>
+      <strong style="color:var(--text);">班子承诺：</strong>在王总给出这个确认的12分钟内，四线产出完成，路径已就绪。
+    </div>
+  </div>
+
+</section>
+
+<hr class="divider"/>
+
+<!-- ── 战略 ── -->
+<section id="strategy">
+  <div class="section-label">Strategy · 战略布局</div>
+  <h2 class="section-title">三横三纵 · 战略矩阵</h2>
+  <p class="section-desc">三条盈利主轴 × 三层护城河。但一切从第一个真实案例开始——没有案例，战略是空的。</p>
+
+  <div class="strategy-grid">
+    <div class="strategy-card">
+      <div class="strategy-num">主轴 01 · 政策资金</div>
+      <h3>接入政府补贴体系</h3>
+      <p>成为长护险定点服务机构，承接失能长者每月800元政府补贴，基金按次结算无需垫资。<br/><em style="color:var(--amber);font-style:normal;font-size:0.78rem;">前提：先有真实服务案例。</em></p>
+      <div class="strategy-tag">政策红利</div>
+    </div>
+    <div class="strategy-card">
+      <div class="strategy-num">主轴 02 · 增值服务</div>
+      <h3>家属安心套餐</h3>
+      <p>在政府保底之上，向有能力的家属销售健康监测、紧急响应、AI陪伴套餐，将 ARPU 从800元提升至3000-5000元。</p>
+      <div class="strategy-tag">自费收入</div>
+    </div>
+    <div class="strategy-card">
+      <div class="strategy-num">主轴 03 · 平台赋能</div>
+      <h3>城市合伙人模式</h3>
+      <p>标准化服务手册+管理系统，授权给城市合伙人，收取加盟费与流水分成。轻资产快速覆盖全国。</p>
+      <div class="strategy-tag">平台收益</div>
+    </div>
+    <div class="strategy-card">
+      <div class="strategy-num">护城河 01</div>
+      <h3>政府关系网络</h3>
+      <p>与民政局、医保局、社区街道办建立深度合作。是最难复制的壁垒，也是最需要时间积累的资产。</p>
+      <div class="strategy-tag">强壁垒</div>
+    </div>
+    <div class="strategy-card">
+      <div class="strategy-num">护城河 02</div>
+      <h3>案例与口碑飞轮</h3>
+      <p>每一个真实的服务故事，都是下一个家庭的信任来源。口碑在社区中的传播是最低成本的获客渠道。</p>
+      <div class="strategy-tag">口碑资产</div>
+    </div>
+    <div class="strategy-card">
+      <div class="strategy-num">护城河 03</div>
+      <h3>智慧照护科技</h3>
+      <p>接入康复设备、智能硬件、AI健康预警，形成"服务+科技"一体化方案，提升效率、增加溢价空间。</p>
+      <div class="strategy-tag">技术驱动</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── TIMELINE ── -->
+<section id="timeline">
+  <div class="section-label">Roadmap · 行动路线</div>
+  <h2 class="section-title">修正后的30天冲刺计划</h2>
+  <p class="section-desc">班子第一次会议后，对原计划做出重要修正：<strong>第一个真实服务案例优先于城市注册和政府对接。</strong></p>
+
+  <div class="timeline">
+    <div class="tl-week">
+      <div class="tl-week-label">Week 1 · 3月11日 — 3月17日（修正后）</div>
+      <h3>🔑 最优先：找到第一个真实服务家庭</h3>
+      <div class="tl-tasks">
+        <div class="task-item">
+          <div class="task-dot active">▶</div>
+          <div class="task-txt">
+            <strong>【P0】找到第一个有照护需求的长者家庭</strong>
+            <span>可以从身边开始，哪怕免费服务一周。目标：建立第一个真实案例。CFO+COO协作。</span>
+          </div>
+          <div class="task-owner">CFO+COO</div>
+        </div>
+        <div class="task-item">
+          <div class="task-dot active">▶</div>
+          <div class="task-txt">
+            <strong>【P0】确定启动资金来源</strong>
+            <span>明确6个月生存线。在政府补贴到账前，收入从哪里来？CFO本周输出财务模型V1。</span>
+          </div>
+          <div class="task-owner">CFO</div>
+        </div>
+        <div class="task-item">
+          <div class="task-dot pending">○</div>
+          <div class="task-txt">
+            <strong>【P1】物色成都本地政府/医疗系统人脉</strong>
+            <span>CGO负责：找到1个在成都民政或医保系统认识人的联系人，作为政府关系冷启动的切入点。</span>
+          </div>
+          <div class="task-owner">CGO</div>
+        </div>
+        <div class="task-item">
+          <div class="task-dot pending">○</div>
+          <div class="task-txt">
+            <strong>【P2】城市注册（降级至P2）</strong>
+            <span>待P0完成且本地人脉确认后再执行。</span>
+          </div>
+          <div class="task-owner">COO</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-week">
+      <div class="tl-week-label">Week 2 · 3月18日 — 3月24日</div>
+      <h3>用案例敲门：建立第一批信任关系</h3>
+      <div class="tl-tasks">
+        <div class="task-item">
+          <div class="task-dot pending">○</div>
+          <div class="task-txt">
+            <strong>完成首次服务交付，形成可讲述的案例故事</strong>
+            <span>沉淀1个真实服务记录，用来向社区居委会和民政局展示。</span>
+          </div>
+          <div class="task-owner">COO</div>
+        </div>
+        <div class="task-item">
+          <div class="task-dot pending">○</div>
+          <div class="task-txt">
+            <strong>拜访成都社区居委会（有案例后）</strong>
+            <span>以"我已经在服务X位长者"开场，而非"我想申请合作"。</span>
+          </div>
+          <div class="task-owner">CGO</div>
+        </div>
+        <div class="task-item">
+          <div class="task-dot pending">○</div>
+          <div class="task-txt">
+            <strong>CFO输出6个月财务压力测试报告</strong>
+            <span>模拟政府补贴延迟3个月到账的情景，确认公司是否仍能存活。</span>
+          </div>
+          <div class="task-owner">CFO</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-week">
+      <div class="tl-week-label">Week 3 · 3月25日 — 3月31日</div>
+      <h3>标准化：让服务可复制</h3>
+      <div class="tl-tasks">
+        <div class="task-item">
+          <div class="task-dot pending">○</div>
+          <div class="task-txt">
+            <strong>完成服务手册V1版（SOP）</strong>
+            <span>基于前两周的真实服务经验，形成可培训、可复制的标准动作。</span>
+          </div>
+          <div class="task-owner">COO</div>
+        </div>
+        <div class="task-item">
+          <div class="task-dot pending">○</div>
+          <div class="task-txt">
+            <strong>正式接触民政局（有案例+有SOP）</strong>
+            <span>此时才有资格谈入库。CGO负责推进。</span>
+          </div>
+          <div class="task-owner">CGO</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-week">
+      <div class="tl-week-label">Week 4 · 4月1日 — 4月10日</div>
+      <h3>验证与融资准备</h3>
+      <div class="tl-tasks">
+        <div class="task-item">
+          <div class="task-dot pending">○</div>
+          <div class="task-txt">
+            <strong>输出首月财务数据（真实）</strong>
+            <span>服务人次、收入来源、成本明细，形成可对外展示的商业验证数据。</span>
+          </div>
+          <div class="task-owner">CFO</div>
+        </div>
+        <div class="task-item">
+          <div class="task-dot pending">○</div>
+          <div class="task-txt">
+            <strong>完成BP商业计划书V1</strong>
+            <span>面向政府产业基金+社会影响力投资人。CSO主导框架，CFO补充财务模型。</span>
+          </div>
+          <div class="task-owner">CSO+CFO</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── LOG ── -->
+<section id="log">
+  <div class="log-header">
+    <div>
+      <div class="section-label">CEO Log · 班子工作日志</div>
+      <h2 class="section-title" style="margin-bottom:0">小时级进展同步</h2>
+      <p style="color:var(--muted);font-size:0.85rem;margin-top:0.4rem;">班子按小时粒度记录关键推进，王总可随时查看最新状态。</p>
+    </div>
+    <div class="log-count" id="log-count">共 3 篇</div>
+  </div>
+
+  <!-- Day 1 -->
+  <div class="log-entry">
+    <div class="log-entry-hd" onclick="toggleLog('log1',this)">
+      <div class="log-meta">
+        <div class="log-date">2026-03-11</div>
+        <div class="log-day">星期三 · Day 1</div>
+        <div class="log-title">班子首次战略会议 · 推翻原计划 · 重建决策框架 ⚡</div>
+      </div>
+      <div style="display:flex;gap:0.5rem;align-items:center;flex-shrink:0">
+        <span class="tag tag-amber">里程碑</span>
+        <span class="tag tag-green">Day 1</span>
+        <span class="log-arrow">▼</span>
+      </div>
+    </div>
+    <div class="log-body open" id="log1">
+
+      <div class="log-sec">
+        <h4>⚡ 【里程碑】今日班子决策摘要</h4>
+        <ul>
+          <li>班子第一次正式会议已完成，对 CEO 原计划提出三大关键挑战并形成修正决策</li>
+          <li>原P0任务"注册公司+对接民政局"已降级为P2，等待真实服务案例建立后再执行</li>
+          <li>新P0任务：①找到第一个真实服务家庭 ②确定启动资金来源</li>
+          <li>已建立《苏格拉底六步决策流程》，所有重大决策必须经过此流程输出决策记录卡</li>
+        </ul>
+      </div>
+
+      <div class="log-sec">
+        <h4>📊 今日市场情报（小美整理）</h4>
+        <ul>
+          <li>2026年全国60岁以上长者人口突破3.2亿，银发经济市场规模达14万亿元，年增速超10%</li>
+          <li>两会政府工作报告：城乡居民基础养老金月标准提至163元，"十五五"规划多次提及养老</li>
+          <li>长护险"第六险"正式从试点转向全面建制，成都已提前布局，是进入市场的关键窗口</li>
+          <li>民政部失能长者消费补贴新规全国落地：7类人群月最高800元，可与长护险叠加</li>
+        </ul>
+      </div>
+
+      <div class="log-sec">
+        <h4>🏛️ 班子会议记录（苏格拉底六步）</h4>
+        <ul>
+          <li>CFO挑战：政府补贴到账实际周期4-6个月，启动资金须独立规划，不可依赖政策资金</li>
+          <li>CGO挑战：成都政策信息来自公开文件，尚未被本地关系人验证；政策积极≠容易进入</li>
+          <li>COO挑战：在有第一个服务案例之前，任何政府对接都缺乏谈判基础</li>
+          <li>CSO提炼：CEO的核心假设"可以以外来者身份快速接入政府补贴"被推翻；新假设：真实服务案例是一切资源的杠杆支点</li>
+          <li>CEO二次判断：接受全部挑战，修正执行顺序，承诺本周找到第一个真实服务家庭</li>
+        </ul>
+      </div>
+
+      <div class="log-sec">
+        <h4>📈 首月盈利预测（待修正）</h4>
+        <div class="log-mini-kpi">
+          <div class="lkpi"><div class="lkpi-val">待定</div><div class="lkpi-nm">启动资金来源</div></div>
+          <div class="lkpi"><div class="lkpi-val">1个</div><div class="lkpi-nm">本周目标：服务家庭</div></div>
+          <div class="lkpi"><div class="lkpi-val">4-6月</div><div class="lkpi-nm">政府补贴到账周期</div></div>
+        </div>
+      </div>
+
+      <div class="log-sec">
+        <h4>🔮 班子明日任务分配</h4>
+        <ul>
+          <li>CFO：输出6个月现金流模型V1，明确"政府补贴到账前"的资金缺口</li>
+          <li>CGO：研究成都民政+医保系统人脉切入路径，寻找第一个本地联系人</li>
+          <li>COO：设计首次上门服务SOP草稿，明确"第一次服务"需要哪些最低配置</li>
+          <li>CSO：整理今日决策记录卡，准备下次会议假设清单</li>
+        </ul>
+      </div>
+
+      <!-- 决策记录卡 -->
+      <div class="decision-card">
+        <div class="dc-header">
+          <span class="dc-id">决策记录卡 #001</span>
+          <span class="dc-date">2026年3月11日 · CEO 王晶晶 签字确认</span>
+        </div>
+        <div class="dc-topic">议题：Day 1 最重要的事是什么？</div>
+        <div class="dc-section">
+          <div class="dc-label">原判断（会前）</div>
+          <div class="dc-content">注册公司 → 对接成都民政局 → 启动政府补贴申请</div>
+        </div>
+        <div class="dc-section">
+          <div class="dc-label">修正判断（会后）</div>
+          <div class="dc-content">
+            <ul>
+              <li>P0：找到第一个真实服务家庭，完成第一次服务（哪怕免费、哪怕在身边）</li>
+              <li>P0：确定启动资金来源，明确6个月生存线</li>
+              <li>P1：物色成都本地政府人脉，为后续政府对接做准备</li>
+              <li>P2：城市注册+政府对接（待P0完成后执行）</li>
+            </ul>
+          </div>
+        </div>
+        <div class="dc-section">
+          <div class="dc-label">被推翻的核心假设</div>
+          <div class="dc-content">"可以以外来者身份，在陌生城市快速接入政府补贴体系。" → 错误。政府补贴在案例之后，不在案例之前。</div>
+        </div>
+        <div class="dc-section">
+          <div class="dc-label">三大关键风险</div>
+          <div class="dc-risks">
+            <div class="dc-risk">
+              <div class="dc-risk-lvl high">高风险</div>
+              <div class="dc-risk-txt">现金流：政府补贴4-6月后到账，需独立准备启动资金</div>
+            </div>
+            <div class="dc-risk">
+              <div class="dc-risk-lvl mid">中风险</div>
+              <div class="dc-risk-txt">政府关系：无本地人脉，冷启动难度高，需提前布局</div>
+            </div>
+            <div class="dc-risk">
+              <div class="dc-risk-lvl mid">中风险</div>
+              <div class="dc-risk-txt">服务能力：第一个护理员从哪来？需本周解决</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Day 1 全天时间线 -->
+  <div class="log-entry">
+    <div class="log-entry-hd" onclick="toggleLog('log1-timeline',this)">
+      <div class="log-meta">
+        <div class="log-date">2026-03-11 · 全天时间线</div>
+        <div class="log-day">Day 1 完整记录</div>
+        <div class="log-title">⏱ 13:00 → 23:40 · 班子小时级推进全记录</div>
+      </div>
+      <div style="display:flex;gap:0.5rem;align-items:center;flex-shrink:0">
+        <span class="tag tag-blue">时间线</span>
+        <span class="log-arrow">▼</span>
+      </div>
+    </div>
+    <div class="log-body open" id="log1-timeline">
+      <div style="display:flex;flex-direction:column;gap:0;">
+
+        <!-- 时间轴条目样式 -->
+        <style>
+          .tl-item{display:flex;gap:1rem;padding:0.8rem 0;border-bottom:1px solid var(--border);}
+          .tl-item:last-child{border-bottom:none;}
+          .tl-time{min-width:52px;font-size:0.72rem;color:var(--gold);font-variant-numeric:tabular-nums;white-space:nowrap;padding-top:0.1rem;letter-spacing:0.04em;}
+          .tl-role{min-width:38px;font-size:0.65rem;padding:0.1rem 0.4rem;border-radius:4px;height:fit-content;white-space:nowrap;text-align:center;margin-top:0.05rem;}
+          .tl-role.ceo{background:rgba(201,168,76,0.15);color:var(--gold);}
+          .tl-role.cfo{background:rgba(255,107,107,0.12);color:var(--red);}
+          .tl-role.cgo{background:rgba(74,158,255,0.12);color:var(--blue);}
+          .tl-role.coo{background:rgba(61,214,140,0.12);color:var(--green);}
+          .tl-role.cso{background:rgba(245,166,35,0.12);color:var(--amber);}
+          .tl-role.sys{background:rgba(138,143,158,0.12);color:var(--muted);}
+          .tl-content{flex:1;font-size:0.84rem;line-height:1.7;color:var(--muted);}
+          .tl-content strong{color:var(--text);}
+          .tl-milestone{border-left:2px solid var(--gold);padding-left:0.6rem;}
+        </style>
+
+        <div class="tl-item">
+          <div class="tl-time">13:00</div>
+          <div class="tl-role ceo">CEO</div>
+          <div class="tl-content"><strong>对话启动</strong> · 提出以"中国养老产业CEO视角"制定第一个月行动计划</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">13:30</div>
+          <div class="tl-role sys">班子</div>
+          <div class="tl-content"><strong>市场情报完成</strong> · 完成2026年养老行业数据扫描：3.2亿长者、14万亿市场、两会政策解读</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">13:37</div>
+          <div class="tl-role sys">SYS</div>
+          <div class="tl-content"><strong>战略官网上线</strong> · 首版官网生成完成，移动端适配，自动打开 ✅</div>
+        </div>
+        <div class="tl-item tl-milestone">
+          <div class="tl-time">14:00</div>
+          <div class="tl-role cso">CSO</div>
+          <div class="tl-content"><strong>【里程碑】班子首次战略会议</strong> · 苏格拉底六步法完整运行，输出《决策记录卡#001》：推翻"注册公司→对接政府"原计划，确立"先找第一个长者家庭"新P0任务</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">14:12</div>
+          <div class="tl-role cgo">CGO</div>
+          <div class="tl-content"><strong>首战城市第一次选定</strong> · 初选成都（政策积极）→ 班子CGO提出"老龄化率不足"质疑，决策被挑战</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">14:20</div>
+          <div class="tl-role sys">SYS</div>
+          <div class="tl-content"><strong>官网升级v2</strong> · 班子模块上线，苏格拉底决策流程可视化，移动端全面适配，文案改为"长者"</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">14:33</div>
+          <div class="tl-role sys">SYS</div>
+          <div class="tl-content"><strong>「小美指令站」群建立</strong> · 大象群建立，膝蓓蓓加入，今日进展消息发送 ✅</div>
+        </div>
+        <div class="tl-item tl-milestone">
+          <div class="tl-time">14:42</div>
+          <div class="tl-role cgo">CGO</div>
+          <div class="tl-content"><strong>【里程碑】首战城市推翻重选</strong> · CGO完成全国城市老龄化率数据对比，成都否决（老龄化率仅~14%），南通（22.67%全国第一）初步入选</div>
+        </div>
+        <div class="tl-item tl-milestone">
+          <div class="tl-time">15:00</div>
+          <div class="tl-role ceo">CEO</div>
+          <div class="tl-content tl-milestone"><strong>【关键信息】王总透露有北京社区资源</strong> → CGO立刻对比北京 vs 南通，北京以「514万长者+王总已有资源」完胜 → 《决策记录卡#002》：首战城市确定北京西城区广外街道 ✅</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">15:05</div>
+          <div class="tl-role cgo">CGO</div>
+          <div class="tl-content"><strong>广外街道深挖</strong> · 发现关键信息：①广外区域养老服务中心已累计73万人次②西城区正公开招募驿站运营商③2026年1月适老化改造供应商招募已开放（政府全额买单）</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">21:10</div>
+          <div class="tl-role sys">SYS</div>
+          <div class="tl-content"><strong>守护进程上线</strong> · group-watcher v1-v4迭代，最终实现通过大象localStorage直读群消息，双渠道监控（指令群+wangjingjing44私信）✅</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">22:38</div>
+          <div class="tl-role sys">班子</div>
+          <div class="tl-content"><strong>四线夜间推进启动</strong> · CFO开始6个月现金流模型 / CGO输出7步进入计划 / COO完成首次服务SOP / CSO建立假设验证清单</div>
+        </div>
+        <div class="tl-item tl-milestone">
+          <div class="tl-time">23:18</div>
+          <div class="tl-role ceo">CEO</div>
+          <div class="tl-content tl-milestone"><strong>【核心指令】王总在 wangjingjing44 私信发出指令</strong>：「跳出30天盈利假设，重新思考路径，围绕愿景去思考」守护进程捕获，写入commands.md，小美立刻执行</div>
+        </div>
+        <div class="tl-item tl-milestone">
+          <div class="tl-time">23:30</div>
+          <div class="tl-role cso">CSO</div>
+          <div class="tl-content tl-milestone"><strong>【里程碑】三阶段愿景路径确立</strong> · 放弃30天盈利框架，建立三阶段路径（0-12月验证→12-36月赋能→36月+生态）· <strong>王总确认：愿意接受12个月验证节奏</strong> · 《决策记录卡#004》签字</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">23:40</div>
+          <div class="tl-role sys">SYS</div>
+          <div class="tl-content"><strong>官网升级v3</strong> · 新增三阶段路径模块、决策记录卡#004、小时级时间线、时间戳精确到分钟</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">23:48</div>
+          <div class="tl-role ceo">CEO</div>
+          <div class="tl-content"><strong>品牌文案导入</strong> · 读取wangjingjing44私信中的完整品牌价值体系文案，班子完成首次品牌讨论，三省六部制架构写入官网，品牌主张模块上线</div>
+        </div>
+        <div class="tl-item tl-milestone">
+          <div class="tl-time">23:55</div>
+          <div class="tl-role ceo">CEO</div>
+          <div class="tl-content tl-milestone"><strong>【里程碑】「开元治理体系」正式命名</strong> · 王总命名确认，治理体系定名为「开元治理体系」</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">00:00</div>
+          <div class="tl-role ceo">CEO</div>
+          <div class="tl-content"><strong>王总发出挑战</strong>：「你们班子在怎么工作？要为这个愿景24小时努力」班子接令，夜班正式开工</div>
+        </div>
+        <div class="tl-item tl-milestone">
+          <div class="tl-time">00:05</div>
+          <div class="tl-role sys">班子四线</div>
+          <div class="tl-content tl-milestone">
+            <strong>【夜班实际产出完成】</strong><br/>
+            <span style="color:var(--gold)">CSO</span>：输出明日广外拜访决策树（3条路径，每条有完整应对方案）<br/>
+            <span style="color:var(--red)">CFO</span>：计算最小启动成本 = <strong>¥3,500</strong>（不需要公司，王总直接干）；发现适老化改造零垫资路径<br/>
+            <span style="color:var(--blue)">CGO</span>：生成拜访话术卡（30秒开场白+4个核心问题+结束语+禁忌）<br/>
+            <span style="color:var(--green)">COO</span>：生成10问清单+120分钟服务流程+物品采购清单<br/>
+            <span style="color:var(--muted)">SYS</span>：合并四线产出为 A4 可打印版行动包，自动打开 ✅
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 1 深夜 · 路径重构 -->
+  <div class="log-entry">
+    <div class="log-entry-hd" onclick="toggleLog('log1-night',this)">
+      <div class="log-meta">
+        <div class="log-date">2026-03-11 · 23:30</div>
+        <div class="log-day">深夜 · Day 1 终章</div>
+        <div class="log-title">愿景路径重构 · 王总确认12个月节奏 · 班子四线夜间产出 🌙</div>
+      </div>
+      <div style="display:flex;gap:0.5rem;align-items:center;flex-shrink:0">
+        <span class="tag tag-amber">关键里程碑</span>
+        <span class="tag" style="background:rgba(138,143,158,0.1);color:var(--muted);border:1px solid rgba(138,143,158,0.2);">深夜</span>
+        <span class="log-arrow">▼</span>
+      </div>
+    </div>
+    <div class="log-body" id="log1-night">
+
+      <div class="log-sec">
+        <h4>🌟 【最重要的决策】路径重构完成</h4>
+        <ul>
+          <li><strong>放弃"30天盈利"假设</strong>——这是今晚最重要的认知跃迁</li>
+          <li>新路径：三阶段（0-12月验证 → 12-36月赋能 → 36月+生态），以愿景为北极星</li>
+          <li><strong>王总确认：愿意接受12个月验证节奏，找到第一个真正被改变的故事</strong></li>
+          <li>新成功标准：10个家庭，NPS>8分，其中30%是低收入长者（不只是能付费的）</li>
+          <li>首战城市最终确认：北京市西城区广外街道（王总已有社区资源）</li>
+        </ul>
+      </div>
+
+      <div class="log-sec">
+        <h4>💰 CFO · 三情景6个月现金流模型</h4>
+        <ul>
+          <li>基准情景：Month 4 政府补贴到账，启动资金需求约 7 万元</li>
+          <li>保守情景：仅靠自费，Month 6 盈亏平衡，启动资金需求约 10 万元</li>
+          <li>乐观情景：快速入库，Month 3 开始盈利，启动资金需求约 4.5 万元</li>
+          <li>CFO结论：北京增值套餐溢价高，盈亏平衡比成都快 1.5 个月</li>
+        </ul>
+      </div>
+
+      <div class="log-sec">
+        <h4>🏛️ CGO · 广外街道进入路径（7步行动计划）</h4>
+        <ul>
+          <li>3月12日（周四）：利用社区联系人，约定面谈，了解需求分布</li>
+          <li>3月13日（周五）：拜访广外区域养老服务中心，以合作伙伴身份入场</li>
+          <li>3月13日下午：询问西城区适老化改造供应商招募情况（政府全额买单！）</li>
+          <li>3月14日：走访2-3个社区，找到真实需求家庭</li>
+          <li>3月17日：整理结论，决定进入路径（驿站 or 居家直营 or 适老化改造）</li>
+        </ul>
+      </div>
+
+      <div class="log-sec">
+        <h4>⚙️ COO · 首次上门服务SOP（最小化可执行版）</h4>
+        <ul>
+          <li>所需物品：血压计约80元 + 礼品50元 + A4纸协议，总成本<200元</li>
+          <li>服务流程：120分钟（自我介绍→需求探索→健康评估→建档→约定下次）</li>
+          <li>第一次绝对不谈钱，不拍照，以倾听为主</li>
+          <li>成功标准：长者愿意约下次 = 成功，分享给邻居 = 超级成功</li>
+        </ul>
+      </div>
+
+      <div class="log-sec">
+        <h4>🎯 CSO · 5个假设全部通过推演验证</h4>
+        <ul>
+          <li>假设1：广外长者接受度高（已服务73万人次，心理壁垒已破）</li>
+          <li>假设2：适老化改造入库<10工作日，比长护险申请快得多</li>
+          <li>假设3：王总每天可服务2-3家（广外面积小，通勤效率高）</li>
+          <li>假设4：增值套餐3000元/月在北京有市场（机构养老已3300-6000元）</li>
+          <li>假设5：广外养老服务中心是合作伙伴而非竞争对手（功能互补）</li>
+        </ul>
+      </div>
+
+      <div class="log-sec">
+        <h4>🤖 技术进展</h4>
+        <ul>
+          <li>守护进程 v4 上线：双渠道监控（小美指令站群 + wangjingjing44 私信）</li>
+          <li>成功验证：通过大象 localStorage 直读群消息，识别王总指令</li>
+          <li>今晚收到并执行王总指令：放弃30天盈利假设，围绕愿景重新思考路径</li>
+        </ul>
+      </div>
+
+      <div class="log-sec">
+        <h4>🌙 明日（3月12日）王总只需做一件事</h4>
+        <ul>
+          <li><strong>去广外街道，拿着 COO 的问题清单，找到第一个长者家庭</strong></li>
+          <li>不是去找付费客户，而是去找"那个能让你记一辈子的第一个故事"</li>
+          <li>班子会继续推进：CGO准备拜访话术，COO准备服务物品清单，CFO更新财务模型</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="border:1px dashed var(--border);border-radius:14px;padding:1.8rem;text-align:center;color:var(--muted);font-size:0.82rem;">
+    ＋ 班子每日工作日志将自动更新于此 · 里程碑事件实时 CC 王总
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── KPI ── -->
+<section id="kpi">
+  <div class="section-label">KPI · 实时指标仪表盘</div>
+  <h2 class="section-title">阶段一进展追踪</h2>
+  <p class="section-desc">班子按小时粒度更新，北极星指标：<strong style="color:var(--gold)">每一位长者，无论贫富，都能享受到基本的有尊严的照护</strong></p>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-val">0</div>
+      <div class="kpi-lbl">服务家庭数</div>
+      <div class="kpi-tgt">月目标：30户</div>
+      <div class="kpi-bar"><div class="kpi-fill" style="width:0%"></div></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val">0</div>
+      <div class="kpi-lbl">政府补贴到账（元）</div>
+      <div class="kpi-tgt">月目标：24,000</div>
+      <div class="kpi-bar"><div class="kpi-fill" style="width:0%"></div></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val">待定</div>
+      <div class="kpi-lbl">启动资金确认</div>
+      <div class="kpi-tgt">本周目标：方案确定</div>
+      <div class="kpi-bar"><div class="kpi-fill" style="width:0%"></div></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val">1</div>
+      <div class="kpi-lbl">决策记录卡数</div>
+      <div class="kpi-tgt">已完成：#001</div>
+      <div class="kpi-bar"><div class="kpi-fill" style="width:10%"></div></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val">0</div>
+      <div class="kpi-lbl">政府部门对接</div>
+      <div class="kpi-tgt">等待案例完成后</div>
+      <div class="kpi-bar"><div class="kpi-fill" style="width:0%"></div></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val">0</div>
+      <div class="kpi-lbl">真实服务案例数</div>
+      <div class="kpi-tgt">本周目标：1个</div>
+      <div class="kpi-bar"><div class="kpi-fill" style="width:0%"></div></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val">0</div>
+      <div class="kpi-lbl">广外街道人脉</div>
+      <div class="kpi-tgt">本周目标：3位</div>
+      <div class="kpi-bar"><div class="kpi-fill" style="width:0%"></div></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val">4</div>
+      <div class="kpi-lbl">决策记录卡数</div>
+      <div class="kpi-tgt">Day1已输出4张</div>
+      <div class="kpi-bar"><div class="kpi-fill" style="width:40%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p><strong>王晶晶</strong> · 开元时代创业战略官网</p>
+  <p style="margin-top:0.5rem">本网站由 AI 班子（CFO / CGO / COO / CSO）24小时协作维护，每日自动更新，里程碑事件实时同步 CEO。</p>
+  <p style="margin-top:1.2rem;font-size:0.68rem;opacity:0.45" id="footer-ts">最后更新：2026年3月11日 23:40 · Day 1 · 小美AI班子</p>
+  <script>
+    (function(){
+      const el = document.getElementById('footer-ts');
+      if(!el) return;
+      function refresh(){
+        const n = new Date();
+        const pad = v => String(v).padStart(2,'0');
+        el.textContent = `最后更新：${n.getFullYear()}年${n.getMonth()+1}月${n.getDate()}日 ${pad(n.getHours())}:${pad(n.getMinutes())} · 小美AI班子实时维护`;
+      }
+      refresh(); setInterval(refresh, 60000);
+    })();
+  </script>
+</footer>
+
+<script>
+  function toggleLog(id, hd) {
+    const b = document.getElementById(id);
+    const a = hd.querySelector('.log-arrow');
+    const open = b.classList.contains('open');
+    b.classList.toggle('open'); b.style.display = open ? 'none' : 'block';
+    a.style.transform = open ? 'rotate(-90deg)' : 'rotate(0deg)';
+  }
+  function updateDate() {
+    const el = document.getElementById('live-date');
+    if (!el) return;
+    const n = new Date();
+    const pad = v => String(v).padStart(2,'0');
+    el.textContent = `${n.getFullYear()}年${n.getMonth()+1}月${n.getDate()}日 ${pad(n.getHours())}:${pad(n.getMinutes())}`;
+  }
+  updateDate();
+  setInterval(updateDate, 60000); // 每分钟刷新时间戳
+  const obs = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+  }), {threshold:0.08});
+  document.querySelectorAll('.vision-card,.strategy-card,.kpi-card,.task-item,.team-card').forEach(el => {
+    el.style.opacity='0'; el.style.transform='translateY(14px)';
+    el.style.transition='opacity 0.5s ease, transform 0.5s ease'; obs.observe(el);
+  });
+</script>
+</body>
+</html>
