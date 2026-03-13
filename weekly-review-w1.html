@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>开元时代 · 第一周周度复盘 · 2026-W11</title>
+<style>
+  :root {
+    --pearl:    #FAFAF7;
+    --pearl-2:  #F4F2EC;
+    --pearl-3:  #EDE9E0;
+    --pearl-4:  #E5E1D6;
+    --white:    #FFFFFF;
+    --gold:     #B8922A;
+    --gold-lt:  #D4A843;
+    --gold-pale:#F5EDD6;
+    --text:     #2C2A25;
+    --text-2:   #5C5850;
+    --muted:    #9A9488;
+    --border:   rgba(184,146,42,0.15);
+    --border-s: rgba(184,146,42,0.08);
+    --green:    #2D7A52;
+    --green-bg: #EBF5EF;
+    --blue:     #2B5FA0;
+    --blue-bg:  #EBF1FA;
+    --amber:    #B06A00;
+    --amber-bg: #FBF0E0;
+    --red:      #A83030;
+    --red-bg:   #FAE8E8;
+    --purple:   #6B3FA0;
+    --purple-bg:#F3EEFA;
+    --shadow:   0 2px 12px rgba(120,100,50,0.08);
+    --shadow-lg:0 4px 24px rgba(120,100,50,0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--pearl);
+    color: var(--text);
+    font-family: -apple-system, 'PingFang SC', 'Helvetica Neue', sans-serif;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: linear-gradient(135deg, #FFFEF8 0%, #FBF7EC 60%, #F5EDD6 100%);
+    border-bottom: 2px solid var(--gold-pale);
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '開元';
+    position: absolute;
+    right: -10px; top: -20px;
+    font-size: 10rem;
+    font-weight: 900;
+    color: rgba(184,146,42,0.05);
+    pointer-events: none;
+    letter-spacing: -8px;
+  }
+  .week-badge {
+    display: inline-block;
+    background: var(--gold-pale);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    padding: 4px 16px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .header h1 { font-size: 1.9rem; font-weight: 800; color: var(--text); margin-bottom: 0.4rem; }
+  .header h1 span { color: var(--gold); }
+  .header .subtitle { color: var(--text-2); font-size: 0.9rem; }
+
+  /* ── Layout ── */
+  .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .section { margin-bottom: 2.5rem; }
+  .section-label {
+    font-size: 0.67rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 0.9rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--pearl-4);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  h2 { font-size: 1.15rem; font-weight: 700; margin-bottom: 1.2rem; color: var(--text); }
+
+  /* ── OKR Dashboard ── */
+  .okr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .okr-card {
+    background: var(--white);
+    border: 1px solid var(--border-s);
+    border-radius: 14px;
+    padding: 1.3rem 1.4rem;
+    box-shadow: var(--shadow);
+  }
+  .okr-card.highlight { border-color: var(--border); }
+  .okr-label { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 0.4rem; font-weight: 600; }
+  .okr-value { font-size: 2rem; font-weight: 800; color: var(--gold); line-height: 1; }
+  .okr-title { font-size: 0.83rem; color: var(--text); margin-top: 0.4rem; font-weight: 700; }
+  .okr-desc { font-size: 0.76rem; color: var(--text-2); margin-top: 0.3rem; line-height: 1.6; }
+  .okr-status {
+    display: inline-block;
+    font-size: 0.65rem;
+    padding: 3px 9px;
+    border-radius: 8px;
+    margin-top: 0.6rem;
+    font-weight: 700;
+  }
+  .status-green { background: var(--green-bg); color: var(--green); border: 1px solid rgba(45,122,82,0.2); }
+  .status-amber { background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(176,106,0,0.2); }
+  .status-red   { background: var(--red-bg);   color: var(--red);   border: 1px solid rgba(168,48,48,0.2); }
+  .status-blue  { background: var(--blue-bg);  color: var(--blue);  border: 1px solid rgba(43,95,160,0.2); }
+
+  /* ── Progress Bar ── */
+  .prog-wrap {
+    background: var(--white);
+    border: 1px solid var(--border-s);
+    border-radius: 14px;
+    padding: 1.4rem 1.6rem;
+    box-shadow: var(--shadow);
+  }
+  .prog-item { margin-bottom: 1rem; }
+  .prog-item:last-child { margin-bottom: 0; }
+  .prog-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; font-size: 0.83rem; color: var(--text-2); }
+  .prog-bar { height: 7px; background: var(--pearl-3); border-radius: 4px; overflow: hidden; }
+  .prog-fill { height: 100%; border-radius: 4px; }
+  .fill-gold   { background: linear-gradient(90deg, var(--gold), var(--gold-lt)); }
+  .fill-green  { background: linear-gradient(90deg, #1e6640, var(--green)); }
+  .fill-blue   { background: linear-gradient(90deg, #1a4a80, var(--blue)); }
+  .fill-amber  { background: linear-gradient(90deg, #8a5000, var(--amber)); }
+
+  /* ── 愿景达成对照表 ── */
+  .vision-compare {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .vc-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    padding: 0.75rem 1.2rem;
+    background: var(--pearl-2);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    border-bottom: 1px solid var(--pearl-4);
+    text-transform: uppercase;
+    font-weight: 700;
+    gap: 0.5rem;
+  }
+  .vc-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    padding: 0.9rem 1.2rem;
+    font-size: 0.82rem;
+    border-bottom: 1px solid var(--pearl-3);
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .vc-row:last-child { border-bottom: none; }
+  .vc-row:hover { background: var(--pearl-2); }
+  .vc-name { font-weight: 700; color: var(--text); }
+  .vc-sub { font-size: 0.72rem; color: var(--muted); margin-top: 0.1rem; }
+  .chip {
+    display: inline-block;
+    font-size: 0.66rem;
+    padding: 3px 9px;
+    border-radius: 6px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .chip-done  { background: var(--green-bg);  color: var(--green); }
+  .chip-wip   { background: var(--amber-bg);  color: var(--amber); }
+  .chip-block { background: var(--red-bg);    color: var(--red); }
+  .chip-na    { background: var(--pearl-3);   color: var(--muted); }
+
+  /* ── 策略调整卡 ── */
+  .strategy-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .sc {
+    background: var(--white);
+    border: 1px solid var(--border-s);
+    border-radius: 12px;
+    padding: 1.2rem;
+    box-shadow: var(--shadow);
+  }
+  .sc.keep   { border-left: 3px solid var(--green); }
+  .sc.adjust { border-left: 3px solid var(--amber); }
+  .sc.add    { border-left: 3px solid var(--blue); }
+  .sc.drop   { border-left: 3px solid var(--red); }
+  .sc-tag  { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 700; }
+  .sc-title{ font-size: 0.88rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text); }
+  .sc-body { font-size: 0.78rem; color: var(--text-2); line-height: 1.7; }
+
+  /* ── 决策清单 ── */
+  .decision-list { display: flex; flex-direction: column; gap: 0.8rem; }
+  .dec-item {
+    background: var(--white);
+    border: 1px solid var(--border-s);
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1rem;
+    align-items: start;
+    box-shadow: var(--shadow);
+  }
+  .dec-num {
+    width: 30px; height: 30px;
+    background: var(--gold-pale);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .dec-content .dec-title { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.3rem; color: var(--text); }
+  .dec-content .dec-desc  { font-size: 0.77rem; color: var(--text-2); line-height: 1.65; }
+  .dec-urgency { font-size: 0.65rem; padding: 4px 9px; border-radius: 6px; white-space: nowrap; font-weight: 700; }
+  .urg-high { background: var(--red-bg);   color: var(--red); }
+  .urg-mid  { background: var(--amber-bg); color: var(--amber); }
+  .urg-low  { background: var(--blue-bg);  color: var(--blue); }
+
+  /* ── 时间线 ── */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before { content: ''; position: absolute; left: 8px; top: 4px; bottom: 4px; width: 2px; background: var(--pearl-4); border-radius: 2px; }
+  .tl-item { position: relative; margin-bottom: 1.6rem; }
+  .tl-dot {
+    position: absolute; left: -1.85rem; top: 4px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: var(--white);
+    box-shadow: 0 0 0 3px var(--gold-pale);
+  }
+  .tl-date  { font-size: 0.7rem; color: var(--gold); margin-bottom: 0.2rem; letter-spacing: 0.08em; font-weight: 700; }
+  .tl-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--text); }
+  .tl-desc  { font-size: 0.78rem; color: var(--text-2); line-height: 1.65; }
+
+  /* ── 北极星卡 ── */
+  .northstar {
+    background: linear-gradient(135deg, #FFFEF5 0%, var(--gold-pale) 100%);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-lg);
+  }
+  .northstar .star  { font-size: 2.2rem; margin-bottom: 0.6rem; }
+  .northstar .ns-text { font-size: 1.1rem; font-weight: 700; color: var(--text); line-height: 1.6; }
+  .northstar .ns-sub  { font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem; }
+
+  /* ── 本周最重要的1件事 ── */
+  .most-important {
+    background: var(--red-bg);
+    border: 1.5px solid rgba(168,48,48,0.25);
+    border-radius: 14px;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 2rem;
+  }
+  .mi-label   { font-size: 0.68rem; color: var(--red); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 700; }
+  .mi-content { font-size: 1rem; font-weight: 700; line-height: 1.6; color: var(--text); }
+  .mi-sub     { font-size: 0.8rem; color: var(--text-2); margin-top: 0.4rem; line-height: 1.65; }
+
+  /* ── CEO 诊断 ── */
+  .ceo-diag {
+    background: linear-gradient(135deg, #FFFEF5 0%, var(--gold-pale) 100%);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 1.6rem 2rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+  }
+  .ceo-diag-label { font-size: 0.68rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.8rem; font-weight: 700; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    font-size: 0.73rem;
+    color: var(--muted);
+    border-top: 1px solid var(--pearl-4);
+    background: var(--pearl-2);
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 640px) {
+    .okr-grid { grid-template-columns: 1fr; }
+    .strategy-cards { grid-template-columns: 1fr; }
+    .vc-header, .vc-row { grid-template-columns: 1.5fr 1fr 1fr; }
+    .vc-header :nth-child(4), .vc-row :nth-child(4) { display: none; }
+    .dec-item { grid-template-columns: auto 1fr; }
+    .dec-urgency { grid-column: 2; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<div class="header">
+  <div class="week-badge">Week 1 Review · 开元时代储备期</div>
+  <h1>第一周<span>周度复盘</span></h1>
+  <p class="subtitle">2026年3月11日 – 3月14日 · 储备期Day1–Day4 · CEO主持</p>
+</div>
+
+<div class="container">
+
+  <!-- ── 北极星回归 ── -->
+  <div class="northstar">
+    <div class="star">⭐</div>
+    <div class="ns-text">每一位长者，无论贫富，都能享受到基本的有尊严的照护</div>
+    <div class="ns-sub">开元时代北极星指标 · 商业价值与社会价值不必对立</div>
+  </div>
+
+  <!-- ── 本周最重要的1件事 ── -->
+  <div class="most-important">
+    <div class="mi-label">⚡ 本周最重要的1件事（CEO首要决策）</div>
+    <div class="mi-content">3月25日失能评估申报截止 — 距今仅剩 <span style="color:var(--red);">11天</span>，必须本周激活居委会家人渠道，锁定首户</div>
+    <div class="mi-sub">错过Q1窗口 = 错过800元/月补贴资格，下次窗口最早Q2（6月）。这是当前最强的首户切入催化剂，也是最低成本的信任建立路径。</div>
+  </div>
+
+  <!-- ── OKR快照 ── -->
+  <div class="section">
+    <div class="section-label">OKR Snapshot · 周度指标快照</div>
+    <div class="okr-grid">
+      <div class="okr-card highlight">
+        <div class="okr-label">阶段一目标（0-12个月）</div>
+        <div class="okr-value">0 / 10</div>
+        <div class="okr-title">服务家庭数</div>
+        <div class="okr-desc">目标：10个家庭，NPS&gt;8分，30%是低收入长者</div>
+        <div class="okr-status status-amber">储备期 · 尚未启动实服务</div>
+      </div>
+      <div class="okr-card">
+        <div class="okr-label">北极星感知指标</div>
+        <div class="okr-value" style="font-size:1.4rem;line-height:1.2;padding-top:0.3rem;">准备中</div>
+        <div class="okr-title">首个"被改变的故事"</div>
+        <div class="okr-desc">目标：找到第一个真正被改变生活的家庭，而非第一批付费客户</div>
+        <div class="okr-status status-amber">CGO进行中 · 3月底前上门评估</div>
+      </div>
+      <div class="okr-card">
+        <div class="okr-label">现金流健康度</div>
+        <div class="okr-value">¥100万</div>
+        <div class="okr-title">启动资金（2027年到位）</div>
+        <div class="okr-desc">个人出资100万，2027年初启动阶段一；储备期成本约¥2,000元（首户试服务）</div>
+        <div class="okr-status status-green">资金安全 · 无压力</div>
+      </div>
+      <div class="okr-card">
+        <div class="okr-label">研究覆盖度</div>
+        <div class="okr-value">6 / 10</div>
+        <div class="okr-title">开元研究院课题完成</div>
+        <div class="okr-desc">T01-T09已完成6项研究，T10政策课题已建档；剩余T08护理员培训、T09退出路径待深化</div>
+        <div class="okr-status status-green">超预期完成</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 本周完成度 ── -->
+  <div class="section">
+    <div class="section-label">Week Progress · 本周完成度</div>
+    <div class="prog-wrap">
+      <div class="prog-item">
+        <div class="prog-header">
+          <span>研究院课题（T01-T10）</span>
+          <span style="color:var(--green); font-weight:700;">60%</span>
+        </div>
+        <div class="prog-bar"><div class="prog-fill fill-green" style="width:60%"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-header">
+          <span>CFO财务模型完整度</span>
+          <span style="color:var(--blue); font-weight:700;">80%</span>
+        </div>
+        <div class="prog-bar"><div class="prog-fill fill-blue" style="width:80%"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-header">
+          <span>COO服务SOP文档化</span>
+          <span style="color:var(--gold); font-weight:700;">40%</span>
+        </div>
+        <div class="prog-bar"><div class="prog-fill fill-gold" style="width:40%"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-header">
+          <span>CGO首户获取（目标3月底上门）</span>
+          <span style="color:var(--amber); font-weight:700;">20%</span>
+        </div>
+        <div class="prog-bar"><div class="prog-fill fill-amber" style="width:20%"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-header">
+          <span>政府关系/兵部预热</span>
+          <span style="color:var(--amber); font-weight:700;">15%</span>
+        </div>
+        <div class="prog-bar"><div class="prog-fill fill-amber" style="width:15%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 愿景达成对照表 ── -->
+  <div class="section">
+    <div class="section-label">Vision Alignment · 愿景策略对照</div>
+    <h2>三阶段路径 · 本周达成情况</h2>
+    <div class="vision-compare">
+      <div class="vc-header">
+        <div>战略维度</div>
+        <div>原定计划</div>
+        <div>本周实际</div>
+        <div>差距/风险</div>
+      </div>
+      <div class="vc-row">
+        <div>
+          <div class="vc-name">🎯 首户锁定</div>
+          <div class="vc-sub">CGO · 阶段一核心里程碑</div>
+        </div>
+        <div><span class="chip chip-na">Week 2</span></div>
+        <div><span class="chip chip-wip">SOP已备</span></div>
+        <div style="font-size:0.74rem; color: var(--amber); font-weight:600;">3月底必须完成首次上门</div>
+      </div>
+      <div class="vc-row">
+        <div>
+          <div class="vc-name">📋 服务SOP</div>
+          <div class="vc-sub">COO · 服务标准化基础</div>
+        </div>
+        <div><span class="chip chip-na">Month 1</span></div>
+        <div><span class="chip chip-done">V1完成</span></div>
+        <div style="font-size:0.74rem; color: var(--green); font-weight:600;">超前完成，L1/L2/L3三层架构</div>
+      </div>
+      <div class="vc-row">
+        <div>
+          <div class="vc-name">💰 定价与现金流</div>
+          <div class="vc-sub">CFO · 财务可行性验证</div>
+        </div>
+        <div><span class="chip chip-na">Month 1</span></div>
+        <div><span class="chip chip-done">V3完成</span></div>
+        <div style="font-size:0.74rem; color: var(--green); font-weight:600;">三情景模型，补贴风险已量化</div>
+      </div>
+      <div class="vc-row">
+        <div>
+          <div class="vc-name">🏛️ 政府关系预热</div>
+          <div class="vc-sub">兵部 · 驿站合作路径</div>
+        </div>
+        <div><span class="chip chip-na">Q2</span></div>
+        <div><span class="chip chip-wip">预案备好</span></div>
+        <div style="font-size:0.74rem; color: var(--amber); font-weight:600;">天恒康健接触待CEO授权</div>
+      </div>
+      <div class="vc-row">
+        <div>
+          <div class="vc-name">📚 研究院知识库</div>
+          <div class="vc-sub">CSO · 9大课题</div>
+        </div>
+        <div><span class="chip chip-na">Month 1</span></div>
+        <div><span class="chip chip-done">60%完成</span></div>
+        <div style="font-size:0.74rem; color: var(--green); font-weight:600;">超速完成，苏格拉底质询全程</div>
+      </div>
+      <div class="vc-row">
+        <div>
+          <div class="vc-name">🌐 GitHub Pages 外网官网</div>
+          <div class="vc-sub">工部 · 品牌数字资产</div>
+        </div>
+        <div><span class="chip chip-na">未规划</span></div>
+        <div><span class="chip chip-done">已上线</span></div>
+        <div style="font-size:0.74rem; color: var(--blue);">
+          <a href="https://wangxiaohou123.github.io/kaiyuanshidai/" target="_blank" style="color:var(--blue);">↗ 访问外网官网</a>
+        </div>
+      </div>
+      <div class="vc-row">
+        <div>
+          <div class="vc-name">🏥 企业注册/资质</div>
+          <div class="vc-sub">刑部 · 法律合规准备</div>
+        </div>
+        <div><span class="chip chip-na">2027年前</span></div>
+        <div><span class="chip chip-na">未启动</span></div>
+        <div style="font-size:0.74rem; color: var(--muted);">Q2申报驿站前需完成注册</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 策略Review ── -->
+  <div class="section">
+    <div class="section-label">Strategy Review · 策略动态调整</div>
+    <h2>哪些继续 · 哪些调整 · 哪些新增 · 哪些放弃</h2>
+    <div class="strategy-cards">
+
+      <div class="sc keep">
+        <div class="sc-tag" style="color:var(--green);">✅ 继续（KEEP）</div>
+        <div class="sc-title">12个月验证节奏，不急求盈利</div>
+        <div class="sc-body">本周验证有效：CFO现金流模型显示首户垫资仅¥2,000元，12个月节奏完全可行。北极星优先于收入，这是本项目的核心竞争壁垒，不改。</div>
+      </div>
+
+      <div class="sc keep">
+        <div class="sc-tag" style="color:var(--green);">✅ 继续（KEEP）</div>
+        <div class="sc-title">先服务案例，再政府对接</div>
+        <div class="sc-body">Week 1 研究验证：政府对接需要运营经验背书，贸然接触只会暴露短板。坚持"先找1个真实改变的故事，再谈扩张"的原则。</div>
+      </div>
+
+      <div class="sc adjust">
+        <div class="sc-tag" style="color:var(--amber);">🔄 调整（ADJUST）</div>
+        <div class="sc-title">驿站入局：从"独立申报"→"合作挂靠"</div>
+        <div class="sc-body">原计划Q2独立申报驿站，本周CSO质询发现：当前无运营经验，直接申报成功率低。调整为：先找天恒康健谈合作分包，以资源换经验，积累后Q3再独立申报。</div>
+      </div>
+
+      <div class="sc adjust">
+        <div class="sc-tag" style="color:var(--amber);">🔄 调整（ADJUST）</div>
+        <div class="sc-title">首户获取：补贴锚点→公益引入</div>
+        <div class="sc-body">V1话术过度强调"补贴"，居委会易产生推销反感。V2改为"志愿研究员协助失能评估申报"切入，先建信任再转化。这是本周最重要的话术迭代。</div>
+      </div>
+
+      <div class="sc add">
+        <div class="sc-tag" style="color:var(--blue);">➕ 新增（ADD）</div>
+        <div class="sc-title">L3"故事记录"服务作为差异化核心</div>
+        <div class="sc-body">COO本周苏格拉底质询发现：竞品只做L1基础照护，我们在L1基础上增加"每周给子女的故事记录"，命中远程子女的情感焦虑，是最强付费粘性点。将写入产品核心话术。</div>
+      </div>
+
+      <div class="sc add">
+        <div class="sc-tag" style="color:var(--blue);">➕ 新增（ADD）</div>
+        <div class="sc-title">养老服务师认证提前布局</div>
+        <div class="sc-body">民政部新职业认定将在Q3-Q4开放。建议今年送1-2名护理员参加首批培训（约¥3,000-5,000元/人），形成未来招募的差异化背书。成本低，护城河价值高。</div>
+      </div>
+
+      <div class="sc drop">
+        <div class="sc-tag" style="color:var(--red);">❌ 放弃（DROP）</div>
+        <div class="sc-title">30天盈利假设（已正式归档）</div>
+        <div class="sc-body">决策#004已确认放弃。CFO模型验证：即使最优情景，首户盈亏平衡也需M3-M5。30天盈利假设会导致错误决策，已从所有模型中删除。</div>
+      </div>
+
+      <div class="sc drop">
+        <div class="sc-tag" style="color:var(--red);">❌ 暂缓（PAUSE）</div>
+        <div class="sc-title">大规模外部接触与PR推广</div>
+        <div class="sc-body">储备期不适合对外宣传。官网已上线但不主动推广；tengbeibei等外部合作伙伴不接收日常班子动态。等首户验证成功后，再考虑外部节点同步。</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── 本周大事记 ── -->
+  <div class="section">
+    <div class="section-label">Week Recap · 本周大事记</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2026-03-11 · Day 1</div>
+        <div class="tl-title">开元时代正式立项 · 治理体系建立</div>
+        <div class="tl-desc">三省六部制确立，苏格拉底决策流程建立，首战城市定为北京西城区广外街道（成都否决），决策#001-#004完成。放弃30天盈利假设，接受12个月验证节奏。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-bg);"></div>
+        <div class="tl-date">2026-03-12 · Day 2</div>
+        <div class="tl-title">研究院启动 · T01-T09课题建档 · 官网重构</div>
+        <div class="tl-desc">开元研究院知识库建立，官网完成品牌主视觉重构，定价推演模型V1（CFO）、产品服务介绍V1（CSO）、招聘标准（COO）产出。官网时间线首次写入。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="border-color:var(--amber);box-shadow:0 0 0 3px var(--amber-bg);"></div>
+        <div class="tl-date">2026-03-13 · Day 3</div>
+        <div class="tl-title">夜间关键决策 · 自主运行Agent启动</div>
+        <div class="tl-desc">CEO确认放弃30天盈利假设（决策#005），四线班子夜间同步启动。CFO 6个月现金流模型、CGO 7步进入计划、COO首次服务SOP、CSO假设验证清单产出。GitHub Pages外网官网上线。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="border-color:var(--green);box-shadow:0 0 0 3px var(--green-bg);"></div>
+        <div class="tl-date">2026-03-14 · Day 4 · 两会收官首日</div>
+        <div class="tl-title">政策进入执行期 · 驿站窗口确认 · 首户策略成型</div>
+        <div class="tl-desc">两会政府工作报告写入银发经济，西城区驿站运营商招募公告发出，CFO现金流V2更新，COO话术卡V1，CGO首家获取策略（苏格拉底审议），T10政策课题建档。待CEO决策3项行动。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 第二周行动清单 ── -->
+  <div class="section">
+    <div class="section-label">Week 2 Actions · 下周行动清单</div>
+    <h2>3月15日 – 3月21日 · 优先级排序</h2>
+    <div class="decision-list">
+      <div class="dec-item" style="border-left:3px solid var(--red);">
+        <div class="dec-num" style="background:var(--red-bg);border-color:rgba(168,48,48,0.3);color:var(--red);">1</div>
+        <div class="dec-content">
+          <div class="dec-title" style="color:var(--red);">🔴 激活居委会家人渠道（CEO亲自执行）</div>
+          <div class="dec-desc">与家人私下沟通，以"公益研究引荐"方式低调接触2-3户需要照护的家庭，保护家人职务安全。目标：3月25日前锁定1户，协助失能评估申报，把握800元/月补贴Q1窗口。</div>
+        </div>
+        <div class="dec-urgency urg-high">🔥 本周必做</div>
+      </div>
+      <div class="dec-item">
+        <div class="dec-num">2</div>
+        <div class="dec-content">
+          <div class="dec-title">💰 确认首户试服务¥2,000垫付授权</div>
+          <div class="dec-desc">CFO精算：首户储备期试服务总成本约¥1,940元（护理员×2次/周×4周+工具包+交通）。批准后即可启动，首户不以收费为目的，以SOP验证+护理员实训+居委会信任为目标。</div>
+        </div>
+        <div class="dec-urgency urg-high">本周决策</div>
+      </div>
+      <div class="dec-item">
+        <div class="dec-num">3</div>
+        <div class="dec-content">
+          <div class="dec-title">🏛️ 决策：是否授权天恒康健接触</div>
+          <div class="dec-desc">兵部准备好了"合作分包"接触预案，可换取已有运营资质的品牌背书+失能评估绿色通道。若不授权，Q2独立入场，不影响首户试服务。本周做决策即可，不需立即执行。</div>
+        </div>
+        <div class="dec-urgency urg-mid">本周决策</div>
+      </div>
+      <div class="dec-item">
+        <div class="dec-num">4</div>
+        <div class="dec-content">
+          <div class="dec-title">📋 COO完成服务手册V1正式版</div>
+          <div class="dec-desc">将服务SOP三层框架（L1基础生活照料 + L2功能维持训练 + L3故事记录）完善为正式可操作手册。L3"故事记录"是本周发现的最强差异化亮点，需写入话术V3。</div>
+        </div>
+        <div class="dec-urgency urg-mid">班子自主</div>
+      </div>
+      <div class="dec-item">
+        <div class="dec-num">5</div>
+        <div class="dec-content">
+          <div class="dec-title">🏥 启动企业注册材料准备</div>
+          <div class="dec-desc">Q2申报驿站需要企业注册+运营经验。刑部本周梳理北京养老服务企业注册要求（是否需要特殊资质、注册资本要求、经营范围写法），评估是否需要法律顾问介入。</div>
+        </div>
+        <div class="dec-urgency urg-low">Week 2</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CEO诊断 ── -->
+  <div class="ceo-diag">
+    <div class="ceo-diag-label">CEO Strategy Diagnosis · 高维视角诊断</div>
+    <div style="font-size:0.88rem; line-height:1.9; color:var(--text);">
+      <strong style="color:var(--gold); font-size:0.95rem;">本周总体评分：B+（超预期）</strong><br><br>
+      <span style="color:var(--green); font-weight:700;">✅ 超预期的地方：</span>研究院课题推进速度超出计划，CFO财务模型远比预期精准，外网官网上线是计划外惊喜，三省六部自主作业节奏已基本形成。<br><br>
+      <span style="color:var(--amber); font-weight:700;">⚠️ 需要警惕的地方：</span>所有工作目前仍是"桌面作业"，尚未接触一个真实的家庭。储备期的核心风险是"研究感觉很充分，但没有真实验证"。班子设计的苏格拉底质询可以挑战假设，但无法替代真实接触。<br><br>
+      <span style="color:var(--text); font-weight:700;">🎯 第二周唯一核心任务：</span>跨越"桌面研究"到"真实接触"的门槛。激活家人渠道，完成首次上门，哪怕只是一次聊天，也比10份文档更有价值。
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    开元时代 · 第一周周度复盘 · 2026.03.14 · CEO主持<br>
+    三省六部制AI班子产出 · 苏格拉底质询通过 · 珍珠白版
+  </div>
+
+</div>
+</body>
+</html>
