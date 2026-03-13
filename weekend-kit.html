@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>开元时代 · 周末必读包 · 2026-03-14/15</title>
+<style>
+  :root{
+    --bg:#0E0F11;--dark-2:#16181C;--dark-3:#1E2128;
+    --gold:#C9A84C;--red:#FF6B6B;--green:#2ED573;--blue:#576CBC;--purple:#B580E8;
+    --muted:#8B92A0;--border:rgba(255,255,255,0.07);--text:#E8EAF0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;padding:0 0 80px;}
+
+  .hero{
+    background:linear-gradient(135deg,#0A1000 0%,#121800 40%,#0E0F11 100%);
+    border-bottom:1px solid rgba(46,213,115,0.2);
+    padding:2.5rem 2rem 2rem;text-align:center;position:relative;overflow:hidden;
+  }
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(46,213,115,0.1),transparent);pointer-events:none;}
+  .hero-eyebrow{font-size:0.72rem;letter-spacing:3px;color:var(--green);text-transform:uppercase;margin-bottom:0.8rem;}
+  .hero-title{font-size:clamp(1.4rem,4vw,2.2rem);font-weight:700;color:#fff;margin-bottom:0.5rem;}
+  .hero-sub{font-size:0.88rem;color:var(--muted);max-width:640px;margin:0 auto 1.2rem;}
+  .badge-row{display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;}
+  .badge{padding:0.3rem 0.8rem;border-radius:20px;font-size:0.72rem;font-weight:600;}
+  .bg{background:rgba(46,213,115,0.15);color:#2ED573;border:1px solid rgba(46,213,115,0.35);}
+  .bb{background:rgba(201,168,76,0.15);color:#C9A84C;border:1px solid rgba(201,168,76,0.35);}
+  .br{background:rgba(255,107,107,0.15);color:#FF6B6B;border:1px solid rgba(255,107,107,0.35);}
+
+  .container{max-width:1000px;margin:0 auto;padding:2rem 1.5rem;}
+  .sec-title{font-size:0.68rem;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:1.2rem;display:flex;align-items:center;gap:0.6rem;}
+  .sec-title::after{content:'';flex:1;height:1px;background:var(--border);}
+
+  /* 导航卡 */
+  .nav-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2.5rem;}
+  .nav-card{background:var(--dark-2);border:1px solid var(--border);border-radius:14px;padding:1.2rem;cursor:pointer;transition:all .2s;text-decoration:none;display:block;}
+  .nav-card:hover{transform:translateY(-2px);border-color:rgba(46,213,115,0.3);}
+  .nav-card-icon{font-size:1.6rem;margin-bottom:0.5rem;}
+  .nav-card-title{font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:0.3rem;}
+  .nav-card-desc{font-size:0.75rem;color:var(--muted);line-height:1.4;}
+  .nav-card-tag{display:inline-block;margin-top:0.5rem;font-size:0.65rem;padding:0.1rem 0.5rem;border-radius:4px;}
+
+  /* 手风琴 */
+  .accordion{border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:1.2rem;}
+  .acc-hd{background:var(--dark-2);padding:1rem 1.2rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;}
+  .acc-hd:hover{background:#1a1c21;}
+  .acc-hd-left{}
+  .acc-hd-tag{font-size:0.65rem;letter-spacing:1px;color:var(--green);text-transform:uppercase;margin-bottom:0.2rem;}
+  .acc-hd-title{font-size:0.92rem;font-weight:700;}
+  .acc-hd-sub{font-size:0.75rem;color:var(--muted);margin-top:0.2rem;}
+  .acc-arrow{font-size:0.8rem;color:var(--muted);transition:transform .2s;}
+  .acc-arrow.open{transform:rotate(180deg);}
+  .acc-body{display:none;padding:1.2rem;border-top:1px solid var(--border);}
+  .acc-body.open{display:block;}
+
+  /* 对话气泡 */
+  .script-block{background:var(--dark-3);border-radius:10px;padding:1rem 1.2rem;margin-bottom:0.8rem;}
+  .script-label{font-size:0.65rem;color:var(--muted);letter-spacing:1px;margin-bottom:0.4rem;text-transform:uppercase;}
+  .script-text{font-size:0.85rem;line-height:1.7;color:var(--text);}
+  .script-text strong{color:var(--gold);}
+  .script-note{font-size:0.75rem;color:var(--green);margin-top:0.4rem;font-style:italic;}
+
+  /* 表格 */
+  .tbl{width:100%;border-collapse:collapse;font-size:0.82rem;}
+  .tbl th{text-align:left;padding:0.5rem 0.8rem;color:var(--muted);border-bottom:1px solid var(--border);font-weight:500;font-size:0.72rem;}
+  .tbl td{padding:0.6rem 0.8rem;border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:top;}
+  .tbl tr:last-child td{border-bottom:none;}
+
+  /* 检查项 */
+  .checklist{display:flex;flex-direction:column;gap:0.6rem;}
+  .check-item{display:flex;gap:0.8rem;align-items:flex-start;padding:0.7rem 0.9rem;background:var(--dark-3);border-radius:10px;}
+  .check-box{width:20px;height:20px;border:2px solid var(--border);border-radius:5px;flex-shrink:0;margin-top:0.1rem;}
+  .check-body h4{font-size:0.85rem;font-weight:600;margin-bottom:0.2rem;}
+  .check-body p{font-size:0.78rem;color:var(--muted);line-height:1.5;}
+  .check-body .why{font-size:0.72rem;color:var(--green);margin-top:0.3rem;}
+
+  /* 标注卡 */
+  .tip-card{border-radius:10px;padding:1rem 1.2rem;margin-bottom:0.8rem;font-size:0.82rem;line-height:1.6;}
+  .tip-gold{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);}
+  .tip-red{background:rgba(255,107,107,0.08);border:1px solid rgba(255,107,107,0.25);}
+  .tip-green{background:rgba(46,213,115,0.08);border:1px solid rgba(46,213,115,0.25);}
+
+  .p0{display:inline-block;background:rgba(255,107,107,0.15);color:#FF6B6B;padding:0.1rem 0.4rem;border-radius:4px;font-size:0.68rem;font-weight:700;}
+  .p1{display:inline-block;background:rgba(201,168,76,0.15);color:#C9A84C;padding:0.1rem 0.4rem;border-radius:4px;font-size:0.68rem;font-weight:700;}
+
+  .footer{text-align:center;color:var(--muted);font-size:0.75rem;padding-top:2rem;border-top:1px solid var(--border);}
+</style>
+<script>
+function toggle(id,btn){
+  var b=document.getElementById(id);
+  var a=btn.querySelector('.acc-arrow');
+  if(b.classList.contains('open')){b.classList.remove('open');a.classList.remove('open');}
+  else{b.classList.add('open');a.classList.add('open');}
+}
+</script>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-eyebrow">开元时代 · CEO 周末必读包</div>
+  <h1 class="hero-title">2026-03-14/15 · 周末行动储备包</h1>
+  <p class="hero-sub">班子已在储备期完成全部准备工作。王总周末只需做三件事：<strong style="color:#2ED573;">了解情况 → 接触人脉 → 听取反馈</strong>，不需要签约，不需要承诺。</p>
+  <div class="badge-row">
+    <span class="badge bg">✅ 班子作业全部储备完毕</span>
+    <span class="badge bb">📋 3个P0清单就绪</span>
+    <span class="badge br">🎯 周末目标：登记2户家庭</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 快速导航 -->
+  <div class="sec-title">📁 本包内容导航</div>
+  <div class="nav-grid">
+    <div class="nav-card">
+      <div class="nav-card-icon">🗣️</div>
+      <div class="nav-card-title">Section A · 话术手册</div>
+      <div class="nav-card-desc">三种场景的完整对话剧本：居委会、电话政务、街坊邻居</div>
+      <span class="nav-card-tag bb">最重要先看</span>
+    </div>
+    <div class="nav-card">
+      <div class="nav-card-icon">📋</div>
+      <div class="nav-card-title">Section B · 需求登记表</div>
+      <div class="nav-card-desc">E06意向书简版，周末遇到有需求的家庭直接用手机记录</div>
+      <span class="nav-card-tag bg">现场可用</span>
+    </div>
+    <div class="nav-card">
+      <div class="nav-card-icon">📞</div>
+      <div class="nav-card-title">Section C · 政务电话攻略</div>
+      <div class="nav-card-desc">打给广外街道政务中心的完整问答脚本，E05确认指南</div>
+      <span class="nav-card-tag bb">周一上班前完成</span>
+    </div>
+    <div class="nav-card">
+      <div class="nav-card-icon">💰</div>
+      <div class="nav-card-title">Section D · 补贴知识速查</div>
+      <div class="nav-card-desc">800元/月消费券申领条件、流程、时间线，跟家人/邻居解释用</div>
+      <span class="nav-card-tag bg">知识储备</span>
+    </div>
+    <div class="nav-card">
+      <div class="nav-card-icon">🏘️</div>
+      <div class="nav-card-title">Section E · 广外竞品地图</div>
+      <div class="nav-card-desc">广外街道现有养老服务机构全览，帮你找到开元的差异化切入点</div>
+      <span class="nav-card-tag" style="background:rgba(87,108,188,0.15);color:#576CBC;border:1px solid rgba(87,108,188,0.25);">战略参考</span>
+    </div>
+    <div class="nav-card" onclick="window.open('index.html','_blank')">
+      <div class="nav-card-icon">🏛️</div>
+      <div class="nav-card-title">返回总指挥台</div>
+      <div class="nav-card-desc">查看全部决策记录、班子作业清单、P0进度追踪</div>
+      <span class="nav-card-tag" style="background:rgba(255,255,255,0.08);color:var(--muted);border:1px solid var(--border);">index.html</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION A · 话术手册
+  ═══════════════════════════════════════════════ -->
+  <div class="sec-title">🗣️ Section A · 周末话术手册（C05 接触剧本 V2）</div>
+
+  <div class="tip-card tip-gold">
+    <strong>核心话术升级说明：</strong>两会确认长护险成"第六险"后，开元的切入话术从"我们在做养老服务"升级为<strong style="color:#C9A84C;">"帮您家长者免费申领800元/月政府补贴"</strong>。这个话头没有商业目的感，反而是在做好事，居委会/街坊邻居接受度极高。
+  </div>
+
+  <!-- 场景1：和家人（居委会）的话 -->
+  <div class="accordion" style="border-color:rgba(201,168,76,0.3);">
+    <div class="acc-hd" onclick="toggle('s-a1',this)">
+      <div class="acc-hd-left">
+        <div class="acc-hd-tag">场景 A-1 · 优先级 P0</div>
+        <div class="acc-hd-title">跟家人（居委会任职）说的话</div>
+        <div class="acc-hd-sub">目标：请家人帮忙介绍辖区内有失能长者的家庭</div>
+      </div>
+      <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body open" id="s-a1">
+      <div class="tip-card tip-gold" style="margin-bottom:1rem;">
+        <strong>使用时机：</strong>周末跟家人吃饭/闲聊时自然带出，不要郑重其事地"开会"，越随意越好。
+      </div>
+
+      <div class="script-block">
+        <div class="script-label">开场（切勿直接说"我要创业"）</div>
+        <div class="script-text">
+          "妈/爸/[称谓]，你们居委会那边，有没有家里有老人卧床、或者需要人照顾的情况？我最近在研究一个政策，国家现在有个补贴，失能的老人每个月能领800块钱的政府消费券，专门用来请人上门照护的。我在想，你们那边有没有什么家庭知道这个事？"
+        </div>
+        <div class="script-note">→ 目的：探问有无失能长者家庭，同时传递"800元补贴"话题，不提任何商业动作</div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-label">如果对方有线索（有认识的家庭）</div>
+        <div class="script-text">
+          "那我能不能让你帮我转达一下，就说有个渠道可以帮他们申领这个补贴，流程比较复杂，但我们可以帮他们弄。不用花他们什么钱，就是搞清楚他们家的情况，然后帮他们递材料。你看能不能帮我问问哪家有需要？"
+        </div>
+        <div class="script-note">→ 目的：争取拿到1-2个可以联系的家庭信息，不谈钱不谈服务合同</div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-label">如果对方问"你为什么关心这个"</div>
+        <div class="script-text">
+          "我在研究养老这个方向，两会刚出来的政策，我觉得挺有意思的。而且你们那边肯定有很多老人家不知道这个补贴，挺可惜的。我就想试试能不能帮几个家庭先用上这个政策，也顺便了解一下大家的需求。"
+        </div>
+        <div class="script-note">→ 关键：定位为"公益性了解"，不是"找客户"</div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-label">如果对方态度积极，可以进一步问</div>
+        <div class="script-text">
+          "那这样，你帮我问一下，他们家老人大概是什么情况？是完全卧床、还是生活能自理但需要帮忙？家里有没有子女照顾？子女上班吗？我就是先了解了解情况，后面看看怎么帮他们。"
+        </div>
+        <div class="script-note">→ 收集：失能程度 + 是否有照护者 + 子女工作情况（付费能力信号）</div>
+      </div>
+
+      <div class="tip-card tip-green" style="margin-top:0.8rem;">
+        <strong>本场景成功标准：</strong>对方表示"我帮你问问"或者直接给你介绍了1个家庭的基本情况。不需要当场见面，不需要确认任何合作意向。
+      </div>
+    </div>
+  </div>
+
+  <!-- 场景2：直接遇到邻居/街坊 -->
+  <div class="accordion" style="border-color:rgba(46,213,115,0.3);">
+    <div class="acc-hd" onclick="toggle('s-a2',this)">
+      <div class="acc-hd-left">
+        <div class="acc-hd-tag">场景 A-2 · 机会性触达</div>
+        <div class="acc-hd-title">直接遇到街坊邻居时的话</div>
+        <div class="acc-hd-sub">适用于：在广外小区遇到有长者的家庭，随机切入</div>
+      </div>
+      <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body" id="s-a2">
+      <div class="tip-card tip-gold" style="margin-bottom:1rem;">
+        <strong>识别信号：</strong>推着老人轮椅散步的子女 / 抱怨"照顾老人太累"的街坊 / 楼道里见到明显失能的长者家庭。
+      </div>
+
+      <div class="script-block">
+        <div class="script-label">轻松切入（遇到推轮椅/陪老人的）</div>
+        <div class="script-text">
+          "阿姨/叔叔，您家老人是在家照顾吗？现在国家有个新政策，失能的老人每个月政府给800块钱的消费券，可以请专业人上门帮忙，您知道吗？"
+        </div>
+        <div class="script-note">→ 不等对方反应，先把"800元/月"这个利益点抛出去</div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-label">如果对方感兴趣，继续</div>
+        <div class="script-text">
+          "这个钱是政府发的，不是商业的东西。就是失能老人可以申领，然后用这个券请人上门帮忙洗澡、翻身、做护理。现在申领流程比较麻烦，一般家庭自己不太会弄。<br/>我在帮几个家庭试点申领，您有没有兴趣了解一下？就是登记一下情况，看老人是否符合条件，不收您任何费用。"
+        </div>
+        <div class="script-note">→ 关键词："政府发的""不收费""帮您申领"——降低警惕心</div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-label">留联系方式话术</div>
+        <div class="script-text">
+          "这样，您留个微信/电话，我发您一份说明，里面有申领条件和流程。您家老人符合的话，我帮您跑一趟街道，申请材料我帮您准备。"
+        </div>
+        <div class="script-note">→ 成功收集联系方式 = 本次接触成功，E06第一行填进去</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 场景3：电话沟通 -->
+  <div class="accordion" style="border-color:rgba(87,108,188,0.3);">
+    <div class="acc-hd" onclick="toggle('s-a3',this)">
+      <div class="acc-hd-left">
+        <div class="acc-hd-tag">场景 A-3 · 后续跟进</div>
+        <div class="acc-hd-title">有初步意向后的上门沟通话术</div>
+        <div class="acc-hd-sub">适用于：家人帮介绍了家庭，需要当面了解情况时</div>
+      </div>
+      <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body" id="s-a3">
+      <div class="script-block">
+        <div class="script-label">上门开场（由家人引荐的情况）</div>
+        <div class="script-text">
+          "您好，我叫王晶晶，是[家人称谓]介绍过来的。我最近在帮几个家庭研究怎么申领政府的养老补贴。听说您家有老人需要照顾，我来了解一下情况，看看符不符合申领条件，完全不收费的。"
+        </div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-label">了解情况（按顺序问，自然聊天方式）</div>
+        <div class="script-text">
+          1. "老人多大了？平时生活能自理吗，还是需要人照顾？"<br/>
+          2. "有没有评过失能等级？或者做过医疗评估？"（没有就说可以帮他们申请评估）<br/>
+          3. "现在谁在照顾？您自己吗，还是另外请了人？"<br/>
+          4. "一个月大概花多少在照护上？"（了解付费能力和现状）<br/>
+          5. "您最希望解决什么问题？是您太累了、还是找不到合适的人、还是钱不够用？"
+        </div>
+        <div class="script-note">→ 第5个问题是最重要的，答案直接决定我们服务的切入点</div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-label">结束时的承诺（不过度许诺）</div>
+        <div class="script-text">
+          "好，我把您家的情况记一下，我去查一查申领条件是否符合，大概一两周内给您回复。如果符合，我帮您把材料整理好，一起去街道办理，全程我陪着您。"
+        </div>
+        <div class="script-note">→ 不说"我们有服务"，只说"帮您申领补贴"——这是储备期的定位</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION B · 需求登记表
+  ═══════════════════════════════════════════════ -->
+  <div class="sec-title" style="margin-top:2.5rem;">📋 Section B · 家庭需求登记表（E06 简版）</div>
+  <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;">遇到有需求的家庭，用手机备忘录按以下格式记录即可，不需要打印任何表格。</p>
+
+  <div style="background:var(--dark-2);border:1px solid var(--border);border-radius:14px;padding:1.4rem;margin-bottom:1.5rem;">
+    <div style="font-size:0.7rem;color:var(--gold);letter-spacing:1px;margin-bottom:0.8rem;">E06 · 需求登记格式（手机备忘录可用）</div>
+    <div style="font-family:monospace;font-size:0.82rem;line-height:1.9;color:#ccc;background:rgba(0,0,0,0.3);padding:1rem;border-radius:8px;">
+      【家庭A · 登记时间：2026-03-14 14:30】<br/>
+      • 长者姓名（可匿名）：李奶奶<br/>
+      • 年龄：82岁<br/>
+      • 失能等级：中度（需要协助吃饭/洗澡/如厕）<br/>
+      • 是否评过等级：否 / 已评（填等级）<br/>
+      • 现有照护方式：子女轮流 / 请钟点工 / 无<br/>
+      • 当前月均照护支出：约____元<br/>
+      • 主要照护人联系方式：___（子女微信）<br/>
+      • 主要痛点：□太贵 □找不到人 □质量差 □自己太累<br/>
+      • 是否愿意申领补贴：□是 □了解后再说<br/>
+      • 是否愿意试用服务：□是 □了解后再说<br/>
+      • 备注：___
+    </div>
+  </div>
+
+  <div class="tip-card tip-green">
+    <strong>周末目标：</strong>登记 <strong>2户</strong> 以上家庭的基础信息。不需要获得任何承诺，只要对方愿意留联系方式+说说情况，就算一户成功登记。
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION C · 政务电话攻略
+  ═══════════════════════════════════════════════ -->
+  <div class="sec-title" style="margin-top:2.5rem;">📞 Section C · 政务电话攻略（E05 确认指南）</div>
+  <div class="tip-card tip-red" style="margin-bottom:1rem;">
+    <strong>重要：</strong>此电话建议<strong>周一（2026-03-16）上班时间</strong>拨打，不是周末任务。周末先把问题清单读熟，周一上班第一件事。
+  </div>
+
+  <div class="accordion" style="border-color:rgba(255,107,107,0.3);">
+    <div class="acc-hd" onclick="toggle('s-c1',this)">
+      <div class="acc-hd-left">
+        <div class="acc-hd-tag">E05 · 政务电话 · 周一执行</div>
+        <div class="acc-hd-title">广安门外街道政务服务中心 · 完整问答脚本</div>
+        <div class="acc-hd-sub">📞 010-83736036 · 法定工作日 09:00-11:30 / 13:30-17:00</div>
+      </div>
+      <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body" id="s-c1">
+      <div class="script-block">
+        <div class="script-label">开场（接通后）</div>
+        <div class="script-text">
+          "您好，我是广外街道的居民，想咨询一下2026年新出台的失能老年人居家养老消费券政策，请问是您这边负责受理吗？"
+        </div>
+        <div class="script-note">→ 先确认对接部门，避免被转来转去浪费时间</div>
+      </div>
+
+      <div style="margin-top:1rem;">
+        <div style="font-size:0.72rem;color:var(--muted);letter-spacing:1px;margin-bottom:0.6rem;">必须问清楚的5个问题</div>
+        <table class="tbl" style="background:var(--dark-3);border-radius:8px;overflow:hidden;">
+          <thead><tr>
+            <th style="width:30px;">#</th>
+            <th>你要问的问题</th>
+            <th>问这个的目的</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><strong style="color:#FF6B6B;">①</strong></td>
+              <td>"西城区广外街道的失能老人，目前可以申领养老消费补贴吗？现在还在受理中吗？"</td>
+              <td>确认政策是否已落地（E05核心问题）</td>
+            </tr>
+            <tr>
+              <td><strong style="color:#FF6B6B;">②</strong></td>
+              <td>"申领需要什么条件？是必须有失能鉴定证书吗？还是医院证明也可以？"</td>
+              <td>确认客户准入门槛，影响意向书里能承诺的内容</td>
+            </tr>
+            <tr>
+              <td><strong style="color:#FF6B6B;">③</strong></td>
+              <td>"申领流程是怎样的？需要去现场吗？大概多少工作日能到账？"</td>
+              <td>测算补贴到账时间，影响CFO的现金流模型</td>
+            </tr>
+            <tr>
+              <td><strong style="color:#C9A84C;">④</strong></td>
+              <td>"可以由家人或者受委托的机构代办申领吗？需要什么手续？"</td>
+              <td>验证开元"代申办"服务的可行性</td>
+            </tr>
+            <tr>
+              <td><strong style="color:#C9A84C;">⑤</strong></td>
+              <td>"消费券是电子的吗？在哪里用？需要在签约机构才能核销，还是任何照护机构都可以？"</td>
+              <td>了解消费券使用范围，影响商业模式</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tip-card tip-green" style="margin-top:1rem;">
+        <strong>通话后必做：</strong>挂机后立刻把答案发给 wangjingjing44（自己的大象）存档，让小美帮你整理进E05文档。这是P0阻塞项，拿到书面确认之前不能开始签意向书。
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION D · 补贴知识速查
+  ═══════════════════════════════════════════════ -->
+  <div class="sec-title" style="margin-top:2.5rem;">💰 Section D · 补贴政策速查卡</div>
+  <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;">周末跟家人或街坊解释时用，30秒能讲清楚。</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem;">
+    <div style="background:var(--dark-2);border:1px solid rgba(201,168,76,0.25);border-radius:14px;padding:1.2rem;">
+      <div style="font-size:0.7rem;color:var(--gold);letter-spacing:1px;margin-bottom:0.6rem;">什么人可以领？</div>
+      <ul style="font-size:0.82rem;line-height:1.9;list-style:none;padding:0;">
+        <li>✅ 经鉴定为<strong>中度以上失能</strong>的老年人</li>
+        <li>✅ 户籍在北京市（或持有居住证）</li>
+        <li>✅ 年满60周岁</li>
+        <li>✅ 未在政府集中供养机构居住</li>
+        <li style="color:var(--muted);font-size:0.75rem;margin-top:0.4rem;">注：具体以广外街道受理窗口为准</li>
+      </ul>
+    </div>
+    <div style="background:var(--dark-2);border:1px solid rgba(46,213,115,0.25);border-radius:14px;padding:1.2rem;">
+      <div style="font-size:0.7rem;color:var(--green);letter-spacing:1px;margin-bottom:0.6rem;">能领多少、怎么用？</div>
+      <ul style="font-size:0.82rem;line-height:1.9;list-style:none;padding:0;">
+        <li>💰 每月最高<strong style="color:#2ED573;">800元</strong>消费券</li>
+        <li>💳 以电子消费券形式发放（每月1号）</li>
+        <li>🏠 居家服务可抵扣<strong>50%</strong>费用</li>
+        <li>🏥 机构养老可抵扣<strong>40%</strong>费用</li>
+        <li>📦 可用于：助浴、助餐、护理、康复训练等17类服务</li>
+      </ul>
+    </div>
+    <div style="background:var(--dark-2);border:1px solid rgba(87,108,188,0.25);border-radius:14px;padding:1.2rem;">
+      <div style="font-size:0.7rem;color:#576CBC;letter-spacing:1px;margin-bottom:0.6rem;">申领时间线参考</div>
+      <ul style="font-size:0.82rem;line-height:1.9;list-style:none;padding:0;">
+        <li>📅 <strong>申请</strong> → 提交材料到街道窗口</li>
+        <li>🔍 <strong>审核</strong> → 约10-15工作日</li>
+        <li>💳 <strong>发放</strong> → 审核通过后5工作日内首月到账</li>
+        <li>🔄 <strong>续发</strong> → 每月1号自动续发</li>
+        <li style="color:var(--muted);font-size:0.75rem;margin-top:0.4rem;">⚠️ 实际以政务中心确认为准（E05核实中）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION E · 广外竞品地图
+  ═══════════════════════════════════════════════ -->
+  <div class="sec-title" style="margin-top:2.5rem;">🏘️ Section E · 广外街道现有养老服务全景</div>
+  <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;">知道有哪些存量竞品，才知道开元的差异化在哪里。</p>
+
+  <div class="accordion" style="border-color:rgba(87,108,188,0.3);">
+    <div class="acc-hd" onclick="toggle('s-e1',this)">
+      <div class="acc-hd-left">
+        <div class="acc-hd-tag">战略参考 · 竞品分析</div>
+        <div class="acc-hd-title">广外街道周边养老服务机构全览</div>
+        <div class="acc-hd-sub">覆盖公立机构、市场机构、平台型选手</div>
+      </div>
+      <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body" id="s-e1">
+      <table class="tbl">
+        <thead><tr>
+          <th>机构</th>
+          <th>类型</th>
+          <th>服务模式</th>
+          <th>价格参考</th>
+          <th>弱点（开元机会）</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>广安门外街道养老照料中心</strong></td>
+            <td style="color:var(--blue);">公立机构</td>
+            <td>全托+日托+居家三位一体</td>
+            <td>日托80元/天；月卡1500元/22天</td>
+            <td style="color:var(--green);">名额有限、预约排队；服务标准化强但人情味不足；不会帮居民申领补贴</td>
+          </tr>
+          <tr>
+            <td><strong>京东居家养老</strong></td>
+            <td style="color:#FF6B6B;">平台型</td>
+            <td>标准化上门服务，线上预约</td>
+            <td>按服务项目计费，价格透明</td>
+            <td style="color:var(--green);">刚进西城区，本地资源薄弱；服务人员流动大；不懂补贴申办</td>
+          </tr>
+          <tr>
+            <td><strong>家政/钟点工平台</strong></td>
+            <td style="color:var(--muted);">松散市场</td>
+            <td>非专业照护，主要做家务</td>
+            <td>30-60元/小时</td>
+            <td style="color:var(--green);">无专业医护背景；无法接受消费券；无法做需求评估</td>
+          </tr>
+          <tr>
+            <td><strong>宣武医院延伸服务</strong></td>
+            <td style="color:var(--purple);">医疗延伸</td>
+            <td>出院后康复指导，不含日常照护</td>
+            <td>按医疗项目计费</td>
+            <td style="color:var(--green);">不做"生活性照护"（洗澡/翻身/陪伴）；价格高、预约难</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="tip-card tip-green" style="margin-top:1rem;">
+        <strong>开元的差异化切入策略：</strong><br/>
+        ① <strong>"消费券代申办"服务</strong>：帮家庭全程跑腿申领800元/月补贴，这是竞品全部不做的<br/>
+        ② <strong>"社区温度"</strong>：通过居委会关系入场，不是陌生人上门，是"街坊介绍的人"<br/>
+        ③ <strong>"低收入家庭优先"</strong>：主动服务公立机构不愿意接、平台不愿意去的困难家庭 → 建立口碑和社会价值
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       周末行动检查清单
+  ═══════════════════════════════════════════════ -->
+  <div class="sec-title" style="margin-top:2.5rem;">✅ 周末行动检查清单</div>
+  <div class="checklist">
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-body">
+        <h4>📖 读完本页面（Section A-E）</h4>
+        <p>特别是 Section A 的话术，周末出门前读熟，开口前不要"临时发挥"</p>
+        <div class="why">预计阅读时间：15分钟</div>
+      </div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-body">
+        <h4>🗣️ 跟家人（居委会）提起补贴话题（场景A-1）</h4>
+        <p>不需要郑重其事，吃饭时随口聊起即可。成功标准：对方说"我帮你问问"</p>
+        <div class="why">→ C05突破口 / 本周末P0</div>
+      </div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-body">
+        <h4>📱 在广外街道附近转转，遇到机会就聊（场景A-2）</h4>
+        <p>不是刻意扫楼，就是去熟悉的地方转，看有没有遇到推轮椅的、抱怨照护问题的邻居</p>
+        <div class="why">→ E06第一行数据来源</div>
+      </div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-body">
+        <h4>📝 用备忘录记录遇到的家庭信息（Section B格式）</h4>
+        <p>哪怕只是听说某个邻居家有失能长者，也先记下来，后续跟进用</p>
+        <div class="why">→ E06意向书首批数据</div>
+      </div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-body">
+        <h4>📅 把"周一打政务电话"设置提醒（Section C）</h4>
+        <p>日历设置：2026-03-16（周一）09:00，事项：广外街道政务中心 010-83736036，问补贴申领流程</p>
+        <div class="why">→ E05书面确认 · P0阻塞项</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer" style="margin-top:3rem;">
+    <p>开元时代 AI 工作台 · 小美搭档 · 周末行动储备包 · 2026-03-13 生成</p>
+    <p style="margin-top:0.4rem;">
+      <a href="index.html" style="color:var(--green);text-decoration:none;">← 返回总指挥台</a>
+      &nbsp;·&nbsp;
+      <a href="day3-action-plan.html" style="color:var(--gold);text-decoration:none;">Day3 行动计划 →</a>
+    </p>
+  </div>
+
+</div>
+</body>
+</html>

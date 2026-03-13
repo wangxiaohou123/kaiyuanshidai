@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>开元时代 · 2027全年作战地图</title>
+<style>
+:root{
+  --gold:#C9A84C;--dark:#0E1117;--dark-2:#161B24;--dark-3:#1E2530;--dark-4:#252D3A;
+  --border:rgba(201,168,76,0.18);--text:#EAE6D8;--muted:#8A8F9E;
+  --green:#3DD68C;--blue:#4A9EFF;--red:#FF6B6B;--amber:#F5A623;--purple:#B580E8;
+  --teal:#2DD4BF;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;background:var(--dark);color:var(--text);line-height:1.7;}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,rgba(14,17,23,0.99),rgba(22,27,36,0.99));border-bottom:1px solid var(--border);padding:2.5rem 2rem 2rem;position:relative;overflow:hidden;}
+.hdr::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.05) 0%,transparent 70%);pointer-events:none;}
+.hdr-eyebrow{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.68rem;color:var(--gold);letter-spacing:2px;font-weight:600;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.3);border-radius:100px;padding:0.2rem 0.8rem;margin-bottom:0.8rem;}
+.hdr-title{font-size:2.2rem;font-weight:700;color:var(--gold);margin-bottom:0.3rem;}
+.hdr-sub{font-size:0.88rem;color:var(--muted);margin-bottom:1.5rem;}
+.hdr-kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;max-width:700px;}
+@media(max-width:640px){.hdr-kpis{grid-template-columns:repeat(3,1fr);}}
+.kpi{text-align:center;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:0.7rem 0.5rem;}
+.kpi-v{font-size:1.5rem;font-weight:700;margin-bottom:0.1rem;}
+.kpi-n{font-size:0.65rem;color:var(--muted);}
+
+/* MAIN */
+.wrap{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem 5rem;}
+
+/* TIMELINE STRIP */
+.tl-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:3rem;}
+@media(max-width:640px){.tl-strip{grid-template-columns:repeat(2,1fr);}}
+.phase{background:var(--dark-2);border:1px solid var(--border);border-radius:12px;padding:1.2rem;position:relative;overflow:hidden;}
+.phase::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.phase-q1::before{background:linear-gradient(90deg,var(--green),var(--teal));}
+.phase-q2::before{background:linear-gradient(90deg,var(--blue),var(--purple));}
+.phase-q3::before{background:linear-gradient(90deg,var(--amber),var(--gold));}
+.phase-q4::before{background:linear-gradient(90deg,var(--red),var(--purple));}
+.phase-label{font-size:0.68rem;letter-spacing:1px;font-weight:600;margin-bottom:0.3rem;}
+.phase-name{font-size:1rem;font-weight:700;margin-bottom:0.6rem;}
+.phase-families{font-size:1.6rem;font-weight:700;margin-bottom:0.3rem;}
+.phase-goal{font-size:0.72rem;color:var(--muted);}
+.phase-budget{margin-top:0.8rem;padding-top:0.6rem;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;font-size:0.72rem;}
+
+/* SECTION TITLE */
+.sec-title{font-size:1.1rem;font-weight:700;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.5rem;}
+
+/* MONTH GRID */
+.month-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2.5rem;}
+@media(max-width:640px){.month-grid{grid-template-columns:1fr;}}
+.month-card{background:var(--dark-2);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.month-hd{padding:0.8rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.month-label{font-size:0.78rem;font-weight:600;}
+.month-families{font-size:0.72rem;padding:2px 8px;border-radius:10px;}
+.month-body{padding:0.8rem 1rem;}
+.task-item{display:flex;align-items:flex-start;gap:0.5rem;margin-bottom:0.35rem;font-size:0.78rem;}
+.task-dot{flex-shrink:0;width:6px;height:6px;border-radius:50%;margin-top:0.45rem;}
+.task-text{flex:1;color:var(--muted);}
+.task-text strong{color:var(--text);}
+.month-footer{padding:0.5rem 1rem 0.8rem;display:flex;gap:0.4rem;flex-wrap:wrap;}
+.res-tag{font-size:0.65rem;padding:1px 7px;border-radius:3px;}
+
+/* RESOURCE TABLE */
+.res-table{width:100%;border-collapse:collapse;font-size:0.8rem;margin-bottom:2.5rem;}
+.res-table th{text-align:left;font-size:0.7rem;color:var(--muted);letter-spacing:0.05em;padding:0.5rem 0.8rem;border-bottom:1px solid var(--border);}
+.res-table td{padding:0.65rem 0.8rem;border-bottom:1px solid rgba(255,255,255,0.04);}
+.res-table tr:last-child td{border-bottom:none;}
+.num-cell{font-weight:600;}
+
+/* MATERIALS */
+.mat-section{margin-bottom:2.5rem;}
+.mat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;}
+@media(max-width:640px){.mat-grid{grid-template-columns:1fr;}}
+.mat-card{background:var(--dark-2);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;}
+.mat-phase{font-size:0.68rem;font-weight:600;letter-spacing:1px;margin-bottom:0.7rem;}
+.mat-item{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem;font-size:0.78rem;}
+.mat-icon{flex-shrink:0;font-size:0.7rem;}
+.mat-name{flex:1;}
+.mat-status{font-size:0.65rem;padding:1px 7px;border-radius:3px;white-space:nowrap;}
+
+/* COMPETITOR TABLE */
+.comp-table-wrap{overflow-x:auto;margin-bottom:2.5rem;}
+.comp-table{width:100%;border-collapse:collapse;font-size:0.8rem;min-width:600px;}
+.comp-table th{background:var(--dark-3);text-align:left;padding:0.7rem 0.9rem;font-size:0.72rem;color:var(--muted);letter-spacing:0.05em;}
+.comp-table td{padding:0.7rem 0.9rem;border-bottom:1px solid rgba(255,255,255,0.04);}
+.comp-table tr:hover td{background:rgba(255,255,255,0.02);}
+.price-badge{font-weight:600;color:var(--amber);}
+.our-price{font-weight:700;color:var(--green);}
+
+/* RISK TABLE */
+.risk-table{width:100%;border-collapse:collapse;font-size:0.8rem;margin-bottom:2.5rem;}
+.risk-table th{text-align:left;font-size:0.7rem;color:var(--muted);padding:0.5rem 0.8rem;border-bottom:1px solid var(--border);}
+.risk-table td{padding:0.7rem 0.8rem;border-bottom:1px solid rgba(255,255,255,0.04);}
+.risk-high{color:var(--red);}
+.risk-med{color:var(--amber);}
+.risk-low{color:var(--green);}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;font-size:0.72rem;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-eyebrow">📅 ANNUAL BATTLE MAP · 2027</div>
+  <div class="hdr-title">开元时代 · 全年作战地图</div>
+  <div class="hdr-sub">2027年1月启动 → 12月验证完成 · 广外街道→西城区扩张路径</div>
+  <div class="hdr-kpis">
+    <div class="kpi"><div class="kpi-v" style="color:var(--green);">35户</div><div class="kpi-n">年末目标家庭</div></div>
+    <div class="kpi"><div class="kpi-v" style="color:var(--gold);">8.0+</div><div class="kpi-n">目标NPS均值</div></div>
+    <div class="kpi"><div class="kpi-v" style="color:var(--blue);">30%</div><div class="kpi-n">低收入家庭占比</div></div>
+    <div class="kpi"><div class="kpi-v" style="color:var(--amber);">73-100万</div><div class="kpi-n">全年预计收入</div></div>
+    <div class="kpi"><div class="kpi-v" style="color:var(--purple);">10人</div><div class="kpi-n">年末团队规模</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- PHASE STRIP -->
+  <div class="tl-strip">
+    <div class="phase phase-q1">
+      <div class="phase-label" style="color:var(--green);">Q1 · 种子期</div>
+      <div class="phase-name">建立信任</div>
+      <div class="phase-families" style="color:var(--green);">3 → 8户</div>
+      <div class="phase-goal">打通服务闭环<br/>护理员体系稳定</div>
+      <div class="phase-budget"><span>运营成本：~5.5万</span><span style="color:var(--green);">净利：+0-5万</span></div>
+    </div>
+    <div class="phase phase-q2">
+      <div class="phase-label" style="color:var(--blue);">Q2 · 生长期</div>
+      <div class="phase-name">口碑裂变</div>
+      <div class="phase-families" style="color:var(--blue);">8 → 20户</div>
+      <div class="phase-goal">转介绍启动<br/>政府关系建立</div>
+      <div class="phase-budget"><span>运营成本：~11万</span><span style="color:var(--blue);">净利：+4-9万</span></div>
+    </div>
+    <div class="phase phase-q3">
+      <div class="phase-label" style="color:var(--amber);">Q3 · 收获期</div>
+      <div class="phase-name">扩张稳定</div>
+      <div class="phase-families" style="color:var(--amber);">20 → 28户</div>
+      <div class="phase-goal">数字化上线<br/>天使融资推进</div>
+      <div class="phase-budget"><span>运营成本：~18万</span><span style="color:var(--amber);">净利：+4-12万</span></div>
+    </div>
+    <div class="phase phase-q4">
+      <div class="phase-label" style="color:var(--purple);">Q4 · 验证期</div>
+      <div class="phase-name">总结复盘</div>
+      <div class="phase-families" style="color:var(--purple);">28 → 35户</div>
+      <div class="phase-goal">完成验证<br/>准备A轮</div>
+      <div class="phase-budget"><span>运营成本：~21万</span><span style="color:var(--purple);">净利：+9-19万</span></div>
+    </div>
+  </div>
+
+  <!-- MONTH BY MONTH -->
+  <div class="sec-title">📅 逐月作战计划</div>
+  <div class="month-grid">
+
+    <!-- 1月 -->
+    <div class="month-card">
+      <div class="month-hd">
+        <div class="month-label">1月 · 启动月</div>
+        <div class="month-families" style="background:rgba(61,214,140,0.1);color:var(--green);">目标：3户</div>
+      </div>
+      <div class="month-body">
+        <div class="task-item"><div class="task-dot" style="background:var(--red);"></div><div class="task-text"><strong>王总</strong>：激活居委会人脉，完成3户上门初评</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--green);"></div><div class="task-text">督导入职，3天培训，招募2名护理员</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--green);"></div><div class="task-text">签前3份服务合同，建立台账</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--blue);"></div><div class="task-text">协助第1户家庭完成补贴申请</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--amber);"></div><div class="task-text">收款：预计8-12万，盈亏平衡</div></div>
+      </div>
+      <div class="month-footer">
+        <span class="res-tag" style="background:rgba(61,214,140,0.1);color:var(--green);">D03 SOP</span>
+        <span class="res-tag" style="background:rgba(61,214,140,0.1);color:var(--green);">D04 合同</span>
+        <span class="res-tag" style="background:rgba(61,214,140,0.1);color:var(--green);">培训手册</span>
+        <span class="res-tag" style="background:rgba(61,214,140,0.1);color:var(--green);">客户台账</span>
+      </div>
+    </div>
+
+    <!-- 2月 -->
+    <div class="month-card">
+      <div class="month-hd">
+        <div class="month-label">2月 · 建立期</div>
+        <div class="month-families" style="background:rgba(61,214,140,0.1);color:var(--green);">目标：5户</div>
+      </div>
+      <div class="month-body">
+        <div class="task-item"><div class="task-dot" style="background:var(--green);"></div><div class="task-text">服务3→5户，第3名护理员入职</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--blue);"></div><div class="task-text"><strong>首次NPS采集</strong>，目标均值≥8</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--amber);"></div><div class="task-text">首批补贴到账确认，退还差价</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--red);"></div><div class="task-text"><strong>王总</strong>：拨12349核实西城区叠加补贴</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--purple);"></div><div class="task-text">整理第一批服务故事（口头记录）</div></div>
+      </div>
+      <div class="month-footer">
+        <span class="res-tag" style="background:rgba(74,158,255,0.1);color:var(--blue);">D05 NPS表</span>
+        <span class="res-tag" style="background:rgba(245,166,35,0.1);color:var(--amber);">财务台账</span>
+      </div>
+    </div>
+
+    <!-- 3月 -->
+    <div class="month-card">
+      <div class="month-hd">
+        <div class="month-label">3月 · 验证期</div>
+        <div class="month-families" style="background:rgba(61,214,140,0.1);color:var(--green);">目标：8户</div>
+      </div>
+      <div class="month-body">
+        <div class="task-item"><div class="task-dot" style="background:var(--green);"></div><div class="task-text">5→8户，首次口碑转介绍出现</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--red);"></div><div class="task-text"><strong>王总</strong>：凭8户案例正式拜访广外民政科</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--blue);"></div><div class="task-text">第4-5名护理员入职，双督导结构</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--gold);"></div><div class="task-text">Q1财务复盘，更新E02模型</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--purple);"></div><div class="task-text">整理融资初步材料</div></div>
+      </div>
+      <div class="month-footer">
+        <span class="res-tag" style="background:rgba(201,168,76,0.1);color:var(--gold);">A04 融资叙事</span>
+        <span class="res-tag" style="background:rgba(181,128,232,0.1);color:var(--purple);">C02 政府话术</span>
+      </div>
+    </div>
+
+    <!-- 4月 -->
+    <div class="month-card">
+      <div class="month-hd">
+        <div class="month-label">4月 · 口碑月</div>
+        <div class="month-families" style="background:rgba(74,158,255,0.1);color:var(--blue);">目标：12户</div>
+      </div>
+      <div class="month-body">
+        <div class="task-item"><div class="task-dot" style="background:var(--blue);"></div><div class="task-text">8→12户，口碑转介绍≥3户</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--green);"></div><div class="task-text">上线客户转介绍200元奖励计划</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--amber);"></div><div class="task-text">制作服务案例海报（可转发社区群）</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--teal);"></div><div class="task-text">飞书/腾讯文档替代纸质服务记录</div></div>
+      </div>
+      <div class="month-footer">
+        <span class="res-tag" style="background:rgba(255,107,107,0.1);color:var(--red);">🔴 H01 案例海报（待产）</span>
+        <span class="res-tag" style="background:rgba(255,107,107,0.1);color:var(--red);">🔴 H02 转介绍方案（待产）</span>
+      </div>
+    </div>
+
+    <!-- 5月 -->
+    <div class="month-card">
+      <div class="month-hd">
+        <div class="month-label">5月 · 扩张月</div>
+        <div class="month-families" style="background:rgba(74,158,255,0.1);color:var(--blue);">目标：16户</div>
+      </div>
+      <div class="month-body">
+        <div class="task-item"><div class="task-dot" style="background:var(--blue);"></div><div class="task-text">12→16户，护理员扩至6-8人</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--red);"></div><div class="task-text"><strong>王总</strong>：提交西城区供应商入册申请</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--gold);"></div><div class="task-text">天使投资人初步接触1-2人</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--purple);"></div><div class="task-text">考察数字化记录工具选型</div></div>
+      </div>
+      <div class="month-footer">
+        <span class="res-tag" style="background:rgba(255,107,107,0.1);color:var(--red);">🔴 I03 备案材料（待产·5月）</span>
+      </div>
+    </div>
+
+    <!-- 6月 -->
+    <div class="month-card">
+      <div class="month-hd">
+        <div class="month-label">6月 · 半年复盘</div>
+        <div class="month-families" style="background:rgba(74,158,255,0.1);color:var(--blue);">目标：20户</div>
+      </div>
+      <div class="month-body">
+        <div class="task-item"><div class="task-dot" style="background:var(--blue);"></div><div class="task-text">16→20户，Q2全面复盘</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--gold);"></div><div class="task-text">整理《天使轮融资材料》（6页PPT含真实数据）</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--green);"></div><div class="task-text">制定Q3-Q4扩张计划（是否进入周边街道）</div></div>
+      </div>
+      <div class="month-footer">
+        <span class="res-tag" style="background:rgba(255,107,107,0.1);color:var(--red);">🔴 I01 半年复盘（待产·6月）</span>
+        <span class="res-tag" style="background:rgba(255,107,107,0.1);color:var(--red);">🔴 I02 融资PPT（待产·6月）</span>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="month-card" style="border-color:rgba(245,166,35,0.3);">
+      <div class="month-hd" style="background:rgba(245,166,35,0.04);">
+        <div class="month-label" style="color:var(--amber);">Q3 · 7-9月 稳定扩张</div>
+        <div class="month-families" style="background:rgba(245,166,35,0.1);color:var(--amber);">目标：28户</div>
+      </div>
+      <div class="month-body">
+        <div class="task-item"><div class="task-dot" style="background:var(--amber);"></div><div class="task-text">20→28户，覆盖广外周边街道</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--teal);"></div><div class="task-text">数字化记录系统正式上线</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--green);"></div><div class="task-text">启动护理员合伙人计划（持股激励）</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--red);"></div><div class="task-text"><strong>王总</strong>：天使融资谈判，或确认自造血路线</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--purple);"></div><div class="task-text">进入西城区级养老服务商备案名录</div></div>
+      </div>
+      <div class="month-footer">
+        <span class="res-tag" style="background:rgba(255,107,107,0.1);color:var(--red);">🔴 J01 合伙人协议（待产·Q3）</span>
+        <span class="res-tag" style="background:rgba(255,107,107,0.1);color:var(--red);">🔴 J02 系统手册（待产·Q3）</span>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="month-card" style="border-color:rgba(181,128,232,0.3);">
+      <div class="month-hd" style="background:rgba(181,128,232,0.04);">
+        <div class="month-label" style="color:var(--purple);">Q4 · 10-12月 验证完成</div>
+        <div class="month-families" style="background:rgba(181,128,232,0.1);color:var(--purple);">目标：35户</div>
+      </div>
+      <div class="month-body">
+        <div class="task-item"><div class="task-dot" style="background:var(--purple);"></div><div class="task-text">28→35户，12个月验证目标达成</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--gold);"></div><div class="task-text">输出全年复盘报告（真实数据）</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--green);"></div><div class="task-text">整理10个长者故事，形成品牌素材库</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--red);"></div><div class="task-text">完成「开元服务标准化手册」（可复制模板）</div></div>
+        <div class="task-item"><div class="task-dot" style="background:var(--blue);"></div><div class="task-text">制定2028年扩张计划（西城区100社区路径）</div></div>
+      </div>
+      <div class="month-footer">
+        <span class="res-tag" style="background:rgba(255,107,107,0.1);color:var(--red);">🔴 K01 全年复盘（待产·12月）</span>
+        <span class="res-tag" style="background:rgba(255,107,107,0.1);color:var(--red);">🔴 K02 标准化手册（待产·Q4）</span>
+      </div>
+    </div>
+
+    <!-- 空位（右对齐布局平衡） -->
+  </div>
+
+  <!-- COMPETITOR PRICING TABLE -->
+  <div class="sec-title">💰 竞对价格对比表（班子调研整理）</div>
+  <div class="comp-table-wrap">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>竞对机构</th>
+          <th>类型</th>
+          <th>服务形态</th>
+          <th>报价</th>
+          <th>特点</th>
+          <th>开元优势</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>首开寸草（西城·金融街）</td><td style="color:var(--blue);">机构型</td><td>机构入住</td><td class="price-badge">5,800-10,000元/月</td><td>四星级，医养结合</td><td>价格低40%，居家更灵活</td></tr>
+        <tr><td>广外养老照料中心</td><td style="color:var(--blue);">公建民营</td><td>机构+居家延伸</td><td class="price-badge">3,000-5,000元/月</td><td>政府背书，基础服务</td><td>更频密，可预约，补贴一条龙</td></tr>
+        <tr><td>延寿社区服务驿站</td><td style="color:var(--green);">居家型</td><td>上门助浴/护理</td><td class="price-badge">50-120元/次</td><td>政府驿站，价格受控</td><td>固定护理员，图文报告，关系更稳</td></tr>
+        <tr><td>普通家政平台</td><td style="color:var(--muted);">散单型</td><td>住家/钟点</td><td class="price-badge">5,500-8,000元/月</td><td>快速，灵活</td><td>专业度高，有督导，不频繁换人</td></tr>
+        <tr><td>58同城护工</td><td style="color:var(--muted);">散单型</td><td>24小时陪护</td><td class="price-badge">280-400元/天</td><td>临时，医院场景</td><td>居家专注，关系驱动</td></tr>
+        <tr>
+          <td style="color:var(--gold);font-weight:600;">✨ 开元时代（定位）</td>
+          <td style="color:var(--gold);">居家专精</td>
+          <td>三级包月服务</td>
+          <td class="our-price">2,400-5,800元/月（补贴后1,600-4,800）</td>
+          <td style="color:var(--green);">固定护理员+图文报告+补贴一条龙</td>
+          <td style="color:var(--green);">综合价格最优，服务最透明</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- RESOURCE TABLE -->
+  <div class="sec-title">📊 全年资源消耗计划</div>
+  <table class="res-table">
+    <thead>
+      <tr><th>阶段</th><th>运营成本</th><th>人力成本</th><th>科技投入</th><th>营销成本</th><th>合计支出</th><th>预计收入</th><th>净利润</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Q1·1-3月</td>
+        <td class="num-cell">3万</td><td class="num-cell">2万</td><td class="num-cell">0</td><td class="num-cell">0.5万</td>
+        <td class="num-cell" style="color:var(--red);">5.5万</td>
+        <td class="num-cell" style="color:var(--green);">6-10万</td>
+        <td class="num-cell" style="color:var(--green);">+0.5-4.5万</td>
+      </tr>
+      <tr>
+        <td>Q2·4-6月</td>
+        <td class="num-cell">5万</td><td class="num-cell">4万</td><td class="num-cell">1万</td><td class="num-cell">1万</td>
+        <td class="num-cell" style="color:var(--red);">11万</td>
+        <td class="num-cell" style="color:var(--green);">15-20万</td>
+        <td class="num-cell" style="color:var(--green);">+4-9万</td>
+      </tr>
+      <tr>
+        <td>Q3·7-9月</td>
+        <td class="num-cell">7万</td><td class="num-cell">7万</td><td class="num-cell">3万</td><td class="num-cell">1万</td>
+        <td class="num-cell" style="color:var(--red);">18万</td>
+        <td class="num-cell" style="color:var(--green);">22-30万</td>
+        <td class="num-cell" style="color:var(--green);">+4-12万</td>
+      </tr>
+      <tr>
+        <td>Q4·10-12月</td>
+        <td class="num-cell">8万</td><td class="num-cell">9万</td><td class="num-cell">2万</td><td class="num-cell">2万</td>
+        <td class="num-cell" style="color:var(--red);">21万</td>
+        <td class="num-cell" style="color:var(--green);">30-40万</td>
+        <td class="num-cell" style="color:var(--green);">+9-19万</td>
+      </tr>
+      <tr style="background:rgba(201,168,76,0.05);font-weight:600;">
+        <td style="color:var(--gold);">全年合计</td>
+        <td class="num-cell">23万</td><td class="num-cell">22万</td><td class="num-cell">6万</td><td class="num-cell">4.5万</td>
+        <td class="num-cell" style="color:var(--red);">55.5万</td>
+        <td class="num-cell" style="color:var(--green);">73-100万</td>
+        <td class="num-cell" style="color:var(--green);">+17.5-44.5万</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- MATERIALS INDEX -->
+  <div class="sec-title">📁 全年物料生产主索引</div>
+  <div class="mat-grid">
+    <div class="mat-card" style="border-color:rgba(61,214,140,0.3);">
+      <div class="mat-phase" style="color:var(--green);">✅ Q0 · 储备期已完成（2026年）</div>
+      <div class="mat-item"><div class="mat-icon">✅</div><div class="mat-name">A01-04 战略文档全套</div><div class="mat-status" style="background:rgba(61,214,140,0.1);color:var(--green);">已完成</div></div>
+      <div class="mat-item"><div class="mat-icon">✅</div><div class="mat-name">B01-02 客户画像+竞对报告</div><div class="mat-status" style="background:rgba(61,214,140,0.1);color:var(--green);">已完成</div></div>
+      <div class="mat-item"><div class="mat-icon">✅</div><div class="mat-name">C02 政府话术手册</div><div class="mat-status" style="background:rgba(61,214,140,0.1);color:var(--green);">已完成</div></div>
+      <div class="mat-item"><div class="mat-icon">✅</div><div class="mat-name">D01-05 服务运营全套</div><div class="mat-status" style="background:rgba(61,214,140,0.1);color:var(--green);">已完成</div></div>
+      <div class="mat-item"><div class="mat-icon">✅</div><div class="mat-name">E01-02 财务模型</div><div class="mat-status" style="background:rgba(61,214,140,0.1);color:var(--green);">已完成</div></div>
+      <div class="mat-item"><div class="mat-icon">✅</div><div class="mat-name">F01 岗位说明书</div><div class="mat-status" style="background:rgba(61,214,140,0.1);color:var(--green);">已完成</div></div>
+      <div class="mat-item"><div class="mat-icon">✅</div><div class="mat-name">护理员培训手册</div><div class="mat-status" style="background:rgba(61,214,140,0.1);color:var(--green);">今日完成</div></div>
+      <div class="mat-item"><div class="mat-icon">✅</div><div class="mat-name">台账体系（5张表）</div><div class="mat-status" style="background:rgba(61,214,140,0.1);color:var(--green);">今日完成</div></div>
+    </div>
+    <div class="mat-card" style="border-color:rgba(255,107,107,0.3);">
+      <div class="mat-phase" style="color:var(--amber);">⏳ Q1-Q4 · 待生产物料（分阶段产出）</div>
+      <div class="mat-item"><div class="mat-icon">🔴</div><div class="mat-name">H01 服务案例海报模板</div><div class="mat-status" style="background:rgba(245,166,35,0.1);color:var(--amber);">Q2·4月</div></div>
+      <div class="mat-item"><div class="mat-icon">🔴</div><div class="mat-name">H02 转介绍激励方案</div><div class="mat-status" style="background:rgba(245,166,35,0.1);color:var(--amber);">Q2·4月</div></div>
+      <div class="mat-item"><div class="mat-icon">🔴</div><div class="mat-name">I01 半年复盘报告</div><div class="mat-status" style="background:rgba(245,166,35,0.1);color:var(--amber);">Q2·6月</div></div>
+      <div class="mat-item"><div class="mat-icon">🔴</div><div class="mat-name">I02 天使轮融资PPT（6页）</div><div class="mat-status" style="background:rgba(245,166,35,0.1);color:var(--amber);">Q2·6月</div></div>
+      <div class="mat-item"><div class="mat-icon">🔴</div><div class="mat-name">I03 供应商备案材料</div><div class="mat-status" style="background:rgba(245,166,35,0.1);color:var(--amber);">Q2·5月</div></div>
+      <div class="mat-item"><div class="mat-icon">🔴</div><div class="mat-name">J01 护理员合伙人协议</div><div class="mat-status" style="background:rgba(74,158,255,0.1);color:var(--blue);">Q3·7月</div></div>
+      <div class="mat-item"><div class="mat-icon">🔴</div><div class="mat-name">J02 数字化系统使用手册</div><div class="mat-status" style="background:rgba(74,158,255,0.1);color:var(--blue);">Q3·8月</div></div>
+      <div class="mat-item"><div class="mat-icon">🔴</div><div class="mat-name">K01 全年复盘报告</div><div class="mat-status" style="background:rgba(181,128,232,0.1);color:var(--purple);">Q4·12月</div></div>
+      <div class="mat-item"><div class="mat-icon">🔴</div><div class="mat-name">K02 开元服务标准化手册</div><div class="mat-status" style="background:rgba(181,128,232,0.1);color:var(--purple);">Q4·11月</div></div>
+    </div>
+  </div>
+
+  <!-- RISK TABLE -->
+  <div class="sec-title">⚠️ 全年风险预案</div>
+  <table class="risk-table">
+    <thead>
+      <tr><th>风险事项</th><th>概率</th><th>影响</th><th>预案</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>补贴到账延迟（>90天）</td><td class="risk-med">中</td><td>现金流压力</td><td>合同约定"家庭先垫付全款，补贴到账后退差价"</td></tr>
+      <tr><td>护理员流失（前3个月）</td><td class="risk-med">中</td><td>服务中断</td><td>保持2名候选备用；3个月后激活持股机制</td></tr>
+      <tr><td>客户前3月流失</td><td class="risk-med">中</td><td>口碑受损</td><td>前3次服务后主动询问满意度，低分48h督导上门</td></tr>
+      <tr><td>王总时间不足</td><td class="risk-med">中</td><td>决策迟缓</td><td>督导承担日常管理，王总专注政府关系+融资</td></tr>
+      <tr><td>竞对降价抢客</td><td class="risk-low">低</td><td>价格战压力</td><td>核心是关系和信任，不打价格战，靠NPS守口碑</td></tr>
+      <tr><td>政策退坡</td><td class="risk-low">低</td><td>补贴减少</td><td>两会已明确写入政工报告，5年内稳定</td></tr>
+      <tr><td>服务过程意外（长者跌倒）</td><td class="risk-low">低</td><td>法律/口碑</td><td>SOP明确紧急处置流程，合同明确责任边界，可考虑购买责任险</td></tr>
+    </tbody>
+  </table>
+
+  <!-- NORTH STAR -->
+  <div style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.3);border-radius:12px;padding:1.5rem 2rem;text-align:center;">
+    <div style="font-size:0.75rem;color:var(--muted);margin-bottom:0.6rem;letter-spacing:1px;">NORTH STAR · 北极星指标</div>
+    <div style="font-size:1.2rem;font-weight:600;color:var(--gold);line-height:1.7;">
+      12个月 · 10个真正改变生活的家庭 · NPS≥8 · 30%低收入长者<br/>
+      <span style="font-size:0.9rem;color:var(--text);font-weight:400;">不是赚钱，是找到第一个真正被改变的故事</span>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  开元时代 · 2027全年作战地图 · 2026-03-13 班子产出 · 三省六部联合战略规划<br/>
+  <span style="color:var(--gold);">每一位长者，无论贫富，都能享受到基本的有尊严的照护 🌟</span>
+</footer>
+
+</body>
+</html>

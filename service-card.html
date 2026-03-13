@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>开元时代 · 居家照护服务介绍</title>
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C97A;
+      --dark: #0E1117;
+      --dark-2: #161B24;
+      --dark-3: #1E2530;
+      --border: rgba(201,168,76,0.18);
+      --text: #EAE6D8;
+      --muted: #8A8F9E;
+      --green: #3DD68C;
+      --blue: #4A9EFF;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+      background: #F5F5F0;
+      min-height: 100vh;
+      padding: 1.5rem 1rem;
+    }
+
+    /* ── 主卡片容器 ── */
+    .main-card {
+      max-width: 480px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+    }
+
+    /* ── 顶部品牌栏 ── */
+    .brand-header {
+      background: linear-gradient(135deg, #1a1200 0%, #2a1f00 60%, #1a1200 100%);
+      padding: 1.5rem 1.5rem 1.3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .brand-header::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.18) 0%, transparent 70%);
+    }
+    .brand-tag {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.35);
+      border-radius: 100px; padding: 0.18rem 0.7rem;
+      font-size: 0.65rem; color: #C9A84C; letter-spacing: 0.1em;
+      margin-bottom: 0.8rem; position: relative; z-index: 1;
+    }
+    .brand-title {
+      font-size: 1.5rem; font-weight: 800;
+      background: linear-gradient(135deg, #fff 20%, #E8C97A 70%, #C9A84C 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1.2; margin-bottom: 0.4rem; position: relative; z-index: 1;
+    }
+    .brand-sub {
+      font-size: 0.8rem; color: rgba(201,168,76,0.7);
+      position: relative; z-index: 1; line-height: 1.5;
+    }
+
+    /* ── 核心利益点 ── */
+    .benefit-row {
+      display: flex; gap: 0;
+      border-bottom: 1px solid #F0EDE6;
+    }
+    .benefit-item {
+      flex: 1; padding: 1rem 0.8rem; text-align: center;
+      border-right: 1px solid #F0EDE6;
+    }
+    .benefit-item:last-child { border-right: none; }
+    .benefit-icon { font-size: 1.4rem; margin-bottom: 0.3rem; }
+    .benefit-label { font-size: 0.7rem; font-weight: 700; color: #2D2A22; line-height: 1.4; }
+    .benefit-desc { font-size: 0.63rem; color: #8A8F9E; margin-top: 0.15rem; line-height: 1.4; }
+
+    /* ── 补贴突出区 ── */
+    .subsidy-banner {
+      background: linear-gradient(135deg, #F0FFF6, #E8FFf2);
+      border-top: 2px solid #3DD68C;
+      padding: 1rem 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .subsidy-amount {
+      font-size: 2rem; font-weight: 900; color: #1A9C5A; line-height: 1;
+      white-space: nowrap;
+    }
+    .subsidy-amount span { font-size: 0.85rem; font-weight: 400; color: #4A7A62; }
+    .subsidy-desc { font-size: 0.78rem; color: #2D5A3D; line-height: 1.6; }
+    .subsidy-desc strong { color: #1A9C5A; }
+
+    /* ── 服务套餐列表 ── */
+    .section-title-sm {
+      font-size: 0.68rem; letter-spacing: 0.12em; color: #8A8F9E;
+      text-transform: uppercase; padding: 1rem 1.5rem 0.5rem;
+      font-weight: 600;
+    }
+    .package-list { padding: 0 1rem 0.5rem; }
+    .package-item {
+      display: flex; align-items: center; gap: 0.8rem;
+      padding: 0.8rem 0.6rem; border-radius: 12px;
+      border: 1px solid #F0EDE6; margin-bottom: 0.6rem;
+      cursor: default; transition: border-color 0.2s;
+      background: #fff;
+    }
+    .package-item.highlight {
+      border-color: rgba(201,168,76,0.4);
+      background: linear-gradient(135deg, rgba(201,168,76,0.04), #fff);
+    }
+    .pkg-badge {
+      width: 42px; height: 42px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.6rem; font-weight: 800; flex-shrink: 0;
+      letter-spacing: 0.05em; line-height: 1.3; text-align: center;
+    }
+    .pkg-name { font-size: 0.88rem; font-weight: 700; color: #1A1A1A; }
+    .pkg-sub { font-size: 0.7rem; color: #8A8F9E; margin-top: 0.1rem; line-height: 1.4; }
+    .pkg-price {
+      margin-left: auto; text-align: right; flex-shrink: 0;
+    }
+    .pkg-price-num { font-size: 1rem; font-weight: 800; line-height: 1; }
+    .pkg-price-label { font-size: 0.6rem; color: #8A8F9E; margin-top: 0.15rem; }
+    .best-badge {
+      background: #C9A84C; color: #fff; font-size: 0.55rem; font-weight: 800;
+      padding: 0.1rem 0.4rem; border-radius: 100px; white-space: nowrap;
+      align-self: flex-start; margin-top: 0.1rem;
+    }
+
+    /* ── 服务对象说明 ── */
+    .target-section {
+      padding: 0 1.5rem 1rem;
+    }
+    .target-row {
+      display: flex; align-items: flex-start; gap: 0.6rem;
+      padding: 0.5rem 0; border-bottom: 1px solid #F5F3EE;
+      font-size: 0.78rem;
+    }
+    .target-row:last-child { border-bottom: none; }
+    .target-check { color: #3DD68C; flex-shrink: 0; font-weight: 700; margin-top: 0.05rem; }
+    .target-text { color: #3D3A2E; line-height: 1.5; }
+
+    /* ── 联系区 ── */
+    .contact-section {
+      background: linear-gradient(135deg, #1a1200, #2a1f00);
+      padding: 1.3rem 1.5rem;
+      position: relative; overflow: hidden;
+    }
+    .contact-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 90% 50%, rgba(201,168,76,0.12) 0%, transparent 70%);
+    }
+    .contact-title {
+      font-size: 0.85rem; font-weight: 700; color: #EAE6D8;
+      margin-bottom: 0.6rem; position: relative; z-index: 1;
+    }
+    .contact-steps {
+      display: flex; gap: 0; position: relative; z-index: 1;
+    }
+    .contact-step {
+      flex: 1; text-align: center;
+    }
+    .step-num {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: rgba(201,168,76,0.2); border: 1px solid rgba(201,168,76,0.4);
+      color: #C9A84C; font-size: 0.7rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 0.4rem;
+    }
+    .step-text { font-size: 0.65rem; color: rgba(201,168,76,0.75); line-height: 1.4; }
+    .step-arrow {
+      align-self: center; color: rgba(201,168,76,0.35); font-size: 0.8rem;
+      padding-top: 0; margin-top: -0.3rem;
+    }
+    .contact-wechat {
+      margin-top: 0.8rem; position: relative; z-index: 1;
+      background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 10px; padding: 0.6rem 1rem;
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.78rem; color: #C9A84C;
+    }
+    .contact-wechat strong { color: #EAE6D8; }
+
+    /* ── 底部声明 ── */
+    .footer-note {
+      padding: 0.8rem 1.5rem;
+      font-size: 0.63rem; color: #B0AA99; text-align: center;
+      border-top: 1px solid #F0EDE6; line-height: 1.6;
+    }
+
+    /* ── 第二张：补贴计算卡 ── */
+    .calc-card {
+      max-width: 480px;
+      margin: 1.2rem auto 0;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+    }
+    .calc-header {
+      background: linear-gradient(135deg, #0A1F0E, #0E2A14);
+      padding: 1.2rem 1.5rem;
+    }
+    .calc-header-title { font-size: 1rem; font-weight: 800; color: #fff; margin-bottom: 0.2rem; }
+    .calc-header-sub { font-size: 0.72rem; color: rgba(61,214,140,0.7); }
+    .calc-body { padding: 1rem 1.5rem 1.2rem; }
+    .calc-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.6rem 0; border-bottom: 1px solid #F0EDE6;
+      font-size: 0.82rem;
+    }
+    .calc-row:last-child { border-bottom: none; }
+    .calc-label { color: #3D3A2E; }
+    .calc-val { font-weight: 700; }
+    .calc-row.total {
+      background: linear-gradient(135deg, #F0FFF6, #E8FFF2);
+      border-radius: 10px; padding: 0.8rem 1rem;
+      margin-top: 0.4rem; border: none;
+    }
+    .calc-row.total .calc-label { color: #1A9C5A; font-weight: 700; }
+    .calc-row.total .calc-val { font-size: 1.2rem; color: #1A9C5A; }
+    .calc-note {
+      font-size: 0.68rem; color: #8A8F9E; margin-top: 0.8rem;
+      background: #F8F7F3; border-radius: 8px; padding: 0.6rem 0.8rem;
+      line-height: 1.6;
+    }
+
+    /* ── 第三张：服务说明卡（朋友圈版）── */
+    .moments-card {
+      max-width: 480px;
+      margin: 1.2rem auto 0;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+      padding-bottom: 1rem;
+    }
+    .moments-top {
+      background: linear-gradient(135deg, #1a1200 0%, #2a1f00 100%);
+      padding: 1.4rem 1.5rem 1rem;
+    }
+    .moments-logo { font-size: 0.72rem; color: rgba(201,168,76,0.6); letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+    .moments-headline {
+      font-size: 1.2rem; font-weight: 800; color: #fff; line-height: 1.3; margin-bottom: 0.4rem;
+    }
+    .moments-headline em { color: #C9A84C; font-style: normal; }
+    .moments-body { padding: 1rem 1.5rem; }
+    .moments-point {
+      display: flex; gap: 0.6rem; align-items: flex-start;
+      padding: 0.55rem 0; border-bottom: 1px solid #F5F3EE;
+      font-size: 0.8rem; color: #2D2A22; line-height: 1.5;
+    }
+    .moments-point:last-child { border-bottom: none; }
+    .moments-point .icon { font-size: 1rem; flex-shrink: 0; margin-top: -0.05rem; }
+    .moments-cta {
+      margin: 0.8rem 1.5rem 0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03));
+      border: 1px solid rgba(201,168,76,0.3); border-radius: 12px;
+      padding: 0.8rem 1rem; font-size: 0.78rem; color: #7A6830; text-align: center; line-height: 1.6;
+    }
+    .moments-cta strong { color: #C9A84C; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     卡片 1：完整服务介绍版（发给居委会/合作方）
+══════════════════════════════════════════ -->
+<div class="main-card">
+
+  <!-- 品牌头部 -->
+  <div class="brand-header">
+    <div class="brand-tag">✦ 开元时代 · 2026</div>
+    <div class="brand-title">居家专业照护服务</div>
+    <div class="brand-sub">北京西城区广外街道 · 失能长者上门照护</div>
+  </div>
+
+  <!-- 三大核心利益 -->
+  <div class="benefit-row">
+    <div class="benefit-item">
+      <div class="benefit-icon">🏅</div>
+      <div class="benefit-label">持证专业<br/>护理员</div>
+      <div class="benefit-desc">国家4级以上<br/>不是家政保姆</div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">🤝</div>
+      <div class="benefit-label">专属照护<br/>管家</div>
+      <div class="benefit-desc">一对一跟进<br/>家属随时报告</div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">💴</div>
+      <div class="benefit-label">政府补贴<br/>可申请</div>
+      <div class="benefit-desc">最高800元/月<br/>帮您全程代办</div>
+    </div>
+  </div>
+
+  <!-- 补贴突出 -->
+  <div class="subsidy-banner">
+    <div>
+      <div class="subsidy-amount">800<span>元/月</span></div>
+    </div>
+    <div class="subsidy-desc">
+      <strong>政府补贴帮您申请</strong><br/>
+      2026年起失能长者可领居家照护消费补贴<br/>
+      我们<strong>免费协助全程办理</strong>，减少您的负担
+    </div>
+  </div>
+
+  <!-- 服务套餐 -->
+  <div class="section-title-sm">四级服务套餐</div>
+  <div class="package-list">
+
+    <div class="package-item">
+      <div class="pkg-badge" style="background:#F5F3EE;color:#6A6660;">启元<br/>Starter</div>
+      <div>
+        <div class="pkg-name">基础生活照护</div>
+        <div class="pkg-sub">清洁整理 · 协助进餐 · 协助洗浴<br/>辅助行走 · 基础体征记录</div>
+      </div>
+      <div class="pkg-price">
+        <div class="pkg-price-num" style="color:#6A6660;">1,500元</div>
+        <div class="pkg-price-label">家庭自付/月起</div>
+      </div>
+    </div>
+
+    <div class="package-item">
+      <div class="pkg-badge" style="background:#EEF4FF;color:#4A9EFF;">兴元<br/>Growth</div>
+      <div>
+        <div class="pkg-name">健康管理照护</div>
+        <div class="pkg-sub">基础服务 + 每日健康监测<br/>每周康复训练 · 用药提醒</div>
+      </div>
+      <div class="pkg-price">
+        <div class="pkg-price-num" style="color:#4A9EFF;">3,000元</div>
+        <div class="pkg-price-label">家庭自付/月起</div>
+      </div>
+    </div>
+
+    <div class="package-item highlight">
+      <div class="pkg-badge" style="background:rgba(201,168,76,0.12);color:#C9A84C;">开元<br/>Standard</div>
+      <div style="flex:1;">
+        <div style="display:flex;align-items:center;gap:0.4rem;">
+          <div class="pkg-name">全程安心照护</div>
+          <div class="best-badge">主力推荐</div>
+        </div>
+        <div class="pkg-sub">全部健康服务 + 24h应急响应<br/>家属实时推送 · 专属管家负责</div>
+      </div>
+      <div class="pkg-price">
+        <div class="pkg-price-num" style="color:#C9A84C;">4,500元</div>
+        <div class="pkg-price-label">家庭自付/月起</div>
+      </div>
+    </div>
+
+    <div class="package-item">
+      <div class="pkg-badge" style="background:#F0FFF6;color:#3DD68C;">昌元<br/>Premium</div>
+      <div>
+        <div class="pkg-name">尊享定制服务</div>
+        <div class="pkg-sub">全部服务 + 固定专属护理师<br/>适老化改造 · 年度健康报告</div>
+      </div>
+      <div class="pkg-price">
+        <div class="pkg-price-num" style="color:#3DD68C;">8,000元</div>
+        <div class="pkg-price-label">家庭自付/月起</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 服务对象 -->
+  <div class="section-title-sm">适合哪些家庭？</div>
+  <div class="target-section">
+    <div class="target-row">
+      <span class="target-check">✓</span>
+      <span class="target-text">长者<strong>中度或重度失能</strong>，需要专业日常照护</span>
+    </div>
+    <div class="target-row">
+      <span class="target-check">✓</span>
+      <span class="target-text">子女<strong>上班无法全天照料</strong>，担心安全和健康</span>
+    </div>
+    <div class="target-row">
+      <span class="target-check">✓</span>
+      <span class="target-text"><strong>不想送机构</strong>，希望长者在家里接受照护</span>
+    </div>
+    <div class="target-row">
+      <span class="target-check">✓</span>
+      <span class="target-text">已有长护险或低收入家庭，想<strong>最大化政策补贴</strong></span>
+    </div>
+  </div>
+
+  <!-- 联系方式 -->
+  <div class="contact-section">
+    <div class="contact-title">三步开启服务</div>
+    <div class="contact-steps">
+      <div class="contact-step">
+        <div class="step-num">1</div>
+        <div class="step-text">微信联系<br/>免费咨询</div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="contact-step">
+        <div class="step-num">2</div>
+        <div class="step-text">上门评估<br/>免费</div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="contact-step">
+        <div class="step-num">3</div>
+        <div class="step-text">协助申请<br/>补贴</div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="contact-step">
+        <div class="step-num">4</div>
+        <div class="step-text">启动<br/>照护服务</div>
+      </div>
+    </div>
+    <div class="contact-wechat">
+      <span>📱</span>
+      <span>电话 / 微信：<strong>134-6659-4929</strong> &nbsp;|&nbsp; 开元时代创始人 · 王晶晶</span>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    📍 北京市西城区广安门外街道 · 开元时代居家照护<br/>
+    服务覆盖：广外街道全辖区 · 当前为试点阶段，名额有限
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     卡片 2：补贴计算器版（发给家属）
+══════════════════════════════════════════ -->
+<div class="calc-card">
+  <div class="calc-header">
+    <div class="calc-header-title">💴 算一算：您家实际要付多少？</div>
+    <div class="calc-header-sub">开元级全程安心照护 · 补贴叠加计算示例</div>
+  </div>
+  <div class="calc-body">
+    <div class="calc-row">
+      <span class="calc-label">服务原价（开元级）</span>
+      <span class="calc-val" style="color:#1A1A1A;">6,000元/月</span>
+    </div>
+    <div class="calc-row">
+      <span class="calc-label">— 长护险最高补贴（西城区）</span>
+      <span class="calc-val" style="color:#3DD68C;">- 3,000元</span>
+    </div>
+    <div class="calc-row">
+      <span class="calc-label">— 民政失能补贴（可叠加）</span>
+      <span class="calc-val" style="color:#3DD68C;">- 800元</span>
+    </div>
+    <div class="calc-row">
+      <span class="calc-label">— 800元消费券抵扣（50%）</span>
+      <span class="calc-val" style="color:#3DD68C;">- 800元</span>
+    </div>
+    <div class="calc-row total">
+      <span class="calc-label">✦ 家庭最终实付</span>
+      <span class="calc-val">约 1,400元/月</span>
+    </div>
+    <div class="calc-note">
+      ⓘ 补贴资格需专业评估认定，实际金额因个人情况有所不同。<br/>
+      我们提供<strong>免费评估 + 全程补贴申请代办</strong>，无需您自己跑手续。<br/>
+      <span style="color:#C9A84C;">📞 咨询：134-6659-4929 / 微信：janewong_cn@hotmail.com（王晶晶）</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     卡片 3：朋友圈/居委会群发版（最精简）
+══════════════════════════════════════════ -->
+<div class="moments-card">
+  <div class="moments-top">
+    <div class="moments-logo">开元时代 · 居家照护</div>
+    <div class="moments-headline">家里有失能长者？<br/>政府<em>每月补贴最高800元</em><br/>帮您申请</div>
+  </div>
+  <div class="moments-body">
+    <div class="moments-point">
+      <span class="icon">🏠</span>
+      <span>不用送机构，<strong>专业护理员上门</strong>，长者留在家里，子女放心</span>
+    </div>
+    <div class="moments-point">
+      <span class="icon">💴</span>
+      <span>符合条件的家庭<strong>每月最高800元补贴</strong>，我们全程免费代办申请手续</span>
+    </div>
+    <div class="moments-point">
+      <span class="icon">🤝</span>
+      <span>专属照护管家一对一跟进，<strong>每日服务记录推送给子女</strong>，心里有底</span>
+    </div>
+    <div class="moments-point">
+      <span class="icon">📍</span>
+      <span>现在是广外街道<strong>试点阶段</strong>，名额有限，优先照顾有需要的家庭</span>
+    </div>
+  </div>
+  <div class="moments-cta">
+    电话 / 微信：<strong>134-6659-4929</strong><br/>
+    微信号：<strong>janewong_cn@hotmail.com</strong><br/>
+    免费上门评估 · 帮您对接政府补贴<br/>
+    <span style="font-size:0.7rem;color:#B0AA99;">开元时代创始人王晶晶直接沟通</span>
+  </div>
+</div>
+
+<div style="height:2rem;"></div>
+
+</body>
+</html>
