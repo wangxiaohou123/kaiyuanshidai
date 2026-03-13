@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>开元时代 · AI工作机制 Week 1 Review</title>
+<style>
+:root {
+  --pearl:    #FAFAF7;
+  --pearl-2:  #F4F2EC;
+  --pearl-3:  #EDE9E0;
+  --pearl-4:  #E5E1D6;
+  --white:    #FFFFFF;
+  --gold:     #B8922A;
+  --gold-lt:  #D4A843;
+  --gold-pale:#F5EDD6;
+  --text:     #2C2A25;
+  --text-2:   #5C5850;
+  --muted:    #9A9488;
+  --border:   rgba(184,146,42,0.15);
+  --border-s: rgba(184,146,42,0.08);
+  --green:    #2D7A52;
+  --green-bg: #EBF5EF;
+  --blue:     #2B5FA0;
+  --blue-bg:  #EBF1FA;
+  --amber:    #B06A00;
+  --amber-bg: #FBF0E0;
+  --red:      #A83030;
+  --red-bg:   #FAE8E8;
+  --shadow:   0 2px 12px rgba(120,100,50,0.08);
+  --shadow-lg:0 4px 24px rgba(120,100,50,0.12);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--pearl);color:var(--text);font-family:"PingFang SC","Helvetica Neue",sans-serif;line-height:1.65;}
+
+.header{
+  background:linear-gradient(135deg,#FFFEF8 0%,#FBF7EC 60%,#F5EDD6 100%);
+  border-bottom:2px solid var(--gold-pale);
+  padding:2.2rem 2rem 1.8rem;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.header::before{content:"机制";position:absolute;right:-10px;top:-15px;font-size:9rem;font-weight:900;color:rgba(184,146,42,0.05);pointer-events:none;}
+.header-label{font-size:0.67rem;letter-spacing:4px;color:var(--gold);text-transform:uppercase;font-weight:700;margin-bottom:0.6rem;}
+.header-title{font-size:1.8rem;font-weight:800;color:var(--text);margin-bottom:0.3rem;}
+.header-title span{color:var(--gold);}
+.header-sub{color:var(--text-2);font-size:0.88rem;}
+.header-date{display:inline-block;background:var(--gold-pale);border:1px solid var(--border);border-radius:20px;padding:0.3rem 1.2rem;font-size:0.78rem;color:var(--gold);font-weight:600;margin-top:0.8rem;}
+
+.container{max-width:960px;margin:0 auto;padding:2rem 1.5rem;}
+.section-title{font-size:0.65rem;letter-spacing:4px;color:var(--gold);text-transform:uppercase;font-weight:700;margin:2.2rem 0 1rem;display:flex;align-items:center;gap:0.6rem;}
+.section-title::after{content:"";flex:1;height:1px;background:var(--pearl-4);}
+
+.card{background:var(--white);border:1px solid var(--border-s);border-radius:14px;padding:1.4rem 1.6rem;margin-bottom:1rem;box-shadow:var(--shadow);}
+.card-title{font-size:0.82rem;font-weight:700;color:var(--gold);margin-bottom:1rem;padding-bottom:0.7rem;border-bottom:1px solid var(--pearl-3);display:flex;align-items:center;gap:0.5rem;}
+
+/* 评分卡 */
+.score-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem;margin-bottom:1.2rem;}
+@media(max-width:600px){.score-grid{grid-template-columns:repeat(2,1fr);}}
+.score-card{background:var(--white);border:1px solid var(--border-s);border-radius:12px;padding:1rem;text-align:center;box-shadow:var(--shadow);}
+.score-val{font-size:2rem;font-weight:800;line-height:1;}
+.score-label{font-size:0.72rem;color:var(--text-2);margin-top:0.4rem;font-weight:600;}
+.score-sub{font-size:0.68rem;color:var(--muted);margin-top:0.2rem;}
+
+/* 问题卡 */
+.issue-list{display:flex;flex-direction:column;gap:0.85rem;}
+.issue{border-radius:12px;padding:1.1rem 1.3rem;border:1px solid;display:flex;gap:1rem;align-items:flex-start;}
+.issue.p0{background:var(--red-bg);border-color:rgba(168,48,48,0.22);}
+.issue.p1{background:var(--amber-bg);border-color:rgba(176,106,0,0.2);}
+.issue.p2{background:var(--blue-bg);border-color:rgba(43,95,160,0.18);}
+.issue.ok{background:var(--green-bg);border-color:rgba(45,122,82,0.18);}
+.issue-badge{flex-shrink:0;width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:800;letter-spacing:0.5px;}
+.badge-p0{background:var(--red);color:white;}
+.badge-p1{background:var(--amber);color:white;}
+.badge-p2{background:var(--blue);color:white;}
+.badge-ok{background:var(--green);color:white;}
+.issue-body{}
+.issue-title{font-size:0.9rem;font-weight:700;margin-bottom:0.3rem;}
+.issue-desc{font-size:0.8rem;color:var(--text-2);line-height:1.7;}
+.issue-fix{font-size:0.78rem;font-weight:600;margin-top:0.5rem;padding:0.4rem 0.6rem;border-radius:6px;background:rgba(255,255,255,0.7);}
+
+/* 机制地图 */
+.mech-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:640px){.mech-grid{grid-template-columns:1fr;}}
+.mech-card{background:var(--white);border:1px solid var(--border-s);border-radius:12px;padding:1.1rem 1.3rem;box-shadow:var(--shadow);}
+.mech-head{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.7rem;}
+.mech-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+.mech-name{font-size:0.85rem;font-weight:700;color:var(--text);}
+.mech-status{font-size:0.65rem;font-weight:700;border-radius:4px;padding:2px 7px;}
+.st-run{background:var(--green-bg);color:var(--green);}
+.st-partial{background:var(--amber-bg);color:var(--amber);}
+.st-broken{background:var(--red-bg);color:var(--red);}
+.mech-items{font-size:0.78rem;color:var(--text-2);line-height:1.8;}
+.mech-items li{list-style:none;padding-left:1rem;position:relative;}
+.mech-items li::before{content:"·";position:absolute;left:0;color:var(--muted);}
+.mech-items .ok::before{content:"✓";color:var(--green);}
+.mech-items .ng::before{content:"✗";color:var(--red);}
+.mech-items .warn::before{content:"!";color:var(--amber);}
+
+/* 改进方案表 */
+table{width:100%;border-collapse:collapse;font-size:0.82rem;}
+th{color:var(--text-2);font-weight:700;text-align:left;padding:0.55rem 0.7rem;background:var(--pearl-2);font-size:0.73rem;letter-spacing:1px;}
+th:first-child{border-radius:6px 0 0 6px;}
+th:last-child{border-radius:0 6px 6px 0;}
+td{padding:0.6rem 0.7rem;border-bottom:1px solid var(--pearl-3);color:var(--text);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:var(--pearl-2);}
+.pri{display:inline-block;font-size:0.65rem;font-weight:700;border-radius:4px;padding:2px 7px;}
+.pri-p0{background:var(--red-bg);color:var(--red);}
+.pri-p1{background:var(--amber-bg);color:var(--amber);}
+.pri-p2{background:var(--blue-bg);color:var(--blue);}
+
+/* 决策卡 */
+.verdict{background:linear-gradient(135deg,#FFFEF5 0%,var(--gold-pale) 100%);border:1.5px solid var(--border);border-radius:14px;padding:1.5rem;box-shadow:var(--shadow-lg);}
+.verdict-tag{font-size:0.65rem;letter-spacing:3px;color:var(--gold);text-transform:uppercase;font-weight:700;margin-bottom:0.5rem;}
+.verdict-title{font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:1rem;}
+.v-row{display:flex;gap:0.7rem;padding:0.55rem 0;border-bottom:1px solid rgba(184,146,42,0.1);font-size:0.83rem;line-height:1.7;}
+.v-row:last-child{border-bottom:none;}
+.v-icon{flex-shrink:0;font-size:1rem;margin-top:1px;}
+
+.footer{text-align:center;padding:1.5rem;color:var(--muted);font-size:0.73rem;border-top:1px solid var(--pearl-4);background:var(--pearl-2);margin-top:2rem;}
+.footer strong{color:var(--gold);}
+
+/* 流程图 */
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:0.4rem;margin:0.8rem 0;}
+.flow-node{background:var(--pearl-2);border:1px solid var(--border);border-radius:8px;padding:0.4rem 0.8rem;font-size:0.78rem;color:var(--text-2);font-weight:600;}
+.flow-node.ok{background:var(--green-bg);border-color:rgba(45,122,82,0.2);color:var(--green);}
+.flow-node.ng{background:var(--red-bg);border-color:rgba(168,48,48,0.2);color:var(--red);}
+.flow-node.warn{background:var(--amber-bg);border-color:rgba(176,106,0,0.2);color:var(--amber);}
+.flow-arrow{color:var(--muted);font-size:0.9rem;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-label">Mechanism Review · 开元时代</div>
+  <div class="header-title">AI工作机制 · <span>Week 1 诊断</span></div>
+  <div class="header-sub">储备期第4天 · 2026年3月14日 · CEO亲自主持</div>
+  <div class="header-date">📐 系统性体检：找问题、定优先级、出改进方案</div>
+</div>
+
+<div class="container">
+
+  <!-- ── 整体评分 ── -->
+  <div class="section-title">Overall · 机制健康度快照</div>
+  <div class="score-grid">
+    <div class="score-card">
+      <div class="score-val" style="color:var(--green);">B+</div>
+      <div class="score-label">整体机制评分</div>
+      <div class="score-sub">内容产出优秀，自动化有短板</div>
+    </div>
+    <div class="score-card">
+      <div class="score-val" style="color:var(--red);">2</div>
+      <div class="score-label">P0 紧急问题</div>
+      <div class="score-sub">影响日常运作，本周必修</div>
+    </div>
+    <div class="score-card">
+      <div class="score-val" style="color:var(--amber);">3</div>
+      <div class="score-label">P1 重要优化</div>
+      <div class="score-sub">影响效率，Week 2处理</div>
+    </div>
+    <div class="score-card">
+      <div class="score-val" style="color:var(--blue);">3</div>
+      <div class="score-label">P2 长期改进</div>
+      <div class="score-sub">结构性建设，月度推进</div>
+    </div>
+  </div>
+
+  <!-- ── P0 紧急问题 ── -->
+  <div class="section-title">P0 · 紧急问题（本周必修）</div>
+  <div class="issue-list">
+
+    <div class="issue p0">
+      <div class="issue-badge badge-p0">P0</div>
+      <div class="issue-body">
+        <div class="issue-title">🔴 pending-push.md 积压未清：3月13日日报至今未发送</div>
+        <div class="issue-desc">
+          <code>pending-push.md</code> 中有3条3月13日日报（多次重复生成）至今未推送给 wangjingjing44。
+          根本原因：<strong>Agent 自动生成了内容，但大象登录态失效，发送卡在登录步骤</strong>，且没有失败重试机制，导致内容无限积压。<br><br>
+          风险：长期不清理 → 每次对话开始都会触发发送逻辑 → 如某次大象恢复登录，会批量推送3条重复日报，造成刷屏。
+        </div>
+        <div class="issue-fix" style="color:var(--red);">🔧 修复方案：今日手动清空 pending-push.md 中过期内容（超过24小时的全部归档），同时给 Agent 增加「超过24小时未发送则自动放弃+归档」逻辑。</div>
+      </div>
+    </div>
+
+    <div class="issue p0">
+      <div class="issue-badge badge-p0">P0</div>
+      <div class="issue-body">
+        <div class="issue-title">🔴 auto-sync.sh 未在今日汇报后执行：day4 尚未推送到 GitHub</div>
+        <div class="issue-desc">
+          今日生成的 <code>day4-briefing-0314.html</code>、<code>weekly-review-w1.html</code>、<code>index.html</code>（日志更新）尚未推送到 GitHub Pages。
+          外网官网目前展示的仍是昨日版本（Day3），与实际进展不同步。<br><br>
+          根本原因：<code>commands.md</code> 中写了「每次生成汇报后必须执行 auto-sync.sh」，但<strong>没有在 HTML 生成流程末尾嵌入强制触发步骤</strong>，依赖「小美记得执行」，属于人工依赖型规则，不可靠。
+        </div>
+        <div class="issue-fix" style="color:var(--red);">🔧 修复方案：①本次立即执行 auto-sync.sh 推送今日产出；②在 commands.md 的交付前检核清单新增一行「✅ auto-sync.sh 已执行」，作为硬性 gate。</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── P1 重要优化 ── -->
+  <div class="section-title">P1 · 重要优化（Week 2 完成）</div>
+  <div class="issue-list">
+
+    <div class="issue p1">
+      <div class="issue-badge badge-p1">P1</div>
+      <div class="issue-body">
+        <div class="issue-title">🟡 task-log.md 中「行业日报生成」条目重复6次，噪音过大</div>
+        <div class="issue-desc">
+          3月13日 task-log.md 中「行业日报生成」重复记录了6次（01:19、02:00、02:02、06:33、08:00、12:00），每次内容几乎相同，说明 LaunchAgent 定时任务在重复执行但没有判断「今日是否已经生成过」。<br><br>
+          这导致日志可读性极差，CEO无法快速定位有效信息。
+        </div>
+        <div class="issue-fix" style="color:var(--amber);">🔧 修复方案：Agent 每日执行前检查 task-log 当日是否已有「行业日报生成」记录，有则跳过写入，改为追加「n次触发，已有记录，跳过」一行。</div>
+      </div>
+    </div>
+
+    <div class="issue p1">
+      <div class="issue-badge badge-p1">P1</div>
+      <div class="issue-body">
+        <div class="issue-title">🟡 知识库归档路径混乱：decisions 存在两个位置</div>
+        <div class="issue-desc">
+          决策文件同时存在于：<br>
+          • <code>~/.xiaomei-workspace/decisions/</code>（旧路径，有5个文件）<br>
+          • <code>~/.xiaomei-workspace/knowledge/decisions/</code>（commands.md 规定的新路径，只有1个README）<br><br>
+          导致：查找决策记录需要去两个地方，Agent 自动归档也无法确认写哪里。
+        </div>
+        <div class="issue-fix" style="color:var(--amber);">🔧 修复方案：将 decisions/ 旧路径文件全部迁移到 knowledge/decisions/，并在 commands.md 删除旧路径引用。统一为 knowledge/ 目录树。</div>
+      </div>
+    </div>
+
+    <div class="issue p1">
+      <div class="issue-badge badge-p1">P1</div>
+      <div class="issue-body">
+        <div class="issue-title">🟡 daily-logs 只有3月11日一个文件，日报归档机制实际未运行</div>
+        <div class="issue-desc">
+          <code>knowledge/daily-logs/</code> 只有 <code>2026-03-11.md</code>，3月12日和3月13日的日报并未按规范写入该目录（实际上写在了 <code>~/.xiaomei-workspace/daily-logs/</code> 根目录）。<br><br>
+          存在两套归档路径：知识库内和知识库外，且 Agent 生成的路径与 commands.md 规定的不一致。
+        </div>
+        <div class="issue-fix" style="color:var(--amber);">🔧 修复方案：统一日报归档到 knowledge/daily-logs/，修改 kaiyuan-agent.py 中的输出路径，补充3月12-14日日报到正确目录。</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── P2 长期改进 ── -->
+  <div class="section-title">P2 · 长期改进（月度推进）</div>
+  <div class="issue-list">
+
+    <div class="issue p2">
+      <div class="issue-badge badge-p2">P2</div>
+      <div class="issue-body">
+        <div class="issue-title">🔵 大象登录态无保活机制，发送稳定性依赖手动介入</div>
+        <div class="issue-desc">
+          目前大象消息发送需要手动扫码登录，Session 有效期约数小时到1天。Agent 自动生成的日报在 Session 失效后无法自动恢复，只能写入 pending-push 等待下次手动触发。<br><br>
+          这是「24小时工作」目标与「手动登录」现实之间的结构性矛盾。
+        </div>
+        <div class="issue-fix" style="color:var(--blue);">🔧 长期方案：研究大象 API 或定时自动扫码 + 保活 Cookie 方案，Week 3-4 评估可行性。短期：接受手动确认，但完善失败提醒机制。</div>
+      </div>
+    </div>
+
+    <div class="issue p2">
+      <div class="issue-badge badge-p2">P2</div>
+      <div class="issue-body">
+        <div class="issue-title">🔵 Agent 角色分工与小美主对话职责边界不清晰</div>
+        <div class="issue-desc">
+          目前存在两套班子作业方式：①小美直接在对话中完成（本次汇报）；②kaiyuan-agent.py 后台运行产出。两者产出格式、归档路径、质量标准不一致，CEO收到的内容质量参差不齐。<br><br>
+          例如：Agent 后台生成的日报「吏部今日AI服务异常」「AI调用失败」等错误信息会直接出现在日报里，影响专业性。
+        </div>
+        <div class="issue-fix" style="color:var(--blue);">🔧 长期方案：明确分工——Agent 负责「定时搜集+缓存」，小美负责「加工+质检+交付」，两者不重复，各司其职。Month 2 重构 Agent。</div>
+      </div>
+    </div>
+
+    <div class="issue p2">
+      <div class="issue-badge badge-p2">P2</div>
+      <div class="issue-body">
+        <div class="issue-title">🔵 研究院课题完成率追踪缺乏自动化，每次靠人工回忆</div>
+        <div class="issue-desc">
+          目前 T01-T10 课题状态（完成/进行中/未启动）存在官网 index.html 里，但没有机器可读的进度文件，每次汇报「研究院完成60%」需要人工数文件。<br><br>
+          随着课题增多，人工统计误差会加大。
+        </div>
+        <div class="issue-fix" style="color:var(--blue);">🔧 长期方案：创建 knowledge/research-index.json，每次新增/完成课题时自动更新，weekly-review 自动读取计算百分比。</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── 机制健康度地图 ── -->
+  <div class="section-title">Mechanism Map · 各模块运行状态</div>
+  <div class="mech-grid">
+    <div class="mech-card">
+      <div class="mech-head">
+        <div class="mech-icon" style="background:var(--green-bg);">📋</div>
+        <div>
+          <div class="mech-name">班子内容生产</div>
+          <span class="mech-status st-run">正常运行</span>
+        </div>
+      </div>
+      <ul class="mech-items">
+        <li class="ok">苏格拉底质询流程稳定执行</li>
+        <li class="ok">三省六部产出分工清晰</li>
+        <li class="ok">珍珠白可视化交付标准已建立</li>
+        <li class="warn">部分汇报产出后未立即 auto-sync</li>
+      </ul>
+    </div>
+    <div class="mech-card">
+      <div class="mech-head">
+        <div class="mech-icon" style="background:var(--red-bg);">📨</div>
+        <div>
+          <div class="mech-name">大象消息推送</div>
+          <span class="mech-status st-broken">需要修复</span>
+        </div>
+      </div>
+      <ul class="mech-items">
+        <li class="ok">日报内容生成质量高</li>
+        <li class="ng">Session失效后无自动恢复</li>
+        <li class="ng">pending-push积压3条未清理</li>
+        <li class="warn">缺乏发送失败的超时放弃机制</li>
+      </ul>
+    </div>
+    <div class="mech-card">
+      <div class="mech-head">
+        <div class="mech-icon" style="background:var(--amber-bg);">🔄</div>
+        <div>
+          <div class="mech-name">GitHub自动同步</div>
+          <span class="mech-status st-partial">部分运行</span>
+        </div>
+      </div>
+      <ul class="mech-items">
+        <li class="ok">auto-sync.sh 脚本完整可用</li>
+        <li class="ok">git hook 测试通过</li>
+        <li class="ng">今日汇报尚未触发同步</li>
+        <li class="warn">执行依赖「小美记得」，非自动</li>
+      </ul>
+    </div>
+    <div class="mech-card">
+      <div class="mech-head">
+        <div class="mech-icon" style="background:var(--amber-bg);">🗄️</div>
+        <div>
+          <div class="mech-name">知识库归档</div>
+          <span class="mech-status st-partial">路径混乱</span>
+        </div>
+      </div>
+      <ul class="mech-items">
+        <li class="ok">T01-T09 研究文件齐全</li>
+        <li class="ng">decisions 存在两个目录</li>
+        <li class="ng">daily-logs 归档路径不统一</li>
+        <li class="warn">缺机器可读的研究进度文件</li>
+      </ul>
+    </div>
+    <div class="mech-card">
+      <div class="mech-head">
+        <div class="mech-icon" style="background:var(--blue-bg);">🤖</div>
+        <div>
+          <div class="mech-name">后台Agent</div>
+          <span class="mech-status st-partial">运行中·有噪音</span>
+        </div>
+      </div>
+      <ul class="mech-items">
+        <li class="ok">LaunchAgent定时触发正常</li>
+        <li class="ok">搜索缓存写入功能正常</li>
+        <li class="ng">日报重复生成6次无去重</li>
+        <li class="warn">错误信息直接出现在产出里</li>
+      </ul>
+    </div>
+    <div class="mech-card">
+      <div class="mech-head">
+        <div class="mech-icon" style="background:var(--green-bg);">🔐</div>
+        <div>
+          <div class="mech-name">官网访问控制</div>
+          <span class="mech-status st-run">正常运行</span>
+        </div>
+      </div>
+      <ul class="mech-items">
+        <li class="ok">登录保护机制已上线</li>
+        <li class="ok">auth.js + auth-config.js 已部署</li>
+        <li class="ok">GitHub Pages 外网可访问</li>
+        <li class="ok">密码管理独立配置文件</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── 改进优先级矩阵 ── -->
+  <div class="section-title">Action Plan · 改进行动清单</div>
+  <div class="card">
+    <div class="card-title">📋 Week 2 修复优先级矩阵</div>
+    <table>
+      <tr><th>优先级</th><th>问题</th><th>修复动作</th><th>负责人</th><th>完成时间</th></tr>
+      <tr>
+        <td><span class="pri pri-p0">P0</span></td>
+        <td style="font-size:0.8rem;">pending-push.md 积压清理</td>
+        <td style="font-size:0.78rem;color:var(--text-2);">手动清空过期内容，Agent增加24小时超时放弃逻辑</td>
+        <td style="font-size:0.78rem;color:var(--gold);">工部·今日</td>
+        <td style="font-size:0.78rem;color:var(--red);">今日完成</td>
+      </tr>
+      <tr>
+        <td><span class="pri pri-p0">P0</span></td>
+        <td style="font-size:0.8rem;">今日产出推送 GitHub</td>
+        <td style="font-size:0.78rem;color:var(--text-2);">执行 auto-sync.sh，同步 day4+weekly-review+index.html</td>
+        <td style="font-size:0.78rem;color:var(--gold);">工部·今日</td>
+        <td style="font-size:0.78rem;color:var(--red);">今日完成</td>
+      </tr>
+      <tr>
+        <td><span class="pri pri-p1">P1</span></td>
+        <td style="font-size:0.8rem;">task-log 重复写入去重</td>
+        <td style="font-size:0.78rem;color:var(--text-2);">Agent 执行前检查当日是否已有同类记录</td>
+        <td style="font-size:0.78rem;color:var(--gold);">工部·Week2</td>
+        <td style="font-size:0.78rem;color:var(--amber);">3月18日前</td>
+      </tr>
+      <tr>
+        <td><span class="pri pri-p1">P1</span></td>
+        <td style="font-size:0.8rem;">decisions 路径统一</td>
+        <td style="font-size:0.78rem;color:var(--text-2);">迁移旧 decisions/ 到 knowledge/decisions/，更新 commands.md</td>
+        <td style="font-size:0.78rem;color:var(--gold);">户部·Week2</td>
+        <td style="font-size:0.78rem;color:var(--amber);">3月18日前</td>
+      </tr>
+      <tr>
+        <td><span class="pri pri-p1">P1</span></td>
+        <td style="font-size:0.8rem;">daily-logs 归档路径统一</td>
+        <td style="font-size:0.78rem;color:var(--text-2);">统一写入 knowledge/daily-logs/，修改 Agent 输出路径</td>
+        <td style="font-size:0.78rem;color:var(--gold);">工部·Week2</td>
+        <td style="font-size:0.78rem;color:var(--amber);">3月18日前</td>
+      </tr>
+      <tr>
+        <td><span class="pri pri-p2">P2</span></td>
+        <td style="font-size:0.8rem;">大象保活机制</td>
+        <td style="font-size:0.78rem;color:var(--text-2);">评估 Cookie 持久化或 API 方案可行性</td>
+        <td style="font-size:0.78rem;color:var(--gold);">工部·Month2</td>
+        <td style="font-size:0.78rem;color:var(--blue);">4月前评估</td>
+      </tr>
+      <tr>
+        <td><span class="pri pri-p2">P2</span></td>
+        <td style="font-size:0.8rem;">Agent 职责边界重构</td>
+        <td style="font-size:0.78rem;color:var(--text-2);">Agent 只做采集+缓存，小美负责加工+质检+交付</td>
+        <td style="font-size:0.78rem;color:var(--gold);">架构·Month2</td>
+        <td style="font-size:0.78rem;color:var(--blue);">3月底设计</td>
+      </tr>
+      <tr>
+        <td><span class="pri pri-p2">P2</span></td>
+        <td style="font-size:0.8rem;">研究进度自动化追踪</td>
+        <td style="font-size:0.78rem;color:var(--text-2);">创建 research-index.json，weekly-review 自动读取</td>
+        <td style="font-size:0.78rem;color:var(--gold);">工部·Month2</td>
+        <td style="font-size:0.78rem;color:var(--blue);">4月前完成</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ── CEO 最终诊断 ── -->
+  <div class="section-title">CEO · 机制诊断结论</div>
+  <div class="verdict">
+    <div class="verdict-tag">Mechanism Verdict · 2026-03-14</div>
+    <div class="verdict-title">AI工作系统第一周：内容能力 A，自动化可靠性 C+</div>
+    <div class="v-row">
+      <span class="v-icon">🏆</span>
+      <div><strong>最强的地方</strong>：苏格拉底质询 × 三省六部产出 × 珍珠白可视化的组合，形成了高质量的「思考-产出-交付」流水线。这是本系统的核心价值，继续强化。</div>
+    </div>
+    <div class="v-row">
+      <span class="v-icon">⚠️</span>
+      <div><strong>最脆弱的地方</strong>：所有自动化步骤（发消息、推GitHub、归档日志）都依赖「小美记得」或「登录态未过期」，缺乏容错设计。一旦某步失败，没有报警，悄悄堆积成积压。</div>
+    </div>
+    <div class="v-row">
+      <span class="v-icon">🎯</span>
+      <div><strong>Week 2 核心改进目标</strong>：把 auto-sync.sh 嵌入交付检核清单成为硬性 gate，彻底消灭「汇报生成但未上线」的情况；同时清理 pending-push 积压，建立「失败即归档」的兜底机制。</div>
+    </div>
+    <div class="v-row">
+      <span class="v-icon">📐</span>
+      <div><strong>Month 2 架构方向</strong>：「Agent 采集 + 小美加工」双层分工；知识库统一 knowledge/ 目录树；大象保活机制评估。届时整体机制健康度目标：A级。</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <strong>开元时代</strong> · AI工作机制 Week 1 诊断报告 · 2026-03-14<br>
+    三省六部制 · 苏格拉底质询通过 · 珍珠白版
+  </div>
+</div>
+
+</body>
+</html>
