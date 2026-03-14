@@ -2,6 +2,7 @@
 
 每次班子产出自动追加，最新在前。
 
+- **2026-03-14** | Day 14战报：广外竞合格局确认·西城200床位政策窗口·科技赋能国家战略落地 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-14** | feat(day13): Day13两会闭幕战报+养老服务师专项研究启动+六部行动令 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-14** | Day 10 班子汇报：养老服务师新职业+补贴叠加定价策略研究，礼部5条情报+中书省2个P0议题 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-14** | 双轨制架构上线·行业情报日报独立板块·双轨工作流可视化页·commands.md固化作业规则 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
