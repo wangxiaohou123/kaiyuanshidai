@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>T00 · 中国养老行业典型公司研究及进入路径分析</title>
+  <style>
+    :root{
+      --gold:#8B6914;--gold-light:#B8940F;--gold-dim:#6A5010;
+      --dark:#FAFAF8;--dark-2:#F4F3EE;--dark-3:#ECEAE3;--dark-4:#E2DFD6;
+      --border:rgba(139,105,20,0.15);--text:#1C1C1E;--muted:#6C6C70;
+      --green:#1D7A45;--blue:#1A56A8;--red:#C0392B;--amber:#C87D0E;--purple:#6B3FA0;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+      background:#FAFAF8;color:#1C1C1E;line-height:1.7;overflow-x:hidden}
+
+    /* NAV */
+    nav{position:sticky;top:0;z-index:100;background:rgba(250,250,248,0.97);backdrop-filter:blur(16px);
+      box-shadow:0 1px 0 rgba(0,0,0,0.08);border-bottom:1px solid var(--border);
+      padding:0 1.5rem;height:52px;display:flex;align-items:center;justify-content:space-between}
+    .nav-brand{font-size:0.8rem;font-weight:800;color:var(--gold)}
+    .nav-links{display:flex;gap:1rem;list-style:none;flex-wrap:nowrap}
+    .nav-links a{font-size:0.73rem;color:var(--muted);text-decoration:none;transition:color 0.2s;white-space:nowrap}
+    .nav-links a:hover{color:var(--gold)}
+    @media(max-width:768px){.nav-links{display:none}}
+
+    /* HERO */
+    .hero{padding:3.5rem 1.5rem 2.5rem;max-width:1100px;margin:0 auto;
+      background:linear-gradient(180deg,#FFFDF5 0%,#FAFAF8 100%);border-bottom:1px solid rgba(139,105,20,0.12)}
+    .source-tag{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.65rem;
+      padding:0.22rem 0.7rem;border-radius:100px;background:rgba(139,105,20,0.08);
+      color:var(--gold);border:1px solid rgba(139,105,20,0.25);margin-bottom:0.8rem;letter-spacing:0.06em}
+    h1.report-title{font-size:clamp(1.4rem,3vw,2rem);font-weight:900;line-height:1.2;margin-bottom:0.7rem;color:#1C1C1E}
+    h1.report-title em{font-style:normal;color:var(--gold)}
+    .abstract-box{background:#FFFBF0;border:1px solid rgba(139,105,20,0.2);border-left:4px solid var(--gold);
+      border-radius:0 12px 12px 0;padding:1rem 1.2rem;margin:1rem 0;font-size:0.84rem;color:var(--text);line-height:1.8}
+    .abstract-box strong{color:var(--gold)}
+    .meta-row{display:flex;gap:1.5rem;flex-wrap:wrap;font-size:0.75rem;color:var(--muted);margin-top:1rem}
+    .meta-item span:first-child{color:var(--gold)}
+
+    /* LAYOUT */
+    .section{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem}
+    .section-hd{margin-bottom:1.5rem}
+    .sec-label{font-size:0.6rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:0.35rem;font-weight:700}
+    .sec-title{font-size:1.2rem;font-weight:800;margin-bottom:0.35rem}
+    .sec-desc{font-size:0.83rem;color:var(--muted);line-height:1.75}
+    .divider{border:none;border-top:1px solid rgba(139,105,20,0.1);margin:0 1.5rem}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    .fade-up{animation:fadeUp 0.4s ease both}
+
+    /* INDUSTRY MAP */
+    .industry-map{display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem;margin-bottom:1.5rem}
+    @media(max-width:768px){.industry-map{grid-template-columns:repeat(2,1fr)}}
+    .ind-card{background:#FFFFFF;border:1px solid rgba(139,105,20,0.15);border-radius:12px;
+      padding:1rem;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+    .ind-icon{font-size:1.4rem;margin-bottom:0.4rem}
+    .ind-title{font-size:0.82rem;font-weight:800;margin-bottom:0.2rem}
+    .ind-desc{font-size:0.7rem;color:var(--muted);line-height:1.5}
+
+    /* COMPANY TABLE */
+    .table-wrap{overflow-x:auto;border-radius:12px;border:1px solid rgba(139,105,20,0.18);
+      margin-bottom:1rem;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+    table{width:100%;border-collapse:collapse;font-size:0.78rem;min-width:900px}
+    thead th{background:#ECEAE3;padding:0.7rem 0.9rem;text-align:left;
+      font-size:0.65rem;font-weight:700;color:var(--gold);letter-spacing:0.08em;text-transform:uppercase;
+      border-bottom:1px solid rgba(139,105,20,0.15);white-space:nowrap}
+    tbody tr{border-bottom:1px solid rgba(0,0,0,0.04);transition:background 0.15s}
+    tbody tr:hover{background:rgba(139,105,20,0.03)}
+    tbody tr:last-child{border-bottom:none}
+    td{padding:0.7rem 0.9rem;vertical-align:top;color:var(--muted);line-height:1.6}
+    td:first-child{color:var(--text);font-weight:700}
+    td:nth-child(2){color:var(--gold);font-size:0.7rem}
+    .ue-val{font-weight:700;color:var(--blue)}
+    .margin-h{color:var(--green);font-weight:700}
+    .badge{display:inline-block;font-size:0.6rem;padding:0.1rem 0.4rem;border-radius:4px;white-space:nowrap}
+    .b-jujia{background:#EEF4FF;color:var(--blue);border:1px solid rgba(26,86,168,0.2)}
+    .b-jigou{background:#FFF8EC;color:var(--amber);border:1px solid rgba(200,125,14,0.2)}
+    .b-ai{background:#F0FAF5;color:var(--green);border:1px solid rgba(29,122,69,0.2)}
+    .b-robot{background:#F8F0FF;color:var(--purple);border:1px solid rgba(107,63,160,0.2)}
+
+    /* TRACK CARDS */
+    .track-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+    @media(max-width:768px){.track-grid{grid-template-columns:1fr}}
+    .track-card{background:#FFFFFF;border:1px solid rgba(139,105,20,0.15);border-radius:14px;
+      padding:1.2rem;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+    .track-name{font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;margin-bottom:0.4rem}
+    .track-title{font-size:0.92rem;font-weight:800;margin-bottom:0.6rem;line-height:1.35}
+    .track-points{list-style:none;display:flex;flex-direction:column;gap:0.35rem}
+    .track-points li{display:flex;gap:0.45rem;font-size:0.78rem;color:var(--muted);line-height:1.6}
+    .track-points li::before{content:"→";color:var(--gold);flex-shrink:0}
+    .track-card.green .track-name{color:var(--green)}
+    .track-card.blue .track-name{color:var(--blue)}
+    .track-card.amber .track-name{color:var(--amber)}
+    .track-card.red .track-name{color:var(--red)}
+    .track-card.purple .track-name{color:var(--purple)}
+
+    /* UE COMPARISON */
+    .ue-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;margin-bottom:1.5rem}
+    @media(max-width:768px){.ue-grid{grid-template-columns:1fr}}
+    .ue-card{background:#FFFFFF;border:1px solid rgba(139,105,20,0.12);border-radius:12px;
+      padding:1rem;box-shadow:0 1px 2px rgba(0,0,0,0.04)}
+    .ue-company{font-size:0.82rem;font-weight:800;margin-bottom:0.3rem}
+    .ue-seg{font-size:0.62rem;color:var(--muted);margin-bottom:0.6rem}
+    .ue-row{display:flex;justify-content:space-between;align-items:baseline;
+      font-size:0.75rem;padding:0.22rem 0;border-bottom:1px solid rgba(0,0,0,0.04)}
+    .ue-row:last-child{border-bottom:none}
+    .ue-key{color:var(--muted)}
+    .ue-num{font-weight:700;color:var(--blue)}
+    .ue-rate{color:var(--green);font-weight:700}
+
+    /* ENTRY PATH */
+    .path-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem}
+    @media(max-width:768px){.path-grid{grid-template-columns:1fr}}
+    .path-card{border-radius:14px;padding:1.2rem;border:1px solid}
+    .path-card.creator{background:#F0FAF5;border-color:rgba(29,122,69,0.2);border-top:2px solid var(--green)}
+    .path-card.corp{background:#EEF4FF;border-color:rgba(26,86,168,0.2);border-top:2px solid var(--blue)}
+    .path-card.investor{background:#FFF8EC;border-color:rgba(200,125,14,0.2);border-top:2px solid var(--amber)}
+    .path-label{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem}
+    .path-card.creator .path-label{color:var(--green)}
+    .path-card.corp .path-label{color:var(--blue)}
+    .path-card.investor .path-label{color:var(--amber)}
+    .path-title{font-size:0.9rem;font-weight:800;margin-bottom:0.5rem}
+    .path-body{font-size:0.78rem;color:var(--muted);line-height:1.75}
+    .path-body strong{color:var(--text)}
+
+    /* TIMELINE 落地节奏 */
+    .timeline-list{display:flex;flex-direction:column;gap:0;position:relative;padding-left:1.5rem}
+    .timeline-list::before{content:'';position:absolute;left:6px;top:6px;bottom:6px;
+      width:1px;background:linear-gradient(to bottom,var(--gold),rgba(139,105,20,0.2))}
+    .tl-item{position:relative;padding:0 0 1.2rem 1.2rem}
+    .tl-item::before{content:'';position:absolute;left:-0.87rem;top:5px;width:10px;height:10px;
+      border-radius:50%;background:var(--gold);border:2px solid #FAFAF8}
+    .tl-phase{font-size:0.62rem;letter-spacing:0.1em;color:var(--gold);text-transform:uppercase;font-weight:700;margin-bottom:0.25rem}
+    .tl-title{font-size:0.88rem;font-weight:800;margin-bottom:0.3rem}
+    .tl-desc{font-size:0.78rem;color:var(--muted);line-height:1.7}
+
+    /* INSIGHT BOX */
+    .insight-box{background:#FFFBF0;border:1px solid rgba(139,105,20,0.2);border-radius:12px;padding:1.1rem;margin:1rem 0}
+    .insight-label{font-size:0.62rem;letter-spacing:0.12em;color:var(--gold);text-transform:uppercase;font-weight:700;margin-bottom:0.5rem}
+    .insight-body{font-size:0.82rem;color:var(--text);line-height:1.8}
+    .insight-body strong{color:var(--gold)}
+
+    /* KAIYUAN BOX */
+    .kaiyuan-box{background:linear-gradient(135deg,#FFFDF5,#FFF8ED);border:2px solid rgba(139,105,20,0.3);
+      border-radius:14px;padding:1.3rem;margin:1.5rem 0}
+    .kaiyuan-label{font-size:0.62rem;letter-spacing:0.15em;color:var(--gold);text-transform:uppercase;font-weight:700;margin-bottom:0.5rem}
+    .kaiyuan-title{font-size:1rem;font-weight:800;margin-bottom:0.6rem}
+    .kaiyuan-body{font-size:0.82rem;color:var(--muted);line-height:1.8}
+    .kaiyuan-body strong{color:var(--text)}
+
+    footer{border-top:1px solid rgba(139,105,20,0.12);padding:2rem 1.5rem;
+      text-align:center;color:var(--muted);font-size:0.75rem;background:#F4F3EE}
+    footer strong{color:var(--gold)}
+    footer a{color:var(--blue);text-decoration:none}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">开元时代 · 研究院</div>
+  <ul class="nav-links">
+    <li><a href="#overview">行业全景</a></li>
+    <li><a href="#companies">典型企业UE</a></li>
+    <li><a href="#tracks">赛道分析</a></li>
+    <li><a href="#new-tracks">新增细分</a></li>
+    <li><a href="#entry">进入路径</a></li>
+    <li><a href="#kaiyuan">对开元启示</a></li>
+  </ul>
+  <span style="font-size:0.65rem;padding:0.18rem 0.6rem;border-radius:100px;background:rgba(139,105,20,0.08);color:var(--gold);border:1px solid rgba(139,105,20,0.2)">T00 · 基础研究 · 2.2万字</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero fade-up">
+  <div class="source-tag">📚 学城原文 · km.sankuai.com · 王晶晶著 · 昨天16:37更新</div>
+  <h1 class="report-title">中国养老行业<em>典型公司研究</em><br/>及进入路径分析报告</h1>
+  <div class="abstract-box">
+    <strong>报告摘要</strong>：本报告聚焦中国养老行业，立足2026年深度老龄化社会背景，系统梳理养老行业产业全景、核心赛道及典型企业，重点分析养老服务、养老智能硬件/机器人两大核心赛道的典型企业，结合行业最新政策导向与市场需求变化，深入剖析行业进入门槛、不同主体的切入路径，预判行业核心风险与发展机会，为创业者、跨界企业、投资者提供专业、可落地的参考依据。报告数据截至2026年2月，均来自公开信息整理与行业合理测算。
+  </div>
+  <div class="meta-row">
+    <div class="meta-item"><span>📅</span><span>数据截至 2026年2月 · 昨天更新</span></div>
+    <div class="meta-item"><span>📝</span><span>正文 2.2万字（12.1页）</span></div>
+    <div class="meta-item"><span>🔑</span><span>关键词：典型企业 · 单位经济模型 · 进入路径 · 智慧养老 · 长护险 · 养老机器人</span></div>
+    <div class="meta-item"><span>✍️</span><span>作者：王晶晶(Jane Wang) · 学城个人学习资料【09】</span></div>
+  </div>
+</div>
+
+<!-- INDUSTRY OVERVIEW -->
+<section class="section" id="overview">
+  <div class="section-hd">
+    <div class="sec-label">Chapter 1 · 行业全景</div>
+    <div class="sec-title">中国养老行业底层逻辑与产业全景</div>
+    <div class="sec-desc">行业遵循"9073"格局，居家社区为第一大赛道；产业链四大环节；政策进入"全面建制"新阶段。</div>
+  </div>
+
+  <!-- 关键数据 -->
+  <div class="industry-map">
+    <div class="ind-card">
+      <div class="ind-icon">👴</div>
+      <div class="ind-title">3.2亿</div>
+      <div class="ind-desc">60岁以上人口<br/>占总人口22.3%</div>
+    </div>
+    <div class="ind-card">
+      <div class="ind-icon">🏠</div>
+      <div class="ind-title">90%</div>
+      <div class="ind-desc">居家养老比例<br/>"9073"格局核心</div>
+    </div>
+    <div class="ind-card">
+      <div class="ind-icon">💰</div>
+      <div class="ind-title">12万亿</div>
+      <div class="ind-desc">银发经济整体规模<br/>养老黄金赛道</div>
+    </div>
+    <div class="ind-card">
+      <div class="ind-icon">🤖</div>
+      <div class="ind-title">8.31万亿</div>
+      <div class="ind-desc">智慧养老规模<br/>行业核心增量</div>
+    </div>
+    <div class="ind-card">
+      <div class="ind-icon">👩‍⚕️</div>
+      <div class="ind-title">5300万</div>
+      <div class="ind-desc">失能/半失能老人<br/>核心付费群体</div>
+    </div>
+    <div class="ind-card">
+      <div class="ind-icon">🧠</div>
+      <div class="ind-title">5300万</div>
+      <div class="ind-desc">认知障碍患者<br/>新兴细分赛道</div>
+    </div>
+    <div class="ind-card">
+      <div class="ind-icon">🏛️</div>
+      <div class="ind-title">3亿人</div>
+      <div class="ind-desc">长护险覆盖人数<br/>核心支付方</div>
+    </div>
+    <div class="ind-card">
+      <div class="ind-icon">📊</div>
+      <div class="ind-title">&lt;5%</div>
+      <div class="ind-desc">行业CR5集中度<br/>极度分散蓝海</div>
+    </div>
+  </div>
+
+  <!-- 产业链 -->
+  <div style="background:#FFFFFF;border:1px solid rgba(139,105,20,0.15);border-radius:14px;padding:1.2rem;box-shadow:0 1px 3px rgba(0,0,0,0.05);margin-bottom:1.5rem">
+    <div style="font-size:0.65rem;letter-spacing:0.14em;color:var(--gold);text-transform:uppercase;font-weight:700;margin-bottom:1rem">产业链四大环节</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem">
+      <div style="text-align:center;padding:0.8rem;background:#F4F3EE;border-radius:10px">
+        <div style="font-size:0.72rem;font-weight:800;color:var(--purple);margin-bottom:0.3rem">上游</div>
+        <div style="font-size:0.78rem;font-weight:700;margin-bottom:0.2rem">核心技术与硬件</div>
+        <div style="font-size:0.7rem;color:var(--muted)">AI芯片·传感器·养老机器人·康复设备·适老化硬件</div>
+      </div>
+      <div style="text-align:center;padding:0.8rem;background:#EEF4FF;border-radius:10px;border:1px solid rgba(26,86,168,0.15)">
+        <div style="font-size:0.72rem;font-weight:800;color:var(--blue);margin-bottom:0.3rem">中游</div>
+        <div style="font-size:0.78rem;font-weight:700;margin-bottom:0.2rem">服务供给与解决方案</div>
+        <div style="font-size:0.7rem;color:var(--muted)">居家照护·陪诊·康复·机构运营·认知障碍·社区家政</div>
+      </div>
+      <div style="text-align:center;padding:0.8rem;background:#F0FAF5;border-radius:10px">
+        <div style="font-size:0.72rem;font-weight:800;color:var(--green);margin-bottom:0.3rem">下游</div>
+        <div style="font-size:0.78rem;font-weight:700;margin-bottom:0.2rem">场景应用</div>
+        <div style="font-size:0.7rem;color:var(--muted)">居家·社区·养老机构·医院<br/>居家&社区是最大需求场景</div>
+      </div>
+      <div style="text-align:center;padding:0.8rem;background:#FFFBF0;border-radius:10px;border:1px solid rgba(139,105,20,0.15)">
+        <div style="font-size:0.72rem;font-weight:800;color:var(--gold);margin-bottom:0.3rem">支付端</div>
+        <div style="font-size:0.78rem;font-weight:700;margin-bottom:0.2rem">多元支付体系</div>
+        <div style="font-size:0.7rem;color:var(--muted)">长护险+医保+个人自费+商业保险+政府购买服务</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 竞争格局 -->
+  <div class="insight-box">
+    <div class="insight-label">行业竞争格局特征（原报告原文）</div>
+    <div class="insight-body">
+      中国养老行业整体呈现<strong>「极度分散、区域集中、分层竞争」</strong>的格局，除高端机构养老赛道由险资主导、智慧养老赛道有少数头部科技企业外，多数细分赛道尚未形成全国性垄断格局，<strong>CR5不足5%</strong>，区域性龙头林立。核心赛道格局：居家社区照护（普惠型+高端型分层）；陪诊助医（极度分散，分为高端资源型/专业医护型/普惠型）；智能硬件（垂直养老+康复机器人+通用服务机器人）；高端机构（险资主导，泰康之家等）。
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- COMPANY UE DATA -->
+<section class="section" id="companies">
+  <div class="section-hd">
+    <div class="sec-label">Chapter 2 · 典型企业UE数据</div>
+    <div class="sec-title">12家典型企业单位经济模型对比</div>
+    <div class="sec-desc">报告从规模、UE、优劣势三维度系统分析。以下为核心数据提取，涵盖居家养老服务6家 + 智能硬件6家。</div>
+  </div>
+
+  <!-- 养老服务6家 -->
+  <div style="font-size:0.65rem;letter-spacing:0.12em;color:var(--blue);text-transform:uppercase;font-weight:700;margin-bottom:0.8rem">🏠 养老服务赛道 · 6家典型企业</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>企业</th>
+          <th>细分赛道</th>
+          <th>2026年规模</th>
+          <th>单客月收入</th>
+          <th>毛利率</th>
+          <th>核心优势</th>
+          <th>核心短板</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>福寿康 <span class="badge b-jujia">居家长护险</span></td>
+          <td>普惠照护龙头</td>
+          <td>59城·400+机构·2.4万员工<br/>年服务2208万次·营收30-40亿</td>
+          <td class="ue-val">长护险4,500-7,500元<br/>自费9,000-24,000元</td>
+          <td class="margin-h">25-35%</td>
+          <td>长护险资质全国第一·规模化运营能力强</td>
+          <td>人力成本60-70%·跨区复制门槛高</td>
+        </tr>
+        <tr>
+          <td>易得康 <span class="badge b-jujia">居家高端</span></td>
+          <td>国际化高端照护</td>
+          <td>北上广深布局·2-3千医护<br/>新风天域控股·营收5-8亿</td>
+          <td class="ue-val">单客日收500-1,200元<br/>月收15,000-36,000元</td>
+          <td class="margin-h">30-40%</td>
+          <td>美国照护体系本土化·医疗专业度领先</td>
+          <td>高端获客成本高·扩张速度慢</td>
+        </tr>
+        <tr>
+          <td>乐成养老 <span class="badge b-jujia">驿站+居家</span></td>
+          <td>普惠型驿站一体</td>
+          <td>80+驿站·500+护理员<br/>北京/上海/天津·营收2-3亿</td>
+          <td class="ue-val">驿站日托80-150元<br/>居家月3,000-6,000元</td>
+          <td class="margin-h">28-38%</td>
+          <td>驿站+居家一体·贴合15分钟服务圈</td>
+          <td>单客毛利低·依赖政府补贴</td>
+        </tr>
+        <tr>
+          <td>泰康之家·燕园 <span class="badge b-jigou">高端驿站</span></td>
+          <td>高端智慧型驿站</td>
+          <td>40+高端驿站·300+医护<br/>核心城市布局·营收1.5-2.5亿</td>
+          <td class="ue-val">驿站日托200-400元<br/>居家月8,000-15,000元</td>
+          <td class="margin-h">40-50%</td>
+          <td>联动泰康机构资源·智慧化运营</td>
+          <td>客群覆盖窄·复制难度大</td>
+        </tr>
+        <tr>
+          <td>蓝豚医陪 <span class="badge b-jujia">专业陪诊</span></td>
+          <td>护士主导陪诊</td>
+          <td>一线城市·300人团队<br/>护士占比80%·营收1-2亿</td>
+          <td class="ue-val">单次400-800元</td>
+          <td class="margin-h">40%</td>
+          <td>护士服务是核心壁垒·口碑获客低成本</td>
+          <td>团队培养成本高·扩张慢</td>
+        </tr>
+        <tr>
+          <td>鲸鱼陪诊 <span class="badge b-jujia">普惠陪诊</span></td>
+          <td>全国普惠平台</td>
+          <td>26城·200人团队·营收约1亿</td>
+          <td class="ue-val">单次200-500元<br/>绿通1,000-5,000元</td>
+          <td class="margin-h">35-45%</td>
+          <td>全国网络·标准化流程·扩张快</td>
+          <td>兼职陪诊师难管控·同质化竞争</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- UE对比卡片 -->
+  <div class="ue-grid">
+    <div class="ue-card">
+      <div class="ue-company">福寿康（普惠居家）</div>
+      <div class="ue-seg">全国居家医养龙头 · 长护险定点全覆盖</div>
+      <div class="ue-row"><span class="ue-key">长护险单客月收</span><span class="ue-num">4,500-7,500元</span></div>
+      <div class="ue-row"><span class="ue-key">自费单客月收</span><span class="ue-num">9,000-24,000元</span></div>
+      <div class="ue-row"><span class="ue-key">毛利率</span><span class="ue-rate">25-35%</span></div>
+      <div class="ue-row"><span class="ue-key">客户年复购率</span><span class="ue-num">80%+</span></div>
+      <div class="ue-row"><span class="ue-key">LTV</span><span class="ue-num">超10万元</span></div>
+    </div>
+    <div class="ue-card">
+      <div class="ue-company">乐成养老（驿站+居家）</div>
+      <div class="ue-seg">普惠型 · 驿站+居家一体化</div>
+      <div class="ue-row"><span class="ue-key">驿站日托收费</span><span class="ue-num">80-150元/天</span></div>
+      <div class="ue-row"><span class="ue-key">居家护理月费</span><span class="ue-num">3,000-6,000元</span></div>
+      <div class="ue-row"><span class="ue-key">毛利率</span><span class="ue-rate">28-38%</span></div>
+      <div class="ue-row"><span class="ue-key">驿站会员复购率</span><span class="ue-num">70%+</span></div>
+      <div class="ue-row"><span class="ue-key">年服务量</span><span class="ue-num">10万+人次</span></div>
+    </div>
+    <div class="ue-card" style="border-color:rgba(139,105,20,0.3);background:#FFFBF0">
+      <div class="ue-company" style="color:var(--gold)">★ 开元时代（目标区间）</div>
+      <div class="ue-seg">中端普惠 · 固定护理员 · 情感陪伴</div>
+      <div class="ue-row"><span class="ue-key">启元级（政补后净付）</span><span class="ue-num" style="color:var(--gold)">1,600元/月</span></div>
+      <div class="ue-row"><span class="ue-key">兴元级</span><span class="ue-num" style="color:var(--gold)">2,700元/月</span></div>
+      <div class="ue-row"><span class="ue-key">开元级</span><span class="ue-num" style="color:var(--gold)">4,700元/月</span></div>
+      <div class="ue-row"><span class="ue-key">目标毛利率</span><span class="ue-rate">31%</span></div>
+      <div class="ue-row"><span class="ue-key">10户盈亏平衡点</span><span class="ue-num" style="color:var(--gold)">15-18户</span></div>
+    </div>
+  </div>
+
+  <!-- 机器人赛道 -->
+  <div style="font-size:0.65rem;letter-spacing:0.12em;color:var(--purple);text-transform:uppercase;font-weight:700;margin:1.5rem 0 0.8rem">🤖 养老智能硬件/机器人赛道 · 6家典型企业</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>企业</th>
+          <th>细分</th>
+          <th>规模指标</th>
+          <th>产品定价</th>
+          <th>毛利率</th>
+          <th>核心壁垒</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>艾雨文承（大头阿亮）<span class="badge b-robot">垂直养老机器人</span></td>
+          <td>居家/机构专用</td>
+          <td>30+省市·1000+养老机构·24项专利</td>
+          <td class="ue-val">居家版¥19,800<br/>机构版¥10-20万</td>
+          <td class="margin-h">40-50%</td>
+          <td>唯一垂直养老场景深度打磨·跌倒监测/自动查房</td>
+        </tr>
+        <tr>
+          <td>傅利叶智能<span class="badge b-robot">康复机器人</span></td>
+          <td>外骨骼/护理机器人</td>
+          <td>32国3100+机构·市占率28.7%<br/>1000人团队·营收18.6亿</td>
+          <td class="ue-val">外骨骼15-50万/台<br/>GR-3护理机器人50万+</td>
+          <td class="margin-h">45-55%</td>
+          <td>技术全球领先·医保长护险适配·核心零部件自研</td>
+        </tr>
+        <tr>
+          <td>优必选<span class="badge b-robot">通用服务机器人</span></td>
+          <td>Walker系列人形机器人</td>
+          <td>港股上市·全球30+国·营收7-10亿</td>
+          <td class="ue-val">企业级定制·百万级</td>
+          <td class="margin-h">40-50%</td>
+          <td>人形机器人技术全球第一梯队·华为生态合作</td>
+        </tr>
+        <tr>
+          <td>科沃斯<span class="badge b-robot">家居服务机器人</span></td>
+          <td>扫地/陪伴机器人</td>
+          <td>A股上市·全球最大扫地机器人<br/>营收150+亿</td>
+          <td class="ue-val">消费级千-万元</td>
+          <td class="margin-h">35-45%</td>
+          <td>消费端规模化量产·C端渠道成熟</td>
+        </tr>
+        <tr>
+          <td>擎朗智能<span class="badge b-robot">配送机器人</span></td>
+          <td>餐厅/医疗/养老配送</td>
+          <td>全球70+国·医疗养老场景加速</td>
+          <td class="ue-val">年租约5-15万元</td>
+          <td class="margin-h">40%</td>
+          <td>医疗养老场景配送标准化·Softbank系资源</td>
+        </tr>
+        <tr>
+          <td>鱼跃医疗<span class="badge b-robot">养老辅具</span></td>
+          <td>家用医疗器械</td>
+          <td>A股上市·市值200+亿·营收60+亿</td>
+          <td class="ue-val">百-千元消费级</td>
+          <td class="margin-h">45-55%</td>
+          <td>全品类家用医疗器械·医保纳入品类多</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- TRACK ANALYSIS -->
+<section class="section" id="tracks">
+  <div class="section-hd">
+    <div class="sec-label">Chapter 3 · 赛道切入策略</div>
+    <div class="sec-title">基础赛道：模式壁垒 × 首期投入 × UE打正节奏</div>
+    <div class="sec-desc">报告对养老服务和智能硬件两大赛道，系统分析各模式创业壁垒要求和资金投入。</div>
+  </div>
+
+  <div class="track-grid">
+    <div class="track-card green">
+      <div class="track-name">居家社区照护 · 普惠型</div>
+      <div class="track-title">核心壁垒：长护险资质 + 本地社区关系</div>
+      <ul class="track-points">
+        <li>首期投入：30-50万元（团队建设+运营系统+政策申报）</li>
+        <li>UE打正节奏：服务20-30户，6-9个月实现盈亏平衡</li>
+        <li>团队要求：本地政府/社区资源+标准化护理体系</li>
+        <li>切入策略：先申请长护险定点资质，以政府购买服务打底</li>
+      </ul>
+    </div>
+    <div class="track-card blue">
+      <div class="track-name">居家社区照护 · 高端型</div>
+      <div class="track-title">核心壁垒：医护资源 + 高端客群获取</div>
+      <ul class="track-points">
+        <li>首期投入：200-500万元（高资质医护+高端品牌建设）</li>
+        <li>UE打正节奏：服务10-15户，12-18个月实现盈亏平衡</li>
+        <li>团队要求：持证医护团队+高端医疗资源合作</li>
+        <li>切入策略：对接高端医院/养老社区，服务高净值家庭</li>
+      </ul>
+    </div>
+    <div class="track-card amber">
+      <div class="track-name">驿站+居家 · 一体化</div>
+      <div class="track-title">核心壁垒：社区场地 + 政府合作关系</div>
+      <ul class="track-points">
+        <li>首期投入：50-150万元（场地装修+人员配置）</li>
+        <li>UE打正节奏：驿站6-12个月，居家部分3-6个月</li>
+        <li>团队要求：社区运营能力+基础护理服务标准化</li>
+        <li>切入策略：通过政府驿站合作获客，叠加居家上门服务</li>
+      </ul>
+    </div>
+    <div class="track-card purple">
+      <div class="track-name">养老机器人 · 创业者视角</div>
+      <div class="track-title">核心壁垒：技术研发投入 + 场景适配经验</div>
+      <ul class="track-points">
+        <li>首期投入：500-2000万元（核心技术研发）</li>
+        <li>UE打正节奏：机构端1-2年，家庭端3-5年</li>
+        <li>团队要求：硬件研发+AI算法+养老场景深度合作</li>
+        <li>切入策略：专注垂直养老场景，走机构端B2B路线</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- NEW TRACKS -->
+<section class="section" id="new-tracks">
+  <div class="section-hd">
+    <div class="sec-label">Chapter 4 · 新增细分赛道</div>
+    <div class="sec-title">4大新兴赛道：创业者优先切入机会</div>
+    <div class="sec-desc">报告明确指出，这4个赛道是创业者进入养老行业的最佳窗口——轻资产、短周期、政策扶持明确。</div>
+  </div>
+
+  <div class="track-grid">
+    <div class="track-card red">
+      <div class="track-name">① 认知障碍干预赛道</div>
+      <div class="track-title">早期筛查 + 居家/社区干预</div>
+      <ul class="track-points">
+        <li>市场规模：5300万认知障碍患者，政策推动社区筛查落地</li>
+        <li>代表企业：忘忧草健康（居家+社区干预）</li>
+        <li>核心壁垒：医疗专业背景 + 认知干预方案积累</li>
+        <li>切入策略：与社区卫生中心合作，提供认知筛查+干预服务</li>
+        <li>首期投入：50-100万元·UE打正节奏：6-12个月</li>
+      </ul>
+    </div>
+    <div class="track-card green">
+      <div class="track-name">② 社区家政养老赛道 ← 开元方向</div>
+      <div class="track-title">家政服务+情感陪伴+基础照护</div>
+      <ul class="track-points">
+        <li>最轻资产赛道，需求量最大，政策补贴直接覆盖</li>
+        <li>核心壁垒：护理员质量标准化 + 社区信任关系建立</li>
+        <li>切入策略：依托居委会/驿站获客，固定护理员建立信任</li>
+        <li>首期投入：20-50万元·UE打正节奏：3-6个月</li>
+        <li style="color:var(--gold);font-weight:600">★ 开元时代正在做这个赛道，且有广外街道居委会资源优势</li>
+      </ul>
+    </div>
+    <div class="track-card blue">
+      <div class="track-name">③ AI虚拟陪伴赛道</div>
+      <div class="track-title">AI情感陪伴 + 健康监测 + 认知激活</div>
+      <ul class="track-points">
+        <li>独居老人超1.3亿，精神孤独是养老核心痛点之一</li>
+        <li>代表企业：AI虚拟陪伴（线上型）</li>
+        <li>核心壁垒：AI产品体验 + 老年人使用门槛突破</li>
+        <li>切入策略：与居家养老服务商合作，作为增值服务叠加</li>
+        <li>首期投入：100-300万元·产品化周期6-12个月</li>
+      </ul>
+    </div>
+    <div class="track-card amber">
+      <div class="track-name">④ 社区协作智能调度赛道</div>
+      <div class="track-title">多元资源智能匹配 + 服务效率提升</div>
+      <ul class="track-points">
+        <li>通过AI调度平台整合护理员、医护、物资等资源</li>
+        <li>解决社区养老服务碎片化问题，提升运营效率</li>
+        <li>核心壁垒：算法调度能力 + 社区资源整合经验</li>
+        <li>切入策略：与驿站/居委会合作，作为平台工具切入</li>
+        <li>首期投入：200-500万元·SaaS平台开发周期12个月</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 4赛道对比 -->
+  <div class="table-wrap" style="margin-top:1rem">
+    <table>
+      <thead>
+        <tr>
+          <th>赛道</th>
+          <th>首期投入</th>
+          <th>UE打正</th>
+          <th>政策支持</th>
+          <th>技术门槛</th>
+          <th>适合创业者</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>认知障碍干预</td>
+          <td>50-100万</td>
+          <td>6-12个月</td>
+          <td>★★★★</td>
+          <td>中（医疗背景）</td>
+          <td>有医疗资源的创业者</td>
+        </tr>
+        <tr style="background:#FFFBF0">
+          <td><strong style="color:var(--gold)">社区家政养老 ★</strong></td>
+          <td><strong style="color:var(--green)">20-50万（最低）</strong></td>
+          <td><strong style="color:var(--green)">3-6个月（最短）</strong></td>
+          <td>★★★★★</td>
+          <td>低（服务标准化）</td>
+          <td><strong style="color:var(--gold)">本地社区资源 = 开元优势</strong></td>
+        </tr>
+        <tr>
+          <td>AI虚拟陪伴</td>
+          <td>100-300万</td>
+          <td>12-24个月</td>
+          <td>★★★</td>
+          <td>高（AI产品）</td>
+          <td>有AI技术背景的团队</td>
+        </tr>
+        <tr>
+          <td>社区协作调度</td>
+          <td>200-500万</td>
+          <td>18-24个月</td>
+          <td>★★★</td>
+          <td>高（平台开发）</td>
+          <td>有运营平台经验的团队</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ENTRY PATH -->
+<section class="section" id="entry">
+  <div class="section-hd">
+    <div class="sec-label">Chapter 5 · 行业进入路径</div>
+    <div class="sec-title">三类市场主体的进入策略建议</div>
+    <div class="sec-desc">报告第五章针对创业者、跨界企业、投资者三类主体，给出差异化进入路径建议。</div>
+  </div>
+
+  <div class="path-grid">
+    <div class="path-card creator">
+      <div class="path-label">创业者 · 轻资产快速破局</div>
+      <div class="path-title">优先切入4大新增细分赛道</div>
+      <div class="path-body">
+        <strong>核心路径</strong>：社区家政养老 > 认知障碍干预 > AI虚拟陪伴 > 社区调度平台<br/><br/>
+        <strong>社区家政养老创业者要求</strong>：① 有本地社区人脉（居委会/街道）② 懂服务标准化运营 ③ 能快速建立护理员管理体系<br/><br/>
+        <strong>6-12个月落地节奏</strong>：<br/>
+        0-3月：对接社区资源，完成第一批10个服务家庭；<br/>
+        3-6月：建立护理员团队，服务标准化，口碑沉淀；<br/>
+        6-12月：扩展至30-50户，申请长护险定点资质。
+      </div>
+    </div>
+    <div class="path-card corp">
+      <div class="path-label">跨界企业 · 依托优势规模化</div>
+      <div class="path-title">按核心资源类型匹配赛道</div>
+      <div class="path-body">
+        <strong>家政企业转型</strong>（如三替集团）→ 居家照护/驿站一体化<br/><br/>
+        <strong>科技企业进入</strong>（互联网/AI）→ AI陪伴/智能调度平台<br/><br/>
+        <strong>医疗机构延伸</strong> → 居家医疗/康复/认知干预<br/><br/>
+        <strong>险资布局</strong> → 高端机构养老/长护险合作<br/><br/>
+        核心：<strong>借助已有资源快速切入，避免从零开始</strong>
+      </div>
+    </div>
+    <div class="path-card investor">
+      <div class="path-label">投资者 · 高潜力赛道价值投资</div>
+      <div class="path-title">2026年三大重点投资方向</div>
+      <div class="path-body">
+        <strong>① 居家社区照护龙头</strong>：长护险定点资质+数字化能力+规模化护理员管理，是最确定的长期价值赛道。代表标的：福寿康（C+轮，百亿估值）<br/><br/>
+        <strong>② AI赋能养老</strong>：AI陪伴+认知干预+智能调度，处于早期，估值低，成长空间大<br/><br/>
+        <strong>③ 具身智能数据资产</strong>：布局最早的真实照护数据公司，是未来机器人训练数据的稀缺资产
+      </div>
+    </div>
+  </div>
+
+  <!-- 落地节奏 -->
+  <div style="margin-top:1.5rem">
+    <div style="font-size:0.65rem;letter-spacing:0.12em;color:var(--green);text-transform:uppercase;font-weight:700;margin-bottom:1rem">创业者 · 6-12个月标准落地节奏（原报告建议）</div>
+    <div class="timeline-list">
+      <div class="tl-item">
+        <div class="tl-phase">第0-1个月 · 资源确认</div>
+        <div class="tl-title">锁定首批目标用户，确认核心资源</div>
+        <div class="tl-desc">对接社区居委会/驿站，确认第一批10个潜在服务家庭；完成护理员候选人预招募；梳理政策申请清单。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">第1-3个月 · 启动验证</div>
+        <div class="tl-title">首批5-10个家庭服务，沉淀NPS口碑</div>
+        <div class="tl-desc">不靠广告，纯靠居委会推荐和口口相传；建立服务记录体系；护理员固定匹配，建立家庭信任；目标NPS≥8分。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">第3-6个月 · 模式固化</div>
+        <div class="tl-title">服务扩至20-30家，完成服务手册</div>
+        <div class="tl-desc">标准化服务流程（SOP）定稿；护理员培训体系建立；申请长护险定点资质前置条件（3个月案例）达成；月度收支平衡。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">第6-12个月 · 申请资质</div>
+        <div class="tl-title">申请长护险定点，触发天使融资条件</div>
+        <div class="tl-desc">正式提交长护险定点申请；政府补贴开始抵扣用户费用；借助定点资质完成天使轮融资话语权建立。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- KAIYUAN INSIGHTS -->
+<section class="section" id="kaiyuan">
+  <div class="section-hd">
+    <div class="sec-label">Insights · 对开元时代的战略启示</div>
+    <div class="sec-title">报告与开元现有战略的交叉验证</div>
+    <div class="sec-desc">这份2.2万字报告与班子过去2周的研究结论高度一致，以下是交叉验证的关键发现。</div>
+  </div>
+
+  <div class="kaiyuan-box">
+    <div class="kaiyuan-label">✅ 验证一：社区家政养老是报告明确推荐的最佳创业赛道</div>
+    <div class="kaiyuan-title">开元的方向是4大新增赛道中壁垒最低、回报最快、政策扶持最强的</div>
+    <div class="kaiyuan-body">报告明确指出社区家政养老：<strong>首期投入20-50万（最低）</strong>、<strong>UE打正3-6个月（最短）</strong>、政策支持★★★★★（最高）。开元的100万启动资金、广外街道社区资源、居委会渠道，恰好精准匹配这个赛道的核心要求。</div>
+  </div>
+
+  <div class="kaiyuan-box">
+    <div class="kaiyuan-label">✅ 验证二：福寿康就是开元的10年路径</div>
+    <div class="kaiyuan-title">2011年从街道起步，今天59城·400+机构·30-40亿营收·C+轮百亿估值</div>
+    <div class="kaiyuan-body">福寿康2011年成立，和开元计划2027年启动的路径完全一致——从社区居家照护切入，积累长护险资质，逐步扩城。福寿康的规模数据（年服务2208万次、LTV超10万元）是开元的可见未来，不是遥不可及的愿景。<strong>差异在于：开元叠加了「有尊严的情感照护」和「数据资产」两层，是福寿康2.0版。</strong></div>
+  </div>
+
+  <div class="kaiyuan-box">
+    <div class="kaiyuan-label">✅ 验证三：行业CR5&lt;5%，窗口期确认</div>
+    <div class="kaiyuan-title">报告数据：多数细分赛道未形成全国垄断格局，区域性龙头机会巨大</div>
+    <div class="kaiyuan-body">这与班子T10竞争格局研究结论一致——广外街道居家养老市场化供给接近于零。报告进一步用全国数据支撑：<strong>CR5不足5%意味着，在任何一个城区做到前三，就是区域龙头</strong>。开元的目标是成为广外街道的居家养老第一品牌——这在全国行业格局中完全可行。</div>
+  </div>
+
+  <div class="kaiyuan-box">
+    <div class="kaiyuan-label">🔴 新发现：乐成养老毛利率28-38%，与班子测算的31%高度一致</div>
+    <div class="kaiyuan-title">CFO的财务模型毛利率预测有外部数据验证</div>
+    <div class="kaiyuan-body">报告显示乐成养老（驿站+居家一体，最接近开元模式）毛利率28-38%，CFO之前测算的31%毛利率与此区间完全吻合。<strong>这是迄今为止对开元财务模型最有力的外部验证。</strong>盈亏平衡点15-18户的判断也获得行业数据支撑（乐成打正约20-30户）。</div>
+  </div>
+
+  <div class="kaiyuan-box" style="border-color:rgba(26,86,168,0.3);background:#EEF4FF">
+    <div class="kaiyuan-label" style="color:var(--blue)">💡 新增发现：AI虚拟陪伴是开元的第二增长曲线</div>
+    <div class="kaiyuan-title">报告新增细分赛道中，AI虚拟陪伴与开元的「具身智能数据资产」叙事直接对接</div>
+    <div class="kaiyuan-body">报告指出AI虚拟陪伴是快速崛起的新赛道，最佳切入是「与居家养老服务商合作，作为增值服务叠加」。这正是开元工部规划的方向——开元不需要自己做AI陪伴产品，只需要<strong>作为载体，让AI公司接入开元的服务体系，开元收取数据授权费和服务佣金</strong>。这是第二增长曲线，不是主业竞争。</div>
+  </div>
+</section>
+
+<footer>
+  <strong>开元时代 · 研究院 · T00</strong> · 中国养老行业典型公司研究 · 可视化版 · 2026-03-15<br/>
+  原文来源：<a href="https://km.sankuai.com/collabpage/2748723517" target="_blank">学城 km.sankuai.com/collabpage/2748723517</a><br/>
+  原作者：王晶晶(Jane Wang) · 正文2.2万字（12.1页）· 数据截至2026年2月
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('fade-up') })
+  }, {threshold: 0.08})
+  document.querySelectorAll('.track-card,.path-card,.ind-card,.ue-card,.kaiyuan-box').forEach(el => obs.observe(el))
+</script>
+</body>
+</html>
