@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>开元时代 · 三大战略研究专项</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8D5A3;
+      --gold-dark: #9A7A2F;
+      --bg: #FAF8F4;
+      --bg2: #F0EDE6;
+      --bg3: #E8E3D8;
+      --text: #2C2C2C;
+      --text2: #5A5550;
+      --text3: #8A8580;
+      --border: #D4CFC5;
+      --red: #C0392B;
+      --green: #27AE60;
+      --blue: #2980B9;
+      --shadow: 0 2px 20px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+    }
+    body {
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #2C2418 0%, #3D3020 50%, #2C2418 100%);
+      padding: 50px 40px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A84C' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    header .badge {
+      display: inline-block;
+      background: rgba(201,168,76,0.2);
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold-light);
+      padding: 4px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    header h1 {
+      color: var(--gold-light);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    header p {
+      color: rgba(232,213,163,0.7);
+      font-size: 14px;
+    }
+    header .meta {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    header .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--gold-light);
+      font-size: 13px;
+      opacity: 0.85;
+    }
+
+    /* Navigation */
+    nav {
+      background: white;
+      border-bottom: 2px solid var(--gold);
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    nav ul li a {
+      display: block;
+      padding: 14px 24px;
+      color: var(--text2);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+      border-bottom: 3px solid transparent;
+    }
+    nav ul li a:hover {
+      color: var(--gold-dark);
+      background: var(--bg);
+      border-bottom-color: var(--gold);
+    }
+
+    /* Summary bar */
+    .summary-bar {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 20px 40px;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .summary-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      text-align: center;
+    }
+    .summary-card .num {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--gold-dark);
+      line-height: 1.2;
+    }
+    .summary-card .unit {
+      font-size: 13px;
+      color: var(--text3);
+      margin-top: 4px;
+    }
+    .summary-card .label {
+      font-size: 12px;
+      color: var(--text3);
+      margin-top: 8px;
+    }
+
+    /* Main content */
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    /* Section */
+    section {
+      margin-bottom: 60px;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--border);
+    }
+    .section-num {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .section-title h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .section-title p {
+      font-size: 13px;
+      color: var(--text3);
+      margin-top: 2px;
+    }
+
+    /* Card */
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-title::before {
+      content: '';
+      display: block;
+      width: 4px;
+      height: 16px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th {
+      background: var(--bg2);
+      color: var(--text2);
+      font-weight: 600;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+      font-size: 13px;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--bg); }
+    .td-highlight { color: var(--gold-dark); font-weight: 600; }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 6px;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--gold), var(--gold-light));
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 24px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -26px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      background: var(--gold);
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--gold-light);
+    }
+    .timeline-item .time {
+      font-size: 12px;
+      color: var(--gold-dark);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .timeline-item .content {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 14px;
+    }
+    .timeline-item .content strong { color: var(--gold-dark); }
+
+    /* Alert */
+    .alert {
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 16px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 14px;
+    }
+    .alert-warning {
+      background: #FFF8E7;
+      border: 1px solid #F0C040;
+      color: #7A5F10;
+    }
+    .alert-danger {
+      background: #FEF0EE;
+      border: 1px solid #E74C3C;
+      color: #922B21;
+    }
+    .alert-success {
+      background: #EAFAF1;
+      border: 1px solid #27AE60;
+      color: #1A6E3D;
+    }
+    .alert-info {
+      background: #EBF5FB;
+      border: 1px solid #2980B9;
+      color: #1A5276;
+    }
+    .alert-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+    /* Socratic block */
+    .socratic {
+      background: linear-gradient(135deg, #FDF6EC 0%, #FAF0E0 100%);
+      border: 1px solid var(--gold-light);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 10px 10px 0;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+    .socratic-q {
+      font-weight: 700;
+      color: var(--gold-dark);
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+    .socratic-insight {
+      background: rgba(201,168,76,0.1);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 10px 0;
+      font-size: 13px;
+    }
+    .socratic-insight strong { color: #C0392B; }
+    .socratic-result {
+      background: rgba(39,174,96,0.1);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-top: 10px;
+      font-size: 13px;
+      border-left: 3px solid var(--green);
+    }
+    .socratic-result strong { color: var(--green); }
+
+    /* Pricing cards */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+    .pricing-card {
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .pricing-card.featured {
+      border-color: var(--gold);
+      box-shadow: 0 4px 24px rgba(201,168,76,0.2);
+    }
+    .pricing-card .featured-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 12px;
+      letter-spacing: 1px;
+    }
+    .pricing-card .pkg-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .pricing-card .pkg-desc {
+      font-size: 12px;
+      color: var(--text3);
+      margin-bottom: 16px;
+    }
+    .pricing-card .pkg-price {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--gold-dark);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .pricing-card .pkg-price span {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text3);
+    }
+    .pricing-card .pkg-real {
+      font-size: 13px;
+      color: var(--green);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .pricing-card .pkg-features {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+    .pricing-card .pkg-features li {
+      font-size: 13px;
+      color: var(--text2);
+      padding: 4px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pricing-card .pkg-features li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .pkg-breakeven {
+      background: var(--bg2);
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: var(--text2);
+      text-align: center;
+    }
+
+    /* Monitor cards */
+    .monitor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .monitor-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+    }
+    .monitor-card .icon {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .monitor-card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .monitor-card p {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+    .monitor-card .frequency {
+      display: inline-block;
+      background: var(--bg2);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 11px;
+      color: var(--gold-dark);
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    /* Action checklist */
+    .checklist {
+      list-style: none;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist .check-box {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--gold);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .checklist .check-dept {
+      background: var(--gold-light);
+      color: var(--gold-dark);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .checklist .check-content { flex: 1; }
+    .checklist .check-deadline {
+      font-size: 12px;
+      color: var(--text3);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    /* Footer */
+    footer {
+      background: #2C2418;
+      color: rgba(232,213,163,0.6);
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 13px;
+    }
+    footer strong { color: var(--gold-light); }
+
+    /* Profit chart */
+    .profit-bar-chart {
+      margin: 20px 0;
+    }
+    .profit-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .profit-label {
+      width: 80px;
+      font-size: 13px;
+      color: var(--text2);
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .profit-bar-wrap {
+      flex: 1;
+      background: var(--bg3);
+      border-radius: 4px;
+      height: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .profit-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-light), var(--gold));
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      padding-left: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #5A4010;
+      transition: width 1s ease;
+    }
+    .profit-value {
+      width: 80px;
+      font-size: 13px;
+      color: var(--gold-dark);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .breakeven-line {
+      border-top: 2px dashed var(--red);
+      margin: 16px 0 8px;
+      position: relative;
+    }
+    .breakeven-line::after {
+      content: '盈亏平衡线（6.3户）';
+      position: absolute;
+      top: -10px;
+      right: 0;
+      font-size: 11px;
+      color: var(--red);
+      background: var(--bg);
+      padding: 0 6px;
+    }
+
+    /* Tag */
+    .tag {
+      display: inline-block;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      margin: 2px;
+    }
+    .tag-gold { background: var(--gold-light); color: var(--gold-dark); }
+    .tag-red { background: #FADBD8; color: #922B21; }
+    .tag-green { background: #D5F5E3; color: #1A6E3D; }
+    .tag-blue { background: #D6EAF8; color: #1A5276; }
+
+    @media (max-width: 768px) {
+      header { padding: 32px 20px 28px; }
+      header h1 { font-size: 22px; }
+      main { padding: 24px 16px; }
+      nav ul li a { padding: 12px 14px; font-size: 12px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="badge">中书省 · 战略研究专项</div>
+  <h1>开元时代 · 三大战略研究专项报告</h1>
+  <p>政策准入资质 · 市场监控体系 · 产品定价与成本结构</p>
+  <div class="meta">
+    <div class="meta-item">📅 2026年3月14日</div>
+    <div class="meta-item">🏛️ 班子四线联合</div>
+    <div class="meta-item">📌 飞书议题授权</div>
+    <div class="meta-item">🔖 V1 · 待CEO审阅</div>
+  </div>
+</header>
+
+<!-- Navigation -->
+<nav>
+  <ul>
+    <li><a href="#policy">Ⅰ 政策准入资质</a></li>
+    <li><a href="#monitor">Ⅱ 市场监控体系</a></li>
+    <li><a href="#pricing">Ⅲ 产品定价成本</a></li>
+    <li><a href="#actions">📋 行动清单</a></li>
+  </ul>
+</nav>
+
+<!-- Summary Bar -->
+<div class="summary-bar">
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="num">800元</div>
+      <div class="unit">每月最高消费补贴</div>
+      <div class="label">2026年1月新政 · 居家50%抵扣</div>
+    </div>
+    <div class="summary-card">
+      <div class="num">D180</div>
+      <div class="unit">长护险定点完成</div>
+      <div class="label">完整资质路径总周期</div>
+    </div>
+    <div class="summary-card">
+      <div class="num">6.3户</div>
+      <div class="unit">盈亏平衡点</div>
+      <div class="label">套餐B主力方案</div>
+    </div>
+    <div class="summary-card">
+      <div class="num">2,400元</div>
+      <div class="unit">主力套餐月费</div>
+      <div class="label">家庭实付仅1,600元</div>
+    </div>
+    <div class="summary-card">
+      <div class="num">4条</div>
+      <div class="unit">监控维度</div>
+      <div class="label">政策·竞对·需求·日报</div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ============ SECTION 1: 政策准入 ============ -->
+  <section id="policy">
+    <div class="section-header">
+      <div class="section-num">Ⅰ</div>
+      <div class="section-title">
+        <h2>政策准入资质体系</h2>
+        <p>CGO主导 · 基于北京市民政局2026.2.28最新文件</p>
+      </div>
+    </div>
+
+    <!-- 最新政策 -->
+    <div class="card">
+      <div class="card-title">2026年新政核心参数</div>
+      <table>
+        <thead>
+          <tr>
+            <th>政策名称</th>
+            <th>补贴标准</th>
+            <th>发放形式</th>
+            <th>资金来源</th>
+            <th>有效期</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>失能老年人养老服务消费补贴</strong><br><small style="color:var(--text3)">2026年1月1日全国落地</small></td>
+            <td>居家/社区：<span class="td-highlight">50%，上限800元/月</span><br>机构：40%，上限800元/月</td>
+            <td>电子消费券<br>（"民政通"APP）</td>
+            <td>中央85%<br>地方15%</td>
+            <td class="td-highlight">2026.1-12<br>⚠️ 12月到期</td>
+          </tr>
+          <tr>
+            <td><strong>长期护理保险（长护险）</strong><br><small style="color:var(--text3)">常设政策，持续有效</small></td>
+            <td>按次结算<br><span class="td-highlight">80-200元/次</span></td>
+            <td>政府直付<br>（定点机构入库后）</td>
+            <td>医保基金</td>
+            <td class="td-highlight">长期有效<br>✅ 主力路径</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="alert alert-warning" style="margin-top:16px">
+        <div class="alert-icon">⚠️</div>
+        <div><strong>重要提示</strong>：消费补贴与长护险不可叠加——已享受长护险者，仅个人自付部分可使用消费补贴抵扣。但两者可先后使用，实际最高减免约1,100-1,200元/月。</div>
+      </div>
+    </div>
+
+    <!-- 资质路线图 -->
+    <div class="card">
+      <div class="card-title">完整资质申请路线图（双轨方案）</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:12px">🟢 主路径（推荐）</div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="time">D0 → D30</div>
+              <div class="content"><strong>A · 工商注册</strong><br>注册资本50万元，经营范围含居家养老照护服务</div>
+            </div>
+            <div class="timeline-item">
+              <div class="time">D30 → D60</div>
+              <div class="content"><strong>B1 · 机构备案</strong><br>西城区民政局，护理员≥4人<br>⭐ 完成后即可核销消费补贴</div>
+            </div>
+            <div class="timeline-item">
+              <div class="time">D60 → D90</div>
+              <div class="content"><strong>B4 · 消费补贴合作</strong><br>B1备案后可申请<br>⭐ 开始帮家庭代办申领800元/月</div>
+            </div>
+            <div class="timeline-item">
+              <div class="time">D90 → D180</div>
+              <div class="content"><strong>B3 · 长护险定点</strong><br>医保局申请，需接入信息系统<br>⭐ 入库后政府直结80-200元/次</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:12px">🔵 备用路径（B2卡住时）</div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="time">D0 → D30</div>
+              <div class="content"><strong>A · 工商注册</strong>（同主路径）</div>
+            </div>
+            <div class="timeline-item">
+              <div class="time">D14 → D30</div>
+              <div class="content"><strong>B2 · 适老化入库</strong><br>⚠️ 可能需要施工案例，需提前咨询</div>
+            </div>
+            <div class="timeline-item">
+              <div class="time">D30 → D75</div>
+              <div class="content"><strong>B1 → B4 → B3</strong>（流程同主路径）</div>
+            </div>
+          </div>
+          <div class="alert alert-info" style="margin-top:12px">
+            <div class="alert-icon">💡</div>
+            <div style="font-size:13px"><strong>先行动作</strong>：注册前非正式咨询西城区民政局，确认B2是否需要施工案例</div>
+          </div>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>资质</th>
+            <th>主管机构</th>
+            <th>核心条件</th>
+            <th>周期</th>
+            <th>收益</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag tag-blue">A</span> 工商注册</td>
+            <td>市场监督管理局</td>
+            <td>注册资本+经营范围</td>
+            <td>1-2周</td>
+            <td>基础前提</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-gold">B1</span> 机构备案</td>
+            <td>西城区民政局</td>
+            <td>场地+护理员≥4人</td>
+            <td>1-2个月</td>
+            <td>可申请补贴合作</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-gold">B2</span> 适老化入库</td>
+            <td>区建委/民政联合</td>
+            <td>营业执照+服务案例说明</td>
+            <td>2-3周</td>
+            <td>备用路径</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-green">B4</span> 消费补贴合作</td>
+            <td>区民政局</td>
+            <td>B1备案完成</td>
+            <td>1-2个月</td>
+            <td>代办800元/月消费券核销</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-green">B3</span> 长护险定点</td>
+            <td>北京市医保局</td>
+            <td>B1+护理员≥4人+信息系统接入</td>
+            <td>2-4个月</td>
+            <td class="td-highlight">80-200元/次，政府直结</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 苏格拉底质询 -->
+    <div class="socratic">
+      <div class="socratic-q">🏛️ 班子苏格拉底质询 · 政策研究</div>
+      <div style="margin-bottom:16px">
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px">Q1 · CFO质询：补贴800元是"抵扣50%"，家庭月消费需≥多少才能用满？</div>
+        <div class="socratic-insight">⚡ <strong>关键算法</strong>：800元 = 50% × 月服务费 → 月服务费需≥1,600元才能用满补贴</div>
+        <div class="socratic-result"><strong>✅ 修正结论</strong>：开元定价2,400元/月，家庭实付1,600元，正好用满800元补贴——这是"补贴最优化设计"，而非巧合。套餐A（1,600元）也满足这个条件。</div>
+      </div>
+      <div style="margin-bottom:16px">
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px">Q2 · COO质询：B3长护险定点需"信息系统接入"，费用几何？</div>
+        <div class="socratic-insight">⚡ 北京医保局要求接入长护险服务系统。市场行情：一次性接入约5,000-20,000元，SaaS订阅约2,000元/年。</div>
+        <div class="socratic-result"><strong>✅ 修正结论</strong>：启动预算增加一项——信息系统费用约8,000元（一次性接入+首年）。需提前1个月准备，勿列为Last-Minute任务。</div>
+      </div>
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px">Q3 · CSO质询：消费补贴"2026年1月至12月"——2027年开元启动时还有？</div>
+        <div class="socratic-insight">⚡ <strong>红色风险</strong>：该政策明确写"试行12个月"，2027年续期尚未确认。不可以此为商业模式压舱石。</div>
+        <div class="socratic-result"><strong>✅ 修正结论</strong>：以长护险（常设政策）为主要政府收入路径，消费补贴为附加红利。2026年底需重点关注续期消息。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2: 市场监控 ============ -->
+  <section id="monitor">
+    <div class="section-header">
+      <div class="section-num">Ⅱ</div>
+      <div class="section-title">
+        <h2>市场监控体系设计</h2>
+        <p>礼部（情报采集）+ CSO（战略研判）+ COO（竞对走访）</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">三维监控矩阵</div>
+      <div class="monitor-grid">
+        <div class="monitor-card">
+          <div class="icon">📡</div>
+          <h4>政策雷达</h4>
+          <p>北京市民政局、国家医保局、西城区政务公开、全国老龄委</p>
+          <p style="margin-top:8px;font-size:12px;color:var(--gold-dark)">关注：补贴续期·长护险扩展·新资质要求</p>
+          <div class="frequency">每周自动</div>
+        </div>
+        <div class="monitor-card">
+          <div class="icon">🔍</div>
+          <h4>竞对监控</h4>
+          <p>广外街道保姆/家政中介（真实竞对）、延寿等驿站（间接竞对）、寸草春晖（参照）</p>
+          <p style="margin-top:8px;font-size:12px;color:var(--gold-dark)">核心：找到竞对失去客户的原因</p>
+          <div class="frequency">每季度走访</div>
+        </div>
+        <div class="monitor-card">
+          <div class="icon">📊</div>
+          <h4>需求数据</h4>
+          <p>广外街道60+人口、失能老人比例、补贴申领率、竞对服务家庭数</p>
+          <p style="margin-top:8px;font-size:12px;color:var(--gold-dark)">目的：精准TAM估算与市场份额感知</p>
+          <div class="frequency">年度更新</div>
+        </div>
+        <div class="monitor-card">
+          <div class="icon">📰</div>
+          <h4>行业日报</h4>
+          <p>每日3-5条核心动态，小美自动采集，写入知识库</p>
+          <p style="margin-top:8px;font-size:12px;color:var(--gold-dark)">关键词：养老补贴·长护险·居家养老·西城区</p>
+          <div class="frequency">每日自动</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">竞对参考价格（2026年3月最新调研）</div>
+      <table>
+        <thead>
+          <tr>
+            <th>竞对名称</th>
+            <th>服务项目</th>
+            <th>收费标准</th>
+            <th>开元对比</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>北京西城延寿驿站</strong><br><small style="color:var(--text3)">西城区政府背景</small></td>
+            <td>助浴服务<br>协助进食<br>月度套餐</td>
+            <td>80元/次<br>30元/次<br>1,500元起/月</td>
+            <td>开元套餐A(1,600元)高出100元，但服务更全面</td>
+          </tr>
+          <tr>
+            <td><strong>个人保姆</strong><br><small style="color:var(--text3)">真实竞对·广外街道</small></td>
+            <td>全天照护</td>
+            <td>5,000-8,000元/月（住家）<br>3,000-4,500元/月（钟点）</td>
+            <td>开元主力套餐家庭实付1,600元，远低于保姆，但有专业标准</td>
+          </tr>
+          <tr>
+            <td><strong>清檬居家照护站</strong><br><small style="color:var(--text3)">朝阳区，对标参照</small></td>
+            <td>居家照护套餐</td>
+            <td>1,800-2,800元/月</td>
+            <td>开元2,400元处于中位水平，性价比有优势</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">监控体系KPI与执行工具</div>
+      <table>
+        <thead>
+          <tr><th>监控维度</th><th>目标KPI</th><th>执行工具</th><th>负责人</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>政策响应速度</td>
+            <td>重大政策24小时内知晓</td>
+            <td>小美日报自动搜索</td>
+            <td>礼部（自动）</td>
+          </tr>
+          <tr>
+            <td>竞对定价覆盖</td>
+            <td>广外街道≥3个竞对有报价</td>
+            <td>实地走访+居委会信息</td>
+            <td>COO（季度）</td>
+          </tr>
+          <tr>
+            <td>需求数据更新</td>
+            <td>覆盖广外街道60+人口年度数据</td>
+            <td>民政局公报+街道统计</td>
+            <td>CSO（年度）</td>
+          </tr>
+          <tr>
+            <td>日报自动化率</td>
+            <td>≥95%（非节假日）</td>
+            <td>小美搭档定时任务</td>
+            <td>礼部（自动）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="socratic">
+      <div class="socratic-q">🏛️ CSO质询 · 竞对监控核心洞察</div>
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px">Q · 竞对监控最有价值的信息是什么？不是价格！</div>
+        <div class="socratic-insight">⚡ <strong>关键洞察</strong>：最有价值的信息是——「哪些家庭离开了竞对，原因是什么？」每一个从保姆/中介流出的家庭，都是开元的潜在客户。</div>
+        <div class="socratic-result"><strong>✅ 修正结论</strong>：竞对监控的核心不是知道对方在做什么，而是识别"对手失去客户的原因"——这就是开元的进攻点。走访方式：拜访广外街道居委会，询问"最近有没有家庭反映保姆/驿站服务不满意"。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 3: 产品定价 ============ -->
+  <section id="pricing">
+    <div class="section-header">
+      <div class="section-num">Ⅲ</div>
+      <div class="section-title">
+        <h2>产品定价与成本结构精细设计</h2>
+        <p>CFO主导 · V3版 · 含苏格拉底修正</p>
+      </div>
+    </div>
+
+    <!-- 定价矩阵 -->
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pkg-name">套餐 A · 基础照护包</div>
+        <div class="pkg-desc">轻度失能 · 子女有兼顾能力</div>
+        <div class="pkg-price">1,600<span>元/月</span></div>
+        <div class="pkg-real">✅ 家庭实付仅 800 元（用满补贴）</div>
+        <ul class="pkg-features">
+          <li>每周3次上门，每次2小时</li>
+          <li>生活照料×2次</li>
+          <li>健康监测+家属报告×1次</li>
+          <li>补贴申请代办（免费）</li>
+        </ul>
+        <div class="pkg-breakeven">盈亏平衡：≥8户</div>
+      </div>
+      <div class="pricing-card featured">
+        <div class="featured-badge">⭐ 主力推荐</div>
+        <div class="pkg-name">套餐 B · 标准照护包</div>
+        <div class="pkg-desc">中度失能 · 家庭主力养老方案</div>
+        <div class="pkg-price">2,400<span>元/月</span></div>
+        <div class="pkg-real">✅ 家庭实付仅 1,600 元（用满补贴）</div>
+        <ul class="pkg-features">
+          <li>每周4次上门，每次2小时</li>
+          <li>生活照料×2次</li>
+          <li>康复指导×1次</li>
+          <li>精神陪伴×1次</li>
+          <li>月度家属关怀报告</li>
+          <li>补贴申请代办（免费）</li>
+        </ul>
+        <div class="pkg-breakeven">盈亏平衡：≥6.3户 ✅</div>
+      </div>
+      <div class="pricing-card">
+        <div class="pkg-name">套餐 C · 全护照护包</div>
+        <div class="pkg-desc">重度失能 · 子女长期在外地</div>
+        <div class="pkg-price">3,800<span>元/月</span></div>
+        <div class="pkg-real">✅ 家庭实付约 2,600 元（叠加补贴）</div>
+        <ul class="pkg-features">
+          <li>每日1次上门，每次2小时</li>
+          <li>全覆盖生活照料</li>
+          <li>长护险+消费补贴叠加</li>
+          <li>紧急响应通道</li>
+          <li>家庭微信群日报</li>
+        </ul>
+        <div class="pkg-breakeven">单户即可盈利 ✅✅</div>
+      </div>
+    </div>
+
+    <!-- 增值服务 -->
+    <div class="card">
+      <div class="card-title">增值服务矩阵（套餐叠加）</div>
+      <table>
+        <thead>
+          <tr><th>服务项目</th><th>定价</th><th>成本</th><th>毛利率</th><th>战略价值</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>补贴申请全程代办</strong></td>
+            <td class="td-highlight">免费</td>
+            <td>3小时/次（人工）</td>
+            <td>—</td>
+            <td>🎯 核心获客工具，帮家庭省800元/月</td>
+          </tr>
+          <tr>
+            <td>家庭应急响应（电话咨询）</td>
+            <td>免费</td>
+            <td>—</td>
+            <td>—</td>
+            <td>提升续约率，增加信任</td>
+          </tr>
+          <tr>
+            <td>适老化改造评估</td>
+            <td>200元/次</td>
+            <td>50元/次</td>
+            <td class="td-highlight">75%</td>
+            <td>高毛利附加业务</td>
+          </tr>
+          <tr>
+            <td>适老化产品采购代理</td>
+            <td>产品价×10%</td>
+            <td>—</td>
+            <td class="td-highlight">~10%</td>
+            <td>被动收入</td>
+          </tr>
+          <tr>
+            <td>月度家属关怀报告</td>
+            <td>免费</td>
+            <td>—</td>
+            <td>—</td>
+            <td>品牌差异化，降低流失率</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 成本拆解 -->
+    <div class="card">
+      <div class="card-title">套餐B · 单家庭月成本拆解（V3版·修正后）</div>
+      <table>
+        <thead>
+          <tr><th>成本项目</th><th>计算逻辑</th><th>月金额</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>护理员服务费</td>
+            <td>95元/次 × 16次（每周4次×4周）</td>
+            <td>1,520元</td>
+          </tr>
+          <tr>
+            <td>护理员意外险</td>
+            <td>5元/次 × 16次</td>
+            <td>80元</td>
+          </tr>
+          <tr>
+            <td>交通补贴</td>
+            <td>15元/次 × 16次</td>
+            <td>240元</td>
+          </tr>
+          <tr>
+            <td>服务耗材</td>
+            <td>手套/消耗品（定额）</td>
+            <td>80元</td>
+          </tr>
+          <tr>
+            <td>督导分摊</td>
+            <td>1,000元 ÷ 10户</td>
+            <td>100元</td>
+          </tr>
+          <tr>
+            <td>信息系统分摊</td>
+            <td>8,000元 ÷ 12月 ÷ 10户</td>
+            <td>67元</td>
+          </tr>
+          <tr style="background:var(--bg2)">
+            <td><strong>直接成本合计</strong></td>
+            <td>—</td>
+            <td><strong>2,087元</strong></td>
+          </tr>
+          <tr style="background:#EAFAF1">
+            <td><strong>月毛利</strong></td>
+            <td>2,400 - 2,087 = <strong style="color:var(--green)">+313元（毛利率13%）</strong></td>
+            <td class="td-highlight">+313元</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="alert alert-success" style="margin-top:16px">
+        <div class="alert-icon">✅</div>
+        <div><strong>已修正（V2→V3）</strong>：从每周5次调整为每周4次后，单户月毛利从-147元转正为+313元，毛利率13%，规模化后可提升至18-22%。</div>
+      </div>
+    </div>
+
+    <!-- 盈利模型图 -->
+    <div class="card">
+      <div class="card-title">规模化盈利模型（套餐B主力方案）</div>
+      <div class="profit-bar-chart">
+        <div style="font-size:12px;color:var(--text3);margin-bottom:12px;text-align:right">月净利润（元）</div>
+        <div class="profit-row">
+          <div class="profit-label">5户</div>
+          <div class="profit-bar-wrap">
+            <div class="profit-bar-fill" style="width:3%">
+            </div>
+          </div>
+          <div class="profit-value" style="color:var(--red)">-635元</div>
+        </div>
+        <div class="breakeven-line"></div>
+        <div class="profit-row">
+          <div class="profit-label">7户</div>
+          <div class="profit-bar-wrap">
+            <div class="profit-bar-fill" style="width:12%">+191元</div>
+          </div>
+          <div class="profit-value">+191元</div>
+        </div>
+        <div class="profit-row">
+          <div class="profit-label">10户</div>
+          <div class="profit-bar-wrap">
+            <div class="profit-bar-fill" style="width:28%">+1,930元</div>
+          </div>
+          <div class="profit-value">+1,930元</div>
+        </div>
+        <div class="profit-row">
+          <div class="profit-label">15户</div>
+          <div class="profit-bar-wrap">
+            <div class="profit-bar-fill" style="width:52%">+3,495元</div>
+          </div>
+          <div class="profit-value">+3,495元</div>
+        </div>
+        <div class="profit-row">
+          <div class="profit-label">20户</div>
+          <div class="profit-bar-wrap">
+            <div class="profit-bar-fill" style="width:75%">+5,060元</div>
+          </div>
+          <div class="profit-value">+5,060元</div>
+        </div>
+        <div class="profit-row">
+          <div class="profit-label">30户</div>
+          <div class="profit-bar-wrap">
+            <div class="profit-bar-fill" style="width:100%">+8,190元</div>
+          </div>
+          <div class="profit-value">+8,190元</div>
+        </div>
+        <div style="font-size:12px;color:var(--text3);margin-top:12px">* 固定成本1,200元/月（督导600+软件200+机动400）；不含创始人时间成本</div>
+      </div>
+    </div>
+
+    <!-- 苏格拉底 -->
+    <div class="socratic">
+      <div class="socratic-q">🏛️ 班子苏格拉底质询 · 定价与成本</div>
+      <div style="margin-bottom:16px">
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px">Q1 · CFO质询：护理员服务16次/月，月收入约1,520元（单户），愿意做吗？</div>
+        <div class="socratic-insight">⚡ 若护理员服务3-4户：48次×95元=<strong>4,560元/月</strong>（兼职）。对比保姆5,000-8,000元/月，处于中低水平，优质护理员存在流失风险。</div>
+        <div class="socratic-result"><strong>✅ 修正结论</strong>：招募策略锁定"有护理证书的在职人员/退休医护"做兼职，不与全职保姆竞争。每位护理员需至少服务3-4户才有竞争力的月收入，护理员招募时需明确告知。</div>
+      </div>
+      <div style="margin-bottom:16px">
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px">Q2 · CSO质询：套餐A家庭实付800元，会不会吸引"只为占补贴"的家庭？</div>
+        <div class="socratic-insight">⚡ 低价门槛可能吸引需求不匹配的家庭，导致服务效率低下、护理员流失。</div>
+        <div class="socratic-result"><strong>✅ 修正结论</strong>：套餐A增加"需求筛查"前置流程——签约前COO完成需求评估（标准化评估表），只向真正中度失能长者销售。</div>
+      </div>
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px">Q3 · COO质询：补贴"当月有效，次月失效"——家庭某月没消费会白费，怎么用这个做销售？</div>
+        <div class="socratic-insight">⚡ 这正是开元预付制服务的独特优势！开元每月固定服务，天然解决了补贴浪费问题。</div>
+        <div class="socratic-result"><strong>✅ 销售话术新增</strong>："我们帮您规划每月服务，确保您每月800元补贴全额用完，一分不浪费——个人保姆和家政中介做不到这一点。"</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 4: 行动清单 ============ -->
+  <section id="actions">
+    <div class="section-header">
+      <div class="section-num">📋</div>
+      <div class="section-title">
+        <h2>整合行动清单</h2>
+        <p>三大研究综合输出 · 按部门分工 · 待CEO确认</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">近期必做（D0-D30）</div>
+      <ul class="checklist">
+        <li>
+          <div class="check-box"></div>
+          <div class="check-dept">CGO</div>
+          <div class="check-content">
+            <strong>非正式咨询西城区民政局</strong>，确认B2（适老化供应商入库）是否需要既有施工案例，决定选主路径还是备用路径
+          </div>
+          <div class="check-deadline">本月内</div>
+        </li>
+        <li>
+          <div class="check-box"></div>
+          <div class="check-dept">CFO</div>
+          <div class="check-content">
+            <strong>预算新增信息系统接入费</strong>约8,000元（长护险B3入库前置，需提前1个月准备，不可临时申请）
+          </div>
+          <div class="check-deadline">D30前</div>
+        </li>
+        <li>
+          <div class="check-box"></div>
+          <div class="check-dept">COO</div>
+          <div class="check-content">
+            <strong>制定服务需求筛查评估表</strong>（套餐A准入标准，防止非目标家庭占用资源）
+          </div>
+          <div class="check-deadline">D20前</div>
+        </li>
+        <li>
+          <div class="check-box"></div>
+          <div class="check-dept">CSO</div>
+          <div class="check-content">
+            <strong>设置2026年12月底政策跟踪闹钟</strong>，关注消费补贴800元政策是否续期至2027年
+          </div>
+          <div class="check-deadline">本月内</div>
+        </li>
+        <li>
+          <div class="check-box"></div>
+          <div class="check-dept">CGO</div>
+          <div class="check-content">
+            <strong>通过家人（居委会渠道）询问</strong>广外街道是否有家庭反映保姆/驿站服务不满意——识别第一批潜在客户
+          </div>
+          <div class="check-deadline">本月内</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">定价红线与财务底线</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div class="alert alert-danger">
+          <div class="alert-icon">🚫</div>
+          <div>
+            <strong>红线①</strong>：政策补贴收入 ≤ 总收入40%<br>
+            <small>避免单一政策依赖风险</small>
+          </div>
+        </div>
+        <div class="alert alert-danger">
+          <div class="alert-icon">🚫</div>
+          <div>
+            <strong>红线②</strong>：主力套餐服务频次 ≥ 每周4次<br>
+            <small>低于此频次套餐B将亏损</small>
+          </div>
+        </div>
+        <div class="alert alert-success">
+          <div class="alert-icon">✅</div>
+          <div>
+            <strong>目标①</strong>：6.3户达盈亏平衡，10户达舒适盈利区<br>
+            <small>套餐B主力方案</small>
+          </div>
+        </div>
+        <div class="alert alert-success">
+          <div class="alert-icon">✅</div>
+          <div>
+            <strong>目标②</strong>：100万启动资金可支撑2年零运营<br>
+            <small>不依赖现金流存活</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer>
+  <div>
+    <strong>开元时代 · 中书省 · 三大战略研究专项</strong><br>
+    研究时间：2026年3月14日 · 版本V1 · 待CEO审阅批复<br>
+    来源：北京市民政局2026.2.28官方文件 + 延寿驿站2026.3实时报价 + 国家医保局长护险管理办法
+  </div>
+</footer>
+
+</body>
+</html>
