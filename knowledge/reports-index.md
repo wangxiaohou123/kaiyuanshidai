@@ -2,6 +2,7 @@
 
 ## 一、研究院课题（T系列 · 一手数据研究）
 
+- **2026-03-15** | Day17中书省专项研究：物业+养老广外入局路径分析+今日情报5条 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | Day16班子汇报：北京家庭养老床位准入路径研究+双补商业模型+今日情报日报 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 > **研究标准**：所有T系列研究须达到「大众点评实时爬取」级颗粒度，详见 [RESEARCH-STANDARDS.md](research/RESEARCH-STANDARDS.md)
 
