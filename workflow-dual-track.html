@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>开元时代 · 双轨制内容作业系统</title>
+  <style>
+    :root {
+      --bg:#FAFAF8; --bg2:#F2F1ED; --bg3:#ECEAE4; --bg4:#E5E2DA;
+      --gold:#8B6914; --gold-light:#B8940F; --text:#1C1C1E; --muted:#6C6C70;
+      --border:rgba(139,105,20,0.18);
+      --green:#1D7A45; --blue:#1A56A8; --red:#C0392B;
+      --amber:#C87D0E; --purple:#6B3FA0; --teal:#0D7A6E;
+      --green-bg:rgba(29,122,69,0.09); --blue-bg:rgba(26,86,168,0.09);
+      --red-bg:rgba(192,57,43,0.09); --amber-bg:rgba(200,125,14,0.09);
+      --purple-bg:rgba(107,63,160,0.09); --teal-bg:rgba(13,122,110,0.09);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+      background:var(--bg);color:var(--text);line-height:1.7;}
+
+    /* HEADER */
+    .page-header{
+      background:linear-gradient(135deg,#1C1C1E 0%,#1A2C1A 100%);
+      color:#EAE6D8;padding:2.8rem 2rem 2.2rem;text-align:center;position:relative;overflow:hidden;
+    }
+    .page-header::before{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(29,122,69,0.2),transparent);
+    }
+    .hl{font-size:.68rem;color:#52C77A;letter-spacing:4px;text-transform:uppercase;margin-bottom:.7rem;position:relative;}
+    .ht{font-size:clamp(1.5rem,4vw,2.2rem);font-weight:900;margin-bottom:.4rem;position:relative;}
+    .hs{font-size:.88rem;color:rgba(234,230,216,.6);position:relative;}
+    .hd{margin-top:.8rem;font-size:.72rem;color:rgba(82,199,122,.7);letter-spacing:2px;position:relative;}
+
+    .container{max-width:1040px;margin:0 auto;padding:0 1.5rem 4rem;}
+    .section{margin:2.8rem 0;}
+    .sl{font-size:.65rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:.4rem;}
+    .st{font-size:1.3rem;font-weight:800;margin-bottom:.4rem;}
+    .sd{font-size:.84rem;color:var(--muted);margin-bottom:1.6rem;}
+    hr.divider{border:none;border-top:1px solid var(--border);margin:2.5rem 0;}
+
+    /* 对比卡 */
+    .compare{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.5rem 0;}
+    @media(max-width:640px){.compare{grid-template-columns:1fr;}}
+    .ccard{border-radius:16px;padding:1.4rem;border:1.5px solid;}
+    .ccard .ctag{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:.5rem;}
+    .ccard h3{font-size:1rem;font-weight:800;margin-bottom:.4rem;}
+    .ccard .cdesc{font-size:.78rem;color:var(--muted);line-height:1.7;}
+    .ccard .cex{margin-top:.8rem;font-size:.73rem;padding:.5rem .8rem;border-radius:8px;line-height:1.6;}
+
+    /* 流程箭头图 */
+    .flow{display:flex;flex-direction:column;gap:0;}
+    .flow-step{display:flex;align-items:stretch;gap:1rem;margin-bottom:0;}
+    .flow-left{display:flex;flex-direction:column;align-items:center;width:40px;flex-shrink:0;}
+    .flow-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+      font-size:.72rem;font-weight:800;color:#fff;flex-shrink:0;z-index:1;}
+    .flow-line{flex:1;width:2px;background:linear-gradient(180deg,var(--green),var(--blue));margin:.2rem 0;}
+    .flow-body{flex:1;padding-bottom:1.4rem;}
+    .flow-title{font-size:.9rem;font-weight:700;margin-bottom:.2rem;}
+    .flow-desc{font-size:.77rem;color:var(--muted);line-height:1.6;}
+    .flow-actor{display:inline-block;font-size:.62rem;padding:2px 8px;border-radius:10px;font-weight:700;margin-bottom:.3rem;}
+
+    /* 双栏时序 */
+    .dual-timeline{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.5rem 0;}
+    @media(max-width:640px){.dual-timeline{grid-template-columns:1fr;}}
+    .dt-col h4{font-size:.78rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+      margin-bottom:.9rem;padding:.4rem .8rem;border-radius:8px;display:inline-block;}
+    .dt-item{margin-bottom:.9rem;padding:.8rem 1rem;border-radius:12px;border:1px solid;}
+    .dt-item .di-tag{font-size:.62rem;letter-spacing:1px;font-weight:700;margin-bottom:.3rem;text-transform:uppercase;}
+    .dt-item .di-title{font-size:.82rem;font-weight:700;margin-bottom:.2rem;}
+    .dt-item .di-desc{font-size:.74rem;color:var(--muted);line-height:1.5;}
+
+    /* 规则卡 */
+    .rule-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin:1.2rem 0;}
+    .rcard{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.1rem;}
+    .rcard .ricon{font-size:1.2rem;margin-bottom:.4rem;}
+    .rcard h4{font-size:.85rem;font-weight:700;margin-bottom:.35rem;}
+    .rcard p{font-size:.76rem;color:var(--muted);line-height:1.6;}
+    .rcard .rtag{display:inline-block;font-size:.62rem;padding:1px 7px;border-radius:8px;
+      font-weight:700;margin-bottom:.4rem;}
+
+    /* 代码块 */
+    .code-block{background:#1C1C1E;color:#A8E6A3;border-radius:10px;padding:1rem 1.2rem;
+      font-family:monospace;font-size:.75rem;line-height:1.8;overflow-x:auto;margin:.8rem 0;}
+    .code-comment{color:#6C6C70;}
+    .code-gold{color:#D4AC3A;}
+    .code-blue{color:#79B8FF;}
+    .code-green{color:#A8E6A3;}
+
+    .footer{background:var(--bg3);border-top:1px solid var(--border);
+      padding:1.5rem 2rem;text-align:center;font-size:.72rem;color:var(--muted);}
+  </style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="hl">Workflow · 双轨制作业系统</div>
+  <h1 class="ht">行业情报 × 专业研究 · 分轨运行</h1>
+  <p class="hs">「今天发生了什么」与「这对我们意味着什么」——两件事，两套流程，不得混淆</p>
+  <div class="hd">2026年3月14日 · 王总确认架构 · CSO沉淀执行</div>
+</div>
+
+<div class="container">
+
+  <!-- ── 一 · 核心区别 ── -->
+  <div class="section">
+    <div class="sl">Core Distinction · 核心区别</div>
+    <h2 class="st">两条轨道，各司其职</h2>
+    <p class="sd">最常见的错误：把「今天的新闻」和「对新闻的深度分析」混在一起——导致日报臃肿、研究肤浅。开元双轨制彻底分开。</p>
+
+    <div class="compare">
+
+      <div class="ccard" style="background:var(--green-bg);border-color:rgba(29,122,69,0.3);">
+        <div class="ctag" style="color:var(--green);">🗞️ 轨道一 · 行业情报日报</div>
+        <h3 style="color:var(--green);">礼部 · 每日情报采集</h3>
+        <div class="cdesc">
+          <strong>问题：</strong>今天发生了什么？<br>
+          <strong>频次：</strong>每日1次，早晨自动执行<br>
+          <strong>深度：</strong>信息层——忠实记录，不分析<br>
+          <strong>格式：</strong>3-5条动态 · 标题+摘要+开元相关度<br>
+          <strong>负责人：</strong>礼部（情报采集）<br>
+          <strong>自动化：</strong>✅ 可完全自动执行
+        </div>
+        <div class="cex" style="background:rgba(29,122,69,0.08);color:var(--green);">
+          示例条目：<br>
+          「民政部：2026年底前所有养老机构安全隐患清零」<br>
+          → 开元相关度：中（影响机构，不影响我们的居家路线）
+        </div>
+      </div>
+
+      <div class="ccard" style="background:var(--blue-bg);border-color:rgba(26,86,168,0.3);">
+        <div class="ctag" style="color:var(--blue);">🔬 轨道二 · 专业课题研究</div>
+        <h3 style="color:var(--blue);">中书省 · 议题驱动研究</h3>
+        <div class="cdesc">
+          <strong>问题：</strong>这对我们意味着什么，我们怎么办？<br>
+          <strong>频次：</strong>按需发起，每周1-2个议题<br>
+          <strong>深度：</strong>策略层——苏格拉底质询+班子辩论<br>
+          <strong>格式：</strong>完整研究报告 · 苏格拉底六步 · 可视化HTML<br>
+          <strong>负责人：</strong>中书省（发起）+三省六部（参与）<br>
+          <strong>自动化：</strong>⚙️ 议题需CEO确认，研究自动执行
+        </div>
+        <div class="cex" style="background:rgba(26,86,168,0.08);color:var(--blue);">
+          示例议题（从上方日报发掘）：<br>
+          「民政通入库是补贴核销前置关卡——开元何时启动，风险几何？」<br>
+          → 中书省立项 → 苏格拉底研究 → CFO建议 → 决策卡
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ── 二 · 中书省议题发掘机制 ── -->
+  <div class="section">
+    <div class="sl">CSO Mechanism · 中书省议题发掘</div>
+    <h2 class="st">情报 → 议题 → 研究 的转化器</h2>
+    <p class="sd">中书省的核心价值不是「研究」本身，而是「从海量信息中识别最重要议题」——这才是CSO的最高职责</p>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:1.6rem;margin-bottom:1.5rem;">
+      <div style="font-size:.75rem;color:var(--gold);letter-spacing:2px;font-weight:700;margin-bottom:1rem;">议题发掘三步法（每日日报采集后自动执行）</div>
+      <div class="flow">
+
+        <div class="flow-step">
+          <div class="flow-left">
+            <div class="flow-dot" style="background:var(--green);">1</div>
+            <div class="flow-line"></div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-actor" style="background:var(--green-bg);color:var(--green);border:1px solid rgba(29,122,69,0.25);">礼部</div>
+            <div class="flow-title">扫描日报全量情报</div>
+            <div class="flow-desc">阅读当日3-5条情报，不做分析，先做「影响评分」：<br>
+            对开元的影响方向（正面/负面/中性）× 影响时效（立即/本季度/长期）</div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-left">
+            <div class="flow-dot" style="background:var(--amber);">2</div>
+            <div class="flow-line"></div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-actor" style="background:var(--amber-bg);color:var(--amber);border:1px solid rgba(200,125,14,0.25);">中书省</div>
+            <div class="flow-title">选出最重要议题（≤2个）</div>
+            <div class="flow-desc">判断标准（满足任一即入选）：<br>
+            ① 影响现金流安全（CFO核心关注）<br>
+            ② 影响进入路径/时机（COO/CGO关注）<br>
+            ③ 影响竞争格局（CSO关注）<br>
+            ④ 改变了之前的假设（任何省部都要警觉）</div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-left">
+            <div class="flow-dot" style="background:var(--blue);">3</div>
+          </div>
+          <div class="flow-body" style="padding-bottom:0;">
+            <div class="flow-actor" style="background:var(--blue-bg);color:var(--blue);border:1px solid rgba(26,86,168,0.25);">中书省 → CEO</div>
+            <div class="flow-title">向CEO汇报「今日议题立项建议」</div>
+            <div class="flow-desc">格式：「今日日报中，中书省建议立项研究以下议题：<br>
+            ① [议题名] · 理由：[一句话] · 预计产出：[研究报告/决策卡]<br>
+            ② [议题名] · 理由：[一句话] · 预计产出：[...]<br>
+            请CEO确认是否立项。」</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ── 三 · 每日完整时序 ── -->
+  <div class="section">
+    <div class="sl">Daily Flow · 每日完整作业时序</div>
+    <h2 class="st">双轨并行 · 一天的完整节奏</h2>
+    <p class="sd">两条轨道不是串行的——情报采集和研究执行可以并行，但议题确认需要CEO节点</p>
+
+    <div class="dual-timeline">
+
+      <div class="dt-col">
+        <h4 style="background:var(--green-bg);color:var(--green);border:1px solid rgba(29,122,69,0.25);">🗞️ 轨道一 · 情报日报</h4>
+
+        <div class="dt-item" style="background:var(--green-bg);border-color:rgba(29,122,69,0.2);">
+          <div class="di-tag" style="color:var(--green);">每日首次对话 · 自动执行</div>
+          <div class="di-title">礼部执行 WebSearch 情报采集</div>
+          <div class="di-desc">关键词：养老政策/居家养老/长护险/补贴/银发经济<br>结果写入 knowledge/daily-intel/intel-YYYY-MM-DD.md</div>
+        </div>
+
+        <div class="dt-item" style="background:var(--green-bg);border-color:rgba(29,122,69,0.2);">
+          <div class="di-tag" style="color:var(--green);">采集完成后 · 自动显示</div>
+          <div class="di-title">日报摘要呈现给CEO</div>
+          <div class="di-desc">格式：3-5条 · 标题+一句摘要+开元相关度<br>官网情报板块同步更新</div>
+        </div>
+
+        <div class="dt-item" style="background:var(--green-bg);border-color:rgba(29,122,69,0.2);">
+          <div class="di-tag" style="color:var(--green);">持续更新</div>
+          <div class="di-title">情报档案归档</div>
+          <div class="di-desc">每日intel文件永久保存，形成可检索的情报档案库<br>按月汇总写入月度情报综述</div>
+        </div>
+      </div>
+
+      <div class="dt-col">
+        <h4 style="background:var(--blue-bg);color:var(--blue);border:1px solid rgba(26,86,168,0.25);">🔬 轨道二 · 课题研究</h4>
+
+        <div class="dt-item" style="background:var(--blue-bg);border-color:rgba(26,86,168,0.2);">
+          <div class="di-tag" style="color:var(--blue);">日报采集后 · 中书省自动分析</div>
+          <div class="di-title">中书省议题发掘 → 立项建议</div>
+          <div class="di-desc">从当日日报中识别≤2个最重要议题<br>向CEO提交「议题立项建议」（等待确认）</div>
+        </div>
+
+        <div class="dt-item" style="background:rgba(200,125,14,0.07);border-color:rgba(200,125,14,0.25);">
+          <div class="di-tag" style="color:var(--amber);">🔑 CEO决策节点</div>
+          <div class="di-title">CEO确认/调整议题</div>
+          <div class="di-desc">「同意立项」或「调整为：[另一议题]」<br>此为双轨系统唯一需要CEO介入的节点</div>
+        </div>
+
+        <div class="dt-item" style="background:var(--blue-bg);border-color:rgba(26,86,168,0.2);">
+          <div class="di-tag" style="color:var(--blue);">CEO确认后 · 自动执行</div>
+          <div class="di-title">中书省启动专项研究</div>
+          <div class="di-desc">苏格拉底六步质询 → 三省六部参与 → 研究报告HTML → 决策卡<br>归档至 knowledge/research/</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ── 四 · 官网双板块规划 ── -->
+  <div class="section">
+    <div class="sl">Site Structure · 官网板块规划</div>
+    <h2 class="st">双轨内容 · 对应两个独立官网板块</h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.2rem 0;">
+      <div style="background:var(--green-bg);border:1.5px solid rgba(29,122,69,0.3);border-radius:14px;padding:1.2rem;">
+        <div style="font-size:.68rem;color:var(--green);letter-spacing:2px;font-weight:700;margin-bottom:.5rem;">📡 新增板块</div>
+        <div style="font-size:1rem;font-weight:800;margin-bottom:.4rem;">行业情报中心</div>
+        <div style="font-size:.76rem;color:var(--muted);line-height:1.6;">
+          导航锚点：<code style="background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:4px;">#intel</code><br>
+          内容：每日3-5条情报，时间轴展示，最新在前<br>
+          自动化：每日首次对话后礼部自动更新<br>
+          与「智库·研究院」完全分开，不混放
+        </div>
+      </div>
+      <div style="background:var(--blue-bg);border:1.5px solid rgba(26,86,168,0.3);border-radius:14px;padding:1.2rem;">
+        <div style="font-size:.68rem;color:var(--blue);letter-spacing:2px;font-weight:700;margin-bottom:.5rem;">🔬 已有板块（保留）</div>
+        <div style="font-size:1rem;font-weight:800;margin-bottom:.4rem;">智库·研究院</div>
+        <div style="font-size:.76rem;color:var(--muted);line-height:1.6;">
+          导航锚点：<code style="background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:4px;">#thinktank</code><br>
+          内容：专项研究报告，苏格拉底质询版<br>
+          触发：由中书省议题发掘后立项产出<br>
+          仅放深度研究，不放日报摘要
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:.8rem;font-size:.78rem;color:var(--muted);background:var(--bg3);border-radius:10px;padding:.8rem 1rem;">
+      ⚠️ <strong>严禁混放规则</strong>：日报情报不得出现在研究院板块；研究报告不得以「日报条目」形式展示。两块内容风格、深度、格式完全不同，读者定位也不同。
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ── 五 · 知识库文件规范 ── -->
+  <div class="section">
+    <div class="sl">File Convention · 知识库文件规范</div>
+    <h2 class="st">每个产出归到哪里？一目了然</h2>
+
+    <div class="code-block">
+<span class="code-comment"># 知识库目录结构（双轨对应关系）</span>
+
+knowledge/
+├── <span class="code-green">daily-intel/</span>          <span class="code-comment"># 轨道一：日报情报档案</span>
+│   ├── intel-2026-03-14.md   <span class="code-comment"># 格式：intel-YYYY-MM-DD.md</span>
+│   ├── intel-2026-03-13.md
+│   └── monthly-intel-2026-03.md  <span class="code-comment"># 月度汇总（月底自动生成）</span>
+│
+├── <span class="code-blue">research/</span>              <span class="code-comment"># 轨道二：专项研究报告</span>
+│   ├── research-民政通入库-2026-03-14.md
+│   ├── research-驿站合作可行性-2026-03-15.md
+│   └── research-index.md     <span class="code-comment"># 研究报告总索引</span>
+│
+├── <span class="code-gold">decisions/</span>             <span class="code-comment"># 决策记录卡（研究产出物）</span>
+│   ├── decision-001-首战城市.md
+│   └── decision-002-路径重构.md
+│
+└── reports-index.md          <span class="code-comment"># 所有汇报/报告总目录</span>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ── 六 · 固化规则卡 ── -->
+  <div class="section">
+    <div class="sl">Fixed Rules · 固化规则</div>
+    <h2 class="st">四条不可违背的作业规则</h2>
+
+    <div class="rule-grid">
+      <div class="rcard" style="border-left:3px solid var(--green);">
+        <div class="ricon">📡</div>
+        <span class="rtag" style="background:var(--green-bg);color:var(--green);border:1px solid rgba(29,122,69,0.25);">规则 01</span>
+        <h4>日报先行，每日必采</h4>
+        <p>每次对话开始，若当日未采集，礼部自动执行 WebSearch 采集。不需要CEO提醒，不需要CEO要求——这是系统默认行为。</p>
+      </div>
+      <div class="rcard" style="border-left:3px solid var(--blue);">
+        <div class="ricon">🔬</div>
+        <span class="rtag" style="background:var(--blue-bg);color:var(--blue);border:1px solid rgba(26,86,168,0.25);">规则 02</span>
+        <h4>中书省必须给议题建议</h4>
+        <p>日报采集完成后，中书省不能「沉默」——必须给出1-2个议题立项建议，哪怕建议是「今日无重要议题，建议继续昨日研究」。</p>
+      </div>
+      <div class="rcard" style="border-left:3px solid var(--amber);">
+        <div class="ricon">🔑</div>
+        <span class="rtag" style="background:var(--amber-bg);color:var(--amber);border:1px solid rgba(200,125,14,0.25);">规则 03</span>
+        <h4>研究立项需CEO确认</h4>
+        <p>中书省不得自行启动深度研究——必须经CEO（或默认3分钟内无反对即视为同意）确认议题后，才能启动苏格拉底研究流程。</p>
+      </div>
+      <div class="rcard" style="border-left:3px solid var(--red);">
+        <div class="ricon">🚫</div>
+        <span class="rtag" style="background:var(--red-bg);color:var(--red);border:1px solid rgba(192,57,43,0.25);">规则 04</span>
+        <h4>严禁双轨内容混放</h4>
+        <p>日报条目不放入研究院板块；研究报告不以「日报格式」简化输出。两条轨道内容类型、深度、官网位置完全隔离。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <strong>开元时代 · 双轨制内容作业系统</strong> · 2026年3月14日 · 王总确认架构<br>
+  <span style="margin-top:.3rem;display:block;">由 CSO 沉淀执行 · 永久固化为 commands.md 作业规则</span>
+</div>
+
+</body>
+</html>
