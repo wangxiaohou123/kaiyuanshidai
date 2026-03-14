@@ -215,6 +215,24 @@
       font-size: 0.62rem; font-weight: 800; margin-top: 0.1rem;
     }
 
+    /* ── 能力象限图 ── */
+    .quadrant-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0.6rem; margin: 1.5rem 0;
+      border: 1.5px solid var(--border); border-radius: 16px; overflow: hidden;
+    }
+    .quadrant-cell {
+      padding: 1.2rem; border: 1px solid var(--border);
+    }
+    .quadrant-label {
+      font-size: 0.62rem; color: var(--muted); letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 0.3rem; font-weight: 700;
+    }
+    .quadrant-title { font-size: 0.88rem; font-weight: 800; margin-bottom: 0.4rem; }
+    .quadrant-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
+    .quadrant-cell.has { background: rgba(29,122,69,0.05); border-color: rgba(29,122,69,0.2); }
+    .quadrant-cell.need { background: rgba(200,125,14,0.05); border-color: rgba(200,125,14,0.2); }
+
     /* ── FOOTER ── */
     .page-footer {
       background: var(--bg3); border-top: 1px solid var(--border);
@@ -225,6 +243,7 @@
     @media (max-width: 640px) {
       .founder-hero { grid-template-columns: 1fr; text-align: center; }
       .founder-avatar { margin: 0 auto; }
+      .quadrant-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -235,7 +254,7 @@
   <div class="header-label">Founding Team · 创始团队规划</div>
   <h1 class="header-title">开元时代 · 联创绿地图</h1>
   <p class="header-sub">「凭什么是你们？」—— 给投资人的诚实答案</p>
-  <div class="header-date">2026年3月14日 · Day 7 · 三省六部 CSO 输出</div>
+  <div class="header-date">2026年3月 · 开元治理体系 · 中书省 CSO 输出</div>
 </div>
 
 <div class="container">
@@ -243,19 +262,19 @@
   <!-- ── 一 · 创始人不对称优势 ── -->
   <div class="section">
     <div class="section-label">Founder Advantage · 创始人画像</div>
-    <h2 class="section-title">为什么是王晶晶？</h2>
-    <p class="section-desc">不是「我懂养老」，而是「我有其他人没有的东西」——三个不对称优势叠加</p>
+    <h2 class="section-title">为什么是这位创始人？</h2>
+    <p class="section-desc">不是「我懂养老」，而是「我有其他人没有的东西」——四个不对称优势叠加</p>
 
     <div class="founder-hero">
-      <div class="founder-avatar">王</div>
+      <div class="founder-avatar">创</div>
       <div>
-        <div class="founder-name">王晶晶</div>
-        <div class="founder-title">CEO · 开元时代 | 前美团·产品市场运营负责人</div>
+        <div class="founder-name">创始人 · CEO</div>
+        <div class="founder-title">开元时代 · 首席执行官 | 互联网服务产品化背景</div>
         <div class="founder-bio">
-          来自美团——中国最懂C端服务产品化的公司。
-          在美团深度经历了「从0到1验证服务模式，再到规模化复制」的全周期。
+          深度经历了「从0到1验证服务模式，再到规模化复制」的全周期。
           不是养老专家，但是一个懂得如何把一个好服务跑成可复制模型的产品人。
-          同时，家人在广外街道居委会任职——这给了我任何外来创业者都无法购买的「第一公里信任资本」。
+          同时，在首战落地城市拥有居委会层级的社区人脉资源——这是任何外来创业者都无法购买的「第一公里信任资本」。
+          带着「让每一位长者有尊严地老去」的北极星使命入场，做的不是赚快钱的生意，而是10年陪伴中国老龄化进程的事业。
         </div>
       </div>
     </div>
@@ -265,21 +284,21 @@
       <div class="advantage-card" style="background:var(--amber-bg);border-color:rgba(200,125,14,0.25);">
         <div class="tag" style="color:var(--amber);">优势 01 · 互联网产品化基因</div>
         <h4>把服务变成可复制的产品</h4>
-        <p>大多数养老创业者是「护理行业出身」——他们懂服务，但不懂标准化。我来自美团，深度参与过外卖、到店等服务产品化全周期。我们的核心护城河不是「护理技术」，而是「SOP+数据+口碑」构成的可复制服务模型。</p>
+        <p>大多数养老创业者是「护理行业出身」——他们懂服务，但不懂标准化。创始人来自互联网服务行业，深度参与过多类服务产品化全周期。核心护城河不是「护理技术」，而是「SOP+数据+口碑」构成的可复制服务模型。</p>
         <div class="proof">「开元最终要成为中国居家照护领域的麦当劳——任何一个社区，按我们的标准开，都能输出同等质量的服务。」</div>
       </div>
 
       <div class="advantage-card" style="background:var(--green-bg);border-color:rgba(29,122,69,0.25);">
         <div class="tag" style="color:var(--green);">优势 02 · 社区信任资本（不可购买）</div>
-        <h4>家人在广外街道居委会任职</h4>
-        <p>这不是人脉，这是「信任背书的入场券」。广外街道是北京西城区养老密度最高的街道之一。居委会是获取失能长者信息、进入家庭、获得第一批用户最快的渠道——而我们有内部人。这个优势是任何资金都买不来的。</p>
-        <div class="proof">「第一个服务家庭，不是靠广告找来的，是靠家人引荐——这是开元的原点故事。」</div>
+        <h4>首战城市居委会层级的社区人脉</h4>
+        <p>这不是人脉，这是「信任背书的入场券」。北京西城区广外街道是老龄化密度最高的街道之一。居委会是获取失能长者信息、进入家庭、获得第一批用户最快的渠道——而开元在这里有深度可信任的社区资源。这个优势是任何资金都买不来的。</p>
+        <div class="proof">「第一个服务家庭，不是靠广告找来的，是靠信任引荐——这是开元的原点故事。」</div>
       </div>
 
       <div class="advantage-card" style="background:var(--blue-bg);border-color:rgba(26,86,168,0.25);">
         <div class="tag" style="color:var(--blue);">优势 03 · 政策感知力（先行者窗口）</div>
         <h4>政策执行期最先动手的人</h4>
-        <p>2026年是「银发经济高质量发展」写入政府工作报告的第一年，民政部800元补贴、长护险全国建制同步落地。大多数人还在观望，我们已经在设计民政通入库路径。政策窗口期的「先入场者优势」，比资本量更重要。</p>
+        <p>2026年是「银发经济高质量发展」写入政府工作报告的第一年，民政部800元补贴、长护险全国建制同步落地。大多数人还在观望，开元已经在设计民政通入库路径。政策窗口期的「先入场者优势」，比资本量更重要。</p>
         <div class="proof">「现在入场养老，就像2010年做外卖——市场刚刚被政策点燃，先跑出来的人有定价权。」</div>
       </div>
 
@@ -290,6 +309,38 @@
         <div class="proof">「我们不是在做一个养老公司，我们是在定义一代中国人老去的方式。」</div>
       </div>
 
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- ── 创始人能力象限 ── -->
+  <div class="section">
+    <div class="section-label">Capability Matrix · 能力现状</div>
+    <h2 class="section-title">「已有」与「缺口」的诚实盘点</h2>
+    <p class="section-desc">投资人最想看的不是「什么都有」，而是「创始人清楚自己缺什么、以及去哪找」</p>
+
+    <div class="quadrant-grid">
+      <div class="quadrant-cell has">
+        <div class="quadrant-label" style="color:var(--green);">✅ 已有 · 创始人天然具备</div>
+        <div class="quadrant-title">战略方向 × 融资叙事</div>
+        <div class="quadrant-desc">清晰的商业模型设计、路演叙事能力、对政策窗口的敏锐判断、互联网服务产品化经验——这是创始人的不可替代项。</div>
+      </div>
+      <div class="quadrant-cell has">
+        <div class="quadrant-label" style="color:var(--green);">✅ 已有 · 资源层面</div>
+        <div class="quadrant-title">社区信任资本 × 启动资金</div>
+        <div class="quadrant-desc">广外街道居委会层级人脉（不可购买的第一公里入场券）、100万个人启动资金、清晰的第一战场定义。</div>
+      </div>
+      <div class="quadrant-cell need">
+        <div class="quadrant-label" style="color:var(--amber);">🔴 急缺 · 需要联创补足</div>
+        <div class="quadrant-title">服务运营 × 护理员体系</div>
+        <div class="quadrant-desc">居家照护服务SOP制定、护理员招募培训留存体系、首批家庭服务的实地质量管控——需要有养老实操经验的COO补足。</div>
+      </div>
+      <div class="quadrant-cell need">
+        <div class="quadrant-label" style="color:var(--amber);">🔴 急缺 · 需要联创补足</div>
+        <div class="quadrant-title">政府资金 × 财务精算</div>
+        <div class="quadrant-desc">民政通入库路径、消费券核销、长护险申请代办、三情景财务模型——需要懂政府资金流向的CFO补足。</div>
+      </div>
     </div>
   </div>
 
@@ -310,14 +361,13 @@
         <div class="cofounder-title">战略总指挥 · 融资叙事 · 愿景守护者</div>
         <div class="cofounder-desc">负责公司方向、对外融资、政府关系、品牌叙事。掌握「为什么」的人——让每一个决策都朝向北极星。</div>
         <div class="tag-list">
-          <span class="tag tag-skill">产品化</span>
+          <span class="tag tag-skill">产品化思维</span>
           <span class="tag tag-skill">融资叙事</span>
-          <span class="tag tag-network">社区资本</span>
-          <span class="tag tag-exp">美团系</span>
+          <span class="tag tag-network">社区信任资本</span>
+          <span class="tag tag-exp">互联网服务背景</span>
         </div>
         <div class="cofounder-where">
-          <strong>在位者：</strong>王晶晶<br>
-          核心贡献：互联网产品化基因 + 广外街道社区信任资本
+          <strong>核心贡献：</strong>互联网服务产品化基因 + 首战城市社区信任入场券 + 北极星使命驱动
         </div>
       </div>
 
@@ -361,14 +411,14 @@
         <div class="tag-list">
           <span class="tag tag-skill">政府补贴申报</span>
           <span class="tag tag-skill">财务建模</span>
-          <span class="tag tag-exp">社会企业/NGO/政府关系</span>
+          <span class="tag tag-exp">社会企业/政府关系</span>
           <span class="tag tag-exp">CPA更佳</span>
         </div>
         <div class="cofounder-where">
           <strong>从哪里找：</strong><br>
           → 民政系统或养老机构财务主管（懂补贴规则）<br>
           → 医疗健康领域财务总监（懂医保/险类支付）<br>
-          → 社会创新基金（如壹基金）财务负责人
+          → 社会创新基金财务负责人（如壹基金等）
         </div>
         <div class="cofounder-timing">⏰ 引入节点：2027年Q1（与民政通入库同步）</div>
       </div>
@@ -382,7 +432,7 @@
           养老获客不靠广告，靠「社区信任渗透」。CGO的使命：<br>
           ① 将居委会渠道做成可复制的「社区渗透手册」<br>
           ② 设计「故事传播」引擎（家庭→口碑→新家庭）<br>
-          ③ 西城区100社区扩张路径执行
+          ③ 目标城区100社区扩张路径执行
         </div>
         <div class="tag-list">
           <span class="tag tag-skill">社区运营</span>
@@ -393,8 +443,8 @@
         <div class="cofounder-where">
           <strong>从哪里找：</strong><br>
           → 社区O2O/生鲜配送公司增长负责人（懂最后一公里）<br>
-          → 物业公司增值服务运营（有社区资源）<br>
-          → 美团/饿了么社区BD（懂地推+数据增长）
+          → 物业公司增值服务运营（有社区资源积累）<br>
+          → 互联网平台社区BD（懂地推+数据增长）
         </div>
         <div class="cofounder-timing">⏰ 引入节点：2027年Q3（验证期完成、规模化前）</div>
       </div>
@@ -465,7 +515,7 @@
         <div class="tl-phase" style="color:var(--green);">M2 · 2027年Q3-Q4（天使融资前）</div>
         <div class="tl-title">4人核心 · +CGO加入</div>
         <div class="tl-desc">
-          CGO进入：把「社区信任渗透」模型标准化，推进至西城区更多社区。<br>
+          CGO进入：把「社区信任渗透」模型标准化，推进至目标城区更多社区。<br>
           天使轮路演期间，4人团队已能完整呈现：战略×运营×财务×增长的能力矩阵。<br>
           <strong style="color:var(--green);">里程碑：10户完美故事 · NPS≥8分 · 天使轮交割</strong>
         </div>
@@ -494,22 +544,22 @@
 
     <div class="benchmark-grid">
       <div class="benchmark-card">
-        <div class="benchmark-name">🏠 爱帮养老（北京）</div>
-        <div class="benchmark-lesson">创始团队：政府系COO（前民政局）+ 互联网CEO。政府背景让其在补贴申报、政务关系上极具优势，互联网CEO负责产品化和融资叙事。天使轮1200万。</div>
+        <div class="benchmark-name">🏠 居家养老龙头（北京）</div>
+        <div class="benchmark-lesson">典型创始团队：政府系COO（前民政局）+ 互联网CEO。政府背景让其在补贴申报、政务关系上极具优势，互联网CEO负责产品化和融资叙事。天使轮1200万。</div>
         <div class="benchmark-apply">→ 开元启示：CFO/COO最好有政府系背景，懂补贴游戏规则</div>
       </div>
       <div class="benchmark-card">
         <div class="benchmark-name">🌿 泰康之家</div>
-        <div class="benchmark-lesson">创始人陈东升：保险出身，深度理解「长钱×长期服务」的生意逻辑。核心团队有医疗专家+运营专家+金融专家三角。但重资产，与开元路径不同。</div>
+        <div class="benchmark-lesson">创始人保险出身，深度理解「长钱×长期服务」的生意逻辑。核心团队有医疗专家+运营专家+金融专家三角。但重资产，与开元轻资产路径不同。</div>
         <div class="benchmark-apply">→ 开元启示：医疗+运营+金融三角对养老创业至关重要</div>
       </div>
       <div class="benchmark-card">
         <div class="benchmark-name">🚗 滴滴早期</div>
-        <div class="benchmark-lesson">程维（运营）+ 柳青（资本+商务）：一个懂地推落地，一个懂融资战略。分工极度清晰，互不越界。早期靠社区地推起家，与开元「居委会入场」逻辑相似。</div>
+        <div class="benchmark-lesson">运营创始人 + 资本/商务联创：一个懂地推落地，一个懂融资战略。分工极度清晰，互不越界。早期靠社区地推起家，与开元「居委会入场」逻辑相似。</div>
         <div class="benchmark-apply">→ 开元启示：CEO管战略融资，COO管地面执行，权责清晰是关键</div>
       </div>
       <div class="benchmark-card">
-        <div class="benchmark-name">💊 丁香园</div>
+        <div class="benchmark-name">💊 医疗健康创业典型</div>
         <div class="benchmark-lesson">医生+产品经理组合。专业背景建立信任，互联网思维做规模化。用「社区信任」切入专业服务，与开元用「居委会信任」切入居家照护逻辑一致。</div>
         <div class="benchmark-apply">→ 开元启示：「专业信任×产品化」是服务平台的通用公式</div>
       </div>
@@ -531,7 +581,7 @@
       <div class="pitch-points">
         <div class="pitch-point">
           <div class="pitch-bullet">1</div>
-          <div><strong>为什么我：</strong>美团背景带来产品化基因——我见证过外卖从0到10亿单的规模化全程，我知道服务SOP是怎么被设计出来的。养老行业现在最缺的，不是爱心，是可复制的系统。</div>
+          <div><strong>为什么是我：</strong>互联网服务产品化基因——深度参与过「服务从0到规模化」的全周期，知道服务SOP是怎么被设计出来的。养老行业现在最缺的，不是爱心，是可复制的系统。</div>
         </div>
         <div class="pitch-point">
           <div class="pitch-bullet">2</div>
@@ -539,11 +589,11 @@
         </div>
         <div class="pitch-point">
           <div class="pitch-bullet">3</div>
-          <div><strong>为什么这里：</strong>我家人在广外街道居委会任职。这不是人脉，这是「信任的基础设施」——第一个服务家庭是家人引荐，不是广告投放。这个优势，钱买不来。</div>
+          <div><strong>为什么这里：</strong>在北京西城区广外街道，我们有居委会层级的深度信任资源。这不是人脉，这是「信任的基础设施」——第一个服务家庭是信任引荐，不是广告投放。这个优势，钱买不来。</div>
         </div>
         <div class="pitch-point">
           <div class="pitch-bullet">4</div>
-          <div><strong>团队缺口是什么：</strong>我们需要一位懂居家养老实操的COO和一位懂政府补贴的CFO——我正在寻找他们，这也是今天向你融资的原因之一：用天使金引入最对的人。</div>
+          <div><strong>团队缺口是什么：</strong>我们需要一位懂居家养老实操的COO和一位懂政府补贴的CFO——正在寻找他们，这也是今天向你融资的原因之一：用天使金引入最对的人。</div>
         </div>
         <div class="pitch-point">
           <div class="pitch-bullet">5</div>
@@ -558,23 +608,23 @@
   <!-- ── 六 · 联创寻访计划 ── -->
   <div class="section">
     <div class="section-label">Recruitment Plan · 联创寻访计划</div>
-    <h2 class="section-title">本月要做的3件事</h2>
+    <h2 class="section-title">本阶段要做的3件事</h2>
     <p class="section-desc">不急着招聘，先建关系——联创要「谈恋爱」，不是「租人」</p>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;">
 
       <div style="background:var(--red-bg);border:1px solid rgba(192,57,43,0.25);border-radius:14px;padding:1.2rem;">
-        <div style="font-size:0.65rem;color:var(--red);letter-spacing:2px;font-weight:700;margin-bottom:0.5rem;">🔴 P0 本月内</div>
+        <div style="font-size:0.65rem;color:var(--red);letter-spacing:2px;font-weight:700;margin-bottom:0.5rem;">🔴 P0 储备期内</div>
         <div style="font-size:0.9rem;font-weight:700;margin-bottom:0.4rem;">建立COO/CFO候选人名单（5-10人）</div>
         <div style="font-size:0.78rem;color:var(--muted);line-height:1.6;">
           渠道：领英搜索「居家养老运营总监」「养老机构财务总监」<br>
           + 养老行业协会活动（民政部养老服务人员培训）<br>
-          + 向王总现有人脉征集推荐
+          + 利用现有人脉征集推荐
         </div>
       </div>
 
       <div style="background:var(--amber-bg);border:1px solid rgba(200,125,14,0.25);border-radius:14px;padding:1.2rem;">
-        <div style="font-size:0.65rem;color:var(--amber);letter-spacing:2px;font-weight:700;margin-bottom:0.5rem;">🟡 P1 本月内</div>
+        <div style="font-size:0.65rem;color:var(--amber);letter-spacing:2px;font-weight:700;margin-bottom:0.5rem;">🟡 P1 储备期内</div>
         <div style="font-size:0.9rem;font-weight:700;margin-bottom:0.4rem;">完成1-2次「非正式咖啡」初探</div>
         <div style="font-size:0.78rem;color:var(--muted);line-height:1.6;">
           话术：「不是招聘，是聊养老创业机会」<br>
@@ -584,7 +634,7 @@
       </div>
 
       <div style="background:var(--blue-bg);border:1px solid rgba(26,86,168,0.25);border-radius:14px;padding:1.2rem;">
-        <div style="font-size:0.65rem;color:var(--blue);letter-spacing:2px;font-weight:700;margin-bottom:0.5rem;">🔵 P2 本季度</div>
+        <div style="font-size:0.65rem;color:var(--blue);letter-spacing:2px;font-weight:700;margin-bottom:0.5rem;">🔵 P2 本季度内</div>
         <div style="font-size:0.9rem;font-weight:700;margin-bottom:0.4rem;">完成联创协议框架设计</div>
         <div style="font-size:0.78rem;color:var(--muted);line-height:1.6;">
           核心条款：股权分配（创始人稀释底线）<br>
@@ -600,8 +650,8 @@
 
 <!-- FOOTER -->
 <div class="page-footer">
-  <strong>开元时代 · 联创绿地图</strong> · 2026年3月14日 · Day 7<br>
-  <span style="margin-top:0.3rem;display:block;">由三省六部 CSO 输出 · 苏格拉底质询版 · 内部机密文件</span>
+  <strong>开元时代 · 联创绿地图</strong> · 2026年3月<br>
+  <span style="margin-top:0.3rem;display:block;">开元治理体系 · 中书省 CSO 输出 · 苏格拉底质询版 · 内部战略文件</span>
 </div>
 
 </body>
