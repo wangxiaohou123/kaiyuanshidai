@@ -2,6 +2,7 @@
 
 每次班子产出自动追加，最新在前。
 
+- **2026-03-14** | Day 10 班子汇报：养老服务师新职业+补贴叠加定价策略研究，礼部5条情报+中书省2个P0议题 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-14** | 双轨制架构上线·行业情报日报独立板块·双轨工作流可视化页·commands.md固化作业规则 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-14** | Day 8 班子汇报 · 北京家政+养老新政落地 · 驿站合作通道开放 · 补贴叠加1400元 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-14** | 新增联创绿地图页·团队配置板块写入路演规划·5人核心团队画像 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
