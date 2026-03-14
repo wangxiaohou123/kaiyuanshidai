@@ -525,6 +525,7 @@
       <div class="theme-dot"        data-t="light-pearl" title="珍珠白·商务简约"   onclick="setTheme('light-pearl')"></div>
       <div class="theme-dot"        data-t="light-sand"  title="暖沙色·人文温润"   onclick="setTheme('light-sand')"></div>
     </div>
+    <a href="mobile.html" style="display:none;font-size:0.7rem;padding:0.22rem 0.7rem;border-radius:100px;background:rgba(61,214,140,0.1);color:var(--green);border:1px solid rgba(61,214,140,0.3);text-decoration:none;white-space:nowrap;" id="mobile-hint-btn">📱 移动版</a>
     <span class="cowork-badge">● 班子协作中</span>
     <span class="nav-date" id="live-date">2026年3月13日</span>
     <!-- 汉堡按钮（移动端） -->
@@ -562,6 +563,12 @@
       <a href="#investor" onclick="closeMobileNav()">💼 投资人</a>
       <a href="#partner" onclick="closeMobileNav()">🤝 合作伙伴</a>
       <a href="#join" onclick="closeMobileNav()">✨ 加入开元</a>
+    </div>
+  </div>
+  <div class="nav-mobile-group" style="border-top:1px solid var(--border);padding-top:0.8rem;margin-top:0.3rem;">
+    <div class="nav-mobile-group-label">切换视图</div>
+    <div class="nav-mobile-links">
+      <a href="mobile.html" style="background:rgba(61,214,140,0.1);color:var(--green);border-color:rgba(61,214,140,0.28);">📱 移动专属版 <span style="font-size:0.65rem;opacity:0.7;">— 更适合手机</span></a>
     </div>
   </div>
 </div>
@@ -5112,6 +5119,46 @@
       document.querySelectorAll('.theme-dot').forEach(d => {
         d.classList.toggle('active', d.dataset.t === 'dark');
       });
+    }
+  })();
+
+  // ── 设备检测：移动端显示"移动版"入口 + 提示跳转 ──
+  (function() {
+    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)
+      || (navigator.maxTouchPoints > 1 && window.innerWidth < 900);
+
+    if (isMobile) {
+      // 显示导航栏移动版按钮
+      const mobileBtn = document.getElementById('mobile-hint-btn');
+      if (mobileBtn) mobileBtn.style.display = '';
+
+      // 显示顶部温馨提示条（仅首次访问）
+      const dismissed = sessionStorage.getItem('mobile-hint-dismissed');
+      if (!dismissed) {
+        const hint = document.createElement('div');
+        hint.id = 'mobile-switch-hint';
+        hint.style.cssText = [
+          'position:fixed;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);left:50%;transform:translateX(-50%)',
+          'z-index:9999;display:flex;align-items:center;gap:0.8rem',
+          'background:rgba(18,22,32,0.96);backdrop-filter:blur(16px)',
+          'border:1px solid rgba(61,214,140,0.35);border-radius:14px',
+          'padding:0.9rem 1.1rem;box-shadow:0 8px 32px rgba(0,0,0,0.4)',
+          'max-width:calc(100vw - 2rem);animation:slideUp 0.4s ease both'
+        ].join(';');
+        hint.innerHTML = `
+          <span style="font-size:1.3rem;flex-shrink:0;">📱</span>
+          <div style="flex:1;">
+            <div style="font-size:0.82rem;font-weight:700;color:#EAE6D8;margin-bottom:0.2rem;">检测到手机访问</div>
+            <div style="font-size:0.72rem;color:#8A8F9E;">移动版体验更佳，专为手机设计</div>
+          </div>
+          <a href="mobile.html" style="font-size:0.75rem;padding:0.45rem 0.9rem;border-radius:8px;background:rgba(61,214,140,0.15);color:#3DD68C;border:1px solid rgba(61,214,140,0.4);text-decoration:none;white-space:nowrap;flex-shrink:0;">去移动版 →</a>
+          <button onclick="document.getElementById('mobile-switch-hint').remove();sessionStorage.setItem('mobile-hint-dismissed','1');" style="background:none;border:none;color:#8A8F9E;font-size:1rem;cursor:pointer;padding:0.2rem;flex-shrink:0;line-height:1;">✕</button>
+        `;
+        const style = document.createElement('style');
+        style.textContent = '@keyframes slideUp{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}';
+        document.head.appendChild(style);
+        document.body.appendChild(hint);
+      }
     }
   })();
 </script>

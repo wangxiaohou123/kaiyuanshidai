@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>开元时代 · 移动工作台</title>
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C97A;
+      --gold-dim: #8A6F30;
+      --dark: #0E1117;
+      --dark-2: #161B24;
+      --dark-3: #1E2530;
+      --dark-4: #252D3A;
+      --border: rgba(201,168,76,0.18);
+      --text: #EAE6D8;
+      --muted: #8A8F9E;
+      --green: #3DD68C;
+      --blue: #4A9EFF;
+      --red: #FF6B6B;
+      --amber: #F5A623;
+      --purple: #B580E8;
+      /* Tab bar */
+      --tab-h: 68px;
+      --tab-bg: rgba(14,17,23,0.97);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; height: 100%; }
+    body {
+      font-family: "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+      background: var(--dark); color: var(--text);
+      line-height: 1.6; min-height: 100%; overflow-x: hidden;
+      padding-bottom: var(--tab-h);
+    }
+
+    /* ── 顶部状态栏 ── */
+    .top-bar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(14,17,23,0.97); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .top-logo { font-size: 1rem; font-weight: 800; color: var(--gold); letter-spacing: 0.05em; }
+    .top-badge {
+      font-size: 0.65rem; padding: 0.2rem 0.6rem; border-radius: 100px;
+      background: rgba(61,214,140,0.12); color: var(--green);
+      border: 1px solid rgba(61,214,140,0.3);
+      animation: pulse 2.5s ease infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.55} }
+    .top-date { font-size: 0.68rem; color: var(--muted); }
+
+    /* ── 底部Tab栏 ── */
+    .tab-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+      height: var(--tab-h);
+      background: var(--tab-bg); backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      display: flex; align-items: stretch;
+      padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+    .tab-item {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 3px;
+      cursor: pointer; transition: all 0.2s;
+      padding: 0.4rem 0;
+      color: var(--muted); border: none; background: none;
+      -webkit-appearance: none;
+    }
+    .tab-icon { font-size: 1.3rem; line-height: 1; }
+    .tab-label { font-size: 0.58rem; letter-spacing: 0.02em; }
+    .tab-item.active { color: var(--gold); }
+    .tab-item.active .tab-icon { transform: translateY(-1px); }
+
+    /* ── 页面切换 ── */
+    .page { display: none; padding: 1rem; animation: fadeIn 0.2s ease; }
+    .page.active { display: block; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+
+    /* ── 通用卡片 ── */
+    .card {
+      background: var(--dark-2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.2rem; margin-bottom: 0.85rem;
+      transition: border-color 0.2s;
+    }
+    .card:active { border-color: var(--gold-dim); }
+    .card-label { font-size: 0.6rem; letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.4rem; font-weight: 600; }
+    .card-title { font-size: 1.05rem; font-weight: 800; margin-bottom: 0.5rem; line-height: 1.3; }
+    .card-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.75; }
+
+    /* ── Hero Banner（首页） ── */
+    .hero-mobile {
+      background:
+        radial-gradient(ellipse 100% 60% at 50% -10%, rgba(201,168,76,0.15) 0%, transparent 70%),
+        var(--dark-2);
+      border: 1px solid var(--border); border-radius: 20px;
+      padding: 1.8rem 1.4rem; margin-bottom: 1rem;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .hero-mobile::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 36px 36px; opacity: 0.4;
+    }
+    .hero-mobile h1 {
+      font-size: 1.6rem; font-weight: 900; line-height: 1.2;
+      background: linear-gradient(135deg, #fff 10%, var(--gold-light) 55%, var(--gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 0.6rem; position: relative; z-index: 1;
+    }
+    .hero-mobile p { font-size: 0.8rem; color: var(--muted); line-height: 1.7; position: relative; z-index: 1; }
+    .hero-stats-row {
+      display: flex; gap: 0; margin-top: 1.2rem; position: relative; z-index: 1;
+    }
+    .hero-stat-m { flex: 1; text-align: center; padding: 0 0.5rem; }
+    .hero-stat-m:not(:last-child) { border-right: 1px solid var(--border); }
+    .hsn { font-size: 1.2rem; font-weight: 800; color: var(--gold); }
+    .hsl { font-size: 0.6rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ── 快捷操作 ── */
+    .quick-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+    .quick-btn {
+      background: var(--dark-3); border: 1px solid var(--border);
+      border-radius: 14px; padding: 0.9rem 0.4rem;
+      text-align: center; cursor: pointer; transition: all 0.2s;
+      text-decoration: none; display: block;
+      -webkit-appearance: none;
+    }
+    .quick-btn:active { border-color: var(--gold-dim); background: var(--dark-4); transform: scale(0.97); }
+    .quick-btn-icon { font-size: 1.4rem; margin-bottom: 0.3rem; }
+    .quick-btn-label { font-size: 0.62rem; color: var(--muted); line-height: 1.3; }
+
+    /* ── 今日KPI行 ── */
+    .kpi-row {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.7rem;
+      margin-bottom: 1rem;
+    }
+    .kpi-m {
+      background: var(--dark-2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1rem;
+    }
+    .kpi-m-val { font-size: 1.6rem; font-weight: 800; color: var(--gold); line-height: 1; }
+    .kpi-m-lbl { font-size: 0.68rem; color: var(--muted); margin-top: 0.3rem; }
+    .kpi-m-bar { height: 3px; background: var(--dark-4); border-radius: 99px; margin-top: 0.6rem; overflow: hidden; }
+    .kpi-m-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--gold-dim), var(--gold)); }
+
+    /* ── 工作日志（移动风格） ── */
+    .log-card {
+      background: var(--dark-2); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden; margin-bottom: 0.85rem;
+    }
+    .log-card-head {
+      padding: 1rem 1.2rem; display: flex; align-items: center;
+      justify-content: space-between; gap: 0.6rem;
+      cursor: pointer; user-select: none;
+    }
+    .log-card-head:active { background: var(--dark-3); }
+    .log-day-badge {
+      font-size: 0.6rem; padding: 0.18rem 0.55rem; border-radius: 100px;
+      background: rgba(201,168,76,0.1); color: var(--gold);
+      border: 1px solid rgba(201,168,76,0.25); white-space: nowrap; flex-shrink: 0;
+    }
+    .log-card-title { font-size: 0.9rem; font-weight: 700; flex: 1; }
+    .log-card-date { font-size: 0.65rem; color: var(--muted); white-space: nowrap; }
+    .log-chevron { color: var(--muted); font-size: 0.7rem; transition: transform 0.2s; flex-shrink: 0; }
+    .log-card-body { padding: 0 1.2rem 1.2rem; display: none; }
+    .log-card-body.open { display: block; }
+    .log-sec-m { margin-bottom: 1rem; }
+    .log-sec-m h4 { font-size: 0.62rem; letter-spacing: 0.14em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.6rem; }
+    .log-sec-m ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .log-sec-m li { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+    .log-sec-m li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
+
+    /* ── 班子成员卡片（移动） ── */
+    .team-m-card {
+      background: var(--dark-2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.2rem; margin-bottom: 0.85rem;
+      position: relative; overflow: hidden;
+    }
+    .team-m-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      opacity: 0.7;
+    }
+    .team-m-card.ceo::before { background: linear-gradient(90deg, var(--gold), transparent); }
+    .team-m-card.cfo::before { background: linear-gradient(90deg, var(--red), transparent); }
+    .team-m-card.coo::before { background: linear-gradient(90deg, var(--green), transparent); }
+    .team-m-card.cso::before { background: linear-gradient(90deg, var(--blue), transparent); }
+    .team-m-card.cgo::before { background: linear-gradient(90deg, var(--purple), transparent); }
+    .team-m-role { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.35rem; font-weight: 600; }
+    .team-m-role.ceo { color: var(--gold); }
+    .team-m-role.cfo { color: var(--red); }
+    .team-m-role.coo { color: var(--green); }
+    .team-m-role.cso { color: var(--blue); }
+    .team-m-role.cgo { color: var(--purple); }
+    .team-m-name { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.15rem; }
+    .team-m-sub { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.8rem; }
+    .team-m-fn { font-size: 0.8rem; color: var(--muted); line-height: 1.7; }
+    .team-m-fn strong { color: var(--text); display: block; margin-bottom: 0.2rem; font-size: 0.75rem; }
+    .team-m-tag {
+      display: inline-block; margin-top: 0.8rem;
+      font-size: 0.64rem; padding: 0.15rem 0.5rem; border-radius: 4px;
+      background: rgba(201,168,76,0.1); color: var(--gold); border: 1px solid rgba(201,168,76,0.22);
+    }
+
+    /* ── 三省六部（移动） ── */
+    .province-row {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem;
+      margin-bottom: 0.85rem;
+    }
+    .province-card {
+      border-radius: 14px; padding: 1rem 0.7rem; text-align: center;
+      border: 1px solid var(--border);
+    }
+    .province-card.zhongshu { background: rgba(201,168,76,0.06); border-color: rgba(201,168,76,0.25); border-top: 2px solid var(--gold); }
+    .province-card.menxia  { background: rgba(255,107,107,0.06); border-color: rgba(255,107,107,0.25); border-top: 2px solid var(--red); }
+    .province-card.shangshu { background: rgba(61,214,140,0.06); border-color: rgba(61,214,140,0.25); border-top: 2px solid var(--green); }
+    .province-icon { font-size: 1.3rem; margin-bottom: 0.4rem; }
+    .province-name { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 0.2rem; }
+    .province-name.gold { color: var(--gold); }
+    .province-name.red { color: var(--red); }
+    .province-name.green { color: var(--green); }
+    .province-role { font-size: 0.85rem; font-weight: 800; margin-bottom: 0.4rem; }
+    .province-desc { font-size: 0.68rem; color: var(--muted); line-height: 1.5; }
+
+    .dept-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem;
+      margin-bottom: 0.85rem;
+    }
+    .dept-card {
+      background: var(--dark-3); border: 1px solid var(--border);
+      border-radius: 12px; padding: 0.9rem;
+    }
+    .dept-name { font-size: 0.62rem; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 0.35rem; }
+    .dept-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── 情报模块 ── */
+    .intel-card {
+      background: var(--dark-2); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden; margin-bottom: 0.85rem;
+    }
+    .intel-head {
+      padding: 0.9rem 1.1rem;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(90deg, rgba(74,158,255,0.04), transparent);
+    }
+    .intel-type { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
+    .intel-type.daily { color: var(--blue); }
+    .intel-type.research { color: var(--gold); }
+    .intel-type.alert { color: var(--red); }
+    .intel-date { font-size: 0.62rem; color: var(--muted); }
+    .intel-body { padding: 1rem 1.1rem; }
+    .intel-title { font-size: 0.92rem; font-weight: 700; margin-bottom: 0.6rem; line-height: 1.35; }
+    .intel-items { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .intel-items li { display: flex; gap: 0.5rem; font-size: 0.8rem; color: var(--muted); line-height: 1.65; align-items: flex-start; }
+    .intel-items li::before { content: '①'; color: var(--blue); flex-shrink: 0; font-size: 0.7rem; padding-top: 0.1rem; }
+    .intel-items li:nth-child(2)::before { content: '②'; }
+    .intel-items li:nth-child(3)::before { content: '③'; }
+    .intel-items li:nth-child(4)::before { content: '④'; }
+    .intel-insight {
+      margin-top: 0.8rem; padding: 0.8rem;
+      background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.18);
+      border-radius: 10px; font-size: 0.78rem; color: var(--text); line-height: 1.7;
+    }
+    .intel-insight-label { font-size: 0.6rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; display: block; }
+
+    /* ── 路演模块 ── */
+    .pitch-card {
+      background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03));
+      border: 1px solid rgba(201,168,76,0.28); border-radius: 16px;
+      padding: 1.2rem; margin-bottom: 0.85rem;
+    }
+    .pitch-stage {
+      font-size: 0.6rem; letter-spacing: 0.15em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 0.4rem; font-weight: 600;
+    }
+    .pitch-title { font-size: 1rem; font-weight: 800; margin-bottom: 0.6rem; line-height: 1.3; }
+    .pitch-items { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .pitch-items li { display: flex; gap: 0.5rem; font-size: 0.8rem; color: var(--muted); align-items: flex-start; line-height: 1.65; }
+    .pitch-items li::before { content: '·'; color: var(--gold); flex-shrink: 0; }
+
+    .pitch-path {
+      display: flex; flex-direction: column; gap: 0.55rem;
+      margin-bottom: 0.85rem;
+    }
+    .pitch-step {
+      display: flex; align-items: flex-start; gap: 0.8rem;
+      background: var(--dark-2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem;
+    }
+    .pitch-step-num {
+      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(201,168,76,0.15); border: 1px solid var(--gold-dim);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 700; color: var(--gold);
+    }
+    .pitch-step-content { flex: 1; }
+    .pitch-step-title { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .pitch-step-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── 通用分隔 ── */
+    .section-header { margin-bottom: 0.85rem; margin-top: 0.3rem; }
+    .sec-label { font-size: 0.6rem; letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.3rem; font-weight: 600; }
+    .sec-title { font-size: 1.2rem; font-weight: 800; line-height: 1.25; margin-bottom: 0.35rem; }
+    .sec-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.75; }
+
+    /* ── Tag ── */
+    .tag { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.65rem; padding: 0.15rem 0.55rem; border-radius: 100px; }
+    .tag-gold { background: rgba(201,168,76,0.12); color: var(--gold); border: 1px solid rgba(201,168,76,0.28); }
+    .tag-green { background: rgba(61,214,140,0.1); color: var(--green); border: 1px solid rgba(61,214,140,0.28); }
+    .tag-blue { background: rgba(74,158,255,0.1); color: var(--blue); border: 1px solid rgba(74,158,255,0.28); }
+    .tag-red { background: rgba(255,107,107,0.1); color: var(--red); border: 1px solid rgba(255,107,107,0.28); }
+    .tag-amber { background: rgba(245,166,35,0.1); color: var(--amber); border: 1px solid rgba(245,166,35,0.28); }
+
+    /* ── 决策卡 ── */
+    .decision-m {
+      background: var(--dark-3); border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 12px; padding: 1rem; margin-bottom: 0.6rem;
+    }
+    .decision-m-id { font-size: 0.6rem; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.35rem; }
+    .decision-m-topic { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.45rem; line-height: 1.35; }
+    .decision-m-result { font-size: 0.78rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── 阶段路径（移动） ── */
+    .stage-m {
+      border-radius: 16px; padding: 1.2rem; margin-bottom: 0.85rem;
+      border: 1px solid var(--border);
+    }
+    .stage-m.s1 { border-left: 3px solid var(--gold); background: rgba(201,168,76,0.04); }
+    .stage-m.s2 { border-left: 3px solid rgba(74,158,255,0.7); background: rgba(74,158,255,0.04); }
+    .stage-m.s3 { border-left: 3px solid rgba(61,214,140,0.7); background: rgba(61,214,140,0.04); }
+    .stage-m-phase { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.3rem; font-weight: 700; }
+    .stage-m.s1 .stage-m-phase { color: var(--gold); }
+    .stage-m.s2 .stage-m-phase { color: var(--blue); }
+    .stage-m.s3 .stage-m-phase { color: var(--green); }
+    .stage-m-title { font-size: 0.95rem; font-weight: 800; margin-bottom: 0.7rem; line-height: 1.3; }
+    .stage-m-items { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .stage-m-items li { display: flex; gap: 0.5rem; font-size: 0.8rem; color: var(--muted); align-items: flex-start; line-height: 1.6; }
+    .stage-m-items li strong { color: var(--text); white-space: nowrap; flex-shrink: 0; }
+
+    /* ── 战略卡 ── */
+    .strategy-m {
+      background: var(--dark-2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.1rem; margin-bottom: 0.7rem;
+    }
+    .strategy-m-num { font-size: 0.6rem; letter-spacing: 0.14em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.35rem; }
+    .strategy-m-title { font-size: 0.92rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .strategy-m-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── PC版入口引导 ── */
+    .pc-hint {
+      background: rgba(74,158,255,0.06); border: 1px solid rgba(74,158,255,0.2);
+      border-radius: 12px; padding: 0.9rem 1rem; margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.8rem; font-size: 0.78rem; color: var(--muted);
+    }
+    .pc-hint-icon { font-size: 1.1rem; flex-shrink: 0; }
+    .pc-hint a { color: var(--blue); text-decoration: none; }
+    .pc-hint a:active { opacity: 0.7; }
+
+    /* ── 空状态 ── */
+    .empty-state { text-align: center; padding: 2.5rem 1rem; color: var(--muted); font-size: 0.85rem; }
+    .empty-state-icon { font-size: 2rem; margin-bottom: 0.6rem; }
+
+    /* ── 滚动条隐藏 ── */
+    ::-webkit-scrollbar { display: none; }
+    * { scrollbar-width: none; }
+  </style>
+</head>
+<body>
+
+<!-- ── 顶部状态栏 ── -->
+<div class="top-bar">
+  <div class="top-logo">开元时代</div>
+  <div class="top-badge">● 班子协作中</div>
+  <div class="top-date" id="live-date">加载中...</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 1 · 首页总览（今日快报）
+═══════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- Hero Banner -->
+  <div class="hero-mobile">
+    <h1>让每一位长者<br/>有尊严地老去</h1>
+    <p>开元时代 · 2027年启动 · 北京广外街道</p>
+    <div class="hero-stats-row">
+      <div class="hero-stat-m">
+        <div class="hsn">3.2亿</div>
+        <div class="hsl">60岁以上长者</div>
+      </div>
+      <div class="hero-stat-m">
+        <div class="hsn">14万亿</div>
+        <div class="hsl">银发经济规模</div>
+      </div>
+      <div class="hero-stat-m">
+        <div class="hsn">D<span id="day-count" style="font-size:0.9em;">?</span></div>
+        <div class="hsl">创业第N天</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PC版提示 -->
+  <div class="pc-hint">
+    <div class="pc-hint-icon">🖥</div>
+    <div>完整数据工作台请在电脑端访问 <a href="index.html">PC版</a>，支持多栏仪表盘 · 研究院 · 交付库等高密度功能</div>
+  </div>
+
+  <!-- 快捷入口 -->
+  <div class="quick-grid">
+    <a class="quick-btn" href="#" onclick="switchTab('log'); return false;">
+      <div class="quick-btn-icon">📋</div>
+      <div class="quick-btn-label">工作日志</div>
+    </a>
+    <a class="quick-btn" href="#" onclick="switchTab('intel'); return false;">
+      <div class="quick-btn-icon">📡</div>
+      <div class="quick-btn-label">行业情报</div>
+    </a>
+    <a class="quick-btn" href="#" onclick="switchTab('team'); return false;">
+      <div class="quick-btn-icon">👥</div>
+      <div class="quick-btn-label">班子</div>
+    </a>
+    <a class="quick-btn" href="#" onclick="switchTab('pitch'); return false;">
+      <div class="quick-btn-icon">🎤</div>
+      <div class="quick-btn-label">路演</div>
+    </a>
+  </div>
+
+  <!-- 今日KPI -->
+  <div class="section-header">
+    <div class="sec-label">KPI · 核心指标</div>
+    <div class="sec-title">阶段进展</div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-m">
+      <div class="kpi-m-val">0</div>
+      <div class="kpi-m-lbl">服务家庭 / 目标10</div>
+      <div class="kpi-m-bar"><div class="kpi-m-fill" style="width:0%"></div></div>
+    </div>
+    <div class="kpi-m">
+      <div class="kpi-m-val">--</div>
+      <div class="kpi-m-lbl">NPS评分 / 目标>8</div>
+      <div class="kpi-m-bar"><div class="kpi-m-fill" style="width:0%"></div></div>
+    </div>
+    <div class="kpi-m">
+      <div class="kpi-m-val">D<span id="day-count2">?</span></div>
+      <div class="kpi-m-lbl">规划推进天数</div>
+      <div class="kpi-m-bar"><div class="kpi-m-fill" id="day-bar" style="width:0%"></div></div>
+    </div>
+    <div class="kpi-m">
+      <div class="kpi-m-val">100万</div>
+      <div class="kpi-m-lbl">预备启动资金</div>
+      <div class="kpi-m-bar"><div class="kpi-m-fill" style="width:20%"></div></div>
+    </div>
+  </div>
+
+  <!-- 愿景卡 -->
+  <div class="section-header" style="margin-top:0.5rem;">
+    <div class="sec-label">Mission · 使命</div>
+  </div>
+
+  <div class="pitch-card">
+    <div class="pitch-stage">北极星 · 核心使命</div>
+    <div class="pitch-title">每一位长者，无论贫富，都能有尊严地在家老去</div>
+    <p style="font-size:0.8rem;color:var(--muted);line-height:1.75;">盈利是我们持续服务的手段，不是我们存在的目的。先找到<strong style="color:var(--gold);">第一个真正被改变的故事</strong>，再谈规模。</p>
+    <div style="margin-top:0.8rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+      <span class="tag tag-gold">普惠优先</span>
+      <span class="tag tag-green">护理员有尊严</span>
+      <span class="tag tag-blue">服务×科技</span>
+    </div>
+  </div>
+
+  <!-- 最新决策摘要 -->
+  <div class="section-header">
+    <div class="sec-label">Decisions · 最新决策</div>
+    <div class="sec-title">关键决策记录</div>
+  </div>
+
+  <div class="decision-m">
+    <div class="decision-m-id">#004 · 2026-03-11 · CEO 王晶晶</div>
+    <div class="decision-m-topic">放弃30天盈利假设，接受12个月验证节奏</div>
+    <div class="decision-m-result">核心认知：找到第一个真正被改变的故事，而不是第一批付费客户。新成功标准：10个家庭，NPS>8分，30%是低收入长者。</div>
+  </div>
+
+  <div class="decision-m">
+    <div class="decision-m-id">#002 · 2026-03-11 · CEO 王晶晶</div>
+    <div class="decision-m-topic">首战城市重选：成都否决 → 北京西城区广外街道</div>
+    <div class="decision-m-result">成都老龄化率不足；广外街道有家庭人脉资源，居委会渠道已确认可用。</div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 2 · 班子（团队）
+═══════════════════════════════════════════ -->
+<div class="page" id="page-team">
+
+  <div class="section-header">
+    <div class="sec-label">Leadership · 三省六部制</div>
+    <div class="sec-title">开元治理体系</div>
+    <div class="sec-desc">以唐朝三省六部制为蓝本——谋划、审议、执行三权分立，重大决策必须三省共识。</div>
+  </div>
+
+  <!-- 三省 -->
+  <div style="font-size:0.62rem;letter-spacing:0.16em;color:var(--gold);text-transform:uppercase;margin-bottom:0.7rem;">三省制 · 决策核心</div>
+  <div class="province-row">
+    <div class="province-card zhongshu">
+      <div class="province-icon">🖋</div>
+      <div class="province-name gold">中书省</div>
+      <div class="province-role">CSO</div>
+      <div class="province-desc">战略谋划<br/>起草决策<br/>核心假设</div>
+    </div>
+    <div class="province-card menxia">
+      <div class="province-icon">⚖</div>
+      <div class="province-name red">门下省</div>
+      <div class="province-role">CFO</div>
+      <div class="province-desc">财务审议<br/>封驳权<br/>现金流守护</div>
+    </div>
+    <div class="province-card shangshu">
+      <div class="province-icon">⚡</div>
+      <div class="province-name green">尚书省</div>
+      <div class="province-role">COO</div>
+      <div class="province-desc">运营执行<br/>服务落地<br/>护理员管理</div>
+    </div>
+  </div>
+
+  <!-- 六部 -->
+  <div style="font-size:0.62rem;letter-spacing:0.16em;color:var(--gold);text-transform:uppercase;margin-bottom:0.7rem;">六部制 · 专业分工</div>
+  <div class="dept-grid">
+    <div class="dept-card">
+      <div class="dept-name">礼部 · 品牌传播</div>
+      <div class="dept-desc">品牌主张落地、市场研究、公关媒体<br/><span style="color:var(--gold);">→ CSO</span></div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-name">吏部 · 人才组织</div>
+      <div class="dept-desc">护理员招募培训、合作社建制<br/><span style="color:var(--green);">→ COO</span></div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-name">户部 · 财务资本</div>
+      <div class="dept-desc">现金流管理、融资路径、政策补贴<br/><span style="color:var(--red);">→ CFO</span></div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-name">兵部 · 政府关系</div>
+      <div class="dept-desc">民政局/医保局、驿站入库申请<br/><span style="color:var(--blue);">→ CGO</span></div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-name">刑部 · 法律合规</div>
+      <div class="dept-desc">法律结构、合同模板、合规审查<br/><span style="color:var(--amber);">→ CSO</span></div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-name">工部 · 科技产品</div>
+      <div class="dept-desc">AI陪伴、具身智能、数据资产<br/><span style="color:var(--green);">→ COO + CTO</span></div>
+    </div>
+  </div>
+
+  <!-- 核心班子成员 -->
+  <div style="font-size:0.62rem;letter-spacing:0.16em;color:var(--gold);text-transform:uppercase;margin-bottom:0.7rem;margin-top:0.3rem;">核心班子 · 成员</div>
+
+  <div class="team-m-card ceo">
+    <div class="team-m-role ceo">CEO · 首席执行官</div>
+    <div class="team-m-name">王晶晶</div>
+    <div class="team-m-sub">创始人 · 愿景守护者</div>
+    <div class="team-m-fn">
+      <strong>核心职责</strong>
+      坚守使命愿景，把握方向与节奏；最终决策权；对外代表公司。
+    </div>
+    <div class="team-m-fn" style="margin-top:0.5rem;">
+      <strong>已知盲区</strong>
+      易把愿景当执行、高估政策落地速度、倾向快速推进——班子专门设计来挑战这三点。
+    </div>
+    <span class="team-m-tag">最终决策权</span>
+  </div>
+
+  <div class="team-m-card cfo">
+    <div class="team-m-role cfo">CFO · 首席财务官</div>
+    <div class="team-m-name">财务官</div>
+    <div class="team-m-sub">现金流守护者 · 冷血的数字人</div>
+    <div class="team-m-fn">
+      <strong>核心职责</strong>
+      6个月生存线守护；封驳所有现金流不清晰的决策；财务模型维护。
+    </div>
+    <div class="team-m-fn" style="margin-top:0.5rem;">
+      <strong>固定质问</strong>
+      "6个月后我们账上还剩多少钱？这个决策的现金流假设是否成立？"
+    </div>
+    <span class="team-m-tag">封驳权</span>
+  </div>
+
+  <div class="team-m-card coo">
+    <div class="team-m-role coo">COO · 首席运营官</div>
+    <div class="team-m-name">运营官</div>
+    <div class="team-m-sub">落地机器 · 执行力最强的人</div>
+    <div class="team-m-fn">
+      <strong>核心职责</strong>
+      服务标准制定与执行；护理员招募与留存；单城市试点运营。
+    </div>
+    <div class="team-m-fn" style="margin-top:0.5rem;">
+      <strong>固定质问</strong>
+      "这个决策，第一周谁来做、做什么、怎么验收？"
+    </div>
+    <span class="team-m-tag">执行把关</span>
+  </div>
+
+  <div class="team-m-card cso">
+    <div class="team-m-role cso">CSO · 首席战略官</div>
+    <div class="team-m-name">战略官</div>
+    <div class="team-m-sub">方向定制者 · 研究驱动</div>
+    <div class="team-m-fn">
+      <strong>核心职责</strong>
+      竞争分析与战略规划；行业研究深度报告；苏格拉底质询主持。
+    </div>
+    <div class="team-m-fn" style="margin-top:0.5rem;">
+      <strong>固定质问</strong>
+      "这个决策的核心假设是什么？如果假设错了，后果是什么？我们凭什么？"
+    </div>
+    <span class="team-m-tag">决策质量把关</span>
+  </div>
+
+  <div class="team-m-card cgo">
+    <div class="team-m-role cgo">CGO · 首席政府关系官</div>
+    <div class="team-m-name">政府关系官</div>
+    <div class="team-m-sub">政策翻译者 · 合规护航</div>
+    <div class="team-m-fn">
+      <strong>核心职责</strong>
+      政策解读与资质申报；长护险/民政系统对接；政府关系网络建设。
+    </div>
+    <div class="team-m-fn" style="margin-top:0.5rem;">
+      <strong>固定质问</strong>
+      "这条政策能在广外街道实际落地吗？补贴到账要多久？谁负责对接？"
+    </div>
+    <span class="team-m-tag">合规底线</span>
+  </div>
+
+  <!-- 决策流程 -->
+  <div class="card" style="margin-top:0.5rem;">
+    <div class="card-label">苏格拉底六步法</div>
+    <div class="card-title">标准决策流程</div>
+    <div style="display:flex;flex-direction:column;gap:0.55rem;margin-top:0.8rem;">
+      <div style="display:flex;align-items:center;gap:0.7rem;font-size:0.8rem;">
+        <div style="width:24px;height:24px;border-radius:50%;background:rgba(201,168,76,0.15);border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;color:var(--gold);flex-shrink:0;">1</div>
+        <span><strong>CEO陈述</strong> — 判断 + 理由</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.7rem;font-size:0.8rem;">
+        <div style="width:24px;height:24px;border-radius:50%;background:rgba(255,107,107,0.12);border:1px solid var(--red);display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;color:var(--red);flex-shrink:0;">2</div>
+        <span><strong>CFO挑战</strong> — 财务可行性？</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.7rem;font-size:0.8rem;">
+        <div style="width:24px;height:24px;border-radius:50%;background:rgba(181,128,232,0.12);border:1px solid var(--purple);display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;color:var(--purple);flex-shrink:0;">3</div>
+        <span><strong>CGO挑战</strong> — 政策真实？</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.7rem;font-size:0.8rem;">
+        <div style="width:24px;height:24px;border-radius:50%;background:rgba(61,214,140,0.12);border:1px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;color:var(--green);flex-shrink:0;">4</div>
+        <span><strong>COO挑战</strong> — 能执行吗？</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.7rem;font-size:0.8rem;">
+        <div style="width:24px;height:24px;border-radius:50%;background:rgba(74,158,255,0.12);border:1px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;color:var(--blue);flex-shrink:0;">5</div>
+        <span><strong>CSO提炼</strong> — 核心假设</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.7rem;font-size:0.8rem;">
+        <div style="width:24px;height:24px;border-radius:50%;background:rgba(201,168,76,0.2);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;color:var(--gold);flex-shrink:0;">6</div>
+        <span><strong>CEO决策</strong> — 输出记录卡</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 3 · 情报（行业情报 + 课题研究）
+═══════════════════════════════════════════ -->
+<div class="page" id="page-intel">
+
+  <div class="section-header">
+    <div class="sec-label">Intelligence · 开元情报站</div>
+    <div class="sec-title">行业情报 & 课题研究</div>
+    <div class="sec-desc">日报情报由中书省每日汇总解读；专题研究基于情报议题深度展开，两类内容独立运作。</div>
+  </div>
+
+  <!-- 类型说明 -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.65rem;margin-bottom:1rem;">
+    <div style="background:rgba(74,158,255,0.06);border:1px solid rgba(74,158,255,0.2);border-radius:12px;padding:0.9rem;">
+      <div style="font-size:0.62rem;letter-spacing:0.12em;color:var(--blue);text-transform:uppercase;margin-bottom:0.3rem;">📡 日报情报</div>
+      <div style="font-size:0.8rem;font-weight:700;margin-bottom:0.3rem;">每日动态收集</div>
+      <div style="font-size:0.72rem;color:var(--muted);line-height:1.6;">政策动向、市场竞态、两会要点、舆论热点，每日自动汇总，中书省解读</div>
+    </div>
+    <div style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:0.9rem;">
+      <div style="font-size:0.62rem;letter-spacing:0.12em;color:var(--gold);text-transform:uppercase;margin-bottom:0.3rem;">🔬 课题研究</div>
+      <div style="font-size:0.8rem;font-weight:700;margin-bottom:0.3rem;">议题深度研究</div>
+      <div style="font-size:0.72rem;color:var(--muted);line-height:1.6;">从日报中发掘重要议题，进行系统性研究，产出决策级报告（T01-T09）</div>
+    </div>
+  </div>
+
+  <!-- 最新日报 -->
+  <div style="font-size:0.62rem;letter-spacing:0.16em;color:var(--blue);text-transform:uppercase;margin-bottom:0.7rem;">📡 最新日报 · 行业动态</div>
+
+  <div class="intel-card">
+    <div class="intel-head">
+      <div class="intel-type daily">📡 行业日报</div>
+      <div class="intel-date" id="intel-date-today">2026-03-14</div>
+    </div>
+    <div class="intel-body">
+      <div class="intel-title">Day 9 · 两会养老政策落地窗口 + 居家服务市场格局</div>
+      <ul class="intel-items">
+        <li>民政部部长两会定调：城市重点建"嵌入式社区养老服务综合体"，财政直补机构，与开元轻资产路径高度吻合</li>
+        <li>长护险全面建制推进加速，49城+两省覆盖扩展信号明确，北京西城区为核心受益区</li>
+        <li>失能长者补贴800元/月政策（2026.1.1起）已正式实施，广外街道入库申请窗口打开</li>
+        <li>"养老服务师"新职业标准落地，可作为护理员团队资质建设核心抓手，大幅提升对外背书</li>
+      </ul>
+      <div class="intel-insight">
+        <span class="intel-insight-label">🖋 中书省 · 议题评级</span>
+        <strong>最重要行动点：</strong>广外街道入库申请启动条件已具备，需优先推进第一个试点家庭对接，以启动政策补贴申领流程。本周核心任务：与居委会家人确认行动路径。
+      </div>
+    </div>
+  </div>
+
+  <!-- 研究院课题 -->
+  <div style="font-size:0.62rem;letter-spacing:0.16em;color:var(--gold);text-transform:uppercase;margin-bottom:0.7rem;margin-top:0.3rem;">🔬 开元研究院 · T01-T09 课题</div>
+
+  <div class="intel-card">
+    <div class="intel-head">
+      <div class="intel-type research">🔬 已完成课题</div>
+      <div class="intel-date">T01~T09 全量</div>
+    </div>
+    <div class="intel-body">
+      <div class="intel-title">九大研究课题 · 苏格拉底修正版</div>
+      <ul class="intel-items">
+        <li>T01 竞争格局：固定护理员信任壁垒 > 价格战，护城河逻辑已验证</li>
+        <li>T03 政策资质：长护险申请路径清晰，前置条件为3个月真实服务案例</li>
+        <li>T04 护理员留存：年流失率35-45%，三层留存机制（薪酬/情感/成长）为核心优先</li>
+        <li>T05 财务模型：劳务外包+人身意外险方案，毛利率31%，首月盈利路径已验证</li>
+      </ul>
+      <div class="intel-insight">
+        <span class="intel-insight-label">📦 研究成果入口</span>
+        完整报告已归档至知识库，包含原始版V1 + 苏格拉底质询版V2。建议在PC端查看完整可视化报告。
+      </div>
+    </div>
+  </div>
+
+  <div class="intel-card">
+    <div class="intel-head">
+      <div class="intel-type alert">⚠️ 高风险预警</div>
+      <div class="intel-date">持续跟踪</div>
+    </div>
+    <div class="intel-body">
+      <div class="intel-title">当前三大核心风险</div>
+      <ul class="intel-items">
+        <li>政策补贴实际到账周期4-6个月，不可依赖政策资金作为启动资本，需个人出资100万兜底</li>
+        <li>护理员年流失率35-45%为行业常态，留存机制建设需在服务启动前完成设计</li>
+        <li>搜索工具（Serper API）已失效，情报系统存在依赖缺口，需尽快切换至Tavily</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 4 · 工作日志
+═══════════════════════════════════════════ -->
+<div class="page" id="page-log">
+
+  <div class="section-header">
+    <div class="sec-label">Work Log · 班子工作日志</div>
+    <div class="sec-title">每日推进记录</div>
+    <div class="sec-desc">AI班子24小时协作，重要里程碑实时同步CEO。</div>
+  </div>
+
+  <!-- Day 9 -->
+  <div class="log-card">
+    <div class="log-card-head" onclick="toggleLog(this)">
+      <div>
+        <span class="log-day-badge">Day 9</span>
+        <div class="log-card-title" style="margin-top:0.3rem;">双轨自动化作业系统 · 全面上线</div>
+        <div class="log-card-date">2026-03-14 · 今日</div>
+      </div>
+      <div class="log-chevron">▾</div>
+    </div>
+    <div class="log-card-body">
+      <div class="log-sec-m">
+        <h4>完成事项</h4>
+        <ul>
+          <li>日报情报轨与课题研究轨正式分离，自动化作业流程更新至commands.md</li>
+          <li>移动端专属设计页面（mobile.html）正式创建，PC/移动双端分离架构启动</li>
+          <li>团队班子配置规划完成，创始人能力凭什么支撑养老创业的核心叙事已梳理</li>
+          <li>开元情报站模块独立，区分日报信息收集 vs 专业课题研究两类内容</li>
+        </ul>
+      </div>
+      <div class="log-sec-m">
+        <h4>明日重点</h4>
+        <ul>
+          <li>与居委会家人确认广外街道养老照料中心对接路径</li>
+          <li>完成第一个试点家庭前期评估表单设计</li>
+          <li>Tavily API接入，修复情报系统搜索依赖</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 8 -->
+  <div class="log-card">
+    <div class="log-card-head" onclick="toggleLog(this)">
+      <div>
+        <span class="log-day-badge">Day 8</span>
+        <div class="log-card-title" style="margin-top:0.3rem;">情报站建设 · 服务定价 · 路演框架</div>
+        <div class="log-card-date">2026-03-14 上午</div>
+      </div>
+      <div class="log-chevron">▾</div>
+    </div>
+    <div class="log-card-body">
+      <div class="log-sec-m">
+        <h4>完成事项</h4>
+        <ul>
+          <li>Day8汇报文档创建，开元情报站模块首次独立呈现</li>
+          <li>服务定价体系明确：启元级/兴元级/开元级/昌元级四档</li>
+          <li>路演投资人问题集已梳理，核心反问6道</li>
+          <li>官网增加情报模块入口和班子汇报链接</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 7 -->
+  <div class="log-card">
+    <div class="log-card-head" onclick="toggleLog(this)">
+      <div>
+        <span class="log-day-badge">Day 7</span>
+        <div class="log-card-title" style="margin-top:0.3rem;">三省六部 Multi-Agent · 全面建制</div>
+        <div class="log-card-date">2026-03-14 凌晨</div>
+      </div>
+      <div class="log-chevron">▾</div>
+    </div>
+    <div class="log-card-body">
+      <div class="log-sec-m">
+        <h4>完成事项</h4>
+        <ul>
+          <li>三省六部制治理架构完整建立，各班子角色职责清晰</li>
+          <li>苏格拉底六步决策法固化为标准SOP</li>
+          <li>LaunchAgent配置，每日08:00自动运行agent脚本</li>
+          <li>team-founding.html创建，创始人凭什么做养老的完整叙事</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 4-6 合并 -->
+  <div class="log-card">
+    <div class="log-card-head" onclick="toggleLog(this)">
+      <div>
+        <span class="log-day-badge">Day 4-6</span>
+        <div class="log-card-title" style="margin-top:0.3rem;">研究院T01-T09全量研究 · 苏格拉底质询完成</div>
+        <div class="log-card-date">2026-03-13</div>
+      </div>
+      <div class="log-chevron">▾</div>
+    </div>
+    <div class="log-card-body">
+      <div class="log-sec-m">
+        <h4>核心成果</h4>
+        <ul>
+          <li>九大课题全部完成，每个课题均有原始版V1 + 苏格拉底修正版V2</li>
+          <li>财务模型关键修正：毛利率31%（劳务外包+人身意外险方案）</li>
+          <li>护理员留存三层机制设计完成，年流失率风险已有应对方案</li>
+          <li>全量可视化交付页research-report.html生成并归档</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 1-3 -->
+  <div class="log-card">
+    <div class="log-card-head" onclick="toggleLog(this)">
+      <div>
+        <span class="log-day-badge">Day 1-3</span>
+        <div class="log-card-title" style="margin-top:0.3rem;">公司框架 · 首战城市 · 路径重构</div>
+        <div class="log-card-date">2026-03-11 ~ 03-12</div>
+      </div>
+      <div class="log-chevron">▾</div>
+    </div>
+    <div class="log-card-body">
+      <div class="log-sec-m">
+        <h4>关键决策</h4>
+        <ul>
+          <li>#001 首要任务：找第一个真实服务家庭 + 确定启动资金100万</li>
+          <li>#002 首战城市：成都否决 → 北京西城区广外街道（有居委会资源）</li>
+          <li>#003 路径重构：放弃30天盈利假设 → 12个月验证节奏</li>
+          <li>#004 CEO确认：愿意接受慢步验证，服务×科技双螺旋路径确立</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 5 · 路演
+═══════════════════════════════════════════ -->
+<div class="page" id="page-pitch">
+
+  <div class="section-header">
+    <div class="sec-label">Pitch · 路演规划</div>
+    <div class="sec-title">投资人推演</div>
+    <div class="sec-desc">融资不是目的，而是让普惠照护成为可能的工具。我们用事实说话，而非PPT说话。</div>
+  </div>
+
+  <!-- 核心叙事 -->
+  <div class="pitch-card">
+    <div class="pitch-stage">融资故事 · 第一句话</div>
+    <div class="pitch-title">"中国有3.2亿长者，只有1%的人能住得起养老院。我们要做剩下99%的家庭的选择。"</div>
+    <p style="font-size:0.78rem;color:var(--muted);line-height:1.7;margin-top:0.6rem;">这不只是养老服务公司。我们是AI陪伴与具身智能时代，<strong style="color:var(--gold);">最早积累真实居家照护数据</strong>的创业者——1000个家庭的数据，是科技公司愿意合作的战略资产。</p>
+  </div>
+
+  <!-- 融资路径 -->
+  <div class="section-header">
+    <div class="sec-label">Roadmap · 融资路径</div>
+  </div>
+
+  <div class="pitch-path">
+    <div class="pitch-step">
+      <div class="pitch-step-num">1</div>
+      <div class="pitch-step-content">
+        <div class="pitch-step-title">启动期 · 个人出资100万</div>
+        <div class="pitch-step-desc">2027年启动，北京广外街道，自营验证10个家庭。不依赖外部资金，以真实服务建立信任。</div>
+      </div>
+    </div>
+    <div class="pitch-step">
+      <div class="pitch-step-num">2</div>
+      <div class="pitch-step-content">
+        <div class="pitch-step-title">天使轮 · 数据资产叙事</div>
+        <div class="pitch-step-desc">有了10个家庭的真实案例 + NPS>8的口碑数据，融资故事变为：「中国第一批真实居家照护数据持有者」。融资金额：500-1000万。</div>
+      </div>
+    </div>
+    <div class="pitch-step">
+      <div class="pitch-step-num">3</div>
+      <div class="pitch-step-content">
+        <div class="pitch-step-title">B轮 · 服务×数据双飞轮</div>
+        <div class="pitch-step-desc">1000个家庭 + 具身智能数据授权 + 长护险定点资质，形成「服务×数据」双飞轮商业模式。目标估值5-8亿。</div>
+      </div>
+    </div>
+    <div class="pitch-step">
+      <div class="pitch-step-num">4</div>
+      <div class="pitch-step-content">
+        <div class="pitch-step-title">战略融资 · 政府产业基金</div>
+        <div class="pitch-step-desc">全国复制阶段，政府产业基金+社会影响力投资，护理员合作社持股，实现商业价值与社会价值的真正统一。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 投资人常见质疑 -->
+  <div class="section-header">
+    <div class="sec-label">Q&A · 投资人质疑</div>
+    <div class="sec-title">我们的答案</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">质疑 01</div>
+    <div class="card-title">创始人凭什么做养老？</div>
+    <div class="card-desc">
+      美团10年产品运营积累，深度理解"如何把复杂服务标准化并规模化"。家人在广外街道居委会任职，有第一手社区渠道资源。不是养老专家，而是会用科技+运营思维重构这个行业的人——这正是养老行业最缺的。
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">质疑 02</div>
+    <div class="card-title">这个市场竞争很激烈，你怎么赢？</div>
+    <div class="card-desc">
+      我们不打价格战。核心壁垒是：<strong style="color:var(--text);">固定护理员建立家庭信任</strong>——把离开的代价做高，比补贴护理员更可持续。护理员流失率是行业通病，我们的三层留存机制是差异化来源。
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">质疑 03</div>
+    <div class="card-title">政策补贴靠谱吗？</div>
+    <div class="card-desc">
+      政府补贴到账实际周期4-6个月，我们的财务模型不依赖政策资金作为启动资本。补贴是"压舱石"，不是"水源"。启动100万个人出资，确保6个月以上的生存线。
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">质疑 04</div>
+    <div class="card-title">数据资产故事是否可信？</div>
+    <div class="card-desc">
+      中国具身智能发展的最大瓶颈是真实场景训练数据。居家照护是最复杂、最个性化的场景——这类数据无法合成，只能靠真实服务积累。我们从第一个家庭开始，10年后是中国最有价值的照护数据资产持有者。
+    </div>
+  </div>
+
+  <!-- 三阶段路径 -->
+  <div class="section-header" style="margin-top:0.5rem;">
+    <div class="sec-label">Roadmap · 三阶段路径</div>
+    <div class="sec-title">增长路径</div>
+  </div>
+
+  <div class="stage-m s1">
+    <div class="stage-m-phase">阶段一 · 2027年 → 2028年</div>
+    <div class="stage-m-title">自营验证 · 找到第一个真正被改变的故事</div>
+    <ul class="stage-m-items">
+      <li><strong>地点</strong>北京市西城区广外街道</li>
+      <li><strong>目标</strong>10个家庭，NPS>8分，30%低收入长者</li>
+      <li><strong>科技</strong>AI陪伴接入，ARPU提升至3000+元</li>
+      <li><strong>融资</strong>「中国第一批真实居家照护数据」天使叙事</li>
+    </ul>
+  </div>
+
+  <div class="stage-m s2">
+    <div class="stage-m-phase">阶段二 · 2028年 → 2030年</div>
+    <div class="stage-m-title">标准化赋能 · 科技降本 · 100家社区</div>
+    <ul class="stage-m-items">
+      <li><strong>目标</strong>1000个家庭，进入长护险定点</li>
+      <li><strong>科技</strong>具身智能辅助，单护理员服务5→15家</li>
+      <li><strong>融资</strong>「服务×数据双飞轮」B轮</li>
+    </ul>
+  </div>
+
+  <div class="stage-m s3">
+    <div class="stage-m-phase">阶段三 · 2030年以后</div>
+    <div class="stage-m-title">生态构建 · 人机协作 · 全国复制</div>
+    <ul class="stage-m-items">
+      <li><strong>护理员</strong>合作社持股，利润共享，有尊严工作</li>
+      <li><strong>科技</strong>数据版税收入，从服务收费跃升平台级</li>
+      <li><strong>兑现</strong>每位长者，无论贫富，有尊严地在家老去</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     底部 Tab 栏
+═══════════════════════════════════════════ -->
+<div class="tab-bar">
+  <button class="tab-item active" id="tab-home" onclick="switchTab('home')">
+    <span class="tab-icon">🏠</span>
+    <span class="tab-label">总览</span>
+  </button>
+  <button class="tab-item" id="tab-intel" onclick="switchTab('intel')">
+    <span class="tab-icon">📡</span>
+    <span class="tab-label">情报</span>
+  </button>
+  <button class="tab-item" id="tab-log" onclick="switchTab('log')">
+    <span class="tab-icon">📋</span>
+    <span class="tab-label">日志</span>
+  </button>
+  <button class="tab-item" id="tab-team" onclick="switchTab('team')">
+    <span class="tab-icon">👥</span>
+    <span class="tab-label">班子</span>
+  </button>
+  <button class="tab-item" id="tab-pitch" onclick="switchTab('pitch')">
+    <span class="tab-icon">🎤</span>
+    <span class="tab-label">路演</span>
+  </button>
+</div>
+
+<script>
+  // ── 日期与天数计算 ──
+  function updateDate() {
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = now.getMonth() + 1;
+    const d = now.getDate();
+    const weekdays = ['日','一','二','三','四','五','六'];
+    const w = weekdays[now.getDay()];
+    const dateStr = `${y}年${m}月${d}日 周${w}`;
+    const el = document.getElementById('live-date');
+    if (el) el.textContent = dateStr;
+
+    // 开元时代启动日：2026-03-06（Day 1 = 3月6日）
+    const startDate = new Date('2026-03-06');
+    const diff = Math.floor((now - startDate) / (1000 * 60 * 60 * 24)) + 1;
+    const dayCount = Math.max(1, diff);
+
+    const dc1 = document.getElementById('day-count');
+    const dc2 = document.getElementById('day-count2');
+    const dayBar = document.getElementById('day-bar');
+    if (dc1) dc1.textContent = dayCount;
+    if (dc2) dc2.textContent = dayCount;
+    if (dayBar) dayBar.style.width = Math.min(100, (dayCount / 30) * 100) + '%';
+
+    // 情报日期
+    const intelDate = document.getElementById('intel-date-today');
+    if (intelDate) intelDate.textContent = `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  }
+  updateDate();
+
+  // ── Tab 切换 ──
+  function switchTab(name) {
+    // 隐藏所有页面
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    // 取消所有tab激活
+    document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+    // 激活目标
+    const page = document.getElementById('page-' + name);
+    const tab = document.getElementById('tab-' + name);
+    if (page) { page.classList.add('active'); page.scrollTop = 0; }
+    if (tab) tab.classList.add('active');
+    // 回到顶部
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── 日志折叠 ──
+  function toggleLog(head) {
+    const body = head.nextElementSibling;
+    const chevron = head.querySelector('.log-chevron');
+    if (!body) return;
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    if (chevron) chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+  }
+
+  // ── 平滑滚动修正（iOS） ──
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
