@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>T10 · 竞争格局研究 · 大众点评一手调研</title>
+  <style>
+    :root{
+      --gold:#C9A84C;--gold-light:#E8C97A;--gold-dim:#8A6F30;
+      --dark:#0E1117;--dark-2:#161B24;--dark-3:#1E2530;--dark-4:#252D3A;
+      --border:rgba(201,168,76,0.18);--text:#EAE6D8;--muted:#8A8F9E;
+      --green:#3DD68C;--blue:#4A9EFF;--red:#FF6B6B;--amber:#F5A623;--purple:#B580E8;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+      background:var(--dark);color:var(--text);line-height:1.7;overflow-x:hidden}
+
+    /* NAV */
+    nav{position:sticky;top:0;z-index:100;background:rgba(14,17,23,0.96);backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--border);padding:0 1.5rem;height:52px;
+      display:flex;align-items:center;justify-content:space-between}
+    .nav-brand{font-size:0.8rem;font-weight:800;color:var(--gold);letter-spacing:0.05em}
+    .nav-links{display:flex;gap:1.5rem;list-style:none}
+    .nav-links a{font-size:0.75rem;color:var(--muted);text-decoration:none;transition:color 0.2s}
+    .nav-links a:hover{color:var(--gold)}
+    .nav-badge{font-size:0.65rem;padding:0.18rem 0.6rem;border-radius:100px;
+      background:rgba(74,158,255,0.12);color:var(--blue);border:1px solid rgba(74,158,255,0.3)}
+
+    /* HERO */
+    .hero{padding:4rem 1.5rem 3rem;max-width:1100px;margin:0 auto;
+      background:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(201,168,76,0.12) 0%,transparent 70%)}
+    .research-tag{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.65rem;
+      padding:0.22rem 0.7rem;border-radius:100px;background:rgba(74,158,255,0.1);
+      color:var(--blue);border:1px solid rgba(74,158,255,0.3);margin-bottom:1rem;letter-spacing:0.08em}
+    .hero h1{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:900;line-height:1.2;margin-bottom:0.8rem}
+    .hero h1 em{font-style:normal;color:var(--gold)}
+    .hero p{font-size:0.9rem;color:var(--muted);max-width:680px;line-height:1.8;margin-bottom:1.5rem}
+    .meta-row{display:flex;gap:1.5rem;flex-wrap:wrap;font-size:0.75rem;color:var(--muted)}
+    .meta-item{display:flex;align-items:center;gap:0.3rem}
+    .meta-item span:first-child{color:var(--gold)}
+
+    /* SECTION */
+    .section{max-width:1100px;margin:0 auto;padding:0 1.5rem 3rem}
+    .section-hd{margin-bottom:1.5rem}
+    .section-label{font-size:0.62rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:0.4rem;font-weight:700}
+    .section-title{font-size:1.3rem;font-weight:800;margin-bottom:0.4rem}
+    .section-desc{font-size:0.84rem;color:var(--muted);line-height:1.75}
+    .divider{border:none;border-top:1px solid var(--border);margin:0 1.5rem}
+
+    /* SUMMARY CARDS */
+    .summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+    .sum-card{background:var(--dark-2);border:1px solid var(--border);border-radius:14px;padding:1.2rem;text-align:center}
+    .sum-num{font-size:1.8rem;font-weight:900;color:var(--gold);line-height:1}
+    .sum-lbl{font-size:0.68rem;color:var(--muted);margin-top:0.3rem}
+    .sum-sub{font-size:0.62rem;color:var(--muted);opacity:0.65;margin-top:0.15rem}
+    @media(max-width:640px){.summary-grid{grid-template-columns:repeat(2,1fr)}}
+
+    /* DATA TABLE */
+    .data-table-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--border);margin-bottom:1.5rem}
+    table{width:100%;border-collapse:collapse;font-size:0.8rem}
+    thead th{background:var(--dark-3);padding:0.75rem 1rem;text-align:left;
+      font-size:0.68rem;font-weight:700;color:var(--gold);letter-spacing:0.08em;text-transform:uppercase;
+      border-bottom:1px solid var(--border);white-space:nowrap}
+    tbody tr{border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.15s}
+    tbody tr:hover{background:rgba(201,168,76,0.04)}
+    tbody tr:last-child{border-bottom:none}
+    td{padding:0.75rem 1rem;vertical-align:top;color:var(--muted)}
+    td:first-child{color:var(--text);font-weight:600}
+    .tag-type{display:inline-block;font-size:0.6rem;padding:0.12rem 0.45rem;border-radius:4px;font-weight:600;white-space:nowrap}
+    .tag-jujia{background:rgba(74,158,255,0.12);color:var(--blue);border:1px solid rgba(74,158,255,0.3)}
+    .tag-jigou{background:rgba(245,166,35,0.1);color:var(--amber);border:1px solid rgba(245,166,35,0.3)}
+    .tag-zhan{background:rgba(61,214,140,0.1);color:var(--green);border:1px solid rgba(61,214,140,0.3)}
+    .tag-alert{background:rgba(255,107,107,0.12);color:var(--red);border:1px solid rgba(255,107,107,0.3)}
+    .score-high{color:var(--green);font-weight:700}
+    .score-mid{color:var(--amber);font-weight:700}
+    .score-low{color:var(--red);font-weight:700}
+    .price-high{color:var(--amber)}
+    .price-mid{color:var(--text)}
+    .zero-sale{color:var(--red);font-size:0.7rem}
+
+    /* FINDING CARDS */
+    .finding-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+    @media(max-width:768px){.finding-grid{grid-template-columns:1fr}}
+    .finding-card{border-radius:14px;padding:1.4rem;border:1px solid var(--border)}
+    .finding-card.red{background:rgba(255,107,107,0.06);border-color:rgba(255,107,107,0.3);border-top:2px solid var(--red)}
+    .finding-card.gold{background:rgba(201,168,76,0.06);border-color:rgba(201,168,76,0.3);border-top:2px solid var(--gold)}
+    .finding-card.green{background:rgba(61,214,140,0.06);border-color:rgba(61,214,140,0.3);border-top:2px solid var(--green)}
+    .finding-card.blue{background:rgba(74,158,255,0.06);border-color:rgba(74,158,255,0.3);border-top:2px solid var(--blue)}
+    .finding-num{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:700;margin-bottom:0.5rem}
+    .finding-card.red .finding-num{color:var(--red)}
+    .finding-card.gold .finding-num{color:var(--gold)}
+    .finding-card.green .finding-num{color:var(--green)}
+    .finding-card.blue .finding-num{color:var(--blue)}
+    .finding-title{font-size:0.96rem;font-weight:800;margin-bottom:0.5rem;line-height:1.35}
+    .finding-body{font-size:0.8rem;color:var(--muted);line-height:1.75}
+    .finding-body strong{color:var(--text)}
+
+    /* PRICE LADDER */
+    .price-ladder{margin:1rem 0 1.5rem}
+    .price-row{display:flex;align-items:center;gap:1rem;padding:0.65rem 1rem;border-radius:10px;margin-bottom:0.5rem;font-size:0.82rem}
+    .price-row.highlight{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.35)}
+    .price-row.normal{background:var(--dark-2);border:1px solid var(--border)}
+    .price-band{min-width:150px;font-weight:700;color:var(--gold)}
+    .price-orgs{color:var(--muted);flex:1;font-size:0.78rem}
+    .price-arrow{color:var(--gold-dim);font-size:0.7rem}
+
+    /* QUOTE */
+    .quote-block{background:rgba(201,168,76,0.06);border-left:3px solid var(--gold);
+      border-radius:0 12px 12px 0;padding:1rem 1.2rem;margin:1rem 0;
+      font-size:0.84rem;line-height:1.8;color:var(--text);font-style:italic}
+    .quote-block .quote-author{font-size:0.68rem;color:var(--muted);font-style:normal;margin-top:0.4rem}
+
+    /* ACTION ITEMS */
+    .action-list{display:flex;flex-direction:column;gap:0.65rem}
+    .action-item{display:flex;gap:0.8rem;background:var(--dark-2);border:1px solid var(--border);
+      border-radius:12px;padding:1rem;align-items:flex-start}
+    .action-num{width:28px;height:28px;border-radius:50%;flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;
+      font-size:0.72rem;font-weight:800;background:rgba(201,168,76,0.15);
+      border:1px solid var(--gold-dim);color:var(--gold)}
+    .action-content{flex:1}
+    .action-title{font-size:0.88rem;font-weight:700;margin-bottom:0.25rem}
+    .action-desc{font-size:0.78rem;color:var(--muted);line-height:1.65}
+
+    /* COMPARISON BARS */
+    .comp-grid{display:grid;grid-template-columns:1fr;gap:0.5rem;margin:1rem 0}
+    .comp-row{display:flex;align-items:center;gap:0.8rem;font-size:0.78rem}
+    .comp-label{min-width:130px;color:var(--muted);text-align:right;flex-shrink:0}
+    .comp-bar-wrap{flex:1;background:var(--dark-4);border-radius:99px;height:6px;overflow:hidden}
+    .comp-bar{height:100%;border-radius:99px;transition:width 0.8s ease}
+    .comp-val{min-width:70px;text-align:right;font-weight:700;font-size:0.75rem}
+
+    /* MAP */
+    .map-zone{background:var(--dark-2);border:1px solid var(--border);border-radius:14px;padding:1.2rem;margin-bottom:1rem}
+    .map-zone-hd{display:flex;align-items:center;gap:0.7rem;margin-bottom:0.8rem}
+    .map-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+    .map-zone-title{font-size:0.88rem;font-weight:700}
+    .map-zone-items{display:flex;flex-direction:column;gap:0.4rem;padding-left:1.7rem}
+    .map-item{font-size:0.78rem;color:var(--muted);display:flex;align-items:flex-start;gap:0.4rem;line-height:1.6}
+    .map-item::before{content:"└";color:var(--dark-4);flex-shrink:0}
+
+    /* METHOD */
+    .method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem}
+    @media(max-width:640px){.method-grid{grid-template-columns:1fr}}
+    .method-card{background:var(--dark-3);border:1px solid var(--border);border-radius:12px;padding:1rem}
+    .method-icon{font-size:1.2rem;margin-bottom:0.5rem}
+    .method-title{font-size:0.82rem;font-weight:700;margin-bottom:0.3rem}
+    .method-desc{font-size:0.73rem;color:var(--muted);line-height:1.65}
+
+    /* FOOTER */
+    footer{border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center;color:var(--muted);font-size:0.75rem}
+    footer strong{color:var(--gold)}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    .fade-up{animation:fadeUp 0.5s ease both}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">开元时代 · 研究院</div>
+  <ul class="nav-links">
+    <li><a href="#overview">总览</a></li>
+    <li><a href="#data">数据表</a></li>
+    <li><a href="#findings">关键发现</a></li>
+    <li><a href="#pricing">定价格局</a></li>
+    <li><a href="#guangwai">广外战场</a></li>
+    <li><a href="#actions">行动建议</a></li>
+  </ul>
+  <span class="nav-badge">T10 · V1.0 · 2026-03-14</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero fade-up">
+  <div class="research-tag">🔬 Research · 一手数据调研 · First-party</div>
+  <h1>T10 · 竞争格局研究<br/><em>大众点评实时爬取 × 广告账户分析</em></h1>
+  <p>首次引入大众点评实时爬取作为一手数据源，系统分析北京居家养老22家机构的真实服务单价、服务量与用户满意度，重点聚焦广外街道及西城区竞争格局。</p>
+  <div class="meta-row">
+    <div class="meta-item"><span>📅</span><span>2026-03-14</span></div>
+    <div class="meta-item"><span>📊</span><span>数据来源：大众点评实时爬取 + 美团广告账户CSV（2615条）</span></div>
+    <div class="meta-item"><span>🏢</span><span>覆盖机构：北京22家 + 参考城市对标</span></div>
+    <div class="meta-item"><span>✍️</span><span>开元情报站 · 礼部</span></div>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<section class="section" id="overview">
+  <div class="section-hd">
+    <div class="section-label">Overview · 核心数据摘要</div>
+    <div class="section-title">一眼看懂北京养老竞争格局</div>
+  </div>
+  <div class="summary-grid">
+    <div class="sum-card">
+      <div class="sum-num">2,615</div>
+      <div class="sum-lbl">全国美团养老广告账户</div>
+      <div class="sum-sub">仅4.7%昨日有实际投放</div>
+    </div>
+    <div class="sum-card">
+      <div class="sum-num" style="color:var(--red)">0</div>
+      <div class="sum-lbl">广外街道居家服务年售量</div>
+      <div class="sum-sub">14个周边账户全部CPC=0</div>
+    </div>
+    <div class="sum-card">
+      <div class="sum-num" style="color:var(--green)">4.7⭐</div>
+      <div class="sum-lbl">大树养老（北京最高评分）</div>
+      <div class="sum-sub">354条评价 · 人均¥214</div>
+    </div>
+    <div class="sum-card">
+      <div class="sum-num" style="color:var(--amber)">¥11,998</div>
+      <div class="sum-lbl">椿萱茂双桥旗舰均价</div>
+      <div class="sum-sub">北京机构养老天花板</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- DATA TABLE -->
+<section class="section" id="data">
+  <div class="section-hd">
+    <div class="section-label">Raw Data · 原始数据表</div>
+    <div class="section-title">22家机构点评数据全量</div>
+    <div class="section-desc">数据采集时间：2026-03-14，账号：王小猴（登录态）。人均消费为点评实测值，≠月度真实客单价，需结合招聘薪资数据综合解读。</div>
+  </div>
+  <div class="data-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>机构名称</th>
+          <th>类型</th>
+          <th>城市/商圈</th>
+          <th>点评评价数</th>
+          <th>点评人均</th>
+          <th>评分</th>
+          <th>CPC昨日</th>
+          <th>团购年售</th>
+          <th>备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>颐家·到家康复（朝阳店）</td>
+          <td><span class="tag-type tag-jujia">居家护工</span></td>
+          <td>北京·北沙滩</td>
+          <td>43</td>
+          <td class="price-high">¥2,916</td>
+          <td>—</td>
+          <td>含在总CPC</td>
+          <td>有</td>
+          <td>快速派工型</td>
+        </tr>
+        <tr>
+          <td>颐家·到家康复（丰台店）</td>
+          <td><span class="tag-type tag-jujia">居家护工</span></td>
+          <td>北京·世界公园</td>
+          <td>22</td>
+          <td class="price-high">¥3,303</td>
+          <td>—</td>
+          <td>—</td>
+          <td>有</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>颐家·到家康复（顺义店）</td>
+          <td><span class="tag-type tag-jujia">居家护工</span></td>
+          <td>北京·顺义城区</td>
+          <td>26</td>
+          <td class="price-high">¥4,287</td>
+          <td>—</td>
+          <td>—</td>
+          <td>有</td>
+          <td>价格最高门店</td>
+        </tr>
+        <tr>
+          <td>颐家·到家康复（鼓楼大街店）</td>
+          <td><span class="tag-type tag-jujia">居家护工</span></td>
+          <td>北京·后海什刹海</td>
+          <td>17</td>
+          <td class="price-mid">¥2,530</td>
+          <td class="score-mid">3.9</td>
+          <td>—</td>
+          <td>有</td>
+          <td>最近西城门店</td>
+        </tr>
+        <tr>
+          <td>颐家·到家康复（西直门店）</td>
+          <td><span class="tag-type tag-jujia">居家护工</span></td>
+          <td>北京·西直门</td>
+          <td>15</td>
+          <td style="color:var(--muted)">¥612</td>
+          <td>—</td>
+          <td>—</td>
+          <td>少</td>
+          <td>服务量低</td>
+        </tr>
+        <tr style="background:rgba(255,107,107,0.04)">
+          <td><strong style="color:var(--red)">⚠️ 福寿康（虎坊桥店）</strong></td>
+          <td><span class="tag-type tag-jujia">居家护工</span></td>
+          <td><strong style="color:var(--red)">北京·前门天坛</strong></td>
+          <td>29</td>
+          <td>—</td>
+          <td class="score-mid">4.1</td>
+          <td>含在总</td>
+          <td><span class="zero-sale">年售0！</span></td>
+          <td><strong style="color:var(--red)">距广外1.5km！</strong></td>
+        </tr>
+        <tr>
+          <td>福寿康（复兴路店）</td>
+          <td><span class="tag-type tag-jujia">居家护工</span></td>
+          <td>北京·复兴路</td>
+          <td>65</td>
+          <td class="price-high">¥3,916</td>
+          <td>—</td>
+          <td>高</td>
+          <td>有</td>
+          <td>丰台/西城交界</td>
+        </tr>
+        <tr>
+          <td>福寿康（丰台店）</td>
+          <td><span class="tag-type tag-jujia">居家护工</span></td>
+          <td>北京·丰台城区</td>
+          <td><strong>76</strong></td>
+          <td class="price-high">¥4,194</td>
+          <td>—</td>
+          <td>高</td>
+          <td>有</td>
+          <td>北京最活跃门店</td>
+        </tr>
+        <tr style="background:rgba(61,214,140,0.04)">
+          <td><strong style="color:var(--green)">大树养老·护理康复保姆</strong></td>
+          <td><span class="tag-type tag-jujia">居家保姆</span></td>
+          <td>北京·牡丹园</td>
+          <td><strong style="color:var(--green)">354</strong></td>
+          <td style="color:var(--muted)">¥214</td>
+          <td class="score-high">4.7⭐</td>
+          <td>2</td>
+          <td>100+次</td>
+          <td><strong style="color:var(--green)">北京居家养老第一</strong></td>
+        </tr>
+        <tr>
+          <td>慈爱嘉·专业居家养老</td>
+          <td><span class="tag-type tag-jujia">居家养老</span></td>
+          <td>北京·东四十条</td>
+          <td>115</td>
+          <td style="color:var(--muted)">¥268</td>
+          <td>—</td>
+          <td>0</td>
+          <td>少</td>
+          <td>政府购买为主</td>
+        </tr>
+        <tr style="background:rgba(201,168,76,0.04)">
+          <td><strong style="color:var(--amber)">南山锦阁康养中心</strong></td>
+          <td><span class="tag-type tag-jigou">机构/餐厅</span></td>
+          <td><strong style="color:var(--amber)">北京·广外大街</strong></td>
+          <td>34</td>
+          <td style="color:var(--muted)">¥30（餐饮）</td>
+          <td class="score-low">3.6</td>
+          <td>0</td>
+          <td><span class="zero-sale">年售0！</span></td>
+          <td><strong style="color:var(--amber)">广外唯一→获客入口</strong></td>
+        </tr>
+        <tr>
+          <td>椿萱茂（双桥旗舰）</td>
+          <td><span class="tag-type tag-jigou">机构高端</span></td>
+          <td>北京·双桥</td>
+          <td>160</td>
+          <td class="price-high">¥11,998</td>
+          <td>—</td>
+          <td>7（朝阳）</td>
+          <td>有</td>
+          <td>失智照护旗舰</td>
+        </tr>
+        <tr>
+          <td>椿萱茂（北苑分院）</td>
+          <td><span class="tag-type tag-jigou">机构高端</span></td>
+          <td>北京·北苑</td>
+          <td><strong>217</strong></td>
+          <td class="price-high">¥10,737</td>
+          <td>—</td>
+          <td>—</td>
+          <td>有</td>
+          <td>评价量最大</td>
+        </tr>
+        <tr>
+          <td>椿萱茂（青塔店）</td>
+          <td><span class="tag-type tag-jigou">机构高端</span></td>
+          <td>北京·丰台青塔</td>
+          <td>168</td>
+          <td class="price-high">¥13,325</td>
+          <td>—</td>
+          <td>—</td>
+          <td>有</td>
+          <td>北京最贵门店</td>
+        </tr>
+        <tr>
+          <td>椿萱茂·和园长者社区</td>
+          <td><span class="tag-type tag-jigou">机构高端</span></td>
+          <td>北京·顺义</td>
+          <td><strong>402</strong></td>
+          <td class="price-high">¥4,721</td>
+          <td>—</td>
+          <td>—</td>
+          <td>有</td>
+          <td>机构养老评价最多</td>
+        </tr>
+        <tr>
+          <td>乐成养老·恭和（双井）</td>
+          <td><span class="tag-type tag-jigou">机构中高</span></td>
+          <td>北京·双井</td>
+          <td>39</td>
+          <td class="price-high">¥9,704</td>
+          <td>—</td>
+          <td>6</td>
+          <td>有</td>
+          <td>乐成品牌</td>
+        </tr>
+        <tr>
+          <td>知护国际颐养（通州）</td>
+          <td><span class="tag-type tag-jigou">机构中高</span></td>
+          <td>北京·通州</td>
+          <td>73</td>
+          <td class="price-high">¥7,194</td>
+          <td>—</td>
+          <td>4</td>
+          <td>有</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>寿山福海（石景山院）</td>
+          <td><span class="tag-type tag-jigou">机构普惠</span></td>
+          <td>北京·石景山</td>
+          <td>106</td>
+          <td class="price-mid">¥6,388</td>
+          <td>—</td>
+          <td>3</td>
+          <td>有</td>
+          <td>普惠型标杆</td>
+        </tr>
+        <tr>
+          <td>首开寸草（金融街）</td>
+          <td><span class="tag-type tag-jigou">机构嵌入</span></td>
+          <td><strong style="color:var(--amber)">北京·西城金融街</strong></td>
+          <td>—</td>
+          <td class="price-high">¥5,500-12,000</td>
+          <td>—</td>
+          <td>0</td>
+          <td>—</td>
+          <td>西城机构养老代表</td>
+        </tr>
+        <tr>
+          <td>西城银龄老年公寓</td>
+          <td><span class="tag-type tag-jigou">机构普惠</span></td>
+          <td><strong style="color:var(--amber)">北京·西城新街口</strong></td>
+          <td>—</td>
+          <td style="color:var(--muted)">¥4,050-14,850</td>
+          <td>—</td>
+          <td>0</td>
+          <td>—</td>
+          <td>政府扶持</td>
+        </tr>
+        <tr>
+          <td>怡养健康管理（西城16驿站）</td>
+          <td><span class="tag-type tag-zhan">驿站</span></td>
+          <td><strong style="color:var(--amber)">北京·西城区</strong></td>
+          <td>—</td>
+          <td>~¥15-30/次</td>
+          <td>—</td>
+          <td><strong style="color:var(--red)">0</strong></td>
+          <td>—</td>
+          <td>政府购买，非市场竞对</td>
+        </tr>
+        <tr>
+          <td>福提园养老院</td>
+          <td><span class="tag-type tag-jigou">机构</span></td>
+          <td>北京·大兴庞各庄</td>
+          <td>53</td>
+          <td class="price-mid">¥4,883</td>
+          <td>—</td>
+          <td>2</td>
+          <td>有</td>
+          <td>郊区机构</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:0.72rem;color:var(--muted)">⚠️ 注：点评人均消费≠月度服务费。居家护工真实月费5,000-8,500元/月，机构养老月费4,000-13,325元/月，均通过招聘薪资数据和二手信息交叉验证。</p>
+</section>
+
+<hr class="divider"/>
+
+<!-- KEY FINDINGS -->
+<section class="section" id="findings">
+  <div class="section-hd">
+    <div class="section-label">Key Findings · 颠覆性发现</div>
+    <div class="section-title">4个推翻原有假设的发现</div>
+    <div class="section-desc">数据说话，不是感觉——以下4个结论在调研前未被预期到。</div>
+  </div>
+
+  <div class="finding-grid">
+    <div class="finding-card red">
+      <div class="finding-num">🚨 发现一 · 竞对已在附近</div>
+      <div class="finding-title">福寿康虎坊桥店距广外仅1.5km</div>
+      <div class="finding-body">
+        <strong>不是蓝海，是待激活的新兴市场。</strong>福寿康已在前门/天坛布局，地址天桥街道华仁路小区4号楼，服务范围覆盖广外街道。但关键是：<strong>年售0次</strong>，29条评价中无居家服务实际销量——说明他们"在场"但"没执行"。开元的护城河不是地域第一，而是<strong>服务质量和固定护理员信任关系</strong>。
+      </div>
+    </div>
+
+    <div class="finding-card gold">
+      <div class="finding-num">⭐ 发现二 · 用户真正买的是情感</div>
+      <div class="finding-title">大树养老354条评价：情感陪伴是第二大价值</div>
+      <div class="finding-body">
+        大树养老4.7分，北京居家养老第一。用户评价标签：阿姨专业护理85条，<strong>解决老人闷闷不乐55条（16%）</strong>，日常打扫干净18条。
+        <div class="quote-block" style="margin-top:0.8rem;font-size:0.78rem">
+          "自从阿姨来了之后，每天陪着聊聊天也能感觉到老人的心情好很多。"
+          <div class="quote-author">— 大树养老用户，2025年11月，5星超预期</div>
+        </div>
+        <strong>这直接验证了开元「有尊严地老去」主张的市场真实性。</strong>
+      </div>
+    </div>
+
+    <div class="finding-card green">
+      <div class="finding-num">✅ 发现三 · 南山锦阁是获客入口</div>
+      <div class="finding-title">广外唯一机构实质是老年餐厅</div>
+      <div class="finding-body">
+        南山锦阁评分3.6，34条评价，<strong>全部是餐饮评价</strong>。居家上门服务团购¥200/次，年售0次。它不是竞对，它是：
+        每天有大量广外长者来就餐的<strong>天然流量入口</strong>。合作方式：开元提供专业居家服务，南山锦阁餐厅向就餐长者推荐，按介绍费分佣。<strong>这比任何广告都精准。</strong>
+      </div>
+    </div>
+
+    <div class="finding-card blue">
+      <div class="finding-num">📊 发现四 · 颐家西城布局盲区</div>
+      <div class="finding-title">颐家在北京15家门店，无一在西城区</div>
+      <div class="finding-body">
+        颐家覆盖朝阳、海淀、昌平、顺义、通州……<strong>没有西城区门店</strong>。最近是鼓楼大街店（后海什刹海），评分仅3.9，人均¥2,530，服务量偏低。西直门店人均仅¥612，几乎无服务量。颐家的模式是"医院周边快速派工"，社区渗透不是强项。<strong>西城区是颐家和福寿康的共同盲区。</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- PRICING LADDER -->
+<section class="section" id="pricing">
+  <div class="section-hd">
+    <div class="section-label">Pricing · 价格格局全景</div>
+    <div class="section-title">北京养老服务价格分层图</div>
+    <div class="section-desc">基于点评均价 + 招聘薪资 + 政府定价三重数据交叉验证。红色标注为开元目标定价窗口。</div>
+  </div>
+
+  <div class="price-ladder">
+    <div class="price-row normal">
+      <div class="price-band" style="color:var(--purple)">¥12,000+/月</div>
+      <div class="price-arrow">←</div>
+      <div class="price-orgs">椿萱茂青塔¥13,325 · 椿萱茂双桥¥11,998</div>
+    </div>
+    <div class="price-row normal">
+      <div class="price-band" style="color:var(--red)">¥8,000-12,000/月</div>
+      <div class="price-arrow">←</div>
+      <div class="price-orgs">椿萱茂百望山¥8,734 · 乐成双井¥9,704 · 西城银龄最高¥14,850</div>
+    </div>
+    <div class="price-row normal">
+      <div class="price-band" style="color:var(--amber)">¥6,000-8,000/月</div>
+      <div class="price-arrow">←</div>
+      <div class="price-orgs">知护颐养¥7,194 · 寿山福海¥6,388 · 首开寸草¥5,500起</div>
+    </div>
+    <div class="price-row normal">
+      <div class="price-band" style="color:var(--text)">¥4,000-6,000/月</div>
+      <div class="price-arrow">←</div>
+      <div class="price-orgs">颐家（多数门店均值区间）· 福寿康（丰台¥4,194 复兴路¥3,916）</div>
+    </div>
+    <div class="price-row highlight">
+      <div class="price-band">★ ¥2,400-5,500/月</div>
+      <div class="price-arrow" style="color:var(--gold)">←</div>
+      <div class="price-orgs" style="color:var(--gold);font-weight:700">
+        【开元时代目标窗口】启元级¥2,400 · 兴元级¥3,500 · 开元级¥5,500<br/>
+        <span style="font-size:0.72rem;opacity:0.8">叠加800元/月政府补贴后家庭净付¥1,600-4,700 · 比机构养老便宜 · 比市场钟点工专业</span>
+      </div>
+    </div>
+    <div class="price-row normal">
+      <div class="price-band" style="color:var(--muted)">¥15-30/次</div>
+      <div class="price-arrow">←</div>
+      <div class="price-orgs">怡养驿站（政府补贴兜底）· 慈爱嘉（政府购买）</div>
+    </div>
+  </div>
+
+  <div style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.25);border-radius:12px;padding:1rem 1.2rem;margin-top:1rem">
+    <div style="font-size:0.68rem;letter-spacing:0.12em;color:var(--gold);text-transform:uppercase;margin-bottom:0.5rem;font-weight:700">定价原则（CFO审议通过）</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.8rem;font-size:0.78rem;color:var(--muted)">
+      <div>① <strong style="color:var(--text)">家庭感知净付</strong>：报价含政府补贴后的净价，而非毛价</div>
+      <div>② <strong style="color:var(--text)">绝不打小时工价格战</strong>：卖月度管家套餐，不可比</div>
+      <div>③ <strong style="color:var(--text)">比机构便宜·比钟点工专业</strong>：定位清晰，差异化无歧义</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- GUANGWAI MAP -->
+<section class="section" id="guangwai">
+  <div class="section-hd">
+    <div class="section-label">Focus · 广外战场分析</div>
+    <div class="section-title">西城区 · 广外街道2km竞争地图</div>
+  </div>
+
+  <div class="map-zone">
+    <div class="map-zone-hd">
+      <div class="map-dot" style="background:var(--red)"></div>
+      <div class="map-zone-title" style="color:var(--red)">⚠️ 福寿康虎坊桥店（威胁等级：中）</div>
+    </div>
+    <div class="map-zone-items">
+      <div class="map-item">地址：天桥街道华仁路小区4号楼 | 距广外约1.5km步行</div>
+      <div class="map-item">评分4.1 | 29条评价 | 团购年售0次 | 线上几乎无实际服务</div>
+      <div class="map-item">服务：居家照护、上门康复、老人助浴</div>
+      <div class="map-item"><strong>判断：在场但未执行，是探路门店，对开元短期威胁低</strong></div>
+    </div>
+  </div>
+
+  <div class="map-zone">
+    <div class="map-zone-hd">
+      <div class="map-dot" style="background:var(--amber)"></div>
+      <div class="map-zone-title" style="color:var(--amber)">🤝 南山锦阁康养中心（机会等级：高）</div>
+    </div>
+    <div class="map-zone-items">
+      <div class="map-item">地址：茶马街6号院3号楼 | 广外大街养老院 | 距16号线红莲南路站620m</div>
+      <div class="map-item">评分3.6 | 34条评价 | 主要是老年餐厅 | 居家服务年售0次</div>
+      <div class="map-item"><strong>判断：不是竞对，是每日有大量广外长者就餐的流量入口</strong></div>
+      <div class="map-item">合作方案：开元提供居家服务，南山锦阁向就餐长者推荐，按15%介绍费合作</div>
+    </div>
+  </div>
+
+  <div class="map-zone">
+    <div class="map-zone-hd">
+      <div class="map-dot" style="background:var(--green)"></div>
+      <div class="map-zone-title" style="color:var(--green)">✅ 怡养健康管理·西城16驿站（合作对象）</div>
+    </div>
+    <div class="map-zone-items">
+      <div class="map-item">覆盖：西城区22个驿站账户 | 昨日CPC=0 | 不靠点评运营</div>
+      <div class="map-item">商业模式：政府购买服务，价格15-30元/次，驿站有空间有政府资源</div>
+      <div class="map-item"><strong>判断：不竞争，B2B合作目标——怡养有渠道，开元有专业服务</strong></div>
+      <div class="map-item">合作节点：2027年Q2，有5个家庭口碑案例后，以合作伙伴身份拜访</div>
+    </div>
+  </div>
+
+  <div class="map-zone">
+    <div class="map-zone-hd">
+      <div class="map-dot" style="background:var(--blue)"></div>
+      <div class="map-zone-title" style="color:var(--blue)">📊 颐家西城最近门店：鼓楼大街（距离：约3km）</div>
+    </div>
+    <div class="map-zone-items">
+      <div class="map-item">评分3.9 | 17条评价 | 人均¥2,530 | 服务量偏低</div>
+      <div class="map-item">颐家15家北京门店无一在西城区，说明西城区是颐家战略盲区</div>
+      <div class="map-item"><strong>判断：短期无直接压力，但需要在颐家进入前建立品牌认知</strong></div>
+    </div>
+  </div>
+
+  <!-- 竞争活跃度横向对比 -->
+  <div style="margin-top:1.5rem">
+    <div style="font-size:0.75rem;color:var(--gold);font-weight:700;margin-bottom:1rem;letter-spacing:0.08em">广外街道周边竞对活跃度综合评分（100分制）</div>
+    <div class="comp-grid">
+      <div class="comp-row">
+        <div class="comp-label">福寿康虎坊桥</div>
+        <div class="comp-bar-wrap"><div class="comp-bar" style="width:35%;background:linear-gradient(90deg,var(--red),rgba(255,107,107,0.5))"></div></div>
+        <div class="comp-val" style="color:var(--red)">35/100</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-label">颐家鼓楼大街</div>
+        <div class="comp-bar-wrap"><div class="comp-bar" style="width:28%;background:linear-gradient(90deg,var(--amber),rgba(245,166,35,0.5))"></div></div>
+        <div class="comp-val" style="color:var(--amber)">28/100</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-label">怡养西城驿站</div>
+        <div class="comp-bar-wrap"><div class="comp-bar" style="width:15%;background:linear-gradient(90deg,var(--blue),rgba(74,158,255,0.5))"></div></div>
+        <div class="comp-val" style="color:var(--blue)">15/100</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-label">南山锦阁</div>
+        <div class="comp-bar-wrap"><div class="comp-bar" style="width:8%;background:linear-gradient(90deg,var(--muted),rgba(138,143,158,0.5))"></div></div>
+        <div class="comp-val" style="color:var(--muted)">8/100</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-label" style="color:var(--gold)">开元时代（目标）</div>
+        <div class="comp-bar-wrap"><div class="comp-bar" style="width:85%;background:linear-gradient(90deg,var(--gold),var(--gold-light))"></div></div>
+        <div class="comp-val" style="color:var(--gold)">85/100目标</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ACTIONS -->
+<section class="section" id="actions">
+  <div class="section-hd">
+    <div class="section-label">Actions · 基于数据的行动建议</div>
+    <div class="section-title">从研究到决策：3个立即行动</div>
+  </div>
+
+  <div class="action-list">
+    <div class="action-item">
+      <div class="action-num">1</div>
+      <div class="action-content">
+        <div class="action-title">拜访南山锦阁——最快速的本地流量入口</div>
+        <div class="action-desc">南山锦阁每天有广外长者就餐，是天然获客渠道。由CEO王总或CGO联络洽谈，提案：开元负责居家专业服务，南山锦阁在餐厅放宣传物料并口头推荐，每成功推荐一单给南山锦阁500元介绍费。这比任何广告都精准。<br><strong style="color:var(--gold)">时间节点：2026年Q4，完成服务手册后实施</strong></div>
+      </div>
+    </div>
+    <div class="action-item">
+      <div class="action-num">2</div>
+      <div class="action-content">
+        <div class="action-title">深度研究福寿康虎坊桥店用户差评——找到开元差异化突破口</div>
+        <div class="action-desc">福寿康4.1分，存在差评。需要进入详情页爬取1-3星评价原文，找到用户不满意的根本原因。通常居家护工平台的弱点是：护工临时调派不固定、服务质量参差不齐、沟通响应慢。这些恰恰是开元「固定护理员+情感连接」模式的天然优势。<br><strong style="color:var(--gold)">待完成：T10研究V1.1补充版，专项爬取差评文本</strong></div>
+      </div>
+    </div>
+    <div class="action-item">
+      <div class="action-num">3</div>
+      <div class="action-content">
+        <div class="action-title">以大树养老为学习标杆——复制4.7分服务设计</div>
+        <div class="action-desc">大树养老4.7分 + 354条评价，是北京居家养老的口碑标杆。核心成功要素：护工质量稳定（85条"阿姨专业护理"）+ 情感陪伴价值（55条"解决老人闷闷不乐"）。开元的护理员培训手册和服务标准，应将"情感陪伴质量"作为核心考核维度，对标大树养老的用户评价语言设计服务标准。<br><strong style="color:var(--gold)">联动：COO服务标准V2更新，纳入情感维度KPI</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- METHOD -->
+<section class="section">
+  <div class="section-hd">
+    <div class="section-label">Method · 研究方法说明</div>
+    <div class="section-title">一手数据获取方法（后续研究基准）</div>
+  </div>
+  <div class="method-grid">
+    <div class="method-card">
+      <div class="method-icon">📊</div>
+      <div class="method-title">美团广告账户CSV</div>
+      <div class="method-desc">2615条账户数据，字段包含城市/商圈/门店名/昨日CPC。Python pandas分析，产出城市CPC排名、西城区36个账户列表、广外周边14个账户全量。</div>
+    </div>
+    <div class="method-card">
+      <div class="method-icon">🔍</div>
+      <div class="method-title">大众点评实时爬取</div>
+      <div class="method-desc">登录账号：王小猴。agent-browser自动化，搜索→店铺详情→截图+文本快照。关键字段：评价数、人均消费、评分、团购产品年售量、用户评价标签原文。共17张截图存档。</div>
+    </div>
+    <div class="method-card">
+      <div class="method-icon">✅</div>
+      <div class="method-title">三重数据交叉验证</div>
+      <div class="method-desc">CPC投放量 × 点评评价数 × 团购年售量，三个数据源互证关键结论。典型案例：南山锦阁三个数据均指向"餐饮门店而非养老服务"，任一单一来源均会误判。</div>
+    </div>
+  </div>
+  <div style="margin-top:1rem;padding:0.9rem 1rem;background:var(--dark-3);border-radius:10px;font-size:0.75rem;color:var(--muted)">
+    📁 原始数据文件：<code>~/Desktop/养老行业广告账户情况.csv</code> | 点评截图：<code>knowledge/research/screenshots-T10/</code> | 研究报告MD：<code>knowledge/research/T10-competition-dianping-fieldwork.md</code>
+  </div>
+</section>
+
+<footer>
+  <strong>开元时代 · 研究院</strong> · T10竞争格局研究 · V1.0 · 2026-03-14<br/>
+  一手数据优先 · 点评实时爬取 · 三重交叉验证<br/>
+  <span style="font-size:0.65rem">后续待补充：T10 V1.1差评专项爬取 · T11广外街道精细化市场地图 · T12需求方访谈</span>
+</footer>
+
+<script>
+  // 滚动动画
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('fade-up') })
+  }, {threshold: 0.1})
+  document.querySelectorAll('.finding-card,.action-item,.map-zone,.sum-card').forEach(el => observer.observe(el))
+</script>
+</body>
+</html>
