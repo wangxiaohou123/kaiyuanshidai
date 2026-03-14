@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>开元时代 · 创始团队规划 · 联创绿地图</title>
+  <style>
+    :root {
+      --bg: #FAFAF8; --bg2: #F2F1ED; --bg3: #ECEAE4; --bg4: #E5E2DA;
+      --gold: #8B6914; --gold-light: #B8940F; --gold-dim: #6A5010;
+      --text: #1C1C1E; --muted: #6C6C70; --border: rgba(139,105,20,0.18);
+      --green: #1D7A45; --blue: #1A56A8; --red: #C0392B;
+      --amber: #C87D0E; --purple: #6B3FA0;
+      --green-bg: rgba(29,122,69,0.08); --blue-bg: rgba(26,86,168,0.08);
+      --red-bg: rgba(192,57,43,0.08); --amber-bg: rgba(200,125,14,0.08);
+      --purple-bg: rgba(107,63,160,0.08);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+      background: var(--bg); color: var(--text); line-height:1.7;
+    }
+
+    /* ── HEADER ── */
+    .page-header {
+      background: linear-gradient(135deg, #1C1C1E 0%, #2C2416 100%);
+      color: #EAE6D8; padding: 3rem 2rem 2.5rem;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(184,148,15,0.18), transparent);
+      pointer-events: none;
+    }
+    .header-label {
+      font-size: 0.68rem; color: #B8940F; letter-spacing: 4px;
+      text-transform: uppercase; margin-bottom: 0.8rem; position:relative;
+    }
+    .header-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 900;
+      color: #EAE6D8; margin-bottom: 0.5rem; position:relative;
+    }
+    .header-sub {
+      font-size: 0.9rem; color: rgba(234,230,216,0.6); position:relative;
+    }
+    .header-date {
+      margin-top: 1rem; font-size: 0.72rem;
+      color: rgba(184,148,15,0.8); letter-spacing: 2px; position:relative;
+    }
+
+    /* ── CONTAINER ── */
+    .container { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+
+    /* ── SECTION ── */
+    .section { margin: 3rem 0; }
+    .section-label {
+      font-size: 0.65rem; color: var(--gold); letter-spacing: 3px;
+      text-transform: uppercase; font-weight: 700; margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem;
+    }
+    .section-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.8rem; }
+
+    /* ── 分割线 ── */
+    .divider {
+      border: none; border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* ── FOUNDER HERO ── */
+    .founder-hero {
+      background: linear-gradient(135deg, var(--bg2), var(--bg3));
+      border: 1.5px solid var(--border); border-radius: 20px;
+      padding: 2rem; margin-bottom: 2rem;
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 1.8rem; align-items: center;
+    }
+    .founder-avatar {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; font-weight: 900; color: #fff;
+      flex-shrink: 0; box-shadow: 0 4px 20px rgba(139,105,20,0.3);
+    }
+    .founder-name { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.2rem; }
+    .founder-title {
+      font-size: 0.78rem; color: var(--gold); font-weight: 600;
+      letter-spacing: 1px; margin-bottom: 0.8rem;
+    }
+    .founder-bio { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── 优势卡片 ── */
+    .advantage-grid {
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 1rem; margin: 1.5rem 0;
+    }
+    .advantage-card {
+      border-radius: 14px; padding: 1.2rem;
+      border: 1px solid var(--border);
+    }
+    .advantage-card .tag {
+      font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase;
+      font-weight: 700; margin-bottom: 0.5rem;
+    }
+    .advantage-card h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .advantage-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+    .advantage-card .proof {
+      margin-top: 0.6rem; padding: 0.5rem 0.7rem;
+      background: rgba(139,105,20,0.06); border-radius: 8px;
+      font-size: 0.73rem; color: var(--gold); font-style: italic;
+    }
+
+    /* ── 联创绿地图 ── */
+    .cofounder-grid {
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+      gap: 1.2rem; margin: 1.5rem 0;
+    }
+    .cofounder-card {
+      background: var(--bg2); border-radius: 16px; padding: 1.4rem;
+      border: 1.5px solid var(--border); position: relative;
+      transition: box-shadow 0.2s;
+    }
+    .cofounder-card:hover { box-shadow: 0 4px 20px rgba(139,105,20,0.12); }
+    .cofounder-priority {
+      position: absolute; top: 1rem; right: 1rem;
+      font-size: 0.62rem; padding: 2px 8px; border-radius: 20px;
+      font-weight: 700; letter-spacing: 1px;
+    }
+    .priority-p0 { background: var(--red-bg); color: var(--red); border: 1px solid rgba(192,57,43,0.25); }
+    .priority-p1 { background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(200,125,14,0.25); }
+    .priority-p2 { background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(26,86,168,0.25); }
+
+    .cofounder-role {
+      font-size: 0.68rem; color: var(--muted); letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 0.3rem;
+    }
+    .cofounder-title { font-size: 1rem; font-weight: 800; margin-bottom: 0.6rem; }
+    .cofounder-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.6; margin-bottom: 0.8rem; }
+
+    .tag-list { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; }
+    .tag {
+      font-size: 0.68rem; padding: 2px 9px; border-radius: 20px;
+      font-weight: 600;
+    }
+    .tag-skill { background: var(--green-bg); color: var(--green); border: 1px solid rgba(29,122,69,0.2); }
+    .tag-network { background: var(--purple-bg); color: var(--purple); border: 1px solid rgba(107,63,160,0.2); }
+    .tag-exp { background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(26,86,168,0.2); }
+
+    .cofounder-where {
+      padding: 0.6rem 0.8rem;
+      background: rgba(139,105,20,0.05); border-radius: 8px;
+      font-size: 0.73rem; color: var(--gold); line-height: 1.6;
+      border-left: 2px solid var(--gold);
+    }
+    .cofounder-timing {
+      margin-top: 0.6rem; font-size: 0.72rem; color: var(--muted);
+    }
+
+    /* ── 时间轴 ── */
+    .timeline { position: relative; padding-left: 1.5rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0.5rem; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(180deg, var(--gold), var(--green), var(--blue));
+      border-radius: 2px;
+    }
+    .tl-item { margin-bottom: 1.5rem; padding-left: 1rem; position: relative; }
+    .tl-dot {
+      position: absolute; left: -0.95rem; top: 0.3rem;
+      width: 10px; height: 10px; border-radius: 50%;
+      border: 2px solid var(--bg);
+    }
+    .tl-phase { font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.2rem; }
+    .tl-title { font-size: 0.95rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .tl-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── 对标 ── */
+    .benchmark-grid {
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 1rem;
+    }
+    .benchmark-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.2rem;
+    }
+    .benchmark-name { font-size: 0.82rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .benchmark-lesson { font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
+    .benchmark-apply {
+      margin-top: 0.5rem; font-size: 0.72rem; color: var(--gold);
+      font-style: italic;
+    }
+
+    /* ── 投资人叙事 ── */
+    .pitch-box {
+      background: linear-gradient(135deg, rgba(139,105,20,0.08), rgba(139,105,20,0.03));
+      border: 1.5px solid rgba(139,105,20,0.3); border-radius: 16px;
+      padding: 1.8rem;
+    }
+    .pitch-quote {
+      font-size: 1.1rem; font-weight: 700; line-height: 1.6;
+      color: var(--text); margin-bottom: 1rem;
+      border-left: 3px solid var(--gold); padding-left: 1rem;
+    }
+    .pitch-points { display: flex; flex-direction: column; gap: 0.6rem; }
+    .pitch-point {
+      display: flex; gap: 0.7rem; align-items: flex-start;
+      font-size: 0.8rem; line-height: 1.6;
+    }
+    .pitch-bullet {
+      flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%;
+      background: var(--gold); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.62rem; font-weight: 800; margin-top: 0.1rem;
+    }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      background: var(--bg3); border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem; text-align: center;
+      font-size: 0.72rem; color: var(--muted);
+    }
+
+    @media (max-width: 640px) {
+      .founder-hero { grid-template-columns: 1fr; text-align: center; }
+      .founder-avatar { margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="header-label">Founding Team · 创始团队规划</div>
+  <h1 class="header-title">开元时代 · 联创绿地图</h1>
+  <p class="header-sub">「凭什么是你们？」—— 给投资人的诚实答案</p>
+  <div class="header-date">2026年3月14日 · Day 7 · 三省六部 CSO 输出</div>
+</div>
+
+<div class="container">
+
+  <!-- ── 一 · 创始人不对称优势 ── -->
+  <div class="section">
+    <div class="section-label">Founder Advantage · 创始人画像</div>
+    <h2 class="section-title">为什么是王晶晶？</h2>
+    <p class="section-desc">不是「我懂养老」，而是「我有其他人没有的东西」——三个不对称优势叠加</p>
+
+    <div class="founder-hero">
+      <div class="founder-avatar">王</div>
+      <div>
+        <div class="founder-name">王晶晶</div>
+        <div class="founder-title">CEO · 开元时代 | 前美团·产品市场运营负责人</div>
+        <div class="founder-bio">
+          来自美团——中国最懂C端服务产品化的公司。
+          在美团深度经历了「从0到1验证服务模式，再到规模化复制」的全周期。
+          不是养老专家，但是一个懂得如何把一个好服务跑成可复制模型的产品人。
+          同时，家人在广外街道居委会任职——这给了我任何外来创业者都无法购买的「第一公里信任资本」。
+        </div>
+      </div>
+    </div>
+
+    <div class="advantage-grid">
+
+      <div class="advantage-card" style="background:var(--amber-bg);border-color:rgba(200,125,14,0.25);">
+        <div class="tag" style="color:var(--amber);">优势 01 · 互联网产品化基因</div>
+        <h4>把服务变成可复制的产品</h4>
+        <p>大多数养老创业者是「护理行业出身」——他们懂服务，但不懂标准化。我来自美团，深度参与过外卖、到店等服务产品化全周期。我们的核心护城河不是「护理技术」，而是「SOP+数据+口碑」构成的可复制服务模型。</p>
+        <div class="proof">「开元最终要成为中国居家照护领域的麦当劳——任何一个社区，按我们的标准开，都能输出同等质量的服务。」</div>
+      </div>
+
+      <div class="advantage-card" style="background:var(--green-bg);border-color:rgba(29,122,69,0.25);">
+        <div class="tag" style="color:var(--green);">优势 02 · 社区信任资本（不可购买）</div>
+        <h4>家人在广外街道居委会任职</h4>
+        <p>这不是人脉，这是「信任背书的入场券」。广外街道是北京西城区养老密度最高的街道之一。居委会是获取失能长者信息、进入家庭、获得第一批用户最快的渠道——而我们有内部人。这个优势是任何资金都买不来的。</p>
+        <div class="proof">「第一个服务家庭，不是靠广告找来的，是靠家人引荐——这是开元的原点故事。」</div>
+      </div>
+
+      <div class="advantage-card" style="background:var(--blue-bg);border-color:rgba(26,86,168,0.25);">
+        <div class="tag" style="color:var(--blue);">优势 03 · 政策感知力（先行者窗口）</div>
+        <h4>政策执行期最先动手的人</h4>
+        <p>2026年是「银发经济高质量发展」写入政府工作报告的第一年，民政部800元补贴、长护险全国建制同步落地。大多数人还在观望，我们已经在设计民政通入库路径。政策窗口期的「先入场者优势」，比资本量更重要。</p>
+        <div class="proof">「现在入场养老，就像2010年做外卖——市场刚刚被政策点燃，先跑出来的人有定价权。」</div>
+      </div>
+
+      <div class="advantage-card" style="background:var(--purple-bg);border-color:rgba(107,63,160,0.25);">
+        <div class="tag" style="color:var(--purple);">优势 04 · 愿景驱动而非纯商业驱动</div>
+        <h4>「北极星」让团队不散，让用户信任</h4>
+        <p>养老是一个「赚慢钱」的生意——纯商业驱动的团队会在第一年现金流困难时离开。开元的北极星：「每一位长者，无论贫富，都能享受到有尊严的照护」。这个使命让护理员有荣誉感，让家庭愿意口碑传播，让投资人相信这是10年长期赛道。</p>
+        <div class="proof">「我们不是在做一个养老公司，我们是在定义一代中国人老去的方式。」</div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- ── 二 · 理想团队画像 ── -->
+  <div class="section">
+    <div class="section-label">Ideal Team · 理想团队配置</div>
+    <h2 class="section-title">开元理想创始班子（5人核心）</h2>
+    <p class="section-desc">现阶段1人启动，以「联创绿地图」明确缺口——按优先级逐步引入，每一位联创都是能力乘法，不是人力加法</p>
+
+    <div class="cofounder-grid">
+
+      <!-- CEO 已有 -->
+      <div class="cofounder-card" style="border-color:rgba(139,105,20,0.5);background:linear-gradient(135deg,rgba(139,105,20,0.06),var(--bg2));">
+        <div class="cofounder-priority" style="background:rgba(29,122,69,0.12);color:var(--green);border:1px solid rgba(29,122,69,0.3);">✅ 已在位</div>
+        <div class="cofounder-role">CEO · 首席执行官</div>
+        <div class="cofounder-title">战略总指挥 · 融资叙事 · 愿景守护者</div>
+        <div class="cofounder-desc">负责公司方向、对外融资、政府关系、品牌叙事。掌握「为什么」的人——让每一个决策都朝向北极星。</div>
+        <div class="tag-list">
+          <span class="tag tag-skill">产品化</span>
+          <span class="tag tag-skill">融资叙事</span>
+          <span class="tag tag-network">社区资本</span>
+          <span class="tag tag-exp">美团系</span>
+        </div>
+        <div class="cofounder-where">
+          <strong>在位者：</strong>王晶晶<br>
+          核心贡献：互联网产品化基因 + 广外街道社区信任资本
+        </div>
+      </div>
+
+      <!-- COO P0 -->
+      <div class="cofounder-card">
+        <div class="cofounder-priority priority-p0">🔴 P0 · 最急缺</div>
+        <div class="cofounder-role">COO · 首席运营官</div>
+        <div class="cofounder-title">服务SOP守护者 · 护理员体系建设者</div>
+        <div class="cofounder-desc">
+          开元最关键的联创缺口。负责：<br>
+          ① 护理员招募×培训×留存体系<br>
+          ② 服务SOP标准化（可复制的「麦当劳手册」）<br>
+          ③ 首批10户服务的全流程质量管控
+        </div>
+        <div class="tag-list">
+          <span class="tag tag-skill">养老/护理背景</span>
+          <span class="tag tag-skill">团队管理</span>
+          <span class="tag tag-exp">3年+居家养老实操</span>
+          <span class="tag tag-network">护理员人脉网络</span>
+        </div>
+        <div class="cofounder-where">
+          <strong>从哪里找：</strong><br>
+          → 连锁居家养老机构中层管理者（想自己创业的）<br>
+          → 养老院护理部主任，厌倦了大机构官僚文化<br>
+          → 社区养老服务站负责人（有基层经验）
+        </div>
+        <div class="cofounder-timing">⏰ 引入节点：2027年Q1前（首批服务启动前）</div>
+      </div>
+
+      <!-- CFO P0 -->
+      <div class="cofounder-card">
+        <div class="cofounder-priority priority-p0">🔴 P0 · 最急缺</div>
+        <div class="cofounder-role">CFO · 首席财务官</div>
+        <div class="cofounder-title">补贴套利设计师 · 现金流守护者</div>
+        <div class="cofounder-desc">
+          养老行业盈利核心是「补贴套利+成本控制」的精算游戏。需要一位懂政府资金流向的人：<br>
+          ① 民政通入库+消费券核销全流程打通<br>
+          ② 长护险申请代办体系（家庭粘性×收入来源）<br>
+          ③ 融资财务模型（三情景×里程碑估值锚）
+        </div>
+        <div class="tag-list">
+          <span class="tag tag-skill">政府补贴申报</span>
+          <span class="tag tag-skill">财务建模</span>
+          <span class="tag tag-exp">社会企业/NGO/政府关系</span>
+          <span class="tag tag-exp">CPA更佳</span>
+        </div>
+        <div class="cofounder-where">
+          <strong>从哪里找：</strong><br>
+          → 民政系统或养老机构财务主管（懂补贴规则）<br>
+          → 医疗健康领域财务总监（懂医保/险类支付）<br>
+          → 社会创新基金（如壹基金）财务负责人
+        </div>
+        <div class="cofounder-timing">⏰ 引入节点：2027年Q1（与民政通入库同步）</div>
+      </div>
+
+      <!-- CGO P1 -->
+      <div class="cofounder-card">
+        <div class="cofounder-priority priority-p1">🟡 P1 · 次急</div>
+        <div class="cofounder-role">CGO · 首席增长官</div>
+        <div class="cofounder-title">社区渗透引擎 · 口碑飞轮设计者</div>
+        <div class="cofounder-desc">
+          养老获客不靠广告，靠「社区信任渗透」。CGO的使命：<br>
+          ① 将居委会渠道做成可复制的「社区渗透手册」<br>
+          ② 设计「故事传播」引擎（家庭→口碑→新家庭）<br>
+          ③ 西城区100社区扩张路径执行
+        </div>
+        <div class="tag-list">
+          <span class="tag tag-skill">社区运营</span>
+          <span class="tag tag-skill">增长黑客</span>
+          <span class="tag tag-network">居委会/街道人脉</span>
+          <span class="tag tag-exp">互联网C端运营</span>
+        </div>
+        <div class="cofounder-where">
+          <strong>从哪里找：</strong><br>
+          → 社区O2O/生鲜配送公司增长负责人（懂最后一公里）<br>
+          → 物业公司增值服务运营（有社区资源）<br>
+          → 美团/饿了么社区BD（懂地推+数据增长）
+        </div>
+        <div class="cofounder-timing">⏰ 引入节点：2027年Q3（验证期完成、规模化前）</div>
+      </div>
+
+      <!-- CTO P2 -->
+      <div class="cofounder-card">
+        <div class="cofounder-priority priority-p2">🔵 P2 · 阶段二引入</div>
+        <div class="cofounder-role">CTO · 首席技术官</div>
+        <div class="cofounder-title">数据护城河建造者 · AI陪伴引入者</div>
+        <div class="cofounder-desc">
+          阶段二（2028年+）的关键人——当开元有了1000户服务数据，需要技术将其变成壁垒：<br>
+          ① 服务记录系统（NPS+故事数据库）<br>
+          ② AI陪伴助手（长者情绪状态预测）<br>
+          ③ 具身智能训练数据平台（B端融资叙事核心）
+        </div>
+        <div class="tag-list">
+          <span class="tag tag-skill">AI/ML</span>
+          <span class="tag tag-skill">具身智能</span>
+          <span class="tag tag-exp">医疗健康科技背景</span>
+          <span class="tag tag-exp">数据平台经验</span>
+        </div>
+        <div class="cofounder-where">
+          <strong>从哪里找：</strong><br>
+          → 医疗AI创业公司CTO（懂老龄健康数据）<br>
+          → 大厂AI/具身智能研究员，想做有社会价值的事<br>
+          → 养老科技公司技术负责人
+        </div>
+        <div class="cofounder-timing">⏰ 引入节点：2028年（天使轮后，阶段二启动前）</div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- ── 三 · 团队建设时间轴 ── -->
+  <div class="section">
+    <div class="section-label">Team Building Timeline · 团队建设节奏</div>
+    <h2 class="section-title">从1人到5人核心团队的路径</h2>
+    <p class="section-desc">不是一次性招人，是按里程碑「精准激活」——每一位联创的引入都对应一个能力跃升</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--gold);"></div>
+        <div class="tl-phase" style="color:var(--gold);">NOW · 2026年3月–12月（储备期）</div>
+        <div class="tl-title">1人启动 · CEO单兵作业</div>
+        <div class="tl-desc">
+          完成桌面研究、商业计划书、路演准备。<br>
+          同步：建立联创候选人名单，开始「非正式接触」——不招聘，先建立关系。<br>
+          <strong style="color:var(--gold);">里程碑：完成路演BP · 确认COO/CFO候选人</strong>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--amber);"></div>
+        <div class="tl-phase" style="color:var(--amber);">M1 · 2027年Q1（首战启动期）</div>
+        <div class="tl-title">3人核心 · CEO + COO + CFO</div>
+        <div class="tl-desc">
+          COO进入：负责第一批服务家庭接触+护理员招募。<br>
+          CFO进入：负责民政通入库+长护险申请代办+现金流管理。<br>
+          三人分工清晰，可用100万启动资金跑出第一个真实故事。<br>
+          <strong style="color:var(--amber);">里程碑：3户家庭入户服务 · 民政通消费券核销打通</strong>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--green);"></div>
+        <div class="tl-phase" style="color:var(--green);">M2 · 2027年Q3-Q4（天使融资前）</div>
+        <div class="tl-title">4人核心 · +CGO加入</div>
+        <div class="tl-desc">
+          CGO进入：把「社区信任渗透」模型标准化，推进至西城区更多社区。<br>
+          天使轮路演期间，4人团队已能完整呈现：战略×运营×财务×增长的能力矩阵。<br>
+          <strong style="color:var(--green);">里程碑：10户完美故事 · NPS≥8分 · 天使轮交割</strong>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--blue);"></div>
+        <div class="tl-phase" style="color:var(--blue);">M3 · 2028年（A轮前）</div>
+        <div class="tl-title">5人核心 · +CTO加入 · 完整创始团队</div>
+        <div class="tl-desc">
+          CTO进入：将1000户服务数据变成AI训练数据护城河。<br>
+          此时开元具备完整创始团队：战略·服务·财务·增长·技术，可支撑全国复制叙事。<br>
+          <strong style="color:var(--blue);">里程碑：西城区100社区 · 1000家庭 · A轮2000-5000万</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- ── 四 · 对标成功案例 ── -->
+  <div class="section">
+    <div class="section-label">Benchmark · 对标参考</div>
+    <h2 class="section-title">哪些团队配置模型值得借鉴？</h2>
+    <p class="section-desc">不是复制，是提炼「创始团队互补逻辑」的通用规律</p>
+
+    <div class="benchmark-grid">
+      <div class="benchmark-card">
+        <div class="benchmark-name">🏠 爱帮养老（北京）</div>
+        <div class="benchmark-lesson">创始团队：政府系COO（前民政局）+ 互联网CEO。政府背景让其在补贴申报、政务关系上极具优势，互联网CEO负责产品化和融资叙事。天使轮1200万。</div>
+        <div class="benchmark-apply">→ 开元启示：CFO/COO最好有政府系背景，懂补贴游戏规则</div>
+      </div>
+      <div class="benchmark-card">
+        <div class="benchmark-name">🌿 泰康之家</div>
+        <div class="benchmark-lesson">创始人陈东升：保险出身，深度理解「长钱×长期服务」的生意逻辑。核心团队有医疗专家+运营专家+金融专家三角。但重资产，与开元路径不同。</div>
+        <div class="benchmark-apply">→ 开元启示：医疗+运营+金融三角对养老创业至关重要</div>
+      </div>
+      <div class="benchmark-card">
+        <div class="benchmark-name">🚗 滴滴早期</div>
+        <div class="benchmark-lesson">程维（运营）+ 柳青（资本+商务）：一个懂地推落地，一个懂融资战略。分工极度清晰，互不越界。早期靠社区地推起家，与开元「居委会入场」逻辑相似。</div>
+        <div class="benchmark-apply">→ 开元启示：CEO管战略融资，COO管地面执行，权责清晰是关键</div>
+      </div>
+      <div class="benchmark-card">
+        <div class="benchmark-name">💊 丁香园</div>
+        <div class="benchmark-lesson">医生+产品经理组合。专业背景建立信任，互联网思维做规模化。用「社区信任」切入专业服务，与开元用「居委会信任」切入居家照护逻辑一致。</div>
+        <div class="benchmark-apply">→ 开元启示：「专业信任×产品化」是服务平台的通用公式</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- ── 五 · 投资人叙事版 ── -->
+  <div class="section">
+    <div class="section-label">Pitch Version · 投资人叙事</div>
+    <h2 class="section-title">路演中怎么讲这一页？</h2>
+    <p class="section-desc">「创始人凭什么？」的标准答案——2分钟版本</p>
+
+    <div class="pitch-box">
+      <div class="pitch-quote">
+        「我不是养老专家，但我是最懂得如何把一个好服务变成可复制模型的人——而且我已经有了其他任何人都没有的第一公里入场券。」
+      </div>
+      <div class="pitch-points">
+        <div class="pitch-point">
+          <div class="pitch-bullet">1</div>
+          <div><strong>为什么我：</strong>美团背景带来产品化基因——我见证过外卖从0到10亿单的规模化全程，我知道服务SOP是怎么被设计出来的。养老行业现在最缺的，不是爱心，是可复制的系统。</div>
+        </div>
+        <div class="pitch-point">
+          <div class="pitch-bullet">2</div>
+          <div><strong>为什么现在：</strong>2026年是政策元年——银发经济写入政府工作报告，民政部800元补贴落地，长护险建制推进。政策窗口只有3-5年，先入场者有定价权。</div>
+        </div>
+        <div class="pitch-point">
+          <div class="pitch-bullet">3</div>
+          <div><strong>为什么这里：</strong>我家人在广外街道居委会任职。这不是人脉，这是「信任的基础设施」——第一个服务家庭是家人引荐，不是广告投放。这个优势，钱买不来。</div>
+        </div>
+        <div class="pitch-point">
+          <div class="pitch-bullet">4</div>
+          <div><strong>团队缺口是什么：</strong>我们需要一位懂居家养老实操的COO和一位懂政府补贴的CFO——我正在寻找他们，这也是今天向你融资的原因之一：用天使金引入最对的人。</div>
+        </div>
+        <div class="pitch-point">
+          <div class="pitch-bullet">5</div>
+          <div><strong>完整团队长什么样：</strong>5人核心——CEO+COO+CFO+CGO+CTO，分别覆盖战略·服务·财务·增长·技术。现在是1人启动，2027年引入COO+CFO，2027年底4人，2028年满配。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- ── 六 · 联创寻访计划 ── -->
+  <div class="section">
+    <div class="section-label">Recruitment Plan · 联创寻访计划</div>
+    <h2 class="section-title">本月要做的3件事</h2>
+    <p class="section-desc">不急着招聘，先建关系——联创要「谈恋爱」，不是「租人」</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;">
+
+      <div style="background:var(--red-bg);border:1px solid rgba(192,57,43,0.25);border-radius:14px;padding:1.2rem;">
+        <div style="font-size:0.65rem;color:var(--red);letter-spacing:2px;font-weight:700;margin-bottom:0.5rem;">🔴 P0 本月内</div>
+        <div style="font-size:0.9rem;font-weight:700;margin-bottom:0.4rem;">建立COO/CFO候选人名单（5-10人）</div>
+        <div style="font-size:0.78rem;color:var(--muted);line-height:1.6;">
+          渠道：领英搜索「居家养老运营总监」「养老机构财务总监」<br>
+          + 养老行业协会活动（民政部养老服务人员培训）<br>
+          + 向王总现有人脉征集推荐
+        </div>
+      </div>
+
+      <div style="background:var(--amber-bg);border:1px solid rgba(200,125,14,0.25);border-radius:14px;padding:1.2rem;">
+        <div style="font-size:0.65rem;color:var(--amber);letter-spacing:2px;font-weight:700;margin-bottom:0.5rem;">🟡 P1 本月内</div>
+        <div style="font-size:0.9rem;font-weight:700;margin-bottom:0.4rem;">完成1-2次「非正式咖啡」初探</div>
+        <div style="font-size:0.78rem;color:var(--muted);line-height:1.6;">
+          话术：「不是招聘，是聊养老创业机会」<br>
+          目标：了解对方创业意愿、薪资期待、资源网络<br>
+          输出：候选人画像评分表（积极性×能力×互补性）
+        </div>
+      </div>
+
+      <div style="background:var(--blue-bg);border:1px solid rgba(26,86,168,0.25);border-radius:14px;padding:1.2rem;">
+        <div style="font-size:0.65rem;color:var(--blue);letter-spacing:2px;font-weight:700;margin-bottom:0.5rem;">🔵 P2 本季度</div>
+        <div style="font-size:0.9rem;font-weight:700;margin-bottom:0.4rem;">完成联创协议框架设计</div>
+        <div style="font-size:0.78rem;color:var(--muted);line-height:1.6;">
+          核心条款：股权分配（创始人稀释底线）<br>
+          Vesting周期：4年·1年Cliff（对齐长期利益）<br>
+          角色边界：各司其职·CEO有最终决策权
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="page-footer">
+  <strong>开元时代 · 联创绿地图</strong> · 2026年3月14日 · Day 7<br>
+  <span style="margin-top:0.3rem;display:block;">由三省六部 CSO 输出 · 苏格拉底质询版 · 内部机密文件</span>
+</div>
+
+</body>
+</html>
