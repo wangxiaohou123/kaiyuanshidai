@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T01 · 需求洞察 · 开元研究院</title>
+<style>
+  :root {
+    --gold: #9B6A1A; --gold-light: #C4892A; --gold-dim: #7A5215;
+    --bg: #FAFAF8; --bg2: #F2F1ED; --bg3: #ECEAE4; --bg4: #E5E2DA;
+    --text: #1C1C1E; --muted: #6C6C70; --border: rgba(139,105,20,0.15);
+    --green: #1D7A45; --blue: #1A56A8; --red: #C0392B; --amber: #C87D0E;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text); line-height:1.7; }
+
+  /* ── 顶部 Banner ── */
+  .banner {
+    background: linear-gradient(135deg, #2C1F10 0%, #4A3520 60%, #6B4C28 100%);
+    color: #F0E6D2; padding: 48px 40px 36px;
+  }
+  .banner-tag { font-size:11px; letter-spacing:4px; text-transform:uppercase; color:#C4892A; margin-bottom:12px; }
+  .banner h1 { font-size:32px; font-weight:700; letter-spacing:2px; margin-bottom:8px; }
+  .banner .subtitle { font-size:15px; color:#D4C4A0; margin-bottom:24px; }
+  .meta-row { display:flex; gap:24px; flex-wrap:wrap; }
+  .meta-pill { background:rgba(196,137,42,0.2); border:1px solid rgba(196,137,42,0.4); border-radius:20px; padding:4px 14px; font-size:12px; color:#C4892A; }
+
+  /* ── 摘要卡片 ── */
+  .summary-section { padding: 32px 40px; background: var(--bg2); border-bottom: 1px solid var(--border); }
+  .summary-label { font-size:11px; letter-spacing:3px; color:var(--muted); margin-bottom:8px; }
+  .summary-text { font-size:17px; font-weight:600; color:var(--text); line-height:1.6; border-left:3px solid var(--gold); padding-left:16px; }
+
+  /* ── 主体 ── */
+  .main { max-width:900px; margin:0 auto; padding:40px; }
+
+  /* ── 结论卡组 ── */
+  .conclusions { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:32px 0; }
+  .con-card { background:#fff; border:1px solid var(--border); border-radius:12px; padding:20px; position:relative; }
+  .con-card::before { content:attr(data-num); position:absolute; top:12px; right:14px; font-size:28px; font-weight:800; color:var(--border); }
+  .con-card .label { font-size:10px; letter-spacing:2px; color:var(--gold); margin-bottom:6px; }
+  .con-card h3 { font-size:14px; font-weight:700; color:var(--text); margin-bottom:8px; }
+  .con-card p { font-size:13px; color:var(--muted); line-height:1.6; }
+  @media(max-width:680px){ .conclusions{ grid-template-columns:1fr; } }
+
+  /* ── 三类角色 ── */
+  .roles { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:24px 0; }
+  .role-card { border-radius:12px; padding:20px; text-align:center; }
+  .role-card.a { background:rgba(26,86,168,0.08); border:1px solid rgba(26,86,168,0.2); }
+  .role-card.b { background:rgba(155,106,26,0.08); border:1px solid rgba(155,106,26,0.2); }
+  .role-card.c { background:rgba(29,122,69,0.08); border:1px solid rgba(29,122,69,0.2); }
+  .role-card .icon { font-size:28px; margin-bottom:8px; }
+  .role-card h4 { font-size:13px; font-weight:700; margin-bottom:4px; }
+  .role-card p { font-size:12px; color:var(--muted); }
+  @media(max-width:680px){ .roles{ grid-template-columns:1fr; } }
+
+  /* ── 市场数字 ── */
+  .numbers { display:flex; gap:20px; flex-wrap:wrap; margin:24px 0; }
+  .num-box { flex:1; min-width:140px; background:#fff; border-radius:12px; padding:20px; text-align:center; border:1px solid var(--border); }
+  .num-box .n { font-size:32px; font-weight:800; color:var(--gold); }
+  .num-box .u { font-size:13px; color:var(--muted); margin-top:4px; }
+
+  /* ── 苏格拉底问答 ── */
+  .socrates { margin:32px 0; }
+  .qa-item { background:#fff; border:1px solid var(--border); border-radius:12px; padding:24px; margin-bottom:16px; }
+  .qa-q { font-size:13px; font-weight:700; color:var(--blue); margin-bottom:12px; display:flex; gap:10px; align-items:flex-start; }
+  .qa-q .badge { background:var(--blue); color:#fff; border-radius:4px; padding:2px 8px; font-size:10px; flex-shrink:0; margin-top:2px; }
+  .qa-breakthrough { background:rgba(200,125,14,0.08); border-left:3px solid var(--amber); border-radius:6px; padding:12px 16px; margin:12px 0; font-size:13px; }
+  .qa-breakthrough::before { content:"⚡ 突破点  "; font-weight:700; color:var(--amber); }
+  .qa-conclusion { background:rgba(29,122,69,0.07); border-radius:8px; padding:14px 16px; font-size:13px; }
+  .qa-conclusion::before { content:"✅ 修正结论  "; font-weight:700; color:var(--green); }
+
+  /* ── 待验证 ── */
+  .unverified { background:rgba(192,57,43,0.06); border:1px solid rgba(192,57,43,0.2); border-radius:12px; padding:20px; margin:24px 0; }
+  .unverified h3 { font-size:13px; font-weight:700; color:var(--red); margin-bottom:12px; }
+  .unverified li { font-size:13px; color:var(--muted); margin-bottom:6px; margin-left:16px; }
+
+  /* ── 行动 ── */
+  .actions { background:var(--bg2); border-radius:12px; padding:20px; margin:24px 0; }
+  .actions h3 { font-size:13px; font-weight:700; margin-bottom:12px; }
+  .action-row { display:flex; gap:12px; align-items:center; padding:10px 0; border-bottom:1px solid var(--border); }
+  .action-row:last-child { border-bottom:none; }
+  .action-who { background:var(--gold); color:#fff; border-radius:4px; padding:2px 8px; font-size:11px; flex-shrink:0; }
+  .action-text { font-size:13px; }
+  .action-when { font-size:11px; color:var(--muted); margin-left:auto; flex-shrink:0; }
+
+  h2 { font-size:18px; font-weight:700; margin:40px 0 16px; padding-left:12px; border-left:3px solid var(--gold); }
+  .disclaimer { font-size:11px; color:var(--muted); text-align:center; padding:24px; border-top:1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="banner-tag">开元研究院 · Research Institute</div>
+  <h1>T01 · 需求洞察</h1>
+  <div class="subtitle">广外街道居家养老服务需求深度研究 · 苏格拉底质询版</div>
+  <div class="meta-row">
+    <span class="meta-pill">📅 2026-03-12</span>
+    <span class="meta-pill">🏛️ 班子四线联合质询</span>
+    <span class="meta-pill">V2 · 修正版</span>
+    <span class="meta-pill">🔒 内部机密</span>
+  </div>
+</div>
+
+<div class="summary-section">
+  <div class="summary-label">ONE-SENTENCE SUMMARY</div>
+  <div class="summary-text">居家养老服务存在「决策者·服务接受者·日常联系人」三角结构，开元必须同时赢得子女信任、长者满意和邻居口碑，任何单一策略均不足以建立护城河。</div>
+</div>
+
+<div class="main">
+
+  <h2>📊 市场基本面</h2>
+  <div class="numbers">
+    <div class="num-box"><div class="n">31,973</div><div class="u">广外街道中度以上失能长者（人）<br><small>北京市民政局 2024</small></div></div>
+    <div class="num-box"><div class="n">2,400</div><div class="u">单家庭月均付费能力（元）<br><small>深度访谈样本</small></div></div>
+    <div class="num-box"><div class="n">800</div><div class="u">民政部失能补贴（元/月）<br><small>2026.1.1起执行</small></div></div>
+    <div class="num-box"><div class="n">12%</div><div class="u">目标可渗透家庭比例<br><small>测算值，待验证</small></div></div>
+  </div>
+
+  <h2>🎯 三类角色模型（核心修正结论）</h2>
+  <div class="roles">
+    <div class="role-card a">
+      <div class="icon">👨‍👩‍👧</div>
+      <h4>决策者：子女</h4>
+      <p>付费 · 最终拍板<br>营销重点：便利性 + 安心感</p>
+    </div>
+    <div class="role-card b">
+      <div class="icon">👴</div>
+      <h4>服务接受者：长者</h4>
+      <p>每日相处 · 体验主体<br>服务重点：尊严感 + 熟悉度</p>
+    </div>
+    <div class="role-card c">
+      <div class="icon">🤝</div>
+      <h4>口碑传播者：邻居/居委</h4>
+      <p>日常接触 · 社区推荐<br>口碑重点：护理员态度 + 礼貌</p>
+    </div>
+  </div>
+
+  <h2>🔍 苏格拉底质询记录</h2>
+  <div class="socrates">
+
+    <div class="qa-item">
+      <div class="qa-q"><span class="badge">Q1</span>「子女是购买决策者」这个假设，你是怎么验证的？子女在外地时，谁是实际联系人？</div>
+      <div class="qa-breakthrough">「决策者」「服务接受者」「日常联系人」是三个完全不同的角色，服务设计和营销必须分层针对，不能混为一谈。</div>
+      <div class="qa-conclusion">营销打子女（安心、透明）；服务留长者（尊严、熟悉）；口碑靠邻居（礼貌、主动）。</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q"><span class="badge">Q2</span>31,973 是哪一年的数据？口径是什么？轻度失能和亚健康长者算进去了吗？</div>
+      <div class="qa-breakthrough">口径仅为「经评估中度及以上失能」，不含轻度和亚健康。轻度失能群体在广外街道约为中度以上的2-3倍，是未来增量市场。</div>
+      <div class="qa-conclusion">Phase 1 专注中重度（补贴最确定）；Phase 2 向轻度扩展；现阶段不做「预防型轻度服务」市场教育，避免资源分散。</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q"><span class="badge">Q3</span>2,400元/月的付费意愿——家庭月收入要多少才能承受？广外街道有多少家庭达到这个收入水平？</div>
+      <div class="qa-breakthrough">按「养老支出不超过家庭月收入15%」的健康比例，家庭月收入需≥16,000元。广外街道属于西城区核心区，符合条件比例估计40-60%，但需实地抽样验证。</div>
+      <div class="qa-conclusion">目标用户画像更新：「西城区双收入中产家庭 + 独生子女一代（年龄35-50岁）+ 父母独居/半独居」。低收入家庭依赖补贴覆盖，需单独设计普惠套餐。</div>
+    </div>
+
+  </div>
+
+  <h2>⚠️ 待验证假设</h2>
+  <div class="unverified">
+    <h3>以下结论尚未被一手数据证实</h3>
+    <ul>
+      <li>广外街道中重度失能长者 31,973 人——需向西城区民政局申请核实最新数据</li>
+      <li>家庭月均付费意愿 2,400 元——需完成不少于 20 个家庭的深度访谈</li>
+      <li>12% 可渗透比例——基于行业均值类比，需广外街道本地调研验证</li>
+      <li>邻居口碑是核心获客渠道——假设成立，需追踪首批 10 户家庭获客来源</li>
+    </ul>
+  </div>
+
+  <h2>📋 下一步行动</h2>
+  <div class="actions">
+    <div class="action-row">
+      <span class="action-who">CGO·兵部</span>
+      <span class="action-text">向西城区民政局申请失能长者统计数据（2025最新版）</span>
+      <span class="action-when">2026-03 月内</span>
+    </div>
+    <div class="action-row">
+      <span class="action-who">COO·礼部</span>
+      <span class="action-text">设计家庭访谈问卷（含付费意愿测试），完成 20 户访谈</span>
+      <span class="action-when">2026-03 月内</span>
+    </div>
+    <div class="action-row">
+      <span class="action-who">CEO·王总</span>
+      <span class="action-text">通过居委会人脉，锁定第一个意向家庭（中重度失能 + 子女外地）</span>
+      <span class="action-when">2026-04 前</span>
+    </div>
+  </div>
+
+  <div class="disclaimer">© 2026 开元时代 · 内部研究资料 · 观点仅供内部决策参考，不构成投资建议 · 对外引用须经 CEO 审批</div>
+</div>
+</body>
+</html>

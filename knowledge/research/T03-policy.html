@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>T03 · 政策资质 · 开元研究院</title>
+<style>
+  :root{--gold:#9B6A1A;--bg:#FAFAF8;--bg2:#F2F1ED;--text:#1C1C1E;--muted:#6C6C70;--border:rgba(139,105,20,0.15);--green:#1D7A45;--blue:#1A56A8;--red:#C0392B;--amber:#C87D0E;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;}
+  .banner{background:linear-gradient(135deg,#1a3a1a,#2d6a2d);color:#E8FFE8;padding:44px 40px 32px;}
+  .banner-tag{font-size:11px;letter-spacing:4px;color:#7AC87A;margin-bottom:10px;}
+  .banner h1{font-size:30px;font-weight:700;margin-bottom:8px;}
+  .banner .subtitle{font-size:14px;color:#A8D8A8;margin-bottom:20px;}
+  .meta-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .meta-pill{background:rgba(122,200,122,0.15);border:1px solid rgba(122,200,122,0.3);border-radius:20px;padding:3px 12px;font-size:11px;color:#7AC87A;}
+  .summary-section{padding:28px 40px;background:var(--bg2);border-bottom:1px solid var(--border);}
+  .summary-label{font-size:11px;letter-spacing:3px;color:var(--muted);margin-bottom:6px;}
+  .summary-text{font-size:16px;font-weight:600;border-left:3px solid var(--green);padding-left:14px;}
+  .main{max-width:880px;margin:0 auto;padding:36px 40px;}
+  h2{font-size:17px;font-weight:700;margin:36px 0 14px;padding-left:12px;border-left:3px solid var(--gold);}
+  /* 路径时间轴 */
+  .timeline{position:relative;padding-left:32px;margin:20px 0;}
+  .timeline::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--border);}
+  .tl-item{position:relative;margin-bottom:20px;}
+  .tl-dot{position:absolute;left:-26px;top:4px;width:16px;height:16px;border-radius:50%;background:var(--green);border:3px solid var(--bg);display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:700;}
+  .tl-item.warn .tl-dot{background:var(--amber);}
+  .tl-title{font-weight:700;font-size:14px;margin-bottom:4px;}
+  .tl-body{font-size:13px;color:var(--muted);}
+  .tl-tag{display:inline-block;border-radius:4px;padding:1px 8px;font-size:11px;margin-left:8px;}
+  .tag-fast{background:rgba(29,122,69,0.1);color:var(--green);}
+  .tag-hard{background:rgba(200,125,14,0.1);color:var(--amber);}
+  .qa-item{background:#fff;border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:14px;}
+  .qa-q{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:10px;}
+  .breakthrough{background:rgba(200,125,14,0.08);border-left:3px solid var(--amber);border-radius:6px;padding:10px 14px;margin:10px 0;font-size:13px;}
+  .conclusion{background:rgba(29,122,69,0.07);border-radius:8px;padding:12px 14px;font-size:13px;}
+  .warn-box{background:rgba(192,57,43,0.06);border:1px solid rgba(192,57,43,0.2);border-radius:10px;padding:18px;margin:20px 0;}
+  .warn-box h3{font-size:13px;font-weight:700;color:var(--red);margin-bottom:10px;}
+  .warn-box li{font-size:13px;color:var(--muted);margin-bottom:5px;margin-left:16px;}
+  .action-table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0;}
+  .action-table td{padding:10px 12px;border-bottom:1px solid var(--border);}
+  .action-table tr:last-child td{border-bottom:none;}
+  .who{display:inline-block;background:var(--gold);color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;}
+  .disclaimer{font-size:11px;color:var(--muted);text-align:center;padding:20px;border-top:1px solid var(--border);margin-top:20px;}
+  /* 补贴计算器 */
+  .subsidy-calc{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0;}
+  .sub-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:18px;text-align:center;}
+  .sub-card .n{font-size:28px;font-weight:800;color:var(--green);}
+  .sub-card .u{font-size:12px;color:var(--muted);margin-top:3px;}
+  @media(max-width:680px){.subsidy-calc{grid-template-columns:1fr;}}
+</style></head><body>
+<div class="banner">
+  <div class="banner-tag">开元研究院 · Research Institute</div>
+  <h1>T03 · 政策资质路线图</h1>
+  <div class="subtitle">从注册到长护险定点，开元的政策套利全路径 · 苏格拉底质询版</div>
+  <div class="meta-row">
+    <span class="meta-pill">📅 2026-03-12</span>
+    <span class="meta-pill">🏛️ 班子联合质询</span>
+    <span class="meta-pill">V2 · 修正版</span>
+    <span class="meta-pill">🔒 内部机密</span>
+  </div>
+</div>
+<div class="summary-section">
+  <div class="summary-label">ONE-SENTENCE SUMMARY</div>
+  <div class="summary-text">政策资质申请存在两条路径：主路径 A→B2→B1→B3→B4 可最大化补贴叠加，备用路径 A→B1→B3 规避B2失败风险，最终目标是同时享受民政补贴+长护险+适老化改造三重政策红利。</div>
+</div>
+<div class="main">
+  <h2>💰 政策补贴叠加模型</h2>
+  <div class="subsidy-calc">
+    <div class="sub-card"><div class="n">800</div><div class="u">民政失能补贴（元/月）<br>中度以上失能长者</div></div>
+    <div class="sub-card"><div class="n">80-200</div><div class="u">长护险补贴（元/次）<br>定额/次，B3资质后可用</div></div>
+    <div class="sub-card"><div class="n">800-3000</div><div class="u">适老化改造补贴（元/户）<br>B2资质后可承接</div></div>
+  </div>
+
+  <h2>🗺️ 资质申请路线图</h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">A</div>
+      <div class="tl-title">序列A：公司注册 <span class="tl-tag tag-fast">立即启动</span></div>
+      <div class="tl-body">北京工商登记，经营范围含"养老服务"。预计2-4周完成，费用约500元。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">B1</div>
+      <div class="tl-title">序列B1：居家养老服务机构备案 <span class="tl-tag tag-fast">最快可用</span></div>
+      <div class="tl-body">向西城区民政局提交备案，无须场地，仅需注册地址+服务能力说明。完成后可享受部分政府补贴。</div>
+    </div>
+    <div class="tl-item warn">
+      <div class="tl-dot">B2</div>
+      <div class="tl-title">序列B2：适老化改造供应商入库 <span class="tl-tag tag-hard">需验证门槛</span></div>
+      <div class="tl-body">申请西城区适老化改造供应商目录。<strong>风险点：</strong>可能需要施工案例或工程资质，纯照护公司可能在此卡住。先非正式咨询民政局确认条件。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">B3</div>
+      <div class="tl-title">序列B3：长护险定点服务机构 <span class="tl-tag tag-fast">Phase 1目标</span></div>
+      <div class="tl-body">取得B3后，每次服务可申请长护险报销（80-200元/次）。需B1+运营3-6个月记录。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">B4</div>
+      <div class="tl-title">序列B4：养老服务星级评定 <span class="tl-tag tag-fast">Phase 2目标</span></div>
+      <div class="tl-body">3星以上机构可获更高补贴系数和政府采购优先资格。需积累服务案例和客户评价。</div>
+    </div>
+  </div>
+
+  <h2>🔍 苏格拉底质询记录</h2>
+  <div class="qa-item">
+    <div class="qa-q">Q1（CSO→CGO）：申请序列 A→B2→B1→B3→B4，这个顺序的逻辑是什么？万一B2申请失败怎么办？</div>
+    <div class="breakthrough">B2（适老化改造供应商）申请的隐性门槛——「服务能力说明」可能需要已有施工案例或工程资质，纯居家照护公司可能在B2上卡住。</div>
+    <div class="conclusion">路径分叉设计：<strong>主路径</strong> A→B2→B1→B3→B4；<strong>备用路径</strong> A→B1→B3→B4（跳过B2，专注服务类）。先行测试：注册前先非正式咨询西城区民政局。</div>
+  </div>
+  <div class="qa-item">
+    <div class="qa-q">Q2（CFO→CGO）：「长护险80-200元/次」——一次服务多长时间？是只报销1小时还是按实际服务时间？</div>
+    <div class="breakthrough">长护险的报销是「定额/次」而非「按时计费」。若提供2小时服务，政府只报销1次（按1小时定额）。长护险是「部分补贴」，不能覆盖全部服务成本。</div>
+    <div class="conclusion">财务模型调整：每次服务=「长护险报销（约120元）+ 家庭自付（约60元）」，合计收入180元/次。确保毛利率为正（护理员成本90-95元/次）。</div>
+  </div>
+
+  <div class="warn-box">
+    <h3>⚠️ 待验证假设</h3>
+    <ul>
+      <li>B2供应商申请是否真的需要施工资质——CGO待非正式咨询西城区民政局</li>
+      <li>B3长护险定点申请的等待周期——市场上听说3-6个月，需向已取得B3的机构核实</li>
+      <li>民政补贴800元/月的实际到账周期——政府补贴到账一般4-6个月，不可作为启动资金</li>
+    </ul>
+  </div>
+
+  <table class="action-table">
+    <tr><td><span class="who">CGO·兵部</span></td><td>非正式咨询西城区民政局，确认B2申请门槛</td><td style="color:var(--muted);font-size:12px;text-align:right;">2026-03 月内</td></tr>
+    <tr><td><span class="who">CFO·户部</span></td><td>向已取得B3资质的机构了解申请周期和实际报销操作流程</td><td style="color:var(--muted);font-size:12px;text-align:right;">2026-04 前</td></tr>
+    <tr><td><span class="who">CEO·王总</span></td><td>决策：是否将B2申请纳入Phase 1计划，或直接走备用路径</td><td style="color:var(--muted);font-size:12px;text-align:right;">注册时</td></tr>
+  </table>
+  <div class="disclaimer">© 2026 开元时代 · 内部研究资料 · 不构成投资建议</div>
+</div></body></html>

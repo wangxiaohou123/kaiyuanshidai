@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T02 · 竞争格局 · 开元研究院</title>
+<style>
+  :root { --gold:#9B6A1A; --gold-light:#C4892A; --bg:#FAFAF8; --bg2:#F2F1ED; --text:#1C1C1E; --muted:#6C6C70; --border:rgba(139,105,20,0.15); --green:#1D7A45; --blue:#1A56A8; --red:#C0392B; --amber:#C87D0E; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text); line-height:1.7; }
+  .banner { background:linear-gradient(135deg,#1a2d5a,#2d4a8a); color:#E8F0FF; padding:48px 40px 36px; }
+  .banner-tag { font-size:11px; letter-spacing:4px; color:#7AA8E8; margin-bottom:12px; }
+  .banner h1 { font-size:32px; font-weight:700; margin-bottom:8px; }
+  .banner .subtitle { font-size:15px; color:#A8C4F0; margin-bottom:24px; }
+  .meta-row { display:flex; gap:12px; flex-wrap:wrap; }
+  .meta-pill { background:rgba(122,168,232,0.2); border:1px solid rgba(122,168,232,0.4); border-radius:20px; padding:4px 14px; font-size:12px; color:#7AA8E8; }
+  .summary-section { padding:32px 40px; background:var(--bg2); border-bottom:1px solid var(--border); }
+  .summary-label { font-size:11px; letter-spacing:3px; color:var(--muted); margin-bottom:8px; }
+  .summary-text { font-size:17px; font-weight:600; border-left:3px solid var(--blue); padding-left:16px; }
+  .main { max-width:900px; margin:0 auto; padding:40px; }
+  h2 { font-size:18px; font-weight:700; margin:40px 0 16px; padding-left:12px; border-left:3px solid var(--gold); }
+
+  /* 竞对矩阵 */
+  .comp-table { width:100%; border-collapse:collapse; font-size:13px; margin:20px 0; }
+  .comp-table th { background:var(--bg2); padding:10px 14px; text-align:left; border-bottom:2px solid var(--border); font-size:12px; color:var(--muted); }
+  .comp-table td { padding:12px 14px; border-bottom:1px solid var(--border); vertical-align:top; }
+  .comp-table tr:last-child td { border-bottom:none; }
+  .tag { display:inline-block; border-radius:4px; padding:2px 8px; font-size:11px; font-weight:600; }
+  .tag-red { background:rgba(192,57,43,0.1); color:var(--red); }
+  .tag-green { background:rgba(29,122,69,0.1); color:var(--green); }
+  .tag-amber { background:rgba(200,125,14,0.1); color:var(--amber); }
+
+  /* 护城河 */
+  .moat { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:20px 0; }
+  .moat-card { background:#fff; border:1px solid var(--border); border-radius:12px; padding:20px; }
+  .moat-card.winner { border-color:rgba(29,122,69,0.3); background:rgba(29,122,69,0.04); }
+  .moat-card h4 { font-size:13px; font-weight:700; margin-bottom:8px; }
+  .moat-card p { font-size:13px; color:var(--muted); }
+  @media(max-width:680px){ .moat{ grid-template-columns:1fr; } }
+
+  .qa-item { background:#fff; border:1px solid var(--border); border-radius:12px; padding:24px; margin-bottom:16px; }
+  .qa-q { font-size:13px; font-weight:700; color:var(--blue); margin-bottom:12px; display:flex; gap:10px; }
+  .qa-q .badge { background:var(--blue); color:#fff; border-radius:4px; padding:2px 8px; font-size:10px; flex-shrink:0; }
+  .qa-breakthrough { background:rgba(200,125,14,0.08); border-left:3px solid var(--amber); border-radius:6px; padding:12px 16px; margin:12px 0; font-size:13px; }
+  .qa-breakthrough::before { content:"⚡ 突破点  "; font-weight:700; color:var(--amber); }
+  .qa-conclusion { background:rgba(29,122,69,0.07); border-radius:8px; padding:14px 16px; font-size:13px; }
+  .qa-conclusion::before { content:"✅ 修正结论  "; font-weight:700; color:var(--green); }
+  .unverified { background:rgba(192,57,43,0.06); border:1px solid rgba(192,57,43,0.2); border-radius:12px; padding:20px; margin:24px 0; }
+  .unverified h3 { font-size:13px; font-weight:700; color:var(--red); margin-bottom:12px; }
+  .unverified li { font-size:13px; color:var(--muted); margin-bottom:6px; margin-left:16px; }
+  .actions { background:var(--bg2); border-radius:12px; padding:20px; margin:24px 0; }
+  .actions h3 { font-size:13px; font-weight:700; margin-bottom:12px; }
+  .action-row { display:flex; gap:12px; align-items:center; padding:10px 0; border-bottom:1px solid var(--border); }
+  .action-row:last-child { border-bottom:none; }
+  .action-who { background:var(--gold); color:#fff; border-radius:4px; padding:2px 8px; font-size:11px; flex-shrink:0; }
+  .action-text { font-size:13px; }
+  .action-when { font-size:11px; color:var(--muted); margin-left:auto; flex-shrink:0; }
+  .disclaimer { font-size:11px; color:var(--muted); text-align:center; padding:24px; border-top:1px solid var(--border); }
+</style>
+</head>
+<body>
+<div class="banner">
+  <div class="banner-tag">开元研究院 · Research Institute</div>
+  <h1>T02 · 竞争格局</h1>
+  <div class="subtitle">广外街道居家养老竞争对手深度分析 · 苏格拉底质询版</div>
+  <div class="meta-row">
+    <span class="meta-pill">📅 2026-03-12</span>
+    <span class="meta-pill">🏛️ 班子四线联合质询</span>
+    <span class="meta-pill">V2 · 修正版</span>
+    <span class="meta-pill">🔒 内部机密</span>
+  </div>
+</div>
+<div class="summary-section">
+  <div class="summary-label">ONE-SENTENCE SUMMARY</div>
+  <div class="summary-text">开元的真正护城河不是价格，而是「固定护理员 × 深度家庭关系」——这是任何资本驱动的平台型竞争对手都无法快速复制的本地信任资产。</div>
+</div>
+<div class="main">
+  <h2>🗺️ 竞争格局全景</h2>
+  <table class="comp-table">
+    <tr><th>竞争对手</th><th>模式</th><th>优势</th><th>弱点</th><th>开元应对</th></tr>
+    <tr>
+      <td><strong>泰康之家</strong><br><small>高端机构养老</small></td>
+      <td>保险+养老社区</td>
+      <td>用户锁定极强（保险沉没成本）</td>
+      <td><span class="tag tag-red">不可复制</span> 依赖大额保险产品，100万启动无法参与</td>
+      <td>借鉴「提高离开代价」逻辑：用<strong>人际信任</strong>替代合同锁定</td>
+    </tr>
+    <tr>
+      <td><strong>寸草春晖</strong><br><small>公建民营</small></td>
+      <td>政府场地+民营运营</td>
+      <td>场地成本极低，政策背书强</td>
+      <td><span class="tag tag-amber">门槛高</span> 需已有运营业绩才能申请</td>
+      <td>Phase 2 目标：用Phase 1的10个家庭口碑换申请资格</td>
+    </tr>
+    <tr>
+      <td><strong>平台型App</strong><br><small>58到家/天鹅到家等</small></td>
+      <td>撮合平台，轻资产</td>
+      <td>流量大，护理员池广</td>
+      <td><span class="tag tag-red">无深度</span> 护理员流动率高，无家庭关系积累</td>
+      <td>强调「固定护理员」vs平台「换人随机」的本质差异</td>
+    </tr>
+    <tr>
+      <td><strong>社区日照中心</strong><br><small>广外养老照料中心等</small></td>
+      <td>日间托管</td>
+      <td>政府补贴+空间资源</td>
+      <td><span class="tag tag-amber">半竞争</span> 服务场景不同（日间离家 vs 居家不离家）</td>
+      <td>合作优先于竞争：作为转介渠道，共享客户资源</td>
+    </tr>
+  </table>
+
+  <h2>🏰 开元差异化护城河</h2>
+  <div class="moat">
+    <div class="moat-card winner">
+      <h4>✅ 核心护城河（已定义）</h4>
+      <p><strong>固定护理员 × 深度家庭关系</strong><br>同一位护理员服务超过3个月后，家庭的换人成本极高——信任积累不可转移、不可批量复制，这是开元最难被平台化竞争对手攻破的壁垒。</p>
+    </div>
+    <div class="moat-card">
+      <h4>🔄 待构建护城河</h4>
+      <p><strong>社区口碑网络</strong><br>通过居委会人脉 × 邻居推荐机制，在广外街道形成强本地信任网络。这是平台型竞争对手最难渗透的毛细血管渠道。</p>
+    </div>
+    <div class="moat-card">
+      <h4>📋 政策护城河（Phase 2）</h4>
+      <p><strong>长护险定点资格</strong><br>一旦取得 B3 定点资格，竞争对手进入同一社区需重新申请，形成行政壁垒。</p>
+    </div>
+    <div class="moat-card">
+      <h4>❌ 无效护城河（放弃）</h4>
+      <p><strong>价格竞争</strong><br>定价2400元/月不以低价竞争，低价只会吸引对价格最敏感、忠诚度最低的家庭，且压缩护理员薪资，加速流失。</p>
+    </div>
+  </div>
+
+  <h2>🔍 苏格拉底质询记录</h2>
+  <div class="qa-item">
+    <div class="qa-q"><span class="badge">Q1</span>你说「对标泰康之家」，但泰康是数百亿资本盘，开元是100万。这个对标有什么实际意义？</div>
+    <div class="qa-breakthrough">泰康模式对开元不可直接复制，但「把离开的代价做高」的逻辑可以偷学——泰康用保险产品做到，开元用人际信任做到，本质相同。</div>
+    <div class="qa-conclusion">开元差异化护城河 = 「固定护理员 × 深度家庭关系」，而非价格或服务次数。</div>
+  </div>
+  <div class="qa-item">
+    <div class="qa-q"><span class="badge">Q2</span>寸草春晖是「公建民营」，但开元能申请公建民营吗？条件是什么？北京现在还有多少名额？</div>
+    <div class="qa-breakthrough">公建民营核心门槛是「已有运营业绩+政府关系」。第一阶段做好10个家庭不只是验证产品，更是在积累申请公建民营的筹码。</div>
+    <div class="qa-conclusion">CGO需提前布局：与广外街道居委会建立关系，为Phase 2申请场地做铺垫，不能等Phase 2才开始。</div>
+  </div>
+
+  <div class="unverified">
+    <h3>⚠️ 待验证假设</h3>
+    <ul>
+      <li>「固定护理员」模式能否成为有效差异化——需首批10户家庭调研验证，询问「为什么选开元而不是天鹅到家」</li>
+      <li>广外街道公建民营剩余名额——CGO需向街道办事处非正式询问</li>
+      <li>寸草春晖等竞对在广外街道的实际覆盖家庭数——需大众点评 + 实地调研</li>
+    </ul>
+  </div>
+
+  <div class="actions">
+    <div class="action-row"><span class="action-who">CGO·兵部</span><span class="action-text">调研广外街道公建民营申请条件及当前名额</span><span class="action-when">2026-03 月内</span></div>
+    <div class="action-row"><span class="action-who">CMO·礼部</span><span class="action-text">实地走访寸草春晖/天鹅到家，获取真实报价和服务内容</span><span class="action-when">2026-04 前</span></div>
+    <div class="action-row"><span class="action-who">CEO·王总</span><span class="action-text">确认开元「固定护理员」承诺写入服务协议（法律约束）</span><span class="action-when">服务协议起草时</span></div>
+  </div>
+  <div class="disclaimer">© 2026 开元时代 · 内部研究资料 · 观点仅供内部决策参考，不构成投资建议</div>
+</div>
+</body>
+</html>

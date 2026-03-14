@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>T04 · 护理员体系 · 开元研究院</title>
+<style>
+  :root{--gold:#9B6A1A;--bg:#FAFAF8;--bg2:#F2F1ED;--text:#1C1C1E;--muted:#6C6C70;--border:rgba(139,105,20,0.15);--green:#1D7A45;--blue:#1A56A8;--red:#C0392B;--amber:#C87D0E;--purple:#6B3FA0;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;}
+  .banner{background:linear-gradient(135deg,#3a1a6a,#6a2da8);color:#F0E8FF;padding:44px 40px 32px;}
+  .banner-tag{font-size:11px;letter-spacing:4px;color:#B87AE8;margin-bottom:10px;}
+  .banner h1{font-size:30px;font-weight:700;margin-bottom:8px;}
+  .banner .subtitle{font-size:14px;color:#D4B8F0;margin-bottom:20px;}
+  .meta-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .meta-pill{background:rgba(184,122,232,0.15);border:1px solid rgba(184,122,232,0.3);border-radius:20px;padding:3px 12px;font-size:11px;color:#B87AE8;}
+  .summary-section{padding:28px 40px;background:var(--bg2);border-bottom:1px solid var(--border);}
+  .summary-label{font-size:11px;letter-spacing:3px;color:var(--muted);margin-bottom:6px;}
+  .summary-text{font-size:16px;font-weight:600;border-left:3px solid var(--purple);padding-left:14px;}
+  .main{max-width:880px;margin:0 auto;padding:36px 40px;}
+  h2{font-size:17px;font-weight:700;margin:36px 0 14px;padding-left:12px;border-left:3px solid var(--gold);}
+  /* 三层留存 */
+  .retain{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0;}
+  .retain-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:18px;}
+  .retain-card .icon{font-size:24px;margin-bottom:8px;}
+  .retain-card h4{font-size:13px;font-weight:700;margin-bottom:6px;}
+  .retain-card p{font-size:12px;color:var(--muted);}
+  @media(max-width:680px){.retain{grid-template-columns:1fr;}}
+  /* 晋升通道 */
+  .career{display:flex;gap:0;margin:18px 0;align-items:stretch;}
+  .career-step{flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;position:relative;}
+  .career-step+.career-step::before{content:"→";position:absolute;left:-14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:18px;}
+  .career-step .level{font-size:10px;letter-spacing:2px;color:var(--purple);margin-bottom:4px;}
+  .career-step h4{font-size:13px;font-weight:700;margin-bottom:4px;}
+  .career-step .salary{font-size:14px;font-weight:700;color:var(--green);}
+  @media(max-width:680px){.career{flex-direction:column;} .career-step+.career-step::before{display:none;}}
+  .qa-item{background:#fff;border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:14px;}
+  .qa-q{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:10px;}
+  .breakthrough{background:rgba(200,125,14,0.08);border-left:3px solid var(--amber);border-radius:6px;padding:10px 14px;margin:10px 0;font-size:13px;}
+  .conclusion{background:rgba(29,122,69,0.07);border-radius:8px;padding:12px 14px;font-size:13px;}
+  .warn-box{background:rgba(192,57,43,0.06);border:1px solid rgba(192,57,43,0.2);border-radius:10px;padding:18px;margin:20px 0;}
+  .warn-box h3{font-size:13px;font-weight:700;color:var(--red);margin-bottom:10px;}
+  .warn-box li{font-size:13px;color:var(--muted);margin-bottom:5px;margin-left:16px;}
+  .action-table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0;}
+  .action-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
+  .action-table tr:last-child td{border-bottom:none;}
+  .who{display:inline-block;background:var(--gold);color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;}
+  .disclaimer{font-size:11px;color:var(--muted);text-align:center;padding:20px;border-top:1px solid var(--border);margin-top:20px;}
+  .kpi-row{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0;}
+  .kpi{flex:1;min-width:120px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;}
+  .kpi .n{font-size:26px;font-weight:800;color:var(--purple);}
+  .kpi .u{font-size:11px;color:var(--muted);margin-top:3px;}
+</style></head><body>
+<div class="banner">
+  <div class="banner-tag">开元研究院 · Research Institute</div>
+  <h1>T04 · 护理员体系</h1>
+  <div class="subtitle">招募标准·三层留存·职业晋升通道 · 苏格拉底质询版</div>
+  <div class="meta-row">
+    <span class="meta-pill">📅 2026-03-12</span>
+    <span class="meta-pill">🏛️ 班子四线联合质询</span>
+    <span class="meta-pill">V2 · 修正版</span>
+    <span class="meta-pill">🔒 内部机密</span>
+  </div>
+</div>
+<div class="summary-section">
+  <div class="summary-label">ONE-SENTENCE SUMMARY</div>
+  <div class="summary-text">护理员留存是P0业务优先级——年流失率35-45%意味着每年替换1/3的人，而护理员离职直接导致家庭信任归零，这是开元最大运营风险，需用三层留存机制系统应对。</div>
+</div>
+<div class="main">
+  <h2>📊 市场关键数字</h2>
+  <div class="kpi-row">
+    <div class="kpi"><div class="n">18%</div><div class="u">北京持证护理员比例<br>（意味着82%无证）</div></div>
+    <div class="kpi"><div class="n">35-45%</div><div class="u">行业年流失率<br>（P0风险来源）</div></div>
+    <div class="kpi"><div class="n">90元</div><div class="u">单次服务护理员费用<br>（2小时，兼职）</div></div>
+    <div class="kpi"><div class="n">8课时</div><div class="u">开元MVP最低培训标准<br>（待升级至30小时）</div></div>
+  </div>
+
+  <h2>👤 招募标准（修正后）</h2>
+  <div class="qa-item">
+    <div class="qa-q">Q1：你说「招持证护理员」，但北京持证率只有18%，你从哪里招？</div>
+    <div class="breakthrough">持证率18%意味着市场上大多数有经验的护理员是「无证有经验」型。硬性要求持证会大幅缩小招募池，且可能筛掉最有经验的人。</div>
+    <div class="conclusion"><strong>修正招募标准：</strong>有证优先，无证但有3年以上实际照护经验可录用，入职后辅助考证。开元自建「入职前实操评估」（2小时），实操表现优先于证书。为护理员提供考证辅导，考证费用公司补贴50%，绑定人才留存。</div>
+  </div>
+
+  <h2>🔒 三层留存机制</h2>
+  <div class="retain">
+    <div class="retain-card">
+      <div class="icon">💰</div>
+      <h4>第一层：收入层</h4>
+      <p>稳定排班保障（每月≥20次服务）<br>好评奖金：4.5分以上 +10元/次<br>确保护理员月收入可预期</p>
+    </div>
+    <div class="retain-card">
+      <div class="icon">📈</div>
+      <h4>第二层：成长层</h4>
+      <p>开元内部「护理师」晋升通道<br>初级→中级→高级护理师<br>对应薪资系数提升（详见下方）</p>
+    </div>
+    <div class="retain-card">
+      <div class="icon">❤️</div>
+      <h4>第三层：情感层</h4>
+      <p>每月护理员例会<br>「最佳护理师」荣誉认定<br>王总亲自感谢信（每季度1封）</p>
+    </div>
+  </div>
+
+  <h2>🎓 职业晋升通道</h2>
+  <div class="career">
+    <div class="career-step"><div class="level">初级</div><h4>护理员</h4><div class="salary">90元/次</div></div>
+    <div class="career-step"><div class="level">中级</div><h4>护理师</h4><div class="salary">110元/次</div></div>
+    <div class="career-step"><div class="level">高级</div><h4>资深护理师</h4><div class="salary">130元/次</div></div>
+    <div class="career-step"><div class="level">精英</div><h4>护理督导</h4><div class="salary">固定月薪</div></div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-q">Q2（CFO→COO）：年流失率35-45%，每年要替换1/3的护理员。护理员离职后，家庭信任归零——这是最大运营风险，怎么解决？</div>
+    <div class="breakthrough">护理员流失 = 客户流失 = 品牌口碑损失，三连击。这不是HR问题，是商业模式的核心风险。留住护理员的成本远低于重新获客的成本。</div>
+    <div class="conclusion">护理员留存是P0业务优先级，不低于获客。建立三层留存机制（收入+成长+情感），确保服务满3个月的护理员主动离职率&lt;10%。</div>
+  </div>
+
+  <div class="warn-box">
+    <h3>⚠️ 待验证假设</h3>
+    <ul>
+      <li>+10元好评奖金是否真的能提升护理员积极性——需首批5名护理员A/B测试</li>
+      <li>「入职前2小时实操评估」能否有效筛选——评估标准需COO设计并验证</li>
+      <li>公司补贴50%考证费用的ROI——需跟踪参加考证的护理员留存率是否显著更高</li>
+    </ul>
+  </div>
+
+  <table class="action-table">
+    <tr><td><span class="who">COO·吏部</span></td><td>设计护理员入职实操评估方案（2小时标准流程）</td><td style="color:var(--muted);font-size:12px;text-align:right;">2026-03 月内</td></tr>
+    <tr><td><span class="who">COO·吏部</span></td><td>起草护理员薪酬激励方案（含三层晋升体系），提交CEO审批</td><td style="color:var(--muted);font-size:12px;text-align:right;">2026-04 前</td></tr>
+    <tr><td><span class="who">CEO·王总</span></td><td>决策：考证补贴比例（50%/100%）和兑付条件（在职满X个月）</td><td style="color:var(--muted);font-size:12px;text-align:right;">招募前</td></tr>
+  </table>
+  <div class="disclaimer">© 2026 开元时代 · 内部研究资料 · 不构成投资建议</div>
+</div></body></html>

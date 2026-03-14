@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>T05 · 财务模型 · 开元研究院</title>
+<style>
+  :root{--gold:#9B6A1A;--bg:#FAFAF8;--bg2:#F2F1ED;--text:#1C1C1E;--muted:#6C6C70;--border:rgba(139,105,20,0.15);--green:#1D7A45;--blue:#1A56A8;--red:#C0392B;--amber:#C87D0E;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;}
+  .banner{background:linear-gradient(135deg,#1a3a1a,#3a6a3a);color:#E8FFE8;padding:44px 40px 32px;}
+  .banner-tag{font-size:11px;letter-spacing:4px;color:#7AC87A;margin-bottom:10px;}
+  .banner h1{font-size:30px;font-weight:700;margin-bottom:8px;}
+  .banner .subtitle{font-size:14px;color:#A8D8A8;margin-bottom:20px;}
+  .meta-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .meta-pill{background:rgba(122,200,122,0.15);border:1px solid rgba(122,200,122,0.3);border-radius:20px;padding:3px 12px;font-size:11px;color:#7AC87A;}
+  .summary-section{padding:28px 40px;background:var(--bg2);border-bottom:1px solid var(--border);}
+  .summary-label{font-size:11px;letter-spacing:3px;color:var(--muted);margin-bottom:6px;}
+  .summary-text{font-size:16px;font-weight:600;border-left:3px solid var(--green);padding-left:14px;}
+  .main{max-width:880px;margin:0 auto;padding:36px 40px;}
+  h2{font-size:17px;font-weight:700;margin:36px 0 14px;padding-left:12px;border-left:3px solid var(--gold);}
+  /* 单户财务卡 */
+  .fin-model{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:20px 0;}
+  .fin-col{background:#fff;border:1px solid var(--border);border-radius:10px;padding:20px;}
+  .fin-col h4{font-size:13px;font-weight:700;margin-bottom:12px;color:var(--muted);}
+  .fin-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;}
+  .fin-row:last-child{border-bottom:none;font-weight:700;font-size:14px;}
+  .fin-row .num{color:var(--green);}
+  .fin-row.cost .num{color:var(--red);}
+  @media(max-width:680px){.fin-model{grid-template-columns:1fr;}}
+  .profit-banner{background:linear-gradient(135deg,rgba(29,122,69,0.1),rgba(29,122,69,0.05));border:1px solid rgba(29,122,69,0.3);border-radius:10px;padding:20px;text-align:center;margin:16px 0;}
+  .profit-banner .big{font-size:40px;font-weight:800;color:var(--green);}
+  .profit-banner .label{font-size:13px;color:var(--muted);}
+  /* 扩张曲线 */
+  .scale-table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0;}
+  .scale-table th{background:var(--bg2);padding:10px 14px;text-align:right;border-bottom:2px solid var(--border);font-size:12px;color:var(--muted);}
+  .scale-table th:first-child{text-align:left;}
+  .scale-table td{padding:10px 14px;border-bottom:1px solid var(--border);text-align:right;}
+  .scale-table td:first-child{text-align:left;font-weight:600;}
+  .scale-table tr:last-child td{border-bottom:none;font-weight:700;background:rgba(29,122,69,0.04);}
+  .qa-item{background:#fff;border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:14px;}
+  .qa-q{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:10px;}
+  .breakthrough{background:rgba(200,125,14,0.08);border-left:3px solid var(--amber);border-radius:6px;padding:10px 14px;margin:10px 0;font-size:13px;}
+  .conclusion{background:rgba(29,122,69,0.07);border-radius:8px;padding:12px 14px;font-size:13px;}
+  .warn-box{background:rgba(192,57,43,0.06);border:1px solid rgba(192,57,43,0.2);border-radius:10px;padding:18px;margin:20px 0;}
+  .warn-box h3{font-size:13px;font-weight:700;color:var(--red);margin-bottom:10px;}
+  .warn-box li{font-size:13px;color:var(--muted);margin-bottom:5px;margin-left:16px;}
+  .action-table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0;}
+  .action-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
+  .action-table tr:last-child td{border-bottom:none;}
+  .who{display:inline-block;background:var(--gold);color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;}
+  .disclaimer{font-size:11px;color:var(--muted);text-align:center;padding:20px;border-top:1px solid var(--border);margin-top:20px;}
+</style></head><body>
+<div class="banner">
+  <div class="banner-tag">开元研究院 · Research Institute</div>
+  <h1>T05 · 财务模型精细化</h1>
+  <div class="subtitle">单户盈亏·扩张曲线·CEO时间成本 · 苏格拉底质询版</div>
+  <div class="meta-row">
+    <span class="meta-pill">📅 2026-03-13</span>
+    <span class="meta-pill">🏛️ 班子四线联合质询</span>
+    <span class="meta-pill">V2 · 修正版</span>
+    <span class="meta-pill">🔒 内部机密</span>
+  </div>
+</div>
+<div class="summary-section">
+  <div class="summary-label">ONE-SENTENCE SUMMARY</div>
+  <div class="summary-text">单户盈亏模型显示月毛利率约31%（2024年修正后），但CEO隐性时间成本（每月约12,000-24,000元）不计入财务模型，10户家庭才能覆盖固定成本，扩张至30户实现规模自洽。</div>
+</div>
+<div class="main">
+  <h2>💰 单户服务月度财务模型（修正版）</h2>
+  <div class="fin-model">
+    <div class="fin-col">
+      <h4>📥 月度收入来源</h4>
+      <div class="fin-row"><span>家庭自付费用</span><span class="num">+1,600元</span></div>
+      <div class="fin-row"><span>民政失能补贴（B1后）</span><span class="num">+800元</span></div>
+      <div class="fin-row"><span>小计</span><span class="num">2,400元</span></div>
+    </div>
+    <div class="fin-col">
+      <h4>📤 月度成本支出</h4>
+      <div class="fin-row cost"><span>护理员服务费（8次×90元）</span><span class="num">720元</span></div>
+      <div class="fin-row cost"><span>护理员意外险分摊</span><span class="num">40元</span></div>
+      <div class="fin-row cost"><span>固定运营成本分摊</span><span class="num">600元</span></div>
+      <div class="fin-row cost"><span>获客成本摊销</span><span class="num">100元</span></div>
+      <div class="fin-row cost"><span>小计</span><span class="num">1,460元</span></div>
+    </div>
+  </div>
+  <div class="profit-banner">
+    <div class="big">740元</div>
+    <div class="label">单户月净利润 · 毛利率约 31%（修正后）</div>
+  </div>
+
+  <h2>📈 扩张规模效益测算</h2>
+  <table class="scale-table">
+    <tr><th>服务规模</th><th>月收入</th><th>月成本</th><th>月净利润</th><th>CEO工作量</th></tr>
+    <tr><td>10 户（验证期）</td><td>24,000</td><td>20,600</td><td>3,400</td><td>约60小时/月</td></tr>
+    <tr><td>20 户</td><td>48,000</td><td>37,200</td><td>10,800</td><td>约80小时/月</td></tr>
+    <tr><td>30 户（规模自洽）</td><td>72,000</td><td>53,800</td><td>18,200</td><td>需督导分担</td></tr>
+    <tr><td>50 户（Phase 1目标）</td><td>120,000</td><td>87,000</td><td>33,000</td><td>需全职运营1人</td></tr>
+  </table>
+
+  <h2>🔍 苏格拉底质询记录</h2>
+  <div class="qa-item">
+    <div class="qa-q">Q1（COO→CFO）：「护理员成本90元/次」——是付给护理员的，还是含社保？兼职出工伤怎么办？</div>
+    <div class="breakthrough">雇主责任险通常覆盖「雇员」，兼职认定模糊区风险较高。建议采用「劳务合同+意外险」双重保障，而非依赖雇主责任险。</div>
+    <div class="conclusion">成本结构增加：每次服务增加护理员人身意外险分摊约5元/次。法律框架：采用「劳务外包」形式，风险隔离更清晰。单家庭月成本上调约40元，毛利率从34%调整至31%。</div>
+  </div>
+  <div class="qa-item">
+    <div class="qa-q">Q2（CSO→CFO）：月固定成本600元没有算CEO的时间成本。王总每月投入多少小时？这些时间值多少钱？</div>
+    <div class="breakthrough">创始人时间是隐性成本，在财务模型里不显现，但决定了「是否值得做」的判断。按美团薪资折算（约200-300元/小时），启动期每月隐性成本约12,000-24,000元。</div>
+    <div class="conclusion">财务模型需新增「CEO隐性成本」字段（不计入日常P&L，但在商业计划书和融资时必须披露）。达到30+户规模时，雇佣兼职运营替代CEO部分工作量，隐性成本才会显性化。</div>
+  </div>
+
+  <div class="warn-box">
+    <h3>⚠️ 待验证假设</h3>
+    <ul>
+      <li>家庭每月接受8次服务——需实地访谈确认，有些家庭可能只要4-6次</li>
+      <li>固定运营成本600元/月——假设分摊给10户，若实际成本更高需重新测算</li>
+      <li>获客成本100元/户——首批10户可能通过居委会0成本获取，此后成本会上升</li>
+      <li>毛利率31%——需首批3户真实运营数据验证，而非模型推算</li>
+    </ul>
+  </div>
+
+  <table class="action-table">
+    <tr><td><span class="who">CFO·户部</span></td><td>修订财务模型：纳入意外险成本，更新至修正版（已完成）</td><td style="color:var(--muted);font-size:12px;text-align:right;">已完成</td></tr>
+    <tr><td><span class="who">CFO·户部</span></td><td>建立月度实际P&L模板，首批服务家庭开始后每月更新</td><td style="color:var(--muted);font-size:12px;text-align:right;">2026-05 起</td></tr>
+    <tr><td><span class="who">CEO·王总</span></td><td>决策：CEO时间成本如何在商业计划书中呈现？是否影响天使估值逻辑？</td><td style="color:var(--muted);font-size:12px;text-align:right;">融资准备时</td></tr>
+  </table>
+  <div class="disclaimer">© 2026 开元时代 · 内部财务数据 · 严禁对外披露</div>
+</div></body></html>
