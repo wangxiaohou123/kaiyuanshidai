@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>开元时代 · 门下省·财务司（CFO）工作台</title>
+<style>
+  :root{
+    --bg:#FAFAF8;--bg2:#F4F3EE;--bg3:#ECEAE3;--bg4:#E5E2DA;
+    --gold:#8B6914;--gold-light:#B8940F;
+    --red:#C0392B;--green:#1D7A45;--blue:#1A56A8;--amber:#C87D0E;--purple:#6B3FA0;
+    --muted:#6C6C70;--border:rgba(139,105,20,0.15);--text:#1C1C1E;
+    --shadow:0 2px 12px rgba(0,0,0,0.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);color:var(--text);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+    padding:0 0 100px;font-size:16px;line-height:1.8;
+  }
+
+  /* ── 顶部导航 ── */
+  .top-nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(250,250,248,0.97);backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--border);
+    padding:0 2rem;height:52px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .nav-brand{font-size:0.85rem;font-weight:800;color:var(--gold);}
+  .nav-back{font-size:0.8rem;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:0.3rem;}
+  .nav-back:hover{color:var(--gold);}
+
+  /* ── Hero ── */
+  .hero{
+    background:linear-gradient(135deg,#1C1C1E 0%,#2C2416 100%);
+    border-bottom:1px solid rgba(139,105,20,0.3);
+    padding:2.5rem 2rem 2rem;position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(184,148,15,0.18),transparent);
+    pointer-events:none;
+  }
+  .hero-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;position:relative;}
+  .hero-left .eyebrow{font-size:0.72rem;letter-spacing:3px;color:#B8940F;text-transform:uppercase;margin-bottom:0.5rem;}
+  .hero-left h1{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:800;color:#EAE6D8;}
+  .hero-left .sub{font-size:0.88rem;color:rgba(234,230,216,0.6);margin-top:0.4rem;}
+
+  .hero-stats{display:flex;gap:0.8rem;flex-wrap:wrap;align-items:flex-end;position:relative;}
+  .stat{
+    background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
+    border-radius:12px;padding:0.7rem 1.1rem;text-align:center;
+  }
+  .stat-num{font-size:1.5rem;font-weight:800;}
+  .stat-label{font-size:0.68rem;color:rgba(234,230,216,0.5);margin-top:0.1rem;}
+
+  .role-badge{
+    margin-top:1.2rem;position:relative;
+    background:rgba(184,148,15,0.1);border:1px solid rgba(184,148,15,0.3);
+    border-radius:10px;padding:0.75rem 1rem;font-size:0.84rem;color:#ddc879;
+    display:flex;gap:0.5rem;align-items:flex-start;
+  }
+
+  /* ── 主容器 ── */
+  .container{max-width:1000px;margin:0 auto;padding:2rem 1.5rem;}
+
+  /* ── 章节标题 ── */
+  .section-title{
+    font-size:0.72rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;
+    padding:0.5rem 0;margin:1.5rem 0 0.8rem;
+    border-bottom:1px solid var(--border);
+    display:flex;align-items:center;gap:0.5rem;
+  }
+
+  /* ── 指标卡片网格 ── */
+  .metric-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;}
+  @media(max-width:640px){.metric-grid{grid-template-columns:1fr;}}
+
+  .metric-card{
+    background:#FFFFFF;border-radius:16px;
+    border:1px solid var(--border);
+    box-shadow:0 1px 4px rgba(0,0,0,0.05);
+    padding:1.3rem;
+    transition:box-shadow .2s,border-color .2s;
+  }
+  .metric-card:hover{box-shadow:0 4px 16px rgba(139,105,20,0.1);border-color:rgba(139,105,20,0.3);}
+  .metric-card.blocked{border-left:4px solid var(--red);}
+  .metric-card.ok{border-left:4px solid var(--green);}
+  .metric-card.waiting{border-left:4px solid var(--purple);}
+  .metric-card.info{border-left:4px solid var(--gold);}
+
+  .metric-label{font-size:0.72rem;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;font-weight:700;margin-bottom:0.5rem;}
+  .metric-value{font-size:1.6rem;font-weight:800;color:var(--text);line-height:1.2;margin-bottom:0.4rem;}
+  .metric-value.red{color:var(--red);}
+  .metric-value.green{color:var(--green);}
+  .metric-value.amber{color:var(--amber);}
+  .metric-desc{font-size:0.87rem;color:var(--muted);line-height:1.7;}
+
+  /* ── 阻塞警告 ── */
+  .block-alert{
+    background:rgba(192,57,43,0.07);border:1px solid rgba(192,57,43,0.3);
+    border-radius:12px;padding:1rem 1.2rem;
+    font-size:0.88rem;line-height:1.75;
+    display:flex;gap:0.7rem;align-items:flex-start;
+    margin-bottom:1rem;
+  }
+  .block-alert-icon{font-size:1.1rem;flex-shrink:0;margin-top:0.05rem;}
+  .block-alert strong{color:var(--red);}
+
+  /* ── 情景模型卡片 ── */
+  .scenario-card{
+    background:#FFFFFF;border-radius:16px;
+    border:1px solid var(--border);
+    box-shadow:0 1px 4px rgba(0,0,0,0.05);
+    overflow:hidden;
+  }
+  .scenario-head{
+    padding:1rem 1.3rem;
+    background:linear-gradient(90deg,rgba(139,105,20,0.06),transparent);
+    border-bottom:1px solid var(--border);
+    display:flex;align-items:center;gap:0.8rem;
+  }
+  .scenario-head h3{font-size:0.95rem;font-weight:800;color:var(--text);}
+  .scenario-head .lock-badge{
+    background:rgba(107,63,160,0.1);color:var(--purple);
+    border:1px solid rgba(107,63,160,0.25);
+    border-radius:6px;padding:0.1rem 0.55rem;
+    font-size:0.7rem;font-weight:700;margin-left:auto;
+  }
+  .scenario-body{padding:1.3rem;}
+  .scenario-row{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;
+  }
+  @media(max-width:500px){.scenario-row{grid-template-columns:1fr;}}
+  .scenario-item{
+    background:var(--bg);border-radius:10px;padding:0.8rem;
+    border:1px solid var(--border);text-align:center;
+  }
+  .scenario-item.locked{opacity:0.45;filter:grayscale(0.4);}
+  .scenario-item-label{font-size:0.7rem;color:var(--muted);margin-bottom:0.4rem;font-weight:600;}
+  .scenario-item-value{font-size:1.1rem;font-weight:800;color:var(--text);}
+  .scenario-item .s-tag{font-size:0.68rem;margin-top:0.3rem;padding:0.1rem 0.4rem;border-radius:4px;}
+  .s-conserv{background:rgba(29,122,69,0.1);color:var(--green);}
+  .s-neutral{background:rgba(139,105,20,0.1);color:var(--gold);}
+  .s-aggr{background:rgba(192,57,43,0.1);color:var(--red);}
+
+  /* ── 封驳原则 ── */
+  .principle-card{
+    background:#FFFBF0;border-radius:16px;
+    border:1px solid rgba(139,105,20,0.2);
+    padding:1.3rem;
+  }
+  .principle-card h3{
+    font-size:0.88rem;font-weight:800;color:var(--gold);
+    margin-bottom:0.8rem;padding-bottom:0.6rem;
+    border-bottom:1px solid rgba(139,105,20,0.15);
+  }
+  .principle-list{list-style:none;padding:0;}
+  .principle-list li{
+    display:flex;gap:0.5rem;font-size:0.9rem;
+    line-height:1.75;padding:0.25rem 0;
+  }
+  .principle-list li::before{content:"⚠️";flex-shrink:0;}
+
+  /* ── 使用提示 ── */
+  .usage-tip{
+    background:rgba(139,105,20,0.06);border:1px solid rgba(139,105,20,0.2);
+    border-radius:12px;padding:1rem 1.2rem;
+    font-size:0.88rem;color:var(--text);line-height:1.75;
+    display:flex;gap:0.7rem;align-items:flex-start;margin-top:2rem;
+  }
+  .usage-tip-icon{font-size:1.1rem;flex-shrink:0;margin-top:0.05rem;}
+  .usage-tip strong{color:var(--gold);}
+
+  /* ── Footer ── */
+  .footer{
+    text-align:center;color:var(--muted);font-size:0.82rem;
+    padding:2rem 0;border-top:1px solid var(--border);margin-top:2rem;
+  }
+  .footer a{color:var(--gold);text-decoration:none;}
+  .footer a:hover{text-decoration:underline;}
+
+  @media(max-width:640px){
+    .hero{padding:2rem 1.2rem 1.5rem;}
+    .container{padding:1.5rem 1rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ── 顶部导航 ── -->
+<div class="top-nav">
+  <span class="nav-brand">开元时代 · 门下省·财务司（CFO）工作台</span>
+  <a class="nav-back" href="index.html">← 返回总指挥台</a>
+</div>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="hero-top">
+    <div class="hero-left">
+      <div class="eyebrow">开元时代 · 人机协作系统</div>
+      <h1>门下省·财务司（CFO）工作台</h1>
+      <p class="sub">财务审议 · 补贴套利设计 · 现金流管控 · 数字不清楚不过审</p>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num" style="color:#FF6B6B;">1</div>
+        <div class="stat-label">阻塞项</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" style="color:#B8940F;">100万</div>
+        <div class="stat-label">启动资金</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" style="color:#2ED573;">3</div>
+        <div class="stat-label">情景模型</div>
+      </div>
+    </div>
+  </div>
+  <div class="role-badge">
+    <span>🏦</span>
+    <span>
+      <strong>角色职责：</strong>负责财务审议、补贴套利设计、现金流管控；封驳原则：数字不清楚不过审。
+      在飞书发「CFO：[问题/指令]」即可触发财务司响应。
+    </span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ── 阻塞警告 ── -->
+  <div class="block-alert">
+    <span class="block-alert-icon">🚨</span>
+    <div>
+      <strong>当前阻塞：E05 政策核查未完成</strong>——CFO 封驳全部依赖补贴政策的财务数字。
+      请 CEO 完成「T003：致电广外街道政务中心确认补贴申领流程」后，CFO 立即解锁三情景建模。
+    </div>
+  </div>
+
+  <!-- ── 关键指标 ── -->
+  <div class="section-title">📊 关键财务指标</div>
+  <div class="metric-grid">
+
+    <div class="metric-card blocked">
+      <div class="metric-label">E05 政策核查</div>
+      <div class="metric-value red">待完成</div>
+      <div class="metric-desc">阻塞 CFO 建模。需 CEO 致电广外街道政务中心确认 800元/月补贴受理状态、申领条件、到账周期、代办可行性。</div>
+    </div>
+
+    <div class="metric-card info">
+      <div class="metric-label">启动资金</div>
+      <div class="metric-value amber">100 万元</div>
+      <div class="metric-desc">CEO 个人注资，到账时间待确认。CFO 需要确切时间窗口以规划护理员招募节奏和运营成本发放计划。</div>
+    </div>
+
+    <div class="metric-card ok">
+      <div class="metric-label">盈亏平衡点</div>
+      <div class="metric-value green">1 户转正</div>
+      <div class="metric-desc">经测算：1 户家庭完整服务即可覆盖单月运营成本。首批 2 户签约后现金流转正，无需烧钱扩张。</div>
+    </div>
+
+    <div class="metric-card waiting">
+      <div class="metric-label">三情景模型</div>
+      <div class="metric-value" style="color:var(--purple);font-size:1.1rem;">等待 E05 解锁</div>
+      <div class="metric-desc">激进 / 中性 / 保守三情景已设计框架，待补贴政策数字落实后自动填充，预计 30 分钟内完成建模输出。</div>
+    </div>
+
+  </div>
+
+  <!-- ── 三情景模型预览 ── -->
+  <div class="section-title">📈 三情景现金流模型</div>
+  <div class="scenario-card">
+    <div class="scenario-head">
+      <h3>📋 情景建模框架（E05确认后自动填充数字）</h3>
+      <span class="lock-badge">🔒 E05解锁前锁定</span>
+    </div>
+    <div class="scenario-body">
+      <div class="scenario-row">
+        <div class="scenario-item locked">
+          <div class="scenario-item-label">保守情景</div>
+          <div class="scenario-item-value">— —</div>
+          <div class="s-tag s-conserv">补贴按50%兑现</div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-top:0.4rem;">盈亏平衡月份：待算</div>
+        </div>
+        <div class="scenario-item locked">
+          <div class="scenario-item-label">中性情景</div>
+          <div class="scenario-item-value">— —</div>
+          <div class="s-tag s-neutral">补贴按80%兑现</div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-top:0.4rem;">盈亏平衡月份：待算</div>
+        </div>
+        <div class="scenario-item locked">
+          <div class="scenario-item-label">激进情景</div>
+          <div class="scenario-item-value">— —</div>
+          <div class="s-tag s-aggr">补贴按100%兑现</div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-top:0.4rem;">盈亏平衡月份：待算</div>
+        </div>
+      </div>
+      <div style="margin-top:1rem;font-size:0.85rem;color:var(--muted);padding:0.7rem;background:var(--bg);border-radius:8px;border:1px solid var(--border);">
+        🔑 <strong>解锁方式：</strong>CEO 完成 T003（致电政务中心），在 CEO 任务区填写5个问题答案 → CFO 自动读取 E05 数据 → 30分钟内输出完整三情景模型。
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 补贴套利设计 ── -->
+  <div class="section-title">🎯 补贴套利结构设计</div>
+  <div class="metric-card info" style="border-radius:16px;padding:1.3rem;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:center;">
+      <div>
+        <div style="font-size:0.7rem;color:var(--muted);margin-bottom:0.3rem;">养老消费券</div>
+        <div style="font-size:1.4rem;font-weight:800;color:var(--green);">800元/月</div>
+        <div style="font-size:0.75rem;color:var(--muted);">E05 待确认</div>
+      </div>
+      <div>
+        <div style="font-size:0.7rem;color:var(--muted);margin-bottom:0.3rem;">医保喘息服务</div>
+        <div style="font-size:1.4rem;font-weight:800;color:var(--blue);">待查</div>
+        <div style="font-size:0.75rem;color:var(--muted);">E05补充项</div>
+      </div>
+      <div>
+        <div style="font-size:0.7rem;color:var(--muted);margin-bottom:0.3rem;">家庭自付</div>
+        <div style="font-size:1.4rem;font-weight:800;color:var(--gold);">≈ 0</div>
+        <div style="font-size:0.75rem;color:var(--muted);">目标：零自付</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CFO封驳原则 ── -->
+  <div class="section-title">⚖️ 财务司封驳原则</div>
+  <div class="principle-card">
+    <h3>🏛️ 门下省封驳准则（不可绕过）</h3>
+    <ul class="principle-list">
+      <li>未经政府书面或电话确认的政策补贴数字，不得进入任何财务模型或对外路演材料。</li>
+      <li>现金流预测必须包含保守/中性/激进三情景，不允许单一乐观预测。</li>
+      <li>启动资金到账时间不确认，护理员招募计划不得排期。</li>
+      <li>单户盈亏测算必须按「补贴零到账」情景下也能覆盖成本的方案设计服务定价。</li>
+    </ul>
+  </div>
+
+  <!-- ── 使用提示 ── -->
+  <div class="usage-tip">
+    <span class="usage-tip-icon">💬</span>
+    <div>
+      在飞书发 <strong>「CFO：[你的问题]」</strong> 让财务司 AI 角色立即响应。<br/>
+      例：「CFO：帮我审一下这个定价方案」「CFO：E05已完成，5个问题答案如下……请建模」
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>开元时代 AI 工作台 · 财务司自动维护</p>
+    <p style="margin-top:0.4rem;">
+      <a href="index.html">← 返回总指挥台</a>
+    </p>
+  </div>
+</div>
+
+</body>
+</html>
