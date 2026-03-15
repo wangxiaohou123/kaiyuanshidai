@@ -230,7 +230,7 @@
     .vision-card-icon { font-size: 1.7rem; margin-bottom: 0.8rem; }
     .vision-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.6rem; }
     .vision-card p { color: var(--muted); font-size: 0.95rem; line-height: 1.85; }
-    @media (max-width: 640px) { .vision-grid { grid-template-columns: 1fr; } }
+    /* vision-grid mobile: handled in unified 768px block below */
 
     /* ── TEAM ── */
     #team { background: none; }
@@ -261,7 +261,7 @@
       font-size: 0.78rem; padding: 0.2rem 0.65rem; border-radius: 4px;
       background: rgba(155,106,26,0.1); color: var(--gold); border: 1px solid rgba(155,106,26,0.22);
     }
-    @media (max-width: 640px) { .team-grid { grid-template-columns: 1fr; } }
+    /* team-grid mobile: handled in unified 768px block below */
 
     /* ── 决策机制 ── */
     .decision-flow {
@@ -297,7 +297,7 @@
     .strategy-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.45rem; }
     .strategy-card p { color: var(--muted); font-size: 0.95rem; line-height: 1.85; }
     .strategy-tag { display: inline-block; margin-top: 0.9rem; font-size: 0.68rem; padding: 0.18rem 0.55rem; border-radius: 4px; background: rgba(155,106,26,0.1); color: var(--gold); border: 1px solid rgba(155,106,26,0.22); }
-    @media (max-width: 768px) { .strategy-grid { grid-template-columns: 1fr; } }
+    /* strategy-grid mobile: handled in unified 768px block below */
 
     /* ── TIMELINE ── */
     .timeline { margin-top: 2.5rem; position: relative; }
@@ -363,7 +363,7 @@
     .dc-risk-lvl.mid { color: var(--amber); }
     .dc-risk-lvl.low { color: var(--green); }
     .dc-risk-txt { color: var(--muted); line-height: 1.6; }
-    @media (max-width: 600px) { .dc-risks { grid-template-columns: 1fr; } .log-mini-kpi { grid-template-columns: repeat(3,1fr); } }
+    /* dc-risks / log-mini-kpi mobile: handled in unified 768px block below */
 
     /* ── KPI ── */
     .kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.1rem; margin-top: 2.2rem; }
@@ -374,7 +374,7 @@
     .kpi-tgt { font-size: 0.68rem; color: var(--muted); margin-top: 0.2rem; opacity: 0.7; }
     .kpi-bar { height: 3px; background: var(--dark-4); border-radius: 99px; margin-top: 0.9rem; overflow: hidden; }
     .kpi-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--gold-dim), var(--gold)); transition: width 0.8s; }
-    @media (max-width: 640px) { .kpi-grid { grid-template-columns: repeat(2,1fr); } }
+    /* kpi-grid mobile: handled in unified 768px block below */
 
     /* ── FOOTER ── */
     footer { border-top: 1px solid var(--border); padding: 2.5rem 1.5rem; text-align: center; color: var(--muted); font-size: 0.9rem; }
@@ -398,6 +398,118 @@
     @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
     .fade-up { animation: fadeUp 0.65s ease both; }
     .d1{animation-delay:0.1s}.d2{animation-delay:0.22s}.d3{animation-delay:0.36s}
+
+    /* ══════════════════════════════════════════════════════
+       📱 移动端全面适配 v2.0  (max-width: 768px / 480px)
+       ══════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+
+      /* ── SECTION 内边距缩小 ── */
+      section { padding: 3.5rem 1rem; }
+
+      /* ── HERO 优化 ── */
+      .hero { padding: 5rem 1.2rem 2.5rem; }
+      .hero-stats { gap: 1.2rem; }
+      .hero-stat { min-width: 70px; }
+      .hero-cta { padding: 0.8rem 1.6rem; font-size: 0.9rem; }
+
+      /* ── 决策流程：横向溢出修复 → 改为竖向堆叠 ── */
+      .decision-flow { padding: 1.2rem; overflow-x: visible; }
+      .flow-steps {
+        flex-direction: column; gap: 0; align-items: stretch;
+      }
+      .flow-step {
+        display: flex; align-items: center; gap: 0.8rem;
+        min-width: 0; flex: none; width: 100%;
+        background: var(--dark-2); border: 1px solid var(--border);
+        border-radius: 10px; padding: 0.75rem 1rem;
+        margin-bottom: 0;
+      }
+      /* 用 margin-bottom + ::after 替换绝对定位箭头 */
+      .flow-step:not(:last-child) {
+        margin-bottom: 0;
+        border-bottom-left-radius: 0; border-bottom-right-radius: 0;
+        border-bottom: none;
+      }
+      .flow-step:not(:first-child) {
+        border-top-left-radius: 0; border-top-right-radius: 0;
+      }
+      .flow-step:not(:last-child)::after {
+        display: none; /* 隐藏横向箭头 */
+      }
+      .flow-dot { margin: 0; flex-shrink: 0; }
+      .flow-label { text-align: left; font-size: 0.9rem; }
+      .flow-sub { font-size: 0.8rem; }
+
+      /* ── STRATEGY GRID ── */
+      .strategy-grid { grid-template-columns: 1fr; gap: 1rem; margin-top: 1.5rem; }
+
+      /* ── TEAM GRID ── */
+      .team-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+      /* ── VISION GRID ── */
+      .vision-grid { grid-template-columns: 1fr; gap: 0.9rem; }
+      .vision-big { padding: 1.4rem 1.2rem; }
+
+      /* ── KPI: 4列→2列 ── */
+      .kpi-grid { grid-template-columns: repeat(2,1fr); gap: 0.8rem; margin-top: 1.5rem; }
+      .kpi-val { font-size: 1.6rem; }
+
+      /* ── LOG 优化 ── */
+      .log-entry-hd { padding: 1rem 1.2rem; }
+      .log-title { font-size: 0.92rem; }
+      .log-body { padding: 1.1rem; }
+      .log-mini-kpi { grid-template-columns: repeat(2,1fr); gap: 0.6rem; }
+
+      /* ── 决策卡风险矩阵 ── */
+      .dc-risks { grid-template-columns: 1fr; gap: 0.6rem; }
+
+      /* ── TIMELINE 缩进减小 ── */
+      .tl-week { margin-left: 36px; }
+      .timeline::before { left: 10px; }
+      .tl-week::before { left: -28px; width: 8px; height: 8px; }
+
+      /* ── 任务项文字调小 ── */
+      .task-item { padding: 0.75rem 0.9rem; font-size: 0.9rem; }
+
+      /* ── SECTION-TITLE 字号缩放 ── */
+      .section-title { font-size: clamp(1.3rem, 5vw, 2rem); }
+      .section-desc { font-size: 0.92rem; }
+
+      /* ── FOOTER ── */
+      footer { padding: 2rem 1rem; font-size: 0.82rem; }
+
+      /* ── 导航 logo 缩小 ── */
+      .nav-logo { font-size: 0.9rem; }
+    }
+
+    /* ── 超小屏幕 480px ── */
+    @media (max-width: 480px) {
+      section { padding: 2.8rem 0.9rem; }
+      .hero { padding: 4.5rem 1rem 2rem; }
+      .hero-stats { gap: 0.8rem; }
+      .hero-stat { min-width: 60px; }
+      .hero-stat-num { font-size: 1.4rem; }
+      .hero-stat-label { font-size: 0.78rem; }
+      .kpi-grid { grid-template-columns: repeat(2,1fr); gap: 0.6rem; }
+      .kpi-val { font-size: 1.4rem; }
+      .log-mini-kpi { grid-template-columns: repeat(2,1fr); }
+      .lkpi-val { font-size: 1.1rem; }
+      .vision-big { padding: 1.1rem 1rem; }
+      .vision-big .quote { font-size: 0.95rem; }
+      .team-card { padding: 1.1rem; }
+      .task-item { padding: 0.65rem 0.8rem; font-size: 0.85rem; }
+      .tl-week { margin-left: 28px; }
+      .tl-week::before { left: -22px; }
+    }
+
+    /* ── 横屏手机 (landscape) ── */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .hero { min-height: auto; padding: 5rem 1.5rem 2rem; }
+      .kpi-grid { grid-template-columns: repeat(4,1fr); }
+      .flow-steps { flex-direction: row; flex-wrap: wrap; }
+      .flow-step { width: calc(50% - 0.4rem); }
+    }
   </style>
   <!-- 🔐 认证模块：未登录自动弹出密码输入框 -->
   <script src="auth-config.js"></script>
