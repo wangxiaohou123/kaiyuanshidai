@@ -2,6 +2,7 @@
 
 ## 一、研究院课题（T系列 · 一手数据研究）
 
+- **2026-03-15** | 固化文件命名规范到长期记忆：user-preferences.md + commands.md 双写，防止再次出现虚假day编号 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | 【编号重构】方案A：全部文件按D{物理日}-R{轮次}双层编号重命名，官网所有引用同步更新，废弃虚假day20等编号 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | Day 20全量班子汇报：广外街道医养战略突破+两大P0研究+家庭养老床位切入方案+CEO行动令 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | mobile.html产品服务理念全面重写：品牌定位/四级产品体系/联创三角/双护城河/路演叙事/北极星全部更新 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
