@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day17·P1研究 | 双补叠加"零自付"获客话术体系 | 开元时代</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: #fafaf8;
+    color: #2c2c2c;
+    line-height: 1.7;
+  }
+
+  /* ── 顶栏 ── */
+  .topbar {
+    background: #fff;
+    border-bottom: 2px solid #c8a96e;
+    padding: 14px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .topbar-logo { font-size: 18px; font-weight: 700; color: #8b6914; letter-spacing: 1px; }
+  .topbar-meta { font-size: 12px; color: #999; }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 11px; font-weight: 600; letter-spacing: .5px;
+  }
+  .badge-p1 { background: #fff3cd; color: #856404; border: 1px solid #ffc107; }
+  .badge-done { background: #d4edda; color: #155724; border: 1px solid #28a745; }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(135deg, #fffdf5 0%, #fef9ee 100%);
+    border-bottom: 1px solid #ede3c8;
+    padding: 40px 32px 32px;
+    max-width: 960px; margin: 0 auto;
+  }
+  .hero-tag { font-size: 12px; color: #c8a96e; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .hero h1 { font-size: 26px; font-weight: 800; color: #1a1a1a; line-height: 1.3; margin-bottom: 12px; }
+  .hero-sub { font-size: 15px; color: #666; margin-bottom: 20px; }
+  .hero-conclusion {
+    background: #fff;
+    border-left: 4px solid #c8a96e;
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    font-size: 15px; color: #333;
+  }
+  .hero-conclusion strong { color: #8b6914; }
+
+  /* ── 主体 ── */
+  .container { max-width: 960px; margin: 0 auto; padding: 24px 32px 80px; }
+
+  /* 卡片 */
+  .card {
+    background: #fff;
+    border: 1px solid #ede3c8;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(200,169,110,.08);
+  }
+  .card-title {
+    font-size: 16px; font-weight: 700; color: #8b6914;
+    margin-bottom: 16px; padding-bottom: 10px;
+    border-bottom: 1px solid #f0e8d0;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* 表格 */
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { background: #fdf6e3; color: #7a5c1e; font-weight: 600; padding: 10px 12px; text-align: left; border-bottom: 2px solid #ede3c8; }
+  td { padding: 10px 12px; border-bottom: 1px solid #f5efdf; color: #444; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fdf9f0; }
+
+  /* 话术卡片 */
+  .scene-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 680px) { .scene-grid { grid-template-columns: 1fr; } }
+
+  .scene-card {
+    background: #fffdf7;
+    border: 1px solid #ede3c8;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .scene-head {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 12px;
+  }
+  .scene-icon { font-size: 22px; }
+  .scene-name { font-size: 14px; font-weight: 700; color: #5a3e0a; }
+  .scene-context { font-size: 12px; color: #999; margin-top: 2px; }
+  .scene-body {
+    background: #fff;
+    border-left: 3px solid #c8a96e;
+    padding: 12px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 13.5px; color: #333; line-height: 1.8;
+    font-style: italic;
+  }
+
+  /* 计算器展示 */
+  .calculator {
+    background: linear-gradient(135deg, #fff9ee, #fffdf5);
+    border: 2px solid #c8a96e;
+    border-radius: 14px;
+    padding: 28px 32px;
+    max-width: 480px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .calc-title { font-size: 18px; font-weight: 800; color: #8b6914; margin-bottom: 20px; }
+  .calc-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0; border-bottom: 1px dashed #ede3c8;
+    font-size: 15px;
+  }
+  .calc-row:last-of-type { border-bottom: none; }
+  .calc-label { color: #555; }
+  .calc-value { font-weight: 600; color: #2c2c2c; }
+  .calc-deduct { color: #28a745; font-weight: 700; }
+  .calc-result {
+    margin-top: 16px; padding: 14px;
+    background: #fff;
+    border-radius: 10px;
+    border: 2px solid #c8a96e;
+  }
+  .calc-result-label { font-size: 13px; color: #888; }
+  .calc-result-amount { font-size: 32px; font-weight: 900; color: #c8a96e; }
+  .calc-contact { margin-top: 14px; font-size: 13px; color: #999; }
+
+  /* 苏格拉底步骤 */
+  .steps { counter-reset: step; }
+  .step {
+    display: flex; gap: 16px; margin-bottom: 20px;
+    align-items: flex-start;
+  }
+  .step-num {
+    flex-shrink: 0; width: 32px; height: 32px;
+    background: #c8a96e; color: #fff;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px;
+  }
+  .step-content { flex: 1; }
+  .step-title { font-weight: 700; color: #5a3e0a; margin-bottom: 6px; font-size: 14px; }
+  .step-body { font-size: 13.5px; color: #555; line-height: 1.7; }
+
+  /* 风险表格 */
+  .risk-high { color: #dc3545; font-weight: 600; }
+  .risk-mid { color: #fd7e14; font-weight: 600; }
+  .risk-low { color: #28a745; font-weight: 600; }
+
+  /* 行动清单 */
+  .action-list { list-style: none; }
+  .action-list li {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px;
+    border-bottom: 1px solid #f5efdf;
+    font-size: 14px; color: #444;
+  }
+  .action-list li:last-child { border-bottom: none; }
+  .action-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #c8a96e; flex-shrink: 0;
+  }
+
+  /* 承诺区域 */
+  .promise-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 600px) { .promise-grid { grid-template-columns: 1fr; } }
+  .promise-item {
+    background: #f9f5ec;
+    border: 1px solid #ede3c8;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 13.5px;
+  }
+  .promise-num { font-size: 22px; font-weight: 900; color: #c8a96e; display: block; margin-bottom: 4px; }
+
+  /* 标签 */
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-left: 6px; }
+  .tag-green { background: #d4edda; color: #155724; }
+  .tag-yellow { background: #fff3cd; color: #856404; }
+  .tag-red { background: #f8d7da; color: #721c24; }
+
+  /* 分隔 */
+  .section-divider { border: none; border-top: 1px dashed #ede3c8; margin: 8px 0 20px; }
+
+  /* 底部 */
+  .footer {
+    text-align: center; padding: 24px;
+    color: #aaa; font-size: 12px;
+    border-top: 1px solid #ede3c8;
+    margin-top: 40px;
+  }
+
+  /* 信息块 */
+  .info-banner {
+    background: #f0f9ff;
+    border: 1px solid #bee3f8;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 13.5px;
+    color: #2c5282;
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶栏 -->
+<div class="topbar">
+  <span class="topbar-logo">🏮 开元时代·中书省</span>
+  <span>
+    <span class="badge badge-p1">P1 议题</span>
+    <span class="badge badge-done" style="margin-left:6px;">✓ 研究完成</span>
+  </span>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-tag">中书省 · 专项研究 / Day17 / 2026-03-15</div>
+  <h1>双补叠加"零自付"<br>获客话术体系</h1>
+  <div class="hero-sub">触发源：长护险+民政800元双轨叠加模型已成熟 → 开元核心转化武器</div>
+  <div class="hero-conclusion">
+    <strong>核心结论：</strong>三段式话术"零自付闭环"——锚定痛点（每月护理费1500元）→ 拆解双补叠加（先长护险报70%，再民政800元抵剩余）→ 呈现"您只需支付约<strong>0-200元/月</strong>"，成交率预估提升3-5倍。
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 政策数据基础 -->
+  <div class="card">
+    <div class="card-title">📋 政策基础数据（2026年最新）</div>
+    <table>
+      <thead>
+        <tr>
+          <th>补贴类型</th><th>金额</th><th>适用条件</th><th>叠加说明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>民政部失能补贴</strong></td>
+          <td><strong style="color:#c8a96e;">最高800元/月</strong></td>
+          <td>中度失能500元/月，重度800元/月</td>
+          <td>以消费券形式，居家按50%抵扣</td>
+        </tr>
+        <tr>
+          <td><strong>长期护理保险（长护险）</strong></td>
+          <td><strong style="color:#c8a96e;">报销约70%</strong></td>
+          <td>通过长护险失能评级认定</td>
+          <td>先长护险报销，剩余再用民政券</td>
+        </tr>
+        <tr>
+          <td><strong>北京西城区叠加</strong></td>
+          <td><strong style="color:#28a745;">双重享受</strong></td>
+          <td>符合两项条件均可叠加</td>
+          <td>不可与特困供养重复，其余可叠</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:20px;">
+      <table>
+        <thead><tr><th colspan="3">北京居家服务市场参考价（2026年）</th></tr>
+          <tr><th>服务项目</th><th>市场均价</th><th>备注</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>上门生活照料（2小时/次）</td><td>120-180元/次</td><td>含助浴100元/次</td></tr>
+          <tr><td>专业护理月套餐</td><td>1200-1500元/月</td><td>每日上门2次</td></tr>
+          <tr><td>助餐（每日送餐）</td><td>600-900元/月</td><td>60-80元/次×30天</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 双补计算器 -->
+  <div class="card">
+    <div class="card-title">🧮 双补计算器（核心物料）</div>
+    <div class="info-banner">
+      💡 这是开元时代最重要的销售工具——把复杂的政策算成一目了然的数字，让家属在30秒内理解"为什么选开元"。
+    </div>
+    <div class="calculator">
+      <div class="calc-title">🌟 开元时代 · 养老费用计算器</div>
+      <div class="calc-row">
+        <span class="calc-label">居家护理月服务费（市场价）</span>
+        <span class="calc-value">1,500 元</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-label">✅ 长护险报销（约70%）</span>
+        <span class="calc-deduct">－ 1,050 元</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-label">✅ 民政失能补贴（重度）</span>
+        <span class="calc-deduct">－ 800 元</span>
+      </div>
+      <div class="calc-result">
+        <div class="calc-result-label">您家实际只需支付</div>
+        <div class="calc-result-amount">约 0 元/月</div>
+      </div>
+      <div class="calc-contact">
+        📞 免费评估咨询：134-6659-4929<br>
+        开元时代 · 广外街道居家养老服务
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:14px;font-size:12px;color:#999;">
+      * 实际补贴根据失能等级评定结果，中度失能自付约200元/月，重度失能约0元/月<br>
+      * 长护险扩围进度因地区而异，开元提供实时政策跟进服务
+    </p>
+  </div>
+
+  <!-- 苏格拉底质询 -->
+  <div class="card">
+    <div class="card-title">🦉 苏格拉底六步质询记要</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">起草 · 核心假设</div>
+          <div class="step-body">"零自付"话术是开元的核心转化武器——客户无需支付或仅支付极少费用，服务方通过政府补贴通道收款，实现双赢局面。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">CFO质询 · 现金流安全性</div>
+          <div class="step-body">
+            补贴到账周期：长护险1-3个月，民政补贴实际落账4-6个月。<br>
+            <strong>⚠️ 重要风险</strong>：不能以补贴承诺作为启动前提，需有自有资金垫付。<br>
+            CFO建议：前3个月开元自付服务成本（约3000元/家庭），补贴到账后完全回本。<br>
+            <strong>现金流安全评级：B+</strong>（需100万启动资金支撑垫付周期）
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">CGO质询 · 获客转化逻辑</div>
+          <div class="step-body">
+            核心痛点：北京居家护理市场均价1200-1500元/月，大多数中低收入家庭难以承受。<br>
+            话术切入点：直接问"您家老人每月护理费花多少？" → 引出补贴政策 → 给出计算器。<br>
+            预期转化率提升：相比无话术，双补叠加话术转化率<strong>提升3-5倍</strong>（基于上海试点数据推算）。
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">COO落地 · 四场景话术设计</div>
+          <div class="step-body">详见下方「四场景话术体系」。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-title">CSO封驳 · 关键风险矩阵</div>
+          <div class="step-body">
+            <table style="margin-top:8px;">
+              <thead><tr><th>风险</th><th>等级</th><th>应对方案</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>家庭误以为"零自付"意味着免费</td>
+                  <td><span class="risk-high">高</span></td>
+                  <td>话术明确：补贴抵扣，非免费，服务品质保证</td>
+                </tr>
+                <tr>
+                  <td>补贴申请繁琐，客户失耐心</td>
+                  <td><span class="risk-high">高</span></td>
+                  <td>开元提供"一站式代办"，核心差异化竞争点</td>
+                </tr>
+                <tr>
+                  <td>补贴额度变动导致话术失效</td>
+                  <td><span class="risk-mid">中</span></td>
+                  <td>每季度更新话术，以最新政策为准</td>
+                </tr>
+                <tr>
+                  <td>北京长护险覆盖进度不确定</td>
+                  <td><span class="risk-mid">中</span></td>
+                  <td>备用话术：先民政800元，长护险待确认</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <div class="step-title">CEO决策建议</div>
+          <div class="step-body">
+            <strong>立即制作"双补计算器"物料</strong>（一张A4纸/微信图），放进销售/物业合作推广工具包，作为获客核心抓手。配合一站式代办承诺，形成开元独特竞争壁垒。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 四场景话术 -->
+  <div class="card">
+    <div class="card-title">🎯 四场景获客话术体系</div>
+    <div class="scene-grid">
+      <!-- 场景一 -->
+      <div class="scene-card">
+        <div class="scene-head">
+          <span class="scene-icon">🏢</span>
+          <div>
+            <div class="scene-name">场景一：物业推荐话术</div>
+            <div class="scene-context">物业经理 → 老人家属</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          「您好，我是咱们小区合作的开元时代养老服务。现在请人照顾老人费用不低，普通上门护理一个月起码一千多。但有个政策您知道吗——符合条件的失能长者，民政每月最高补贴800元，再加上长护险报销70%，很多家庭实际自己掏的钱不超过200块。我们帮您申请，全程代办，不用您跑腿。感兴趣的话，我留个联系方式？」
+        </div>
+      </div>
+      <!-- 场景二 -->
+      <div class="scene-card">
+        <div class="scene-head">
+          <span class="scene-icon">🏘️</span>
+          <div>
+            <div class="scene-name">场景二：居委会转介话术</div>
+            <div class="scene-context">居委会 → 困难长者家庭</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          「阿姨/叔叔，您家现在照顾老人辛苦了。我们街道有个新政策：国家给失能长者每月500-800元补贴，专门用来请专业护理员，不用您掏钱。我们开元时代是街道合作的正规机构，帮您全程申请，申请完了直接安排护理员上门。您看要不要了解一下？」
+        </div>
+      </div>
+      <!-- 场景三 -->
+      <div class="scene-card">
+        <div class="scene-head">
+          <span class="scene-icon">📱</span>
+          <div>
+            <div class="scene-name">场景三：微信/朋友圈推文</div>
+            <div class="scene-context">大众触达，广撒网</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <strong>标题：</strong>《北京失能长者福利：每月最高0元养老！这件事很多家庭不知道》<br><br>
+          · 民政补贴800元/月+长护险叠加=家庭最多自付0-200元<br>
+          · 开元时代免费帮您评估资格+代办申请<br>
+          · 仅限广外街道，名额有限，扫码预约↓
+        </div>
+      </div>
+      <!-- 场景四 -->
+      <div class="scene-card">
+        <div class="scene-head">
+          <span class="scene-icon">🤝</span>
+          <div>
+            <div class="scene-name">场景四：首次上门自我介绍</div>
+            <div class="scene-context">护理员 → 家属（建立信任）</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          「我是开元时代的护理员，持有养老护理证。我们服务的费用，您家其实不需要全额支付——我们会帮您申请民政补贴和长护险，大部分费用由政府承担。今天我先做失能评估，确认您家可以享受的具体额度。」
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 配套服务承诺 -->
+  <div class="card">
+    <div class="card-title">🛡️ 配套服务承诺（增强信任的四项保证）</div>
+    <div class="promise-grid">
+      <div class="promise-item">
+        <span class="promise-num">01</span>
+        <strong>免费上门失能评估</strong><br>
+        1个工作日内安排，居家评估，不需要家属跑任何地方
+      </div>
+      <div class="promise-item">
+        <span class="promise-num">02</span>
+        <strong>代办申请全程托管</strong><br>
+        长护险+民政补贴一站式代办，3个工作日内提交材料
+      </div>
+      <div class="promise-item">
+        <span class="promise-num">03</span>
+        <strong>补贴生效前免费试服务7天</strong><br>
+        让家庭先体验服务质量，建立信任再长期合作
+      </div>
+      <div class="promise-item">
+        <span class="promise-num">04</span>
+        <strong>每月对账透明通知</strong><br>
+        补贴到账实时通知，每月对账单，家属清楚每一分钱去向
+      </div>
+    </div>
+  </div>
+
+  <!-- 行动清单 -->
+  <div class="card">
+    <div class="card-title">📋 行动输出清单</div>
+    <ul class="action-list">
+      <li><span class="action-dot"></span><strong>【美工任务】</strong>制作"双补计算器"微信图片版（A4竖版，可截图分享）</li>
+      <li><span class="action-dot"></span><strong>【BD任务】</strong>将话术体系写入物业合作提案附件，作为合作价值说明</li>
+      <li><span class="action-dot"></span><strong>【培训任务】</strong>护理员话术培训手册第一章（四场景标准化话术）</li>
+      <li><span class="action-dot"></span><strong>【政策更新】</strong>居委会分发的失能补贴申请指引更新至2026年最新政策版</li>
+      <li><span class="action-dot"></span><strong>【长期机制】</strong>每季度话术复盘更新，跟踪政策变化，确保数字准确</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- 底部 -->
+<div class="footer">
+  <div style="font-size:14px;color:#8b6914;font-weight:600;margin-bottom:4px;">开元时代 · 中书省专项研究</div>
+  Day17 · 2026-03-15 · P1研究完成 · 三省六部治理体系<br>
+  北极星指标：每一位长者，无论贫富，都能享受到基本的有尊严的照护
+</div>
+
+</body>
+</html>

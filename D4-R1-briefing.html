@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>开元时代 · 第4天班子汇报 · 2026-03-14</title>
+<style>
+:root {
+  --pearl: #FAFAF7;
+  --pearl-2: #F4F2EC;
+  --pearl-3: #EDE9E0;
+  --pearl-4: #E5E1D6;
+  --gold: #B8922A;
+  --gold-light: #D4A843;
+  --gold-pale: #F5EDD6;
+  --text: #2C2A25;
+  --text-2: #5C5850;
+  --muted: #9A9488;
+  --border: rgba(184,146,42,0.18);
+  --border-light: rgba(184,146,42,0.10);
+  --green: #2D7A52;
+  --green-bg: #EBF5EF;
+  --blue: #2B5FA0;
+  --blue-bg: #EBF1FA;
+  --amber: #B06A00;
+  --amber-bg: #FBF0E0;
+  --red: #B03030;
+  --red-bg: #FAEBEB;
+  --shadow: 0 2px 12px rgba(120,100,50,0.08);
+  --shadow-lg: 0 4px 24px rgba(120,100,50,0.12);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--pearl);color:var(--text);font-family:"PingFang SC","Helvetica Neue",sans-serif;line-height:1.6;}
+
+/* 顶部 */
+.header{
+  background:linear-gradient(135deg,#FFFEF8 0%,#FBF7EC 50%,#F5EDD6 100%);
+  border-bottom:2px solid var(--gold-pale);
+  padding:2.5rem 2rem 2rem;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.header::before{
+  content:"開元";
+  position:absolute;
+  right:-10px;top:-15px;
+  font-size:9rem;
+  color:rgba(184,146,42,0.06);
+  font-weight:900;
+  pointer-events:none;
+  letter-spacing:-8px;
+}
+.header-label{
+  font-size:0.68rem;
+  letter-spacing:4px;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:0.6rem;
+}
+.header-title{
+  font-size:2rem;
+  font-weight:700;
+  color:var(--text);
+  margin-bottom:0.3rem;
+}
+.header-title span{color:var(--gold);}
+.header-sub{color:var(--text-2);font-size:0.9rem;}
+.header-date{
+  display:inline-block;
+  background:var(--gold-pale);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:0.3rem 1.2rem;
+  font-size:0.8rem;
+  color:var(--gold);
+  font-weight:600;
+  margin-top:0.9rem;
+}
+
+/* 容器 */
+.container{max-width:960px;margin:0 auto;padding:2rem 1.5rem;}
+
+/* 段落标题 */
+.section-title{
+  font-size:0.65rem;
+  letter-spacing:4px;
+  color:var(--gold);
+  text-transform:uppercase;
+  font-weight:700;
+  margin:2.2rem 0 1rem;
+  display:flex;
+  align-items:center;
+  gap:0.6rem;
+}
+.section-title::after{content:"";flex:1;height:1px;background:var(--pearl-4);}
+
+/* 卡片 */
+.card{
+  background:#FFFFFF;
+  border:1px solid var(--border-light);
+  border-radius:14px;
+  padding:1.4rem 1.6rem;
+  margin-bottom:1rem;
+  box-shadow:var(--shadow);
+}
+.card-title{
+  font-size:0.82rem;
+  font-weight:700;
+  color:var(--gold);
+  margin-bottom:1rem;
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+  padding-bottom:0.7rem;
+  border-bottom:1px solid var(--pearl-3);
+}
+
+/* 徽章 */
+.badge{display:inline-block;font-size:0.65rem;border-radius:4px;padding:0.15rem 0.5rem;font-weight:600;}
+.badge-done{background:var(--green-bg);color:var(--green);}
+.badge-wip{background:var(--amber-bg);color:var(--amber);}
+
+/* 新闻条目 */
+.news-item{padding:0.9rem 0;border-bottom:1px solid var(--pearl-3);display:flex;gap:1rem;}
+.news-item:last-child{border-bottom:none;padding-bottom:0;}
+.news-num{
+  min-width:26px;height:26px;border-radius:50%;
+  background:var(--gold-pale);color:var(--gold);
+  font-size:0.75rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  margin-top:2px;flex-shrink:0;
+  border:1px solid var(--border);
+}
+.news-content strong{color:var(--text);font-size:0.9rem;}
+.news-content p{color:var(--text-2);font-size:0.83rem;margin-top:0.3rem;line-height:1.7;}
+.news-insight{
+  font-size:0.78rem;
+  margin-top:0.4rem;
+  padding:0.4rem 0.7rem;
+  border-radius:6px;
+  border-left:3px solid;
+}
+.insight-green{background:var(--green-bg);color:var(--green);border-color:var(--green);}
+.insight-blue{background:var(--blue-bg);color:var(--blue);border-color:var(--blue);}
+.insight-amber{background:var(--amber-bg);color:var(--amber);border-color:var(--amber);}
+.news-tag{display:inline-block;font-size:0.65rem;border-radius:4px;padding:0.1rem 0.45rem;margin-left:0.3rem;vertical-align:middle;font-weight:600;}
+.tag-policy{background:var(--blue-bg);color:var(--blue);}
+.tag-market{background:var(--green-bg);color:var(--green);}
+.tag-action{background:var(--amber-bg);color:var(--amber);}
+
+/* 网格 */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:640px){.grid2{grid-template-columns:1fr;}}
+
+/* 表格 */
+table{width:100%;border-collapse:collapse;font-size:0.83rem;}
+th{
+  color:var(--text-2);font-weight:600;text-align:left;
+  padding:0.5rem 0.6rem;
+  background:var(--pearl-2);
+  font-size:0.75rem;letter-spacing:1px;
+}
+th:first-child{border-radius:6px 0 0 6px;}
+th:last-child{border-radius:0 6px 6px 0;}
+td{padding:0.55rem 0.6rem;border-bottom:1px solid var(--pearl-3);color:var(--text);}
+tr:last-child td{border-bottom:none;}
+.num-green{color:var(--green);font-weight:700;}
+.num-amber{color:var(--amber);font-weight:700;}
+.num-red{color:var(--red);font-weight:700;}
+
+/* 时间线 */
+.timeline{position:relative;padding-left:1.6rem;}
+.timeline::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--pearl-3);border-radius:2px;}
+.tl-item{position:relative;margin-bottom:1.1rem;}
+.tl-dot{position:absolute;left:-1.6rem;top:4px;width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid #fff;box-shadow:0 0 0 2px var(--gold-pale);}
+.tl-dot.red{background:var(--red);box-shadow:0 0 0 2px var(--red-bg);}
+.tl-dot.amber{background:var(--amber);box-shadow:0 0 0 2px var(--amber-bg);}
+.tl-dot.green{background:var(--green);box-shadow:0 0 0 2px var(--green-bg);}
+.tl-time{font-size:0.68rem;color:var(--gold);font-weight:700;letter-spacing:1px;margin-bottom:0.1rem;}
+.tl-text{font-size:0.85rem;color:var(--text);font-weight:600;}
+.tl-sub{font-size:0.78rem;color:var(--text-2);line-height:1.6;}
+
+/* 步骤 */
+.steps{display:flex;gap:0.5rem;flex-wrap:wrap;margin:0.8rem 0;}
+.step{
+  flex:1;min-width:100px;
+  background:var(--pearl-2);
+  border:1px solid var(--border-light);
+  border-radius:10px;padding:0.8rem 0.6rem;
+  text-align:center;
+}
+.step-num{font-size:1.3rem;font-weight:800;color:var(--gold);display:block;}
+.step-name{font-size:0.72rem;color:var(--text-2);display:block;margin-top:0.2rem;font-weight:600;}
+.step-arr{display:flex;align-items:center;color:var(--pearl-4);font-size:1.2rem;padding-top:0.3rem;}
+
+/* 话术框 */
+.script-box{
+  background:var(--pearl-2);
+  border:1px solid var(--border-light);
+  border-radius:10px;
+  padding:1.1rem 1.2rem;
+  font-size:0.83rem;
+  line-height:1.9;
+  margin-top:0.7rem;
+}
+.script-step-label{color:var(--gold);font-weight:700;font-size:0.8rem;}
+.script-hint{color:var(--muted);font-size:0.75rem;}
+
+/* 决策卡 */
+.decision-card{
+  background:linear-gradient(135deg,#FFFEF5 0%,var(--gold-pale) 100%);
+  border:1.5px solid var(--border);
+  border-radius:14px;
+  padding:1.5rem;
+  box-shadow:var(--shadow-lg);
+}
+.decision-tag{font-size:0.65rem;letter-spacing:3px;color:var(--gold);text-transform:uppercase;font-weight:700;margin-bottom:0.5rem;}
+.decision-title{font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:1rem;}
+.decision-item{
+  display:flex;gap:0.7rem;
+  padding:0.6rem 0;
+  border-bottom:1px solid rgba(184,146,42,0.12);
+  font-size:0.84rem;
+  line-height:1.7;
+}
+.decision-item:last-child{border-bottom:none;}
+.d-icon{font-size:1rem;flex-shrink:0;margin-top:1px;}
+
+/* 提示框 */
+.alert{border-radius:8px;padding:0.75rem 1rem;font-size:0.82rem;margin:0.8rem 0;display:flex;gap:0.6rem;align-items:flex-start;}
+.alert-icon{flex-shrink:0;font-size:0.9rem;}
+.alert.green{background:var(--green-bg);color:var(--green);border:1px solid rgba(45,122,82,0.2);}
+.alert.amber{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(176,106,0,0.2);}
+.alert.blue{background:var(--blue-bg);color:var(--blue);border:1px solid rgba(43,95,160,0.2);}
+
+/* Q&A 问答 */
+.qa-item{margin-bottom:0.8rem;font-size:0.82rem;line-height:1.7;}
+.qa-q{color:var(--red);font-weight:600;}
+.qa-a{color:var(--text-2);}
+.qa-a strong{color:var(--text);}
+
+/* 状态行 */
+.status-row{display:flex;align-items:center;gap:0.5rem;padding:0.55rem 0;border-bottom:1px solid var(--pearl-3);font-size:0.83rem;}
+.status-row:last-child{border-bottom:none;}
+.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.dot-green{background:var(--green);}
+.dot-amber{background:var(--amber);}
+.dot-red{background:var(--red);}
+
+/* 底部 */
+.footer{
+  text-align:center;padding:2rem;
+  color:var(--muted);font-size:0.75rem;
+  border-top:1px solid var(--pearl-3);
+  margin-top:2rem;
+  background:var(--pearl-2);
+}
+.footer strong{color:var(--gold);}
+</style>
+  <!-- 🔐 认证模块 -->
+  <script src="auth-config.js"></script>
+  <script src="auth.js"></script>
+</head>
+<body>
+
+<!-- 顶部 -->
+<div class="header">
+  <div class="header-label">CEO Daily Briefing · 开元时代</div>
+  <div class="header-title">班子汇报 · 储备期<span>第4天</span></div>
+  <div class="header-sub">三省六部 · 2026年3月14日（周六）· 两会收官首日</div>
+  <div class="header-date">📅 今日重点：政策落地节点 × 首家获取准备 × 试服务决策</div>
+</div>
+
+<div class="container">
+
+  <!-- ── 行业动态 ── -->
+  <div class="section-title">CSO · 今日行业动态</div>
+  <div class="card">
+    <div class="card-title">🌐 2026全国两会收官 · 养老行业3条核心信号</div>
+
+    <div class="news-item">
+      <div class="news-num">1</div>
+      <div class="news-content">
+        <strong>政府工作报告写入「银发经济高质量发展」顶层部署 <span class="news-tag tag-policy">政策</span></strong>
+        <p>2026年《政府工作报告》正式提出：制定推进银发经济高质量发展的措施，完善老年用品、养老金融、旅居养老等支持政策，落实长期护理保险制度，保障中度以上失能长者服务补贴到位。</p>
+        <div class="news-insight insight-amber">⚡ CEO洞见：「银发经济高质量」是用市场化手段填补养老服务赤字的国家意志，开元时代的商业模式与此路径完全契合。</div>
+      </div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-num">2</div>
+      <div class="news-content">
+        <strong>800元/月消费补贴全国铺开 + 西城区2026第一批驿站运营商招募已开启 <span class="news-tag tag-action">行动信号</span></strong>
+        <p>2026年1月起，中度及以上失能长者可享每月最高800元消费补贴（电子券形式，抵扣比例50%）。与此同时，西城区已公开招募2026年第一批社区养老服务驿站运营商，广安门外街道在历年招募名单中多次出现。</p>
+        <div class="news-insight insight-green">✅ CEO洞见：补贴已从「规划」进入「执行」，广外驿站招募正在进行，是直接进入渠道的行动窗口。</div>
+      </div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-num">3</div>
+      <div class="news-content">
+        <strong>3.23亿长者规模 · 「十五五」人均预期寿命目标80岁 <span class="news-tag tag-market">市场</span></strong>
+        <p>截至2025年末，60岁以上长者3.23亿（占总人口23%），失能失智超4500万。「十五五」规划提出人均预期寿命提高至80岁，社区养老服务覆盖率目标70%以上——照护需求的「长度」和「密度」双重扩张。</p>
+        <div class="news-insight insight-blue">📊 CEO洞见：全国专业居家照护渗透率不足5%，广外街道独居/空巢长者超过1.2万人，10户目标仅需0.08%渗透率。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CFO ── -->
+  <div class="section-title">CFO · 现金流模型 V2 · 政策红利更新版</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">💰 六个月现金流滚动模型 <span class="badge badge-done">已更新</span></div>
+      <table>
+        <tr><th>月份</th><th>家庭数</th><th>月营收</th><th>月净利</th></tr>
+        <tr><td>M1（试运营）</td><td>1</td><td>¥2,400</td><td class="num-red">-¥200</td></tr>
+        <tr><td>M2</td><td>2</td><td>¥4,800</td><td class="num-amber">+¥940</td></tr>
+        <tr><td>M3</td><td>4</td><td>¥9,600</td><td class="num-green">+¥3,460</td></tr>
+        <tr><td>M4</td><td>6</td><td>¥14,400</td><td class="num-green">+¥5,980</td></tr>
+        <tr><td>M5</td><td>8</td><td>¥19,200</td><td class="num-green">+¥8,500</td></tr>
+        <tr><td><strong>M6（里程碑）</strong></td><td><strong>10</strong></td><td><strong>¥24,000</strong></td><td class="num-green"><strong>+¥11,020</strong></td></tr>
+      </table>
+      <div class="alert green" style="margin-top:0.9rem;"><span class="alert-icon">✅</span>M3起稳定正现金流；M6完成10户里程碑，月净利约1.1万元</div>
+    </div>
+    <div class="card">
+      <div class="card-title">⚠️ CFO苏格拉底质询 · 补贴风险评估</div>
+      <div class="timeline" style="margin-top:0.4rem;">
+        <div class="tl-item">
+          <div class="tl-dot red"></div>
+          <div class="tl-time">风险 #1 · 高</div>
+          <div class="tl-text">补贴到账周期 4–6 个月</div>
+          <div class="tl-sub">家庭先付2400元，补贴800元延迟返还 → CFO建议M1-M2不依赖补贴预测净利</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot amber"></div>
+          <div class="tl-time">风险 #2 · 中</div>
+          <div class="tl-text">长护险叠加未核实</div>
+          <div class="tl-sub">北京长护险2026年尚在建制中，广外能否叠加补贴需CGO实地确认</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot green"></div>
+          <div class="tl-time">缓解方案 · 已确认</div>
+          <div class="tl-text">「先服务后申报」策略</div>
+          <div class="tl-sub">先用2400元定价建立服务关系，补贴到账后抵扣下月 → 不影响M1现金流安全</div>
+        </div>
+      </div>
+      <div class="alert amber"><span class="alert-icon">⚡</span>CFO结论：100万资金前提下，6个月内不存在现金流断裂风险，最坏情景仅损失3–5万启动成本。</div>
+    </div>
+  </div>
+
+  <!-- ── COO ── -->
+  <div class="section-title">COO · 广外街道首次接触话术卡 V1</div>
+  <div class="card">
+    <div class="card-title">🏠 居委会渠道话术 · 首次家庭接触 5 步法</div>
+    <div class="alert blue"><span class="alert-icon">🎯</span>场景：通过家人（居委会成员）介绍，首次与目标家庭建立联系</div>
+
+    <div class="steps" style="margin-top:1rem;">
+      <div class="step"><span class="step-num">01</span><span class="step-name">开场建立信任</span></div>
+      <div class="step"><span class="step-num">02</span><span class="step-name">了解长者现状</span></div>
+      <div class="step"><span class="step-num">03</span><span class="step-name">补贴价值植入</span></div>
+      <div class="step"><span class="step-num">04</span><span class="step-name">免费评估邀约</span></div>
+      <div class="step"><span class="step-num">05</span><span class="step-name">留联系方式</span></div>
+    </div>
+
+    <div class="script-box">
+      <div style="color:var(--muted);font-size:0.72rem;margin-bottom:0.7rem;letter-spacing:1px;">【居委会渠道 · 标准话术版本 V1】</div>
+
+      <div style="margin-bottom:0.8rem;">
+        <div class="script-step-label">Step 01 · 开场</div>
+        「王阿姨好，我是[居委会人员]的亲属，他/她跟我说您家有长者在家，我这边做了几年专业居家照护，想来了解一下情况，看看有没有能帮上忙的。」
+      </div>
+      <div style="margin-bottom:0.8rem;">
+        <div class="script-step-label">Step 02 · 了解现状</div>
+        「您家长辈现在主要是什么情况？平时能自己活动吗？子女在附近还是外地？」<br>
+        <span class="script-hint">→ 核心判断：是否中度以上失能（补贴资格）</span>
+      </div>
+      <div style="margin-bottom:0.8rem;">
+        <div class="script-step-label">Step 03 · 补贴价值植入</div>
+        「您知道吗，国家现在有个政策，像您家这种情况，每个月可以申请到800元的服务补贴，专门用来买正规的上门照护服务。很多家庭不知道，就白白错过了。」
+      </div>
+      <div style="margin-bottom:0.8rem;">
+        <div class="script-step-label">Step 04 · 免费评估邀约</div>
+        「我们可以先过来做一次免费评估，大概一个小时，帮您看看能申请多少补贴，用不用花钱，看了再说——您这周哪天方便？」
+      </div>
+      <div>
+        <div class="script-step-label">Step 05 · 留联系方式</div>
+        「我把我的微信留给您，您想到了随时联系，不打扰您，告辞了。」
+      </div>
+    </div>
+
+    <div class="alert green" style="margin-top:0.9rem;"><span class="alert-icon">💡</span>COO关键洞见：「补贴」是话术锚点，不是卖服务，是帮家庭拿到他们本来就该有的钱。</div>
+  </div>
+
+  <!-- ── CGO ── -->
+  <div class="section-title">CGO · 第一个家庭 · 获取策略路径图</div>
+  <div class="card">
+    <div class="card-title">🎯 广外街道首家签约路径 · 苏格拉底审议版</div>
+    <div class="grid2" style="margin-top:0.5rem;">
+      <div>
+        <div style="color:var(--green);font-size:0.78rem;font-weight:700;margin-bottom:0.8rem;letter-spacing:1px;">🏆 最优路径（居委会渠道）</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-time">第 1 周</div>
+            <div class="tl-text">激活家人居委会资源</div>
+            <div class="tl-sub">王总家人在广外居委会任职，请求推荐1-2个有照护需求的家庭</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-time">第 2 周</div>
+            <div class="tl-text">免费上门评估</div>
+            <div class="tl-sub">2-3个家庭评估，找到1个「故事感最强」的目标家庭</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-time">第 3 周</div>
+            <div class="tl-text">协议签署 + 服务启动</div>
+            <div class="tl-sub">王总亲自第一次上门，确保体验满分</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot green"></div>
+            <div class="tl-time">第 4 周</div>
+            <div class="tl-text">收集NPS + 转介绍</div>
+            <div class="tl-sub">目标：NPS ≥ 9分，获得1个转介绍线索</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="color:var(--text-2);font-size:0.78rem;font-weight:700;margin-bottom:0.8rem;letter-spacing:1px;">⚖️ CGO苏格拉底质询</div>
+        <div class="qa-item">
+          <div class="qa-q">Q: 居委会渠道是否可靠？</div>
+          <div class="qa-a">王总家人任职其中，信任成本趋零。但注意：<strong>不能让家人「强推」</strong>，需家庭自愿意愿。</div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-q">Q: 第一个家庭应选有钱的还是困难的？</div>
+          <div class="qa-a">选<strong>「故事感强」的</strong>——不是最有钱，而是照护需求真实且家属沟通能力强，能为口碑传播赋能。</div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-q">Q: 2027年才启动，现在谈第一个家庭是否超前？</div>
+          <div class="qa-a">储备期目标是「演练」而非「签约」。可以做<strong>「试服务」</strong>：找1户配合意愿强的，提供2-4次免费或象征性收费服务，用来测试SOP、检验护理员、收集反馈。</div>
+        </div>
+        <div class="alert amber" style="margin-top:0.5rem;"><span class="alert-icon">💡</span>CGO建议：储备期启动「预备队」1户试服务，2027年前完成SOP迭代，启动即可规模化。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── T10 ── -->
+  <div class="section-title">CSO · 两会政策红利转化路径 · 新建研究课题 T10</div>
+  <div class="card">
+    <div class="card-title">📚 T10 · 两会政策红利 → 开元时代行动清单 <span class="badge badge-wip">新增</span></div>
+    <div class="grid2">
+      <div>
+        <div style="color:var(--text-2);font-size:0.75rem;font-weight:700;margin-bottom:0.7rem;letter-spacing:1px;">📋 政策信号 → 开元行动映射</div>
+        <table>
+          <tr><th>政策信号</th><th>开元对应行动</th></tr>
+          <tr><td style="font-size:0.78rem;">800元消费补贴全国落地</td><td style="font-size:0.78rem;color:var(--green);font-weight:600;">CGO核实广外申报流程</td></tr>
+          <tr><td style="font-size:0.78rem;">长护险制度推行中</td><td style="font-size:0.78rem;color:var(--amber);font-weight:600;">兵部调研北京时间表</td></tr>
+          <tr><td style="font-size:0.78rem;">驿站运营商招募开启</td><td style="font-size:0.78rem;color:var(--blue);font-weight:600;">2027年启动时申报运营资质</td></tr>
+          <tr><td style="font-size:0.78rem;">银发经济高质量部署</td><td style="font-size:0.78rem;color:var(--green);font-weight:600;">A轮融资叙事核心背书</td></tr>
+          <tr><td style="font-size:0.78rem;">「养老服务师」纳入新职业</td><td style="font-size:0.78rem;color:var(--amber);font-weight:600;">护理员证书化路径，COO跟进</td></tr>
+        </table>
+      </div>
+      <div>
+        <div style="color:var(--text-2);font-size:0.75rem;font-weight:700;margin-bottom:0.7rem;letter-spacing:1px;">🎯 CSO结论：两会后3个月是政策落地窗口期</div>
+        <div style="font-size:0.83rem;line-height:1.85;color:var(--text-2);">
+          两会结束后，各部委将在Q2密集发布配套文件（预计4–6月）。开元时代应在此窗口：<br><br>
+          <span style="color:var(--text);">① 核实北京消费补贴申报细则<br>
+          ② 完成运营商资质预备条件梳理<br>
+          ③ 建立与广外街道民政干事的初步联系</span><br><br>
+          这三项动作不需要等到2027年，<strong>储备期即可推进</strong>。
+        </div>
+        <div class="alert blue" style="margin-top:0.8rem;"><span class="alert-icon">📌</span>兵部（政府关系）启动信号：最迟2026年Q2完成广外街道民政干事接触。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 决策 ── -->
+  <div class="section-title">CEO · 今日决策信号</div>
+  <div class="decision-card">
+    <div class="decision-tag">Decision Signal · 2026-03-14 · 待王总拍板</div>
+    <div class="decision-title">储备期增设「试服务计划」— 提前验证SOP，不等2027年</div>
+
+    <div class="decision-item">
+      <span class="d-icon">🎯</span>
+      <div><strong>背景</strong>：两会收官，政策红利正在落地，广外驿站招募已启动，CGO研判认为等到2027年可能错过SOP验证窗口。</div>
+    </div>
+    <div class="decision-item">
+      <span class="d-icon">🔍</span>
+      <div><strong>CGO建议（待CEO确认）</strong>：储备期（2026年下半年）启动1-2户「试服务」，象征性收费或免费，目的是SOP压力测试，而非盈利。</div>
+    </div>
+    <div class="decision-item">
+      <span class="d-icon">⚡</span>
+      <div><strong>CEO思考方向</strong>：试服务价值不在收入，而在获得真实反馈、训练护理员、建立第一个故事——与「先有真实服务案例，再谈政府对接」原则完全一致。</div>
+    </div>
+    <div class="decision-item" style="border:none;">
+      <span class="d-icon">📌</span>
+      <div><strong>待王总拍板</strong>：是否在2026年下半年启动1-2户试服务？如确认，班子将立即启动试服务招募流程（居委会推荐 → 家庭评估 → 试服务方案设计）。</div>
+    </div>
+  </div>
+
+  <!-- ── 今日清单 ── -->
+  <div class="section-title">CEO · 今日产出清单</div>
+  <div class="card">
+    <div class="card-title">✅ 第4天 · 班子产出总结</div>
+    <div class="status-row">
+      <div class="status-dot dot-green"></div>
+      <div style="flex:1;font-size:0.83rem;">今日行业动态日报（两会收官3条信号）</div>
+      <div style="font-size:0.75rem;color:var(--text-2);">CSO · 中书省</div>
+      <span class="badge badge-done">完成</span>
+    </div>
+    <div class="status-row">
+      <div class="status-dot dot-green"></div>
+      <div style="flex:1;font-size:0.83rem;">现金流模型V2 · 6个月滚动 + 补贴风险评估</div>
+      <div style="font-size:0.75rem;color:var(--text-2);">CFO · 门下省</div>
+      <span class="badge badge-done">完成</span>
+    </div>
+    <div class="status-row">
+      <div class="status-dot dot-green"></div>
+      <div style="flex:1;font-size:0.83rem;">广外街道首次接触话术卡 V1（5步法）</div>
+      <div style="font-size:0.75rem;color:var(--text-2);">COO · 尚书省</div>
+      <span class="badge badge-done">完成</span>
+    </div>
+    <div class="status-row">
+      <div class="status-dot dot-green"></div>
+      <div style="flex:1;font-size:0.83rem;">第一个家庭获取策略 · 苏格拉底审议版</div>
+      <div style="font-size:0.75rem;color:var(--text-2);">CGO · 礼部</div>
+      <span class="badge badge-done">完成</span>
+    </div>
+    <div class="status-row">
+      <div class="status-dot dot-green"></div>
+      <div style="flex:1;font-size:0.83rem;">T10两会政策红利转化研究课题建档</div>
+      <div style="font-size:0.75rem;color:var(--text-2);">CSO · 中书省</div>
+      <span class="badge badge-done">完成</span>
+    </div>
+    <div class="status-row">
+      <div class="status-dot dot-amber"></div>
+      <div style="flex:1;font-size:0.83rem;">2026年试服务计划 · 待CEO决策</div>
+      <div style="font-size:0.75rem;color:var(--text-2);">CEO</div>
+      <span class="badge badge-wip">待确认</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <strong>开元时代</strong> · 让每一位长者，无论贫富，都能享受有尊严的照护<br>
+    班子汇报 · 储备期第4天 · 2026-03-14 · 三省六部自主作业 · 珍珠白版
+  </div>
+</div>
+
+</body>
+</html>

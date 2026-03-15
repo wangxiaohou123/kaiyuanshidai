@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day17 班子汇报 · 开元时代 · 2026-03-15</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: #f8f6f0;
+    color: #2c2c2c;
+    line-height: 1.7;
+  }
+  /* ===== HEADER ===== */
+  .header {
+    background: linear-gradient(135deg, #fff9f0 0%, #fffdf8 100%);
+    border-bottom: 3px solid #c8a96e;
+    padding: 40px 48px 32px;
+    position: relative;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #c8a96e 30%, #c8a96e 70%, transparent);
+  }
+  .badge-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .badge {
+    background: #c8a96e;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+  .badge.day { background: #8b6914; }
+  .badge.date { background: #5a7a5a; }
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  .subtitle { color: #7a6a50; font-size: 15px; }
+  .meta-row {
+    display: flex; gap: 24px; margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .meta-item { font-size: 13px; color: #8a7860; }
+  .meta-item strong { color: #5a4a30; }
+
+  /* ===== NAV ===== */
+  .toc-nav {
+    background: #fff;
+    border: 1px solid #e8ddc8;
+    border-radius: 12px;
+    padding: 20px 28px;
+    margin: 28px 48px;
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+  }
+  .toc-label { font-size: 13px; color: #8a7860; margin-right: 8px; font-weight: 600; }
+  .toc-link {
+    display: inline-block;
+    background: #f5f0e8;
+    color: #6a5a3a;
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    border: 1px solid #e0d5bc;
+    transition: all 0.2s;
+  }
+  .toc-link:hover { background: #c8a96e; color: #fff; border-color: #c8a96e; }
+
+  /* ===== MAIN ===== */
+  .main { padding: 0 48px 60px; max-width: 1100px; }
+
+  /* ===== SECTION ===== */
+  .section {
+    margin-bottom: 40px;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #e8ddc8;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(180,150,90,0.07);
+  }
+  .section-header {
+    padding: 20px 28px;
+    border-bottom: 1px solid #e8ddc8;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-icon { font-size: 22px; }
+  .section-title { font-size: 18px; font-weight: 700; color: #1a1a1a; }
+  .section-tag {
+    background: #f5f0e8;
+    color: #8a6a30;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .section-body { padding: 24px 28px; }
+
+  /* ===== INTEL CARDS ===== */
+  .intel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+  .intel-card {
+    border: 1px solid #e8ddc8;
+    border-radius: 12px;
+    padding: 18px;
+    background: #fdf9f3;
+    transition: box-shadow 0.2s;
+  }
+  .intel-card:hover { box-shadow: 0 4px 16px rgba(180,150,90,0.12); }
+  .intel-card.high { border-left: 4px solid #e05a4e; }
+  .intel-card.mid { border-left: 4px solid #d4882a; }
+  .intel-card.low { border-left: 4px solid #888; }
+  .intel-card-title { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; line-height: 1.5; }
+  .intel-card-summary { font-size: 13px; color: #5a5a5a; margin-bottom: 10px; }
+  .intel-card-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+  .intel-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: #f0e8d8;
+    color: #7a5a20;
+  }
+  .intel-signal {
+    font-size: 12px;
+    color: #6a5a3a;
+    background: #fffbf0;
+    border: 1px solid #e8d8b0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+  .intel-signal::before { content: '⚡ '; }
+
+  /* ===== RESEARCH ===== */
+  .research-block {
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px dashed #e0d5bc;
+  }
+  .research-block:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+  .research-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .p-tag { font-size: 12px; padding: 3px 10px; border-radius: 10px; font-weight: 700; }
+  .p0 { background: #fde8e6; color: #c0392b; }
+  .p1 { background: #fef3e2; color: #d68910; }
+
+  /* 六步质询表 */
+  .socrates-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  .socrates-table th {
+    background: #f5f0e8;
+    color: #6a5a3a;
+    font-weight: 700;
+    padding: 10px 14px;
+    text-align: left;
+    border: 1px solid #e0d5bc;
+  }
+  .socrates-table td {
+    padding: 10px 14px;
+    border: 1px solid #e0d5bc;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .socrates-table tr:nth-child(even) td { background: #fdf9f3; }
+
+  /* 决策结论 */
+  .decision-box {
+    background: linear-gradient(135deg, #fffbf0, #fff9ec);
+    border: 2px solid #c8a96e;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-top: 16px;
+  }
+  .decision-box-title { font-size: 14px; font-weight: 700; color: #8b6914; margin-bottom: 12px; }
+  .decision-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; font-size: 14px; }
+  .decision-item::before { content: '▶'; color: #c8a96e; flex-shrink: 0; margin-top: 2px; }
+
+  /* Action 卡 */
+  .action-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; margin-top: 16px; }
+  .action-card {
+    background: #fdf9f3;
+    border: 1px solid #e8ddc8;
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .action-card-title { font-size: 14px; font-weight: 700; color: #2c2c2c; margin-bottom: 8px; }
+  .action-card ul { padding-left: 16px; }
+  .action-card li { font-size: 13px; color: #5a5a5a; margin-bottom: 4px; }
+
+  /* 话术体系 */
+  .script-block {
+    background: #f8fff5;
+    border: 1px solid #b8d8b0;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+  }
+  .script-scenario { font-size: 13px; font-weight: 700; color: #3a6a3a; margin-bottom: 8px; }
+  .script-content {
+    background: #fff;
+    border-left: 3px solid #5a9a5a;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #2c2c2c;
+    border-radius: 0 8px 8px 0;
+    line-height: 1.8;
+  }
+  .script-note { font-size: 12px; color: #7a7a7a; margin-top: 8px; }
+
+  /* 数字对比 */
+  .calc-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  .calc-table th { background: #e8f5e8; color: #2a5a2a; padding: 9px 12px; text-align: left; border: 1px solid #c0d8c0; }
+  .calc-table td { padding: 9px 12px; border: 1px solid #c0d8c0; }
+  .calc-table .highlight td { background: #f0fff0; font-weight: 700; color: #1a5a1a; }
+
+  /* CEO 指令区 */
+  .ceo-zone {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #e8d8b0;
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 40px;
+  }
+  .ceo-zone-title { font-size: 16px; font-weight: 700; color: #c8a96e; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .ceo-actions { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+  .ceo-action-item {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(200,169,110,0.3);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .ceo-action-label { font-size: 12px; color: #c8a96e; margin-bottom: 6px; font-weight: 600; }
+  .ceo-action-text { font-size: 14px; color: #f0e8d0; line-height: 1.6; }
+  .urgency { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 8px; margin-top: 6px; }
+  .urgency.now { background: #c0392b; color: #fff; }
+  .urgency.week { background: #d4882a; color: #fff; }
+  .urgency.month { background: #27ae60; color: #fff; }
+
+  /* 底部 */
+  .footer { padding: 24px 48px; text-align: center; font-size: 13px; color: #a08860; border-top: 1px solid #e8ddc8; margin-top: 20px; }
+
+  @media (max-width: 768px) {
+    .header, .main, .footer { padding-left: 20px; padding-right: 20px; }
+    .toc-nav { margin: 20px; }
+    h1 { font-size: 22px; }
+    .intel-grid, .action-cards, .ceo-actions { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <div class="badge-row">
+    <span class="badge day">Day 17</span>
+    <span class="badge date">2026-03-15（周日）</span>
+    <span class="badge">三省六部 · 开元时代</span>
+  </div>
+  <h1>班子日报 · 物业入局路径 × 双补零自付话术</h1>
+  <div class="subtitle">今日两大战略研究 | 礼部情报 5 条 | 中书省深度质询</div>
+  <div class="meta-row">
+    <div class="meta-item"><strong>主笔：</strong>中书省 · 战略研究司</div>
+    <div class="meta-item"><strong>质询：</strong>门下省（CFO）× 吏部（CGO）</div>
+    <div class="meta-item"><strong>落地方案：</strong>尚书省（COO）</div>
+    <div class="meta-item"><strong>发布：</strong>2026-03-15 上午</div>
+  </div>
+</div>
+
+<!-- ===== NAV ===== -->
+<div class="toc-nav">
+  <span class="toc-label">快速跳转：</span>
+  <a href="#intel" class="toc-link">📰 今日情报</a>
+  <a href="#p0" class="toc-link">🏢 P0·物业入局</a>
+  <a href="#p1" class="toc-link">💰 P1·双补话术</a>
+  <a href="#ceo" class="toc-link">👑 CEO行动包</a>
+</div>
+
+<div class="main">
+
+<!-- ===== CEO 行动包 ===== -->
+<div id="ceo" class="ceo-zone">
+  <div class="ceo-zone-title">👑 CEO 今日行动包（最重要的3件事）</div>
+  <div class="ceo-actions">
+    <div class="ceo-action-item">
+      <div class="ceo-action-label">P0 · 立即行动</div>
+      <div class="ceo-action-text">电话联系广外街道辖区内1-2家物业公司（万科物业/首开物业/街道指定物业），提出"物业+养老合作"洽谈意向。</div>
+      <span class="urgency now">🔴 本周执行</span>
+    </div>
+    <div class="ceo-action-item">
+      <div class="ceo-action-label">P1 · 话术部署</div>
+      <div class="ceo-action-text">将"双补零自付"话术体系交给首批获客动作：在广外街道居委会（家人渠道）介绍时，以"每月照护费用基本不用掏钱"为核心卖点。</div>
+      <span class="urgency now">🔴 本周执行</span>
+    </div>
+    <div class="ceo-action-item">
+      <div class="ceo-action-label">P2 · 本月完成</div>
+      <div class="ceo-action-text">完成广外街道养老照料中心拜访，确认其对接居家上门服务的合作意愿（中心已覆盖29个社区，可借势）。</div>
+      <span class="urgency week">🟠 本月执行</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 今日情报 ===== -->
+<div id="intel" class="section">
+  <div class="section-header">
+    <span class="section-icon">📰</span>
+    <span class="section-title">今日行业情报 · Day17</span>
+    <span class="section-tag">礼部 · 信息司</span>
+  </div>
+  <div class="section-body">
+    <div class="intel-grid">
+
+      <div class="intel-card high">
+        <div class="intel-card-title">🔴 上海嘉定"物业+养老"试点正式签约（3月14日）</div>
+        <div class="intel-card-summary">嘉定区举行"物业+养老"居家养老综合服务签约仪式，物业企业发挥常驻社区优势，打通居家养老服务"最后100米"。</div>
+        <div class="intel-card-meta">
+          <span class="intel-tag">来源：中新网</span>
+          <span class="intel-tag">⭐⭐⭐ 高相关</span>
+        </div>
+        <div class="intel-signal">物业合作模式成全国趋势，广外街道可借此路径快速嵌入，绕过传统政府审批，入局提速3-6个月</div>
+      </div>
+
+      <div class="intel-card high">
+        <div class="intel-card-title">🔴 十五五规划确认：居家养老+高龄护理补贴协同推进</div>
+        <div class="intel-card-summary">十四届人大四次会议通过"十五五"规划纲要，明确居家养老支持、高龄护理补贴、困难老人救助协同推进，从"给钱"延伸到"服务保障尊严"。</div>
+        <div class="intel-card-meta">
+          <span class="intel-tag">来源：今日头条</span>
+          <span class="intel-tag">⭐⭐⭐ 高相关</span>
+        </div>
+        <div class="intel-signal">政策主轴5年不变，居家+社区路线获国家背书，开元战略方向完全正确</div>
+      </div>
+
+      <div class="intel-card high">
+        <div class="intel-card-title">🟠 长护险+民政双补"零自付"模型成熟，全国推开</div>
+        <div class="intel-card-summary">2026年民政部800元/月 + 长护险报销70%，多地家庭实现居家护理费"零自付"。全国长护险持续扩围，江苏等地待遇享受人数破万。</div>
+        <div class="intel-card-meta">
+          <span class="intel-tag">来源：今日头条</span>
+          <span class="intel-tag">⭐⭐⭐ 高相关</span>
+        </div>
+        <div class="intel-signal">客户获客话术"零负担"可用；补贴叠加窗口期约2-3年，是开元最强转化武器</div>
+      </div>
+
+      <div class="intel-card mid">
+        <div class="intel-card-title">🟠 两会后银发经济进入"政策+市场双红利期"</div>
+        <div class="intel-card-summary">国务院将银发经济提升至国家战略，3.2亿长者被重塑为"价值消费主体"，万亿蓝海全面爆发，融资窗口有利。</div>
+        <div class="intel-card-meta">
+          <span class="intel-tag">来源：搜狐/网易</span>
+          <span class="intel-tag">⭐⭐ 中相关</span>
+        </div>
+        <div class="intel-signal">赛道热度持续升温，未来2年融资环境有利，开元需在窗口期前完成验证</div>
+      </div>
+
+      <div class="intel-card low">
+        <div class="intel-card-title">🟡 社区居家养老服务收入同比增长18%（2025上半年）</div>
+        <div class="intel-card-summary">居家养老增速18%低于机构（22.6%）、社区（30.4%），但绝对体量最大，获客成本高是核心痛点。</div>
+        <div class="intel-card-meta">
+          <span class="intel-tag">来源：央广网</span>
+          <span class="intel-tag">⭐ 低相关</span>
+        </div>
+        <div class="intel-signal">居家增速偏低印证获客难问题，物业渠道合作可有效降低获客成本，是开元差异化优势</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===== P0 研究 ===== -->
+<div id="p0" class="section">
+  <div class="section-header">
+    <span class="section-icon">🏢</span>
+    <span class="section-title">P0 专项研究：物业+养老快速入局路径</span>
+    <span class="section-tag">中书省 · 苏格拉底六步质询</span>
+  </div>
+  <div class="section-body">
+
+    <!-- 背景 -->
+    <div style="background:#fff8f0;border-left:4px solid #c8a96e;padding:14px 18px;border-radius:0 8px 8px 0;margin-bottom:20px;font-size:14px;">
+      <strong>研究背景：</strong>上海嘉定2026年3月14日"物业+养老"试点签约，物业模式成为全国性趋势。
+      开元在广外街道的入局路径，是否可以绕开政府审批，通过物业合作实现"快速嵌入"？本研究给出答案。
+    </div>
+
+    <!-- 苏格拉底六步 -->
+    <table class="socrates-table">
+      <tr>
+        <th style="width:80px;">步骤</th>
+        <th style="width:180px;">角色</th>
+        <th>核心内容</th>
+      </tr>
+      <tr>
+        <td><strong>①起草</strong></td>
+        <td>中书省</td>
+        <td>物业+养老有三种合作模式：A.物业主导型（物业配置养老专员）B.服务嵌入型（养老机构驻点物业服务中心）C.联合运营型（物业+养老共建综合服务中心）。开元适合<strong>B类服务嵌入型</strong>——轻资产进入，无需自建，借用物业现有客情和空间。</td>
+      </tr>
+      <tr>
+        <td><strong>②CFO质询</strong></td>
+        <td>门下省</td>
+        <td>物业每月收取"渠道服务费"是多少？开元能否在不先垫资的情况下进入？<br><br><em>答：</em>物业合作无需前期大额投入，一般签订服务合作协议，按转介绍或驻场服务提成（约10-15%）给物业，月初无资金压力。广外街道养老照料中心已覆盖29个社区——可优先联系中心背后的运营方借势，进一步降低单独进入物业体系的难度。</td>
+      </tr>
+      <tr>
+        <td><strong>③CGO质询</strong></td>
+        <td>吏部</td>
+        <td>广外街道有哪些物业公司？如何找到对接人？<br><br><em>答：</em>广外街道辖区主要物业：①首开物业（国企背景，覆盖广外多个小区）②万科物业（品质物业，有养老合作意愿）③街道直管物业（通过街道办联系）。突破口：通过家人居委会资源，获取物业公司联系人或进行推荐引介，成功率远高于陌生拜访。</td>
+      </tr>
+      <tr>
+        <td><strong>④COO落地方案</strong></td>
+        <td>尚书省</td>
+        <td>
+          <strong>三步入局路径：</strong><br>
+          第一步（1-2周）：通过居委会资源获取物业公司联系方式，预约上门拜访<br>
+          第二步（2-4周）：提供"物业+养老合作提案"（已准备，见附件），核心条款：开元提供专业护理服务、物业提供渠道和场地、双方按服务单量5:5分成<br>
+          第三步（1个月）：签约后，在物业服务中心张贴宣传物料，开展第一批失能评估申请引导活动
+        </td>
+      </tr>
+      <tr>
+        <td><strong>⑤封驳</strong></td>
+        <td>门下省</td>
+        <td>
+          <strong>风险提示：</strong><br>
+          ①物业公司决策链长（需总部审批），广外街道可能需要3-6个月才能签约 → 对策：同时推进2-3家物业，设置优先级，不单押一家<br>
+          ②物业对养老服务专业性存疑 → 对策：首次拜访带"服务案例包"（含服务流程、资质证明、成功案例）<br>
+          ③分成比例谈判可能受阻 → 对策：初期让利（7:3给物业更多）换入场机会，先跑量再谈价
+        </td>
+      </tr>
+      <tr>
+        <td><strong>⑥决策卡</strong></td>
+        <td>CEO</td>
+        <td>
+          <strong>结论：物业入局路径可行，优先级P0，本周启动</strong><br>
+          路径优先级：居委会渠道（家人资源）> 物业公司拜访 > 政府正式审批<br>
+          关键成功因素：①有真实推荐人引介 ②有专业服务包展示材料 ③让利换首批案例
+        </td>
+      </tr>
+    </table>
+
+    <!-- 决策结论 -->
+    <div class="decision-box">
+      <div class="decision-box-title">📋 决策结论 · 物业+养老入局</div>
+      <div class="decision-item">最优入局路径：<strong>居委会引介 → 物业洽谈 → 服务嵌入型合作协议</strong>（预计4-8周可签约）</div>
+      <div class="decision-item">广外街道目标物业：首开物业（第一选择）、万科物业（备选）</div>
+      <div class="decision-item">开元核心条件：提供专业服务人员 + 失能评估资质 + 补贴申请协助</div>
+      <div class="decision-item">物业核心诉求：无需投入资金，有额外服务收入，提升业主满意度</div>
+      <div class="decision-item">本周行动：<strong>请家人居委会帮忙联系1-2家物业公司负责人</strong>，安排初步拜访</div>
+    </div>
+
+    <!-- 竞对情报 -->
+    <div style="margin-top:20px;">
+      <div class="research-title" style="font-size:15px;">📊 广外街道现有养老服务格局（竞对参考）</div>
+      <div class="action-cards">
+        <div class="action-card">
+          <div class="action-card-title">🏛️ 广外街道养老照料中心</div>
+          <ul>
+            <li>政府背景，全额投资，五星级</li>
+            <li>覆盖29个社区，床位54张</li>
+            <li>提供上门照料、助餐助浴</li>
+            <li><strong>定位：</strong>机构养老为主，居家上门为辅</li>
+            <li><strong>开元机会：</strong>与其对接，接收转介绍居家长者</li>
+          </ul>
+        </div>
+        <div class="action-card">
+          <div class="action-card-title">🏢 红莲幸福家养老院</div>
+          <ul>
+            <li>民营，承接机构+社区+居家三类</li>
+            <li>广外街道核心综合性养老平台</li>
+            <li>联系：400-166-2126</li>
+            <li><strong>定位：</strong>覆盖较全，是开元的主要竞对</li>
+            <li><strong>开元差异：</strong>更专注居家上门，更低价格</li>
+          </ul>
+        </div>
+        <div class="action-card">
+          <div class="action-card-title">✅ 开元时代差异化定位</div>
+          <ul>
+            <li>专注失能评估申请协助（独特价值）</li>
+            <li>双补叠加零自付（最强转化话术）</li>
+            <li>居委会人脉背书（信任度高）</li>
+            <li>轻资产运营，价格灵活</li>
+            <li>首批10个家庭，不追求规模</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== P1 研究 ===== -->
+<div id="p1" class="section">
+  <div class="section-header">
+    <span class="section-icon">💰</span>
+    <span class="section-title">P1 专项研究：双补叠加零自付获客话术体系</span>
+    <span class="section-tag">中书省 · 转化武器库</span>
+  </div>
+  <div class="section-body">
+
+    <!-- 政策底层逻辑 -->
+    <div style="margin-bottom:20px;">
+      <div class="research-title" style="font-size:15px;">📐 双补叠加计算模型（北京西城区）</div>
+      <table class="calc-table">
+        <tr>
+          <th>长者类型</th>
+          <th>民政补贴</th>
+          <th>长护险报销</th>
+          <th>月均护理费</th>
+          <th>家庭实际自付</th>
+        </tr>
+        <tr>
+          <td>重度失能（职工医保）</td>
+          <td>800元/月</td>
+          <td>70% ≈ 1050元</td>
+          <td>约1500元</td>
+          <td class="highlight"><strong>约−350元（实际盈余）</strong></td>
+        </tr>
+        <tr class="highlight">
+          <td>重度失能（居民医保）</td>
+          <td>800元/月</td>
+          <td>50% ≈ 750元</td>
+          <td>约1500元</td>
+          <td><strong>约−50元（接近零自付）</strong></td>
+        </tr>
+        <tr>
+          <td>中度失能（职工医保）</td>
+          <td>500元/月</td>
+          <td>70% ≈ 840元</td>
+          <td>约1200元</td>
+          <td><strong>约−140元（零自付）</strong></td>
+        </tr>
+        <tr>
+          <td>轻度失能/高龄（80岁+）</td>
+          <td>200-300元/月</td>
+          <td>暂不适用</td>
+          <td>约800元</td>
+          <td><strong>约500元/月自付</strong></td>
+        </tr>
+      </table>
+      <div style="font-size:12px;color:#888;margin-top:8px;">⚠️ 注：北京长护险西城区2026年全面推开（曾试点），数字为参考估算，实际以评估结果为准</div>
+    </div>
+
+    <!-- 话术体系 -->
+    <div class="research-title" style="font-size:15px;">🗣️ 六大场景获客话术</div>
+
+    <div class="script-block">
+      <div class="script-scenario">场景一：居委会/社区活动首次介绍</div>
+      <div class="script-content">
+        "阿姨/叔叔，您知道吗？现在国家政策特别好，如果家里有行动不便的长辈，每个月可以拿到<strong>最高800元的国家补贴</strong>，还可以叠加长期护理保险，很多家庭基本上<strong>不用自己掏钱</strong>就能让专业护理人员上门服务。我们开元时代专门帮助大家申请这些补贴，不收任何服务费，您有需要吗？"
+      </div>
+      <div class="script-note">✅ 适用：社区宣讲、居委会活动、小区公告栏张贴</div>
+    </div>
+
+    <div class="script-block">
+      <div class="script-scenario">场景二：电话/微信初次接触</div>
+      <div class="script-content">
+        "您好，我是开元时代居家养老服务的小美。我们发现很多家庭不知道，照顾失能长辈的费用，政府其实报销得很多。以<strong>重度失能</strong>为例，每月可能只需要家庭支付几十元甚至完全不用掏钱。我可以先帮您评估一下，您家里的长辈符不符合申请条件？只需要5分钟，完全免费。"
+      </div>
+      <div class="script-note">✅ 适用：电话回访、微信初次联系</div>
+    </div>
+
+    <div class="script-block">
+      <div class="script-scenario">场景三：回应"太贵了"的价格异议</div>
+      <div class="script-content">
+        "我完全理解您担心费用。但实际上，通过我们的专业申请协助，很多长者家庭每月政府补贴加上长护险报销，<strong>照护费用基本不用自己出</strong>。我们今天就可以帮您做一个初步评估，确认您家长辈的补贴资格，您有什么损失呢？我们的服务费只在您实际享受服务之后才收取。"
+      </div>
+      <div class="script-note">✅ 适用：上门拜访后的价格谈判</div>
+    </div>
+
+    <div class="script-block">
+      <div class="script-scenario">场景四：向子女介绍（转介绍话术）</div>
+      <div class="script-content">
+        "您好！您父母已经享受了我们的服务。我想问您是否有亲戚邻居，家里有行动不便的长辈？现在国家对居家照护的补贴政策非常好，我们可以帮他们免费评估一下，申请下来之后，<strong>每月实际花费可能只有几十元</strong>，甚至全额报销。帮他们介绍一下，对他们是实实在在的好事。"
+      </div>
+      <div class="script-note">✅ 适用：现有客户转介绍新客户</div>
+    </div>
+
+    <div class="script-block">
+      <div class="script-scenario">场景五：物业公司介绍（B2B渠道话术）</div>
+      <div class="script-content">
+        "我们开元时代想跟贵公司合作，为小区里的失能长者提供居家养老服务。我们发现很多长者家庭不知道可以申请政府补贴——最高每月1850元（补贴+长护险叠加）。<strong>这对业主是极大的增值服务</strong>，可以显著提升物业满意度。我们只需要在服务中心设一个咨询点，不收场地费，按照成交服务单量与贵公司分成。"
+      </div>
+      <div class="script-note">✅ 适用：物业公司洽谈合作</div>
+    </div>
+
+    <div class="script-block">
+      <div class="script-scenario">场景六：朋友圈/社群内容（文案）</div>
+      <div class="script-content">
+        "【北京西城区长者家庭注意】国家2026年新政：家里有行动不便长辈的，每月最高可申请<strong>800元照护补贴 + 长护险报销</strong>，很多家庭<strong>照护费用几乎不用自己掏</strong>！开元时代免费帮您评估申请资格，欢迎私信了解👇"
+      </div>
+      <div class="script-note">✅ 适用：微信朋友圈、社区群、居委会公众号</div>
+    </div>
+
+    <!-- 决策结论 -->
+    <div class="decision-box">
+      <div class="decision-box-title">📋 话术体系部署建议</div>
+      <div class="decision-item">话术核心：永远以"不用花钱/少花钱"为开场，而非以"服务好"为卖点</div>
+      <div class="decision-item">第一阶段话术重点：补贴申请协助（免费价值）→ 建立信任 → 才是收费服务</div>
+      <div class="decision-item">北京西城区特别注意：长护险2026年全面推开，申请窗口期，是最强话术节点</div>
+      <div class="decision-item">本周行动：将场景一话术纸质版交给家人居委会，由其作为社区宣传材料</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== 今日工作总结 ===== -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-icon">📊</span>
+    <span class="section-title">今日工作总结 · Day17</span>
+    <span class="section-tag">班子全体</span>
+  </div>
+  <div class="section-body">
+    <div class="action-cards">
+      <div class="action-card">
+        <div class="action-card-title">✅ 今日完成</div>
+        <ul>
+          <li>礼部：采集今日5条行业情报</li>
+          <li>中书省：P0物业入局路径苏格拉底质询完成</li>
+          <li>中书省：P1双补零自付话术体系6套完成</li>
+          <li>尚书省：竞对格局分析（广外街道3家机构）</li>
+          <li>三省六部班子日报生成并归档</li>
+        </ul>
+      </div>
+      <div class="action-card">
+        <div class="action-card-title">📅 明日计划（Day18）</div>
+        <ul>
+          <li>礼部：采集3月16日行业情报</li>
+          <li>中书省：研究"失能评估申请完整流程"（申请材料+评估机构+时间周期）</li>
+          <li>工部：制作物业合作提案PPT/PDF（用于物业拜访）</li>
+          <li>礼部：制作双补话术单页宣传物料（A4打印版）</li>
+        </ul>
+      </div>
+      <div class="action-card">
+        <div class="action-card-title">📈 月度进度（Day17/30）</div>
+        <ul>
+          <li>公司规划：80% ✅</li>
+          <li>市场调研：65% 🔄</li>
+          <li>获客体系：50% 🔄</li>
+          <li>物业渠道：10% 🆕（今日立项）</li>
+          <li>第一个家庭：待启动 ⚠️</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<div class="footer">
+  开元时代 · 三省六部班子汇报系统 · Day17 · 2026-03-15<br>
+  <span style="color:#c8a96e;">北极星指标：每一位长者，无论贫富，都能享受到基本的有尊严的照护</span>
+</div>
+
+</body>
+</html>

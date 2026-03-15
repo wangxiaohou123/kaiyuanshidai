@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>开元时代 · Day 3 战略行动计划 · 2026-03-13</title>
+<style>
+  :root{
+    --bg:#FAFAF8;--dark-2:#F4F3EE;--dark-3:#ECEAE3;
+    --gold:#C9A84C;--gold-dim:rgba(201,168,76,0.15);
+    --red:#FF6B6B;--green:#2ED573;--blue:#576CBC;--purple:#B580E8;
+    --muted:#6C6C70;--border:rgba(139,105,20,0.15);
+    --text:#1C1C1E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh;padding:0 0 60px;}
+
+  /* ── 顶部 Banner ── */
+  .hero{
+    background:linear-gradient(135deg,#161200 0%,#1A1400 40%,#0E0F11 100%);
+    border-bottom:1px solid rgba(201,168,76,0.2);
+    padding:2.5rem 2rem 2rem;
+    text-align:center;
+    position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,0.12),transparent);
+    pointer-events:none;
+  }
+  .hero-eyebrow{font-size:0.72rem;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:0.8rem;}
+  .hero-title{font-size:clamp(1.4rem,4vw,2.2rem);font-weight:700;color:#fff;margin-bottom:0.5rem;}
+  .hero-sub{font-size:0.88rem;color:var(--muted);max-width:600px;margin:0 auto 1.2rem;}
+  .hero-badges{display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;}
+  .badge{display:inline-flex;align-items:center;gap:0.3rem;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.72rem;font-weight:600;letter-spacing:0.5px;}
+  .badge-gold{background:rgba(201,168,76,0.15);color:#C9A84C;border:1px solid rgba(201,168,76,0.35);}
+  .badge-red{background:rgba(255,107,107,0.15);color:#FF6B6B;border:1px solid rgba(255,107,107,0.35);}
+  .badge-green{background:rgba(46,213,115,0.15);color:#2ED573;border:1px solid rgba(46,213,115,0.35);}
+
+  /* ── 布局 ── */
+  .container{max-width:1100px;margin:0 auto;padding:2rem 1.5rem;}
+  .section-title{font-size:0.7rem;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+  .section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+
+  /* ── 政策速报 ── */
+  .policy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem;}
+  .policy-card{background:var(--dark-2);border:1px solid var(--border);border-radius:14px;padding:1.2rem;text-align:center;transition:transform .2s;}
+  .policy-card:hover{transform:translateY(-2px);}
+  .policy-num{font-size:2rem;font-weight:800;margin-bottom:0.3rem;}
+  .policy-label{font-size:0.75rem;color:var(--muted);line-height:1.4;}
+  .policy-sub{font-size:0.65rem;color:var(--muted);margin-top:0.3rem;opacity:0.7;}
+
+  /* ── 今日动态 ── */
+  .news-list{display:flex;flex-direction:column;gap:0.8rem;margin-bottom:2rem;}
+  .news-item{background:var(--dark-2);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;display:flex;gap:1rem;align-items:flex-start;}
+  .news-icon{font-size:1.2rem;flex-shrink:0;margin-top:0.1rem;}
+  .news-body{}
+  .news-tag{font-size:0.65rem;font-weight:700;letter-spacing:1px;color:var(--gold);margin-bottom:0.3rem;}
+  .news-text{font-size:0.85rem;line-height:1.6;color:var(--text);}
+  .news-impact{font-size:0.75rem;color:var(--green);margin-top:0.4rem;}
+
+  /* ── 班子作业表 ── */
+  .task-table{width:100%;border-collapse:collapse;margin-bottom:2rem;}
+  .task-table th{text-align:left;padding:0.6rem 0.8rem;font-size:0.72rem;color:var(--muted);border-bottom:1px solid var(--border);font-weight:500;letter-spacing:0.5px;}
+  .task-table td{padding:0.7rem 0.8rem;font-size:0.83rem;border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:top;}
+  .task-table tr:last-child td{border-bottom:none;}
+  .task-table tr:hover td{background:rgba(255,255,255,0.02);}
+  .dept{font-weight:700;font-size:0.8rem;}
+  .p0{display:inline-block;background:rgba(255,107,107,0.15);color:#FF6B6B;padding:0.1rem 0.5rem;border-radius:4px;font-size:0.68rem;font-weight:700;}
+  .p1{display:inline-block;background:rgba(201,168,76,0.15);color:#C9A84C;padding:0.1rem 0.5rem;border-radius:4px;font-size:0.68rem;font-weight:700;}
+
+  /* ── P0 行动卡片 ── */
+  .action-cards{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;}
+  .action-card{background:var(--dark-2);border-radius:14px;padding:1.2rem 1.4rem;display:flex;gap:1rem;align-items:flex-start;}
+  .action-card.urgent{border:1px solid rgba(255,107,107,0.35);background:linear-gradient(135deg,rgba(255,107,107,0.06),var(--dark-2));}
+  .action-card.normal{border:1px solid rgba(201,168,76,0.25);background:linear-gradient(135deg,rgba(201,168,76,0.05),var(--dark-2));}
+  .action-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;margin-top:0.1rem;}
+  .action-num.red{background:rgba(255,107,107,0.2);color:#FF6B6B;}
+  .action-num.gold{background:rgba(201,168,76,0.2);color:#C9A84C;}
+  .action-body h3{font-size:0.92rem;font-weight:700;margin-bottom:0.4rem;}
+  .action-body p{font-size:0.82rem;color:var(--muted);line-height:1.6;}
+  .action-body .action-tip{font-size:0.75rem;color:var(--green);margin-top:0.4rem;font-style:italic;}
+
+  /* ── CEO 判断框 ── */
+  .ceo-box{background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(201,168,76,0.03));border:1px solid rgba(201,168,76,0.35);border-radius:14px;padding:1.5rem;margin-bottom:2rem;}
+  .ceo-box-label{font-size:0.65rem;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:0.8rem;}
+  .ceo-box p{font-size:0.9rem;line-height:1.8;color:var(--text);}
+  .ceo-box strong{color:var(--gold);}
+  .ceo-box .highlight{color:#C9A84C;font-weight:600;}
+
+  /* ── 战略路径进度 ── */
+  .timeline{display:flex;flex-direction:column;gap:0;margin-bottom:2rem;}
+  .tl-item{display:flex;gap:1rem;position:relative;}
+  .tl-line{display:flex;flex-direction:column;align-items:center;}
+  .tl-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:0.3rem;}
+  .tl-connector{width:2px;flex:1;margin:4px 0;}
+  .tl-content{padding-bottom:1.2rem;flex:1;}
+  .tl-phase{font-size:0.7rem;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:0.2rem;}
+  .tl-title{font-size:0.88rem;font-weight:600;margin-bottom:0.3rem;}
+  .tl-desc{font-size:0.78rem;color:var(--muted);line-height:1.5;}
+
+  /* ── 底部 ── */
+  .footer{text-align:center;color:var(--muted);font-size:0.75rem;padding-top:2rem;border-top:1px solid var(--border);}
+
+  @media(max-width:600px){
+    .policy-grid{grid-template-columns:repeat(2,1fr);}
+    .hero{padding:1.8rem 1.2rem 1.5rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="hero-eyebrow">开元时代 · CEO 战略指挥台</div>
+  <h1 class="hero-title">Day 3 · 两会政策红利日</h1>
+  <p class="hero-sub">2026-03-13（星期五）· 广外首战窗口开启 · 政府补贴800元/月全国落地</p>
+  <div class="hero-badges">
+    <span class="badge badge-gold">📋 班子作业已分发</span>
+    <span class="badge badge-red">🚨 P0 王总需行动</span>
+    <span class="badge badge-green">📡 两会政策监控中</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ── 政策核心数字 ── -->
+  <div class="section-title">⚡ 政策核心数字 · 今日必须掌握</div>
+  <div class="policy-grid">
+    <div class="policy-card" style="border-color:rgba(201,168,76,0.3);">
+      <div class="policy-num" style="color:#C9A84C;">800元</div>
+      <div class="policy-label">居家照护服务<br/>每月最高消费补贴</div>
+      <div class="policy-sub">2026.1.1全国落地</div>
+    </div>
+    <div class="policy-card" style="border-color:rgba(46,213,115,0.3);">
+      <div class="policy-num" style="color:#2ED573;">50%</div>
+      <div class="policy-label">居家上门服务<br/>消费券抵扣比例</div>
+      <div class="policy-sub">机构养老40%</div>
+    </div>
+    <div class="policy-card" style="border-color:rgba(87,108,188,0.3);">
+      <div class="policy-num" style="color:#576CBC;">85%</div>
+      <div class="policy-label">中央财政<br/>承担补贴资金</div>
+      <div class="policy-sub">地方15%配套</div>
+    </div>
+    <div class="policy-card" style="border-color:rgba(255,107,107,0.3);">
+      <div class="policy-num" style="color:#FF6B6B;">5天</div>
+      <div class="policy-label">审核通过后<br/>首月补贴到账</div>
+      <div class="policy-sub">电子消费券形式</div>
+    </div>
+    <div class="policy-card" style="border-color:rgba(181,128,232,0.3);">
+      <div class="policy-num" style="color:#B580E8;">第六险</div>
+      <div class="policy-label">长护险两会定调<br/>全国统一覆盖</div>
+      <div class="policy-sub">结束49城试点</div>
+    </div>
+    <div class="policy-card" style="border-color:rgba(201,168,76,0.2);">
+      <div class="policy-num" style="color:#C9A84C;">3亿</div>
+      <div class="policy-label">长护险已覆盖<br/>参保人群</div>
+      <div class="policy-sub">2026年加速扩面</div>
+    </div>
+  </div>
+
+  <!-- ── 今日动态 ── -->
+  <div class="section-title">📡 今日两会·行业动态（2026-03-13）</div>
+  <div class="news-list">
+    <div class="news-item" style="border-color:rgba(201,168,76,0.3);">
+      <div class="news-icon">🏛️</div>
+      <div class="news-body">
+        <div class="news-tag">【头条】两会 · 长护险成第六险</div>
+        <div class="news-text">两会明确：长期护理保险正式列为社保"第六险"，全国统一覆盖全体城乡居民，结束49城+2省试点格局。过去仅部分城市可参保，2026年全国推进。</div>
+        <div class="news-impact">→ 开元直接利好：服务客户可叠加长护险+消费补贴双重报销，实际支付成本大幅降低</div>
+      </div>
+    </div>
+    <div class="news-item" style="border-color:rgba(46,213,115,0.3);">
+      <div class="news-icon">💰</div>
+      <div class="news-body">
+        <div class="news-tag">【政策落地】民政部+财政部联发通知 · 北京西城区已适用</div>
+        <div class="news-text">2026.2.28正式发布：居家上门服务消费券抵扣50%，每月最高800元；中央财政承担85%；审核通过后5个工作日内发放首月补贴；异地居住老人凭居住证可就地申请。</div>
+        <div class="news-impact">→ 北京西城区已纳入政策范围，广外街道居民可直接申领</div>
+      </div>
+    </div>
+    <div class="news-item" style="border-color:rgba(255,107,107,0.3);">
+      <div class="news-icon">⚡</div>
+      <div class="news-body">
+        <div class="news-tag">【竞争态势】京东居家养老入局西城区（2026.3）</div>
+        <div class="news-text">京东居家养老服务在北京西城区启动试点，覆盖东城/西城/海淀，全国近50个城市同步推进。优先覆盖一线城市及老龄化程度较高城市。标准化程度高，但社区人情味不足。</div>
+        <div class="news-impact">→ 开元差异化壁垒：广外居委会关系 + 消费券代申办服务 + 人情温度</div>
+      </div>
+    </div>
+    <div class="news-item" style="border-color:rgba(87,108,188,0.3);">
+      <div class="news-icon">🏘️</div>
+      <div class="news-body">
+        <div class="news-tag">【政策风向】15分钟养老服务圈 · 2026年全覆盖</div>
+        <div class="news-text">两会报告确认：2026年推进城市"15分钟养老服务圈"全覆盖，社区养老服务中心提供助餐、助洁、体检、慢病管理等一站式服务。社区嵌入式养老成为主流模式。</div>
+        <div class="news-impact">→ 与开元三位一体服务体系（居家+日托+社区）高度对齐，政策顺风</div>
+      </div>
+    </div>
+    <div class="news-item" style="border-color:rgba(181,128,232,0.3);">
+      <div class="news-icon">📍</div>
+      <div class="news-body">
+        <div class="news-tag">【广外竞品】广安门外街道养老照料中心</div>
+        <div class="news-text">同区竞品：全托+日托+居家三位一体，失能长者护理比1:3，护理团队持证率100%，与宣武医院有医疗合作。2026年收费标准完整（日托80元/天，月度日托卡1500元/22天）。</div>
+        <div class="news-impact">→ 开元策略：不与其正面竞争，以"消费券申办代跑腿+社区深度关系"错位切入</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 班子作业表 ── -->
+  <div class="section-title">📋 Day 3 班子作业分发</div>
+  <div style="background:var(--dark-2);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:2rem;">
+    <table class="task-table">
+      <thead>
+        <tr>
+          <th style="width:120px;">省 / 部</th>
+          <th>今日核心任务</th>
+          <th style="width:180px;">输出物</th>
+          <th style="width:70px;text-align:center;">优先级</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="dept" style="color:#C9A84C;">中书省 CSO</span><br/><span style="font-size:0.7rem;color:var(--muted);">谋划·战略</span></td>
+          <td>两会政策红利全面解码 → 长护险第六险 × 消费券800元 → 开元核心竞争力重新锚定，输出战略研判备忘录 V2</td>
+          <td style="color:var(--muted);font-size:0.78rem;">战略研判备忘录 V2</td>
+          <td style="text-align:center;"><span class="p0">P0</span></td>
+        </tr>
+        <tr>
+          <td><span class="dept" style="color:#576CBC;">门下省 CFO</span><br/><span style="font-size:0.7rem;color:var(--muted);">审议·财务</span></td>
+          <td>补贴到账时间线财务模型更新：加入800元消费券→实际到账时间→客户现金流影响→服务定价区间重新测算</td>
+          <td style="color:var(--muted);font-size:0.78rem;">E05补充财务测算</td>
+          <td style="text-align:center;"><span class="p0">P0</span></td>
+        </tr>
+        <tr>
+          <td><span class="dept" style="color:#2ED573;">尚书省 COO</span><br/><span style="font-size:0.7rem;color:var(--muted);">执行·运营</span></td>
+          <td>广外5户意向家庭接触SOP迭代：加入"消费券申报辅助"服务环节 → 话术从"购买服务"升级为"帮您免费申领800元补贴"</td>
+          <td style="color:var(--muted);font-size:0.78rem;">E06意向书模板 V2</td>
+          <td style="text-align:center;"><span class="p0">P0</span></td>
+        </tr>
+        <tr>
+          <td><span class="dept" style="color:#B580E8;">工部 CTO</span><br/><span style="font-size:0.7rem;color:var(--muted);">科技·系统</span></td>
+          <td>"民政通"系统对接研究：消费券核销数字链路 → 开元是否可接入 → 技术可行性与时间成本评估</td>
+          <td style="color:var(--muted);font-size:0.78rem;">技术对接可行性备忘</td>
+          <td style="text-align:center;"><span class="p1">P1</span></td>
+        </tr>
+        <tr>
+          <td><span class="dept" style="color:#FF6B6B;">兵部 CGO</span><br/><span style="font-size:0.7rem;color:var(--muted);">渠道·政府</span></td>
+          <td>广外居委会接触话术全面迭代：以"帮居民申领800元/月养老补贴"为切入点，不谈商业合作，先做好事建立信任</td>
+          <td style="color:var(--muted);font-size:0.78rem;">C05接触剧本 V2</td>
+          <td style="text-align:center;"><span class="p0">P0</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── 王总今日P0行动 ── -->
+  <div class="section-title">🎯 王总今日 P0 行动（需人工启动）</div>
+  <div class="action-cards">
+    <div class="action-card urgent">
+      <div class="action-num red">①</div>
+      <div class="action-body">
+        <h3 style="color:#FF6B6B;">激活居委会资源 — 今日最高优先</h3>
+        <p>联系家人（广外居委会任职），以<strong>"帮街坊邻居免费申领800元/月养老补贴"</strong>为话头，而非谈商业合作。<br/>探问：是否知道辖区内有中度以上失能长者家庭？子女是否知道这项补贴？是否需要有人帮助申办？</p>
+        <div class="action-tip">→ 这是 C05（街道合作意向函）的最快突破口，也是第一单客户的来源</div>
+      </div>
+    </div>
+    <div class="action-card urgent">
+      <div class="action-num red">②</div>
+      <div class="action-body">
+        <h3 style="color:#FF6B6B;">致电政务中心确认补贴受理流程</h3>
+        <p>拨打广安门外街道政务服务中心：<strong>010-83736036</strong>（法定工作日 09:00-11:30 / 13:30-17:00）<br/>询问：西城区养老消费补贴券目前申领状态？受理窗口在哪？需要哪些材料？代办申领是否可行？</p>
+        <div class="action-tip">→ E05（补贴到账时间线书面确认）第一步，此电话不可替代</div>
+      </div>
+    </div>
+    <div class="action-card normal">
+      <div class="action-num gold">③</div>
+      <div class="action-body">
+        <h3 style="color:#C9A84C;">本周末目标：登记2户家庭需求</h3>
+        <p>通过居委会关系或口碑推荐，找到至少2户有中度以上失能长者的家庭，完成初步需求登记。<br/>不谈签约，只说：<em>"我们在试点免费帮助申领800元/月政府补贴，顺便了解一下家里长者的情况。"</em></p>
+        <div class="action-tip">→ 这是 E06（5户预收款意向书）的首批来源，进入真实验证期的第一步</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CEO今日判断 ── -->
+  <div class="section-title">💡 CEO 今日判断</div>
+  <div class="ceo-box">
+    <div class="ceo-box-label">CEO 战略研判 · 2026-03-13</div>
+    <p>两会已将长护险列为社保<strong>"第六险"</strong>——这是开元时代成立以来最大的政策顺风。</p>
+    <br/>
+    <p><strong>800元/月消费券 × 50%居家抵扣</strong>，意味着政府实际分担了客户一半成本。一位中度失能长者，每月花1600元请开元上门照护，政府补贴800元，自付仅800元——这个价格甚至低于市面上最便宜的钟点工。</p>
+    <br/>
+    <p>这改变了开元的<strong>销售话术</strong>：从"购买养老服务"变成<span class="highlight">"帮您申领政府免费补贴，顺带提供专业照护"</span>。</p>
+    <br/>
+    <p>京东已进入西城区，但他们做的是标准化平台，缺的是社区温度和申报代跑腿服务。<span class="highlight">广外居委会的关系，今天就是开元的护城河。必须今日激活。</span></p>
+  </div>
+
+  <!-- ── 战略路径进度 ── -->
+  <div class="section-title">🗺️ 战略路径 · 当前阶段定位</div>
+  <div style="background:var(--dark-2);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:2rem;">
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-line">
+          <div class="tl-dot" style="background:#C9A84C;box-shadow:0 0 8px rgba(201,168,76,0.6);"></div>
+          <div class="tl-connector" style="background:linear-gradient(rgba(201,168,76,0.5),rgba(201,168,76,0.1));"></div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-phase">当前 · 储备期（2026年3月）</div>
+          <div class="tl-title" style="color:#C9A84C;">P0文件准备 + 首批家庭接触</div>
+          <div class="tl-desc">完成P0阻塞项（E05/E06/C05）→ 找到2-5户真实意向家庭 → 本月完成作业储备</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-line">
+          <div class="tl-dot" style="background:#576CBC;opacity:0.5;"></div>
+          <div class="tl-connector" style="background:rgba(87,108,188,0.15);"></div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-phase">阶段一（2027年-）</div>
+          <div class="tl-title" style="color:var(--muted);">自营验证 · 广外街道 · 10个家庭</div>
+          <div class="tl-desc">100万启动资金 · NPS&gt;8分 · 30%低收入长者 · 口碑第一个真实改变的故事</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-line">
+          <div class="tl-dot" style="background:#2ED573;opacity:0.3;"></div>
+          <div class="tl-connector" style="background:rgba(46,213,115,0.1);"></div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-phase">阶段二（2027-2029年）</div>
+          <div class="tl-title" style="color:var(--muted);">标准化赋能 · 西城区100社区</div>
+          <div class="tl-desc">1000个家庭 · 天使融资 · 政府产业基金 · 赋能合作伙伴</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-line">
+          <div class="tl-dot" style="background:#B580E8;opacity:0.3;"></div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-phase">阶段三（2029年+）</div>
+          <div class="tl-title" style="color:var(--muted);">生态构建 · 护理员合作社 + 全国复制</div>
+          <div class="tl-desc">科技赋能 · 北极星：每一位长者，无论贫富，都能享受到有尊严的照护</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 底部 ── -->
+  <div class="footer">
+    <p>开元时代 AI 工作台 · 小美搭档自动生成 · 2026-03-13</p>
+    <p style="margin-top:0.4rem;"><a href="index.html" style="color:var(--gold);text-decoration:none;">← 返回总指挥台</a></p>
+  </div>
+
+</div>
+</body>
+</html>

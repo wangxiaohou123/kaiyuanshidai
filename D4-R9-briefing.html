@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 14 战报 · 开元时代 · 2026-03-14</title>
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --dark-2: #181c27;
+    --dark-3: #1e2235;
+    --gold: #C9A84C;
+    --gold-light: #e8c96b;
+    --green: #4CAF82;
+    --purple: #9B7EDE;
+    --red: #E05555;
+    --blue: #5B9BD5;
+    --text: #1C1C1E;
+    --muted: #6C6C70;
+    --border: rgba(201,168,76,0.18);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", sans-serif;
+    line-height: 1.7;
+    padding: 2rem 1rem;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+  .header {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, var(--dark-2), var(--dark-3));
+    text-align: center;
+  }
+  .header .day-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: #111;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 0.2rem 0.8rem;
+    border-radius: 20px;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.8rem;
+  }
+  .header h1 {
+    font-size: 1.6rem;
+    color: var(--gold-light);
+    margin-bottom: 0.5rem;
+  }
+  .header .subtitle { color: var(--muted); font-size: 0.9rem; }
+  .section {
+    background: var(--dark-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .intel-item {
+    background: var(--dark-3);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+    border-left: 3px solid var(--gold);
+  }
+  .intel-item.green { border-left-color: var(--green); }
+  .intel-item.purple { border-left-color: var(--purple); }
+  .intel-item.blue { border-left-color: var(--blue); }
+  .intel-item.red { border-left-color: var(--red); }
+  .intel-num {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+  }
+  .intel-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .intel-body { font-size: 0.88rem; color: var(--muted); }
+  .intel-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+    font-weight: 600;
+  }
+  .tag-red { background: rgba(224,85,85,0.15); color: var(--red); }
+  .tag-green { background: rgba(76,175,130,0.15); color: var(--green); }
+  .tag-gold { background: rgba(201,168,76,0.15); color: var(--gold); }
+  .issue-card {
+    background: var(--dark-3);
+    border-radius: 10px;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .issue-card h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 0.6rem;
+  }
+  .issue-card p { font-size: 0.87rem; color: var(--muted); }
+  .action-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+  .action-table th {
+    background: var(--dark-3);
+    color: var(--gold);
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    font-weight: 600;
+  }
+  .action-table td {
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: var(--text);
+  }
+  .action-table tr:last-child td { border-bottom: none; }
+  .priority-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+  }
+  .p0 { background: rgba(224,85,85,0.2); color: var(--red); }
+  .p1 { background: rgba(201,168,76,0.2); color: var(--gold); }
+  .decision-box {
+    background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03));
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 10px;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .decision-box h3 { color: var(--gold); font-size: 0.95rem; margin-bottom: 0.5rem; }
+  .decision-box p { font-size: 0.87rem; color: var(--text); }
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .kpi-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+  .kpi-card {
+    flex: 1;
+    min-width: 140px;
+    background: var(--dark-3);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .kpi-num { font-size: 1.6rem; font-weight: 800; color: var(--gold); }
+  .kpi-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.3rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 头部 -->
+  <div class="header">
+    <div class="day-badge">DAY 14 · 储备期第十四日</div>
+    <h1>开元时代 · 班子战报</h1>
+    <div class="subtitle">2026年3月14日（周六）· 礼部情报 × 中书省立项 × 六部行动令</div>
+  </div>
+
+  <!-- KPI看板 -->
+  <div class="section">
+    <div class="section-title">📊 储备期关键指标</div>
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-num">14</div>
+        <div class="kpi-label">储备期天数</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-num">5</div>
+        <div class="kpi-label">今日情报条数</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-num">2</div>
+        <div class="kpi-label">立项研究议题</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-num">1600元</div>
+        <div class="kpi-label">家庭月实付（补贴后）</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 礼部情报 -->
+  <div class="section">
+    <div class="section-title">📰 礼部 · Day 14 情报战报</div>
+
+    <div class="intel-item">
+      <div class="intel-num">动态 01</div>
+      <div class="intel-title">民政部八部门联合发布《培育养老服务经营主体》政策 · 科技赋能成核心方向</div>
+      <div class="intel-body">2026年1月民政部等八部门联合印发政策，明确三大路径：科技赋能、社区化运营、产品创新。AI、大数据、北斗等技术全面融入养老场景，智能康辅具、适老化食品研发获重点支持。政策推动养老机器人概念股迎来风口。</div>
+      <span class="intel-tag tag-red">🔴 高 · 科技战略定位</span>
+    </div>
+
+    <div class="intel-item green">
+      <div class="intel-num">动态 02</div>
+      <div class="intel-title">广外街道·广外医院联合打造"智慧康养"模式 · 已见北京发改委专家肯定</div>
+      <div class="intel-body">北京市发改委2026年1月专家评估报告明确：西城区广外街道区域养老服务中心与广外医院共同打造智慧康养模式，获官方正面肯定。2026年北京将启动医养结合促进行动，支持医疗机构与养老设施同址或毗邻建设。这是开元直接竞对的战略格局。</div>
+      <span class="intel-tag tag-red">🔴 极高 · 直接影响开元进入路径</span>
+    </div>
+
+    <div class="intel-item purple">
+      <div class="intel-num">动态 03</div>
+      <div class="intel-title">西城区2026年新增200张家庭照护床位 · 驿站向嵌入型机构转型</div>
+      <div class="intel-body">西城区民政局杨静局长明确：2026年新增不少于200张家庭照护床位，新建1-2家区级全龄友好银龄生活示范中心，推动养老服务驿站向嵌入型机构转型。西城区温家街驿站收费已公开：日间托管80元/天，月度会员1500元/月。</div>
+      <span class="intel-tag tag-red">🔴 高 · 竞对格局清晰化</span>
+    </div>
+
+    <div class="intel-item blue">
+      <div class="intel-num">动态 04</div>
+      <div class="intel-title">银发经济18条新政 · 社区助浴/适老化改造/助餐三大轻资产创业口</div>
+      <div class="intel-body">2026年刚落地的养老新政18条，将"便宜的地"和"便宜的钱"压到社区层级。三大低门槛机会：①社区助浴投资不到2万，长护险开始报销；②居家适老化改造，政府补贴最高30%，医保卡余额可支付；③老年助餐点，街道可申请零租金场地。这与开元的社区嵌入路径高度吻合。</div>
+      <span class="intel-tag tag-gold">🟡 中 · 可作为服务扩展选项</span>
+    </div>
+
+    <div class="intel-item">
+      <div class="intel-num">动态 05</div>
+      <div class="intel-title">护理员缺口超500万 · "养老服务师"国家新职业2026年加速落地</div>
+      <div class="intel-body">《2025养老护理员职业现状调查研究报告》显示专业护理员缺口超500万。民政部2026年推动"养老服务师"纳入新职业，设三级认定体系。同时2026年智慧养老布局聚焦"科技赋能、服务兜底、生态协同"，目标精准对接需求，破解资源错配。</div>
+      <span class="intel-tag tag-red">🔴 高 · 人才建设窗口期</span>
+    </div>
+  </div>
+
+  <!-- 中书省议题立项 -->
+  <div class="section">
+    <div class="section-title">🏛️ 中书省 · Day 14 议题立项建议</div>
+
+    <div class="issue-card">
+      <h3>🎯 议题A（推荐立项 · P0）：广外街道"智慧康养"竞对深度研究</h3>
+      <p><strong>触发情报：</strong>动态02 — 广外街道+广外医院已联合打造智慧康养，获北京发改委官方肯定</p>
+      <p style="margin-top:0.5rem;"><strong>战略影响：</strong>开元的首战城市广外街道，已有官方背书的医院+养老联合体存在，开元的进入策略需要重新精算：是协同、差异化还是避开？</p>
+      <p style="margin-top:0.5rem;"><strong>研究问题：</strong>广外医院+街道联合体的服务边界是什么？开元的居家护理在"最后一公里"能否补足他们覆盖不到的家庭需求？合作可能性几何？</p>
+    </div>
+
+    <div class="issue-card">
+      <h3>📋 议题B（推荐立项 · P0）：西城区家庭照护床位政策的开元嵌入路径</h3>
+      <p><strong>触发情报：</strong>动态03 — 2026年西城区新增200张家庭照护床位政策</p>
+      <p style="margin-top:0.5rem;"><strong>战略影响：</strong>家庭照护床位是政府"床位下沉"的重要路径，开元居家服务与家庭床位存在天然协同——承接床位配套护理服务，可获政府导流。</p>
+      <p style="margin-top:0.5rem;"><strong>研究问题：</strong>西城区家庭照护床位的申请条件、服务商资质要求是什么？开元是否具备参与资质？如何成为这200张床位的配套服务商之一？</p>
+    </div>
+  </div>
+
+  <!-- 六部行动令 -->
+  <div class="section">
+    <div class="section-title">⚔️ 尚书省 · Day 14 六部行动令</div>
+    <table class="action-table">
+      <thead>
+        <tr>
+          <th>部门</th>
+          <th>今日核心任务</th>
+          <th>优先级</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🏛️ 礼部<br><small style="color:var(--muted)">市场情报</small></td>
+          <td>调研广外医院养老合作的公开资料（官网/政府文件），摸清其服务范围与覆盖家庭数</td>
+          <td><span class="priority-tag p0">P0</span></td>
+        </tr>
+        <tr>
+          <td>💰 户部<br><small style="color:var(--muted)">财务模型</small></td>
+          <td>测算西城区家庭照护床位配套服务商的财务可行性（日均护理费×200张床×政府分成比例）</td>
+          <td><span class="priority-tag p0">P0</span></td>
+        </tr>
+        <tr>
+          <td>⚔️ 兵部<br><small style="color:var(--muted)">政府关系</small></td>
+          <td>梳理西城区家庭照护床位申请流程与服务商资质要求，确认开元是否符合准入条件</td>
+          <td><span class="priority-tag p0">P0</span></td>
+        </tr>
+        <tr>
+          <td>📚 吏部<br><small style="color:var(--muted)">组织人才</small></td>
+          <td>制定"养老服务师"三级认定体系对应的护理员招募+培训路线图V1</td>
+          <td><span class="priority-tag p1">P1</span></td>
+        </tr>
+        <tr>
+          <td>⚙️ 工部<br><small style="color:var(--muted)">科技产品</small></td>
+          <td>研究广外智慧康养模式的技术组件（AI/IoT/大数据），评估开元差异化科技切入点</td>
+          <td><span class="priority-tag p1">P1</span></td>
+        </tr>
+        <tr>
+          <td>🎓 礼部<br><small style="color:var(--muted)">品牌传播</small></td>
+          <td>梳理"银发经济18条"中适老化改造+助浴+助餐三大服务品类，评估开元服务套餐扩展可行性</td>
+          <td><span class="priority-tag p1">P1</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CEO决策建议 -->
+  <div class="section">
+    <div class="section-title">👑 CEO · 今日决策建议（2项）</div>
+
+    <div class="decision-box">
+      <h3>决策项1：是否立项「广外智慧康养竞对研究」</h3>
+      <p>广外医院+街道已有官方智慧康养联合体，这是开元首战城市最大的竞合变量。建议王总授权中书省启动专项研究，产出进入策略选择（协同/差异/避开）。</p>
+      <p style="margin-top:0.5rem; color:var(--gold); font-size:0.85rem;">⚡ 建议：立项（理由：关系开元核心战场，信息不透明时决策风险最大）</p>
+    </div>
+
+    <div class="decision-box">
+      <h3>决策项2：是否将「西城区家庭照护床位服务商」纳入开元启动目标</h3>
+      <p>200张家庭床位是政府导流渠道，成为配套服务商可跳过冷启动阶段直接获得首批用户。但需满足政府资质条件，可能影响启动时间节点（2027年初）。</p>
+      <p style="margin-top:0.5rem; color:var(--gold); font-size:0.85rem;">⚡ 建议：先由兵部摸清准入条件，下次CEO审议前完成尽调</p>
+    </div>
+  </div>
+
+  <!-- 战略背景提醒 -->
+  <div class="section">
+    <div class="section-title">🧭 开元战略背景（常驻提醒）</div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.8rem; font-size:0.85rem;">
+      <div style="background:var(--dark-3);padding:0.8rem;border-radius:8px;">
+        <div style="color:var(--gold);font-weight:700;margin-bottom:0.4rem;">北极星指标</div>
+        <div style="color:var(--muted);">每一位长者，无论贫富，都能享受到基本的有尊严的照护</div>
+      </div>
+      <div style="background:var(--dark-3);padding:0.8rem;border-radius:8px;">
+        <div style="color:var(--gold);font-weight:700;margin-bottom:0.4rem;">当前阶段</div>
+        <div style="color:var(--muted);">储备期 · 桌面研究为主 · 2027年初个人出资100万正式启动</div>
+      </div>
+      <div style="background:var(--dark-3);padding:0.8rem;border-radius:8px;">
+        <div style="color:var(--gold);font-weight:700;margin-bottom:0.4rem;">首战城市</div>
+        <div style="color:var(--muted);">北京市西城区广外街道 · 家庭资源优势 · 居委会渠道</div>
+      </div>
+      <div style="background:var(--dark-3);padding:0.8rem;border-radius:8px;">
+        <div style="color:var(--gold);font-weight:700;margin-bottom:0.4rem;">商业模式核心</div>
+        <div style="color:var(--muted);">800元/月补贴叠加长护险 · 家庭实付降至1600元/月</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    开元时代 · 班子战报 Day 14 · 2026-03-14<br>
+    礼部情报组采集 · 中书省谋划室立项 · 尚书省行动令<br>
+    <a href="index.html" style="color:var(--gold);text-decoration:none;">← 返回官网主页</a>
+  </div>
+
+</div>
+</body>
+</html>

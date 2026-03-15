@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>开元时代 · Day 6 班子汇报 · 2026-03-15</title>
+<style>
+  :root {
+    /* 珍珠白主题色板 */
+    --pearl: #F8F6F2;        /* 珍珠白底 */
+    --pearl-2: #FFFFFF;      /* 纯白卡片 */
+    --pearl-3: #F0EDE7;      /* 浅米灰分隔 */
+    --border: rgba(180,165,140,0.25);
+    --text: #2C2A26;         /* 深暖棕文字 */
+    --muted: #8A8070;        /* 暖灰辅助文字 */
+    --gold: #9B7B3A;         /* 深金，作为强调色 */
+    --gold-light: #C9A84C;   /* 浅金 */
+    --green: #2E7D5A;
+    --blue: #2A6BAD;
+    --red: #C0392B;
+    --amber: #B7651A;
+    --purple: #6B46A6;
+    --shadow: 0 2px 16px rgba(100,85,60,0.08);
+    --shadow-md: 0 4px 24px rgba(100,85,60,0.12);
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+    background: linear-gradient(160deg, #F8F6F2 0%, #F2EDE4 50%, #F5F0E8 100%);
+    color:var(--text); line-height:1.7; min-height:100vh; padding:2rem 1rem; }
+
+  .page { max-width: 860px; margin: 0 auto; }
+
+  .header { text-align:center; margin-bottom: 2.5rem; padding: 2.2rem 2rem;
+    background: linear-gradient(135deg, #FFFFFF 0%, #F5F0E8 100%);
+    border: 1px solid rgba(155,123,58,0.2); border-radius: 16px;
+    box-shadow: var(--shadow-md); }
+  .header-badge { display:inline-block; font-size:0.72rem; letter-spacing:0.15em;
+    color:var(--gold); background:rgba(155,123,58,0.08); border:1px solid rgba(155,123,58,0.25);
+    padding:0.3rem 0.85rem; border-radius:20px; margin-bottom:1rem; }
+  .header h1 { font-size:1.6rem; font-weight:700; color:var(--text); margin-bottom:0.4rem; }
+  .header .subtitle { color:var(--muted); font-size:0.88rem; }
+  .header .date-info { margin-top:0.8rem; font-size:0.82rem; color:var(--gold); font-weight:600; }
+
+  .alert-box { background:rgba(192,57,43,0.05); border:1px solid rgba(192,57,43,0.2);
+    border-radius:10px; padding:0.9rem 1.2rem; margin-bottom:1.8rem; font-size:0.84rem; }
+  .alert-box strong { color:var(--red); }
+
+  .decision-bar { display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:2rem; }
+  .decision-card { flex:1; min-width:220px; background:var(--pearl-2);
+    border:1px solid rgba(155,123,58,0.2); border-radius:12px; padding:1rem 1.2rem;
+    box-shadow: var(--shadow); }
+  .decision-card .num { font-size:1.4rem; font-weight:800; color:var(--gold); }
+  .decision-card .label { font-size:0.72rem; color:var(--muted); letter-spacing:0.08em; margin-bottom:0.4rem; }
+  .decision-card .val { font-size:0.88rem; color:var(--text); font-weight:600; }
+  .decision-card .desc { font-size:0.78rem; color:var(--muted); margin-top:0.3rem; }
+
+  .section { background:var(--pearl-2); border:1px solid var(--border); border-radius:14px;
+    margin-bottom:1.5rem; overflow:hidden; box-shadow: var(--shadow); }
+  .section-hd { padding:1rem 1.4rem; border-bottom:1px solid var(--border);
+    display:flex; align-items:center; gap:0.8rem; background: linear-gradient(to right, rgba(248,246,242,0.8), #FFFFFF); }
+  .section-icon { font-size:1.2rem; }
+  .section-title-wrap { flex:1; }
+  .section-tag { font-size:0.68rem; letter-spacing:0.1em; padding:0.2rem 0.6rem;
+    border-radius:10px; font-weight:600; }
+  .section-body { padding:1.2rem 1.4rem; }
+
+  .role-label { font-size:0.72rem; letter-spacing:0.12em; font-weight:700;
+    padding:0.15rem 0.55rem; border-radius:8px; display:inline-block; margin-bottom:0.6rem; }
+
+  .item { padding:0.7rem 0; border-bottom:1px solid rgba(180,165,140,0.15); }
+  .item:last-child { border-bottom:none; }
+  .item-q { font-size:0.8rem; color:var(--muted); margin-bottom:0.3rem; }
+  .item-a { font-size:0.84rem; color:var(--text); }
+
+  .sop-step { display:flex; gap:0.8rem; padding:0.5rem 0; }
+  .sop-num { width:22px; height:22px; border-radius:50%; background:rgba(42,107,173,0.12);
+    color:var(--blue); font-size:0.75rem; font-weight:700; display:flex;
+    align-items:center; justify-content:center; flex-shrink:0; margin-top:0.15rem; }
+  .sop-content { font-size:0.84rem; color:var(--text); line-height:1.7; }
+  .sop-content em { color:var(--muted); font-style:normal; font-size:0.8rem; }
+
+  .cost-table { width:100%; border-collapse:collapse; margin:0.8rem 0; font-size:0.82rem; }
+  .cost-table th { background:rgba(155,123,58,0.06); color:var(--gold);
+    padding:0.5rem 0.8rem; text-align:left; font-size:0.72rem; letter-spacing:0.08em; }
+  .cost-table td { padding:0.5rem 0.8rem; border-bottom:1px solid rgba(180,165,140,0.12); color:var(--text); }
+  .cost-table tr.total td { color:var(--gold); font-weight:700; border-top:1px solid rgba(155,123,58,0.25); }
+
+  .signal-row { display:flex; gap:0.6rem; align-items:flex-start; padding:0.6rem 0;
+    border-bottom:1px solid rgba(180,165,140,0.12); }
+  .signal-row:last-child { border-bottom:none; }
+  .signal-dot { width:8px; height:8px; border-radius:50%; background:var(--blue);
+    flex-shrink:0; margin-top:0.45rem; }
+  .signal-row p { font-size:0.84rem; color:var(--text); line-height:1.7; }
+  .signal-row p em { color:var(--muted); font-style:normal; font-size:0.8rem; }
+
+  .action-box { background:rgba(42,107,173,0.05); border:1px solid rgba(42,107,173,0.18);
+    border-radius:8px; padding:0.8rem 1rem; margin-top:0.8rem; font-size:0.82rem; }
+  .action-box strong { color:var(--blue); }
+
+  .decision-pending { background:linear-gradient(135deg, rgba(155,123,58,0.05), rgba(248,246,242,0.8));
+    border:1px solid rgba(155,123,58,0.25); border-radius:12px; padding:1.2rem 1.4rem; margin-top:2rem;
+    box-shadow: var(--shadow); }
+  .decision-pending h3 { color:var(--gold); font-size:0.9rem; margin-bottom:0.8rem; }
+  .decision-item { display:flex; gap:0.8rem; padding:0.55rem 0;
+    border-bottom:1px solid rgba(155,123,58,0.1); font-size:0.84rem; color:var(--text); }
+  .decision-item:last-child { border-bottom:none; }
+  .decision-num { color:var(--gold); font-weight:700; flex-shrink:0; }
+
+  .footer { text-align:center; margin-top:2.5rem; padding-top:1.5rem;
+    border-top:1px solid var(--border); font-size:0.78rem; color:var(--muted); }
+</style>
+  <!-- 🔐 认证模块 -->
+  <script src="auth-config.js"></script>
+  <script src="auth.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <!-- 页头 -->
+  <div class="header">
+    <div class="header-badge">CEO Log · Day 6 · 储备期第六日</div>
+    <h1>开元时代 · 班子日汇报</h1>
+    <div class="subtitle">政策落地执行期第2日 · 三省六部自主作业成果</div>
+    <div class="date-info">📅 2026年3月15日（周日）· 汇报时间：全天产出综合</div>
+  </div>
+
+  <!-- 紧急提醒 -->
+  <div class="alert-box">
+    <strong>⚠️ 紧急倒计时：</strong>北京市失能长者消费补贴 Q1 申报窗口 <strong>3月25日截止</strong>，距今仅剩 <strong style="color:var(--red);">10天</strong>。首户锁定须在本周内启动，方可赶上申报节点。
+  </div>
+
+  <!-- 待决策摘要卡 -->
+  <div class="decision-bar">
+    <div class="decision-card">
+      <div class="label">DECISION #1</div>
+      <div class="num">¥2,000</div>
+      <div class="val">首户试服务垫付授权</div>
+      <div class="desc">CFO建模：回收率123%（若转化），不转化换取SOP验证</div>
+    </div>
+    <div class="decision-card">
+      <div class="label">DECISION #2</div>
+      <div class="num">本周</div>
+      <div class="val">激活居委会家人渠道</div>
+      <div class="desc">CGO设计3步SOP，CEO亲自沟通，低风险高效率路径</div>
+    </div>
+    <div class="decision-card">
+      <div class="label">DECISION #3</div>
+      <div class="num">可选</div>
+      <div class="val">天恒康健合作意向</div>
+      <div class="desc">以资源换经验，驿站分包切入；若暂缓，Q2独立申报</div>
+    </div>
+  </div>
+
+  <!-- Section 1: CSO政策信号 -->
+  <div class="section">
+    <div class="section-hd" style="border-color:rgba(74,158,255,0.2);">
+      <div class="section-icon">🌐</div>
+      <div class="section-title-wrap">
+        <div style="font-size:0.95rem;font-weight:700;color:var(--text);">CSO · 今日三大政策信号</div>
+        <div style="font-size:0.78rem;color:var(--muted);">中书省 · 苏格拉底质询后修正版</div>
+      </div>
+      <span class="section-tag" style="background:rgba(74,158,255,0.12);color:var(--blue);border:1px solid rgba(74,158,255,0.3);">战略情报</span>
+    </div>
+    <div class="section-body">
+      <div class="signal-row">
+        <div class="signal-dot" style="background:var(--blue);"></div>
+        <p><strong style="color:var(--blue);">信号①</strong> · 「养老服务师」新职业认定启动（2026.3.7两会宣布），Q3-Q4发布等级细则。<br>
+        <em>→ 开元布局：吏部本周梳理北京首批培训机构，送1-2名护理员参加首批认定，形成差异化品质背书。培训成本约¥3,000-5,000/人，纳入CFO启动成本模型。</em></p>
+      </div>
+      <div class="signal-row">
+        <div class="signal-dot" style="background:var(--green);"></div>
+        <p><strong style="color:var(--green);">信号②</strong> · 北京民政局3月4日公告第一批备案驿站；天恒康健·恒煦康养已确认广外片区运营商资质。第二批招募预计Q2（4月底）开放。<br>
+        <em>→ 开元布局：Q1走合作挂靠路径，Q2独立申报；兵部本周研判是否先行接触天恒康健谈分包合作。</em></p>
+      </div>
+      <div class="signal-row">
+        <div class="signal-dot" style="background:var(--red);"></div>
+        <p><strong style="color:var(--red);">信号③（紧急）</strong> · Q1失能评估申报截止3月25日，补贴资质锁定窗口关闭后下次开放最早6月。<br>
+        <em>→ 开元行动：CGO本周激活居委会家人渠道，锁定1户符合条件家庭，协助申报（零成本入户理由）。</em></p>
+      </div>
+      <div class="action-box">
+        <strong>CSO质询结论：</strong>养老服务师认定是吸引优质护理员的「人才杠杆」，而非招募门槛。现阶段以非持证护理员为主体，同步培育1名种子护理员取证，用「我们的护理员是国家认定养老服务师」作为未来差异化话术。
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: CFO垫付模型 -->
+  <div class="section">
+    <div class="section-hd" style="border-color:rgba(61,214,140,0.2);">
+      <div class="section-icon">💰</div>
+      <div class="section-title-wrap">
+        <div style="font-size:0.95rem;font-weight:700;color:var(--text);">CFO · 首户启动成本精算 V1</div>
+        <div style="font-size:0.78rem;color:var(--muted);">门下省 · 垫付决策量化支撑</div>
+      </div>
+      <span class="section-tag" style="background:rgba(61,214,140,0.12);color:var(--green);border:1px solid rgba(61,214,140,0.3);">财务模型</span>
+    </div>
+    <div class="section-body">
+      <table class="cost-table">
+        <thead>
+          <tr><th>项目</th><th>金额</th><th>备注</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>失能评估协助</td><td style="color:var(--green);">¥0</td><td>民政局指定机构免费上门，我方仅陪同协调</td></tr>
+          <tr><td>试服务人工（2次/周×4周×3h）</td><td>¥1,440</td><td>护理员时薪¥60，24小时合计</td></tr>
+          <tr><td>工具包（话术卡+小礼品）</td><td>¥300</td><td>A5卡片印刷+实用型小礼物（保温杯等）</td></tr>
+          <tr><td>交通+协调</td><td>¥200</td><td>预估</td></tr>
+          <tr class="total"><td><strong>合计</strong></td><td><strong>¥1,940</strong></td><td>建议批准¥2,000额度（含余量）</td></tr>
+        </tbody>
+      </table>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.8rem;">
+        <div style="flex:1;min-width:180px;background:rgba(46,125,90,0.05);border:1px solid rgba(46,125,90,0.18);border-radius:8px;padding:0.8rem;">
+          <div style="font-size:0.75rem;color:var(--green);font-weight:700;margin-bottom:0.3rem;">情景A：首户转化</div>
+          <div style="font-size:0.84rem;color:var(--text);">M1付费¥2,400 → 回收率123%<br>+ 补贴800元/月（M5到账）<br><strong style="color:var(--green);">验证SOP + 正向现金流</strong></div>
+        </div>
+        <div style="flex:1;min-width:180px;background:rgba(192,57,43,0.05);border:1px solid rgba(192,57,43,0.15);border-radius:8px;padding:0.8rem;">
+          <div style="font-size:0.75rem;color:var(--red);font-weight:700;margin-bottom:0.3rem;">情景B：首户不转化</div>
+          <div style="font-size:0.84rem;color:var(--text);">损失¥1,940<br>换取：SOP验证 + 护理员实训<br><strong style="color:var(--amber);">+ 居委会信任资产</strong></div>
+        </div>
+      </div>
+      <div class="action-box" style="margin-top:0.8rem;">
+        <strong>门下省封驳意见：</strong>批准垫付，同时设定转化指标——3个月内首户续签+推荐1户。若达到，扩展至3户试服务；若未达到，暂停垫付，重审SOP。
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: COO服务标准 -->
+  <div class="section">
+    <div class="section-hd" style="border-color:rgba(245,166,35,0.2);">
+      <div class="section-icon">🏠</div>
+      <div class="section-title-wrap">
+        <div style="font-size:0.95rem;font-weight:700;color:var(--text);">COO · 服务标准V1框架</div>
+        <div style="font-size:0.78rem;color:var(--muted);">尚书省 · 基础照护SOP三层架构</div>
+      </div>
+      <span class="section-tag" style="background:rgba(245,166,35,0.12);color:var(--amber);border:1px solid rgba(245,166,35,0.3);">服务标准</span>
+    </div>
+    <div class="section-body">
+      <div style="display:flex;gap:0.6rem;margin-bottom:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;background:rgba(42,107,173,0.05);border:1px solid rgba(42,107,173,0.18);border-radius:8px;padding:0.8rem;">
+          <div style="font-size:0.72rem;color:var(--blue);font-weight:700;letter-spacing:0.1em;margin-bottom:0.4rem;">L1 · 基础生活照料（每次必做）</div>
+          <div style="font-size:0.8rem;color:var(--muted);line-height:1.8;">安全评估 5min → 体温血压记录 → 清洁护理 → 餐食准备/喂食 → 用药提醒 → 离开前环境整理</div>
+        </div>
+        <div style="flex:1;min-width:200px;background:rgba(46,125,90,0.05);border:1px solid rgba(46,125,90,0.18);border-radius:8px;padding:0.8rem;">
+          <div style="font-size:0.72rem;color:var(--green);font-weight:700;letter-spacing:0.1em;margin-bottom:0.4rem;">L2 · 功能维持训练（2-3次/周）</div>
+          <div style="font-size:0.8rem;color:var(--muted);line-height:1.8;">关节活动训练 → 认知刺激（图片/音乐/回忆疗法）→ 平衡感练习</div>
+        </div>
+        <div style="flex:1;min-width:200px;background:rgba(155,123,58,0.05);border:1px solid rgba(155,123,58,0.22);border-radius:8px;padding:0.8rem;">
+          <div style="font-size:0.72rem;color:var(--gold);font-weight:700;letter-spacing:0.1em;margin-bottom:0.4rem;">L3 · 家庭连接服务（每周1次）★差异化</div>
+          <div style="font-size:0.8rem;color:var(--muted);line-height:1.8;">书面服务记录发子女 → 月度评估报告 → 「故事记录」（长者本人一句话）</div>
+        </div>
+      </div>
+      <div class="action-box">
+        <strong>苏格拉底质询发现：</strong>L3「故事记录」是<strong style="color:var(--gold);">最被低估的差异化价值点</strong>——竞争对手只做L1，我们做L1+L3。子女的情感连接 = 最强付费粘性。<br>
+        <strong>COO行动：</strong>话术V3加入核心句：「我们不只是护理，我们帮您留住父母的每一个故事」
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4: CGO居委会激活SOP -->
+  <div class="section">
+    <div class="section-hd" style="border-color:rgba(181,128,232,0.2);">
+      <div class="section-icon">🎯</div>
+      <div class="section-title-wrap">
+        <div style="font-size:0.95rem;font-weight:700;color:var(--text);">CGO · 居委会激活SOP（家人渠道版）</div>
+        <div style="font-size:0.78rem;color:var(--muted);">门下省质询通过 · 三步走方案</div>
+      </div>
+      <span class="section-tag" style="background:rgba(181,128,232,0.12);color:var(--purple);border:1px solid rgba(181,128,232,0.3);">获客策略</span>
+    </div>
+    <div class="section-body">
+      <div class="sop-step">
+        <div class="sop-num">1</div>
+        <div class="sop-content">
+          <strong style="color:var(--text);">CEO ← → 家人（私下沟通）</strong><br>
+          话术：「我在研究养老服务，你们那边有没有需要上门照护的家庭？我想去了解一下，不是推销」<br>
+          <em>保持私人关系感，不走正式渠道，不给家人造成职务压力</em>
+        </div>
+      </div>
+      <div class="sop-step">
+        <div class="sop-num">2</div>
+        <div class="sop-content">
+          <strong style="color:var(--text);">家人 ← → 居委会同事（低调引荐）</strong><br>
+          话术：「我认识一个做志愿养老研究的朋友，想帮几户家庭申请政府补贴，不是推销，能不能帮问问？」<br>
+          <em>以「个人推荐」而非「居委会背书」角色出现，保护家人职务安全</em>
+        </div>
+      </div>
+      <div class="sop-step">
+        <div class="sop-num">3</div>
+        <div class="sop-content">
+          <strong style="color:var(--text);">CEO 以志愿者身份上门（← → 目标家庭）</strong><br>
+          首次不收费，携带「志愿者上门协助包」（政府补贴政策一页纸 + 失能评估申报流程卡），协助失能评估申报<br>
+          <em>建立信任后再介绍服务；若家庭感兴趣，自然过渡到试服务邀约</em>
+        </div>
+      </div>
+      <div class="action-box" style="margin-top:0.8rem;">
+        <strong>首户画像优先级：</strong>①中度失能+独生子女家庭（补贴动机强）② 高龄独居+子女在外省（远程焦虑，付费意愿高）③ 低收入+补贴叠加（愿景对齐）
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5: 兵部天恒合作预案 -->
+  <div class="section">
+    <div class="section-hd" style="border-color:rgba(201,168,76,0.2);">
+      <div class="section-icon">🏛️</div>
+      <div class="section-title-wrap">
+        <div style="font-size:0.95rem;font-weight:700;color:var(--text);">兵部 · 天恒康健合作接触预案</div>
+        <div style="font-size:0.78rem;color:var(--muted);">政府关系线 · 驿站分包合作路径</div>
+      </div>
+      <span class="section-tag" style="background:rgba(201,168,76,0.12);color:var(--gold);border:1px solid rgba(201,168,76,0.3);">待CEO授权</span>
+    </div>
+    <div class="section-body">
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:0.8rem;">
+        <div style="flex:1;min-width:200px;background:rgba(46,125,90,0.05);border:1px solid rgba(46,125,90,0.18);border-radius:8px;padding:0.8rem;">
+          <div style="font-size:0.75rem;color:var(--green);font-weight:700;margin-bottom:0.3rem;">我方可提供</div>
+          <div style="font-size:0.82rem;color:var(--muted);line-height:1.8;">广外居委会家人人脉资源<br>CEO个人时间 + 志愿者型服务<br>真实服务记录（未来申报素材）</div>
+        </div>
+        <div style="flex:1;min-width:200px;background:rgba(42,107,173,0.05);border:1px solid rgba(42,107,173,0.15);border-radius:8px;padding:0.8rem;">
+          <div style="font-size:0.75rem;color:var(--blue);font-weight:700;margin-bottom:0.3rem;">对方可给予</div>
+          <div style="font-size:0.82rem;color:var(--muted);line-height:1.8;">已有运营资质 + 品牌背书<br>失能评估绿色通道<br>驿站设施资源（会议室/宣传位）</div>
+        </div>
+      </div>
+      <div class="action-box">
+        <strong>接触方式：</strong>以「西城区广外街道养老服务研究者」身份，通过官网/LinkedIn联系恒煦康养，提出合作意向，不暴露竞争姿态。<br>
+        <strong>若暂缓：</strong>等Q2独立申报资质后直接入场，不影响首户试服务推进。
+      </div>
+    </div>
+  </div>
+
+  <!-- 待决策汇总 -->
+  <div class="decision-pending">
+    <h3>⚡ Day 6 · 待CEO决策清单（3项）</h3>
+    <div class="decision-item">
+      <div class="decision-num">1</div>
+      <div>
+        <strong style="color:var(--text);">垫付授权</strong> · 是否批准 ¥2,000 首户试服务垫付额度？<br>
+        <span style="color:var(--muted);font-size:0.8rem;">CFO建议：批准。Q1补贴申报窗口3月25日截止，此刻是最强入户理由。</span>
+      </div>
+    </div>
+    <div class="decision-item">
+      <div class="decision-num">2</div>
+      <div>
+        <strong style="color:var(--text);">家人渠道激活</strong> · 是否本周亲自和家人沟通居委会引荐路径？<br>
+        <span style="color:var(--muted);font-size:0.8rem;">CGO建议：优先激活，低风险高效率。若家人不愿意，立即切换陌生拜访路径。</span>
+      </div>
+    </div>
+    <div class="decision-item">
+      <div class="decision-num">3</div>
+      <div>
+        <strong style="color:var(--text);">天恒康健接触</strong> · 是否授权兵部本周发出合作意向？<br>
+        <span style="color:var(--muted);font-size:0.8rem;">若暂缓无影响，Q2独立申报；若授权，兵部本周起草意向信。</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>开元时代 · 班子日汇报 · Day 6 · 2026-03-15</p>
+    <p style="margin-top:0.3rem;">中书省（CSO）× 门下省（CFO）× 尚书省（COO）× 六部联合产出</p>
+    <p style="margin-top:0.3rem;color:rgba(138,143,158,0.5);">由 小美 · 王晶晶AI助理 汇编生成</p>
+  </div>
+
+</div>
+</body>
+</html>

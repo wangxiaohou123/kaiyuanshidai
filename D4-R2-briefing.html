@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>开元时代 · Day 4 战略日报 · 2026-03-14</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif; background: #F8F5F0; color: #2C2C2C; line-height: 1.6; padding: 2rem 1rem; }
+  .container { max-width: 900px; margin: 0 auto; }
+  .hero { background: linear-gradient(135deg, #1a1006 0%, #2d1e08 50%, #1a1006 100%); border-radius: 18px; padding: 2.5rem 2rem; margin-bottom: 2rem; position: relative; overflow: hidden; }
+  .hero::before { content: "开元"; position: absolute; right: -20px; top: -20px; font-size: 8rem; color: rgba(201,168,76,0.07); font-weight: 900; }
+  .hero-badge { display: inline-block; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: #C9A84C; font-size: 0.72rem; padding: 0.25rem 0.7rem; border-radius: 20px; letter-spacing: 0.08em; margin-bottom: 0.8rem; }
+  .hero h1 { color: #C9A84C; font-size: 1.8rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .hero p { color: rgba(234,230,216,0.7); font-size: 0.9rem; }
+  .hero .date-tag { position: absolute; top: 1.5rem; right: 1.5rem; background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3); color: #C9A84C; padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; }
+  .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .kpi-card { background: white; border-radius: 12px; padding: 1.2rem; border-left: 4px solid #C9A84C; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .kpi-card.green { border-left-color: #3DD68C; }
+  .kpi-card.blue { border-left-color: #4A9EFF; }
+  .kpi-card.amber { border-left-color: #F5A623; }
+  .kpi-label { font-size: 0.72rem; color: #888; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; color: #1a1006; }
+  .kpi-sub { font-size: 0.75rem; color: #aaa; margin-top: 0.2rem; }
+  .sec-title { font-size: 0.72rem; color: #C9A84C; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-weight: 700; }
+  .sec-title::after { content: ""; flex: 1; height: 1px; background: rgba(201,168,76,0.2); }
+  .intel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .intel-card { background: white; border-radius: 12px; padding: 1.3rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-top: 3px solid #C9A84C; }
+  .intel-card.red { border-top-color: #FF6B6B; }
+  .intel-card.blue { border-top-color: #4A9EFF; }
+  .intel-num { font-size: 0.68rem; color: #aaa; margin-bottom: 0.5rem; }
+  .intel-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; color: #1a1006; }
+  .intel-body { font-size: 0.82rem; color: #555; line-height: 1.5; }
+  .intel-tag { display: inline-block; margin-top: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
+  .tag-gold { background: #fffbeb; color: #b7791f; }
+  .tag-red { background: #fff3f3; color: #e53e3e; }
+  .tag-blue { background: #f0f7ff; color: #2b6cb0; }
+  .main-output { background: linear-gradient(135deg, #fffdf5 0%, #fff9e6 100%); border: 2px solid rgba(201,168,76,0.4); border-radius: 16px; padding: 1.8rem; margin-bottom: 2rem; box-shadow: 0 4px 16px rgba(201,168,76,0.1); }
+  .out-hd { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.4rem; flex-wrap: wrap; gap: 0.8rem; }
+  .out-title { font-size: 1.2rem; font-weight: 700; color: #1a1006; }
+  .out-sub { font-size: 0.82rem; color: #888; margin-top: 0.2rem; }
+  .done-badge { background: rgba(61,214,140,0.15); border: 1px solid rgba(61,214,140,0.4); color: #276749; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+  .three-step { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin-bottom: 1.3rem; }
+  @media (max-width: 600px) { .three-step { grid-template-columns: 1fr; } }
+  .step-card { background: white; border-radius: 10px; padding: 1rem; border-top: 3px solid #C9A84C; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .step-num { font-size: 0.68rem; color: #C9A84C; font-weight: 700; margin-bottom: 0.3rem; }
+  .step-title { font-size: 0.88rem; font-weight: 700; color: #1a1006; margin-bottom: 0.3rem; }
+  .step-body { font-size: 0.78rem; color: #666; }
+  .risk-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-bottom: 1.5rem; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .risk-table th { background: #1a1006; color: #C9A84C; padding: 0.7rem 1rem; text-align: left; font-size: 0.75rem; letter-spacing: 0.05em; }
+  .risk-table td { padding: 0.7rem 1rem; border-bottom: 1px solid #f0ece4; vertical-align: top; color: #444; }
+  .risk-table tr:last-child td { border-bottom: none; }
+  .risk-table tr:nth-child(even) td { background: #fafaf7; }
+  .action-list { background: white; border-radius: 12px; padding: 1.3rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 2rem; }
+  .action-item { display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.6rem 0; border-bottom: 1px solid #f5f2ec; font-size: 0.85rem; }
+  .action-item:last-child { border-bottom: none; }
+  .dept { background: rgba(201,168,76,0.12); color: #b7791f; padding: 0.15rem 0.5rem; border-radius: 6px; font-size: 0.7rem; font-weight: 700; white-space: nowrap; flex-shrink: 0; }
+  .dept.g { background: rgba(61,214,140,0.12); color: #276749; }
+  .dept.b { background: rgba(74,158,255,0.12); color: #2b6cb0; }
+  .dept.r { background: rgba(255,107,107,0.12); color: #c53030; }
+  .footer { text-align: center; padding: 1.5rem; font-size: 0.75rem; color: #bbb; border-top: 1px solid #ede8de; }
+  .footer strong { color: #C9A84C; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hero">
+    <div class="date-tag">2026-03-14 · Day 4</div>
+    <div class="hero-badge">开元时代 · CEO战略日报</div>
+    <h1>补贴落地加速 · 广外驿站方案产出</h1>
+    <p>兵部核心作业完成 · 北京立法窗口确认 · 三步进入路径设计</p>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-card"><div class="kpi-label">今日情报条数</div><div class="kpi-value">3</div><div class="kpi-sub">政策类为主</div></div>
+    <div class="kpi-card green"><div class="kpi-label">兵部产出</div><div class="kpi-value">V1</div><div class="kpi-sub">驿站合作方案初稿</div></div>
+    <div class="kpi-card blue"><div class="kpi-label">政策补贴覆盖</div><div class="kpi-value">全国</div><div class="kpi-sub">800元/月·已落地</div></div>
+    <div class="kpi-card amber"><div class="kpi-label">北京条例施行距今</div><div class="kpi-value">109天</div><div class="kpi-sub">7月1日前需布局</div></div>
+  </div>
+
+  <div class="sec-title">📡 礼部 · 今日行业情报</div>
+  <div class="intel-grid">
+    <div class="intel-card">
+      <div class="intel-num">情报 #01 · 补贴政策</div>
+      <div class="intel-title">800元/月补贴全国多城正式执行</div>
+      <div class="intel-body">重庆、青岛、衡水等地2026年1月1日起执行失能长者养老服务消费补贴，居家上门补贴比例从40%升至50%，月最高800元，全国受益89.2万人（民政部3月7日两会记者会数据）。</div>
+      <span class="intel-tag tag-gold">开元相关度 ⭐⭐⭐ 极高 · 财务模型核心支柱已确认</span>
+    </div>
+    <div class="intel-card red">
+      <div class="intel-num">情报 #02 · 北京立法</div>
+      <div class="intel-title">《北京市养老服务条例》7月施行 · 广外已是典型</div>
+      <div class="intel-body">条例2026年7月1日施行。广外街道与广外医院共建智慧康养已被北京发改委官方引用为示范案例。<strong>开元首战地已进入政府视野，合作窗口7月前打开。</strong></div>
+      <span class="intel-tag tag-red">开元相关度 ⭐⭐⭐ 极高 · 提前布局窗口已开</span>
+    </div>
+    <div class="intel-card blue">
+      <div class="intel-num">情报 #03 · 行业政策</div>
+      <div class="intel-title">八部门14项举措·扶持品牌化养老初创</div>
+      <div class="intel-body">民政部联合工信部、国家发改委等八部门发布养老服务市场主体培育措施，14项举措全面推动行业从"补短板"向"促发展"转型，明确扶持专业化、连锁化、品牌化主体。</div>
+      <span class="intel-tag tag-blue">开元相关度 ⭐⭐ 中 · 申报材料需提前准备</span>
+    </div>
+  </div>
+
+  <div class="sec-title">⚔️ 兵部 · 广外驿站合作方案 V1</div>
+  <div class="main-output">
+    <div class="out-hd">
+      <div>
+        <div class="out-title">广外街道养老服务驿站合作方案</div>
+        <div class="out-sub">文件：knowledge/government/guang-wai-station-plan-v1.md · 待苏格拉底质询</div>
+      </div>
+      <div class="done-badge">✅ V1 初稿完成</div>
+    </div>
+    <div class="sec-title">推荐路径：B类·驿站协议服务商</div>
+    <div class="three-step">
+      <div class="step-card">
+        <div class="step-num">STEP 01 · 0-3个月</div>
+        <div class="step-title">建立信任接触点</div>
+        <div class="step-body">通过居委会人脉约见照料中心负责人（非正式）→ 赠送免费体验服务 → 参与社区养老讲座建立在地形象</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">STEP 02 · 3-6个月</div>
+        <div class="step-title">签订协议服务商</div>
+        <div class="step-body">成为广外街道驿站协议居家服务商 · 驿站转介客户 · 补贴走驿站渠道 · 积累10个服务案例</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">STEP 03 · 6-12个月</div>
+        <div class="step-title">申报驿站资质</div>
+        <div class="step-body">7月条例施行后正式申报 · 所需：营业执照+持证护理员+服务手册+安全制度+10户案例</div>
+      </div>
+    </div>
+    <div style="background:rgba(201,168,76,0.08);border-radius:10px;padding:1rem;font-size:0.83rem;color:#555;">
+      <strong style="color:#b7791f;">🔑 核心人脉路径：</strong>
+      王总家人（居委会）→ 广外街道居委会 → 照料中心负责人 → 广外医院老年科 → 西城区民政局<br>
+      <span style="color:#888;margin-top:0.3rem;display:block;">首次接触话术：以"合作意向沟通+免费试服务"切入，信任先于合同</span>
+    </div>
+  </div>
+
+  <div class="sec-title">🏛️ 苏格拉底质询 · 预留反驳（V2待议）</div>
+  <table class="risk-table">
+    <thead><tr><th>质询问题</th><th>初步回应</th></tr></thead>
+    <tbody>
+      <tr><td>没有服务案例，驿站凭什么信任你？</td><td>先用家人关系打开门，再用免费服务创造样本。信任先于合同。</td></tr>
+      <tr><td>补贴申请流程你熟悉吗？</td><td>需要研究西城区民政局具体操作流程，是兵部下一步任务。</td></tr>
+      <tr><td>竞争对手也在争驿站合作怎么办？</td><td>差异化：固定护理员+服务质量承诺。价格在800元补贴框架内设计，家庭感知成本接近零。</td></tr>
+      <tr><td>7月前政策不明朗，怎么推进？</td><td>7月前走B类非正式合作路径，7月后转正式资质申报。时间窗口已知，提前布局。</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-title">📋 本周班子行动清单</div>
+  <div class="action-list">
+    <div class="action-item"><span class="dept">兵部</span><span>研究西城区民政局养老服务消费补贴具体申请流程（含材料清单）</span></div>
+    <div class="action-item"><span class="dept">礼部</span><span>设计首次接触广外街道照料中心话术脚本（正式版，两情景）</span></div>
+    <div class="action-item"><span class="dept g">COO</span><span>完成"服务价值承诺书"两版：对家庭版 + 对驿站版</span></div>
+    <div class="action-item"><span class="dept b">CFO</span><span>计算B类协议商模式下与驿站分润后的财务可行性（单户经济账）</span></div>
+    <div class="action-item"><span class="dept r">刑部</span><span>梳理7月《北京市养老服务条例》对驿站资质的具体法律要求</span></div>
+  </div>
+
+  <div class="footer">
+    <strong>开元时代 · CEO战略日报</strong> · 2026年3月14日 · Day 4<br>
+    储备期桌面研究产出 · 由AI班子生成 · 待CEO审阅
+  </div>
+
+</div>
+</body>
+</html>
