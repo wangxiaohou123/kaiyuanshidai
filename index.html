@@ -483,6 +483,45 @@
       .nav-logo { font-size: 0.9rem; }
     }
 
+    /* ── 全局文字溢出防护 ── */
+    * { word-break: break-word; }
+    code, pre { overflow-x: auto; white-space: pre-wrap; word-break: break-all; }
+
+    /* ══════════════════════════════════════════════════════
+       📱 内联 style grid 覆盖：强制1列（内联style优先级高，需 !important）
+       目标：section内所有固定3列/4列的内联grid，在移动端改为1列
+       ══════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      /* 通用：section内的 grid 子元素强制1列 */
+      section [style*="grid-template-columns:repeat(3"],
+      section [style*="grid-template-columns: repeat(3"],
+      [id="workspace"] [style*="grid-template-columns:repeat(3"],
+      [id="products"] [style*="grid-template-columns:repeat(3"],
+      [id="thinktank"] [style*="grid-template-columns:repeat(3"],
+      [id="deliverables"] [style*="grid-template-columns:repeat(3"],
+      [id="pitch"] [style*="grid-template-columns:repeat(3"],
+      [id="log"] [style*="grid-template-columns:repeat(3"],
+      [id="intel"] [style*="grid-template-columns:repeat(3"] {
+        grid-template-columns: 1fr !important;
+      }
+      /* 4列 → 2列 */
+      section [style*="grid-template-columns:repeat(4"],
+      section [style*="grid-template-columns: repeat(4"],
+      [id="workspace"] [style*="grid-template-columns:repeat(4"] {
+        grid-template-columns: repeat(2,1fr) !important;
+      }
+      /* 2列内联 → 较小屏也可能溢出，≤480再降为1列（见下方480断点） */
+
+      /* 内联 padding 5rem → 移动端压缩 */
+      [id="workspace"][style*="padding"],
+      [id="products"][style*="padding"],
+      [id="thinktank"][style*="padding"],
+      [id="deliverables"][style*="padding"],
+      [id="pitch"][style*="padding"] {
+        padding: 3.5rem 1rem !important;
+      }
+    }
+
     /* ── 超小屏幕 480px ── */
     @media (max-width: 480px) {
       section { padding: 2.8rem 0.9rem; }
@@ -501,6 +540,20 @@
       .task-item { padding: 0.65rem 0.8rem; font-size: 0.85rem; }
       .tl-week { margin-left: 28px; }
       .tl-week::before { left: -22px; }
+
+      /* 超小屏：2列内联grid → 1列 */
+      section [style*="grid-template-columns:repeat(2"],
+      [id="workspace"] [style*="grid-template-columns:repeat(2"],
+      [id="products"] [style*="grid-template-columns:repeat(2"],
+      [id="thinktank"] [style*="grid-template-columns:repeat(2"],
+      [id="pitch"] [style*="grid-template-columns:repeat(2"] {
+        grid-template-columns: 1fr !important;
+      }
+      /* 4列 → 1列 */
+      section [style*="grid-template-columns:repeat(4"],
+      [id="workspace"] [style*="grid-template-columns:repeat(4"] {
+        grid-template-columns: 1fr !important;
+      }
     }
 
     /* ── 横屏手机 (landscape) ── */
