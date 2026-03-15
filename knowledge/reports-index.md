@@ -2,6 +2,7 @@
 
 ## 一、研究院课题（T系列 · 一手数据研究）
 
+- **2026-03-15** | feat(day19): Day19战报·物业+养老入局路径确认·广外街道30天行动令 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | Day 19 CEO日报：物业+养老广外入局路径研究(P0)+双补叠加获客话术体系(P1) | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | Day19 研究体系v2.0重启：T11 AI陪伴选型 × T12硬件BOM × T13数据资产商业化 × 三层收入模型重构 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | Day19 双课题研究：物业+养老快速入局路径 × 双补零自付话术体系 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
