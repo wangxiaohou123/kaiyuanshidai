@@ -360,15 +360,24 @@
 ═══════════════════════════════════════════ -->
 <div class="page active" id="page-home">
 
-  <!-- ── 今日看板 Header ── -->
-  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:0.85rem;">
-    <div>
-      <div style="font-size:0.62rem;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;margin-bottom:0.3rem;font-weight:600;">开元时代 · 今日看板</div>
-      <div style="font-size:1.3rem;font-weight:900;line-height:1.2;background:linear-gradient(135deg,#fff 10%,var(--gold-light) 55%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">让每一位长者<br/>有尊严地老去</div>
+  <!-- ── 品牌定位 + 今日看板 Header ── -->
+  <div style="background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.25);border-radius:16px;padding:1.2rem;margin-bottom:0.85rem;">
+    <div style="font-size:0.58rem;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;margin-bottom:0.5rem;font-weight:700;">AI 时代的医养服务公司</div>
+    <div style="font-size:1.35rem;font-weight:900;line-height:1.2;background:linear-gradient(135deg,#fff 10%,var(--gold-light) 55%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.6rem;">让每一位长者<br/>有尊严地老去</div>
+    <div style="font-size:0.75rem;color:var(--muted);line-height:1.7;margin-bottom:0.7rem;">开元是每个有长者家庭<strong style="color:var(--text);">最专业、最具性价比的私人服务管家</strong>。AI把运营成本压到传统养老机构的五分之一，把服务质量做到私人健康管家的水准。</div>
+    <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
+      <span style="font-size:0.6rem;padding:0.15rem 0.5rem;border-radius:100px;background:rgba(201,168,76,0.12);color:var(--gold);border:1px solid rgba(201,168,76,0.3);">🏠 专属照护管家</span>
+      <span style="font-size:0.6rem;padding:0.15rem 0.5rem;border-radius:100px;background:rgba(61,214,140,0.1);color:var(--green);border:1px solid rgba(61,214,140,0.3);">✓ 长护险可报销</span>
+      <span style="font-size:0.6rem;padding:0.15rem 0.5rem;border-radius:100px;background:rgba(74,158,255,0.1);color:var(--blue);border:1px solid rgba(74,158,255,0.3);">🤖 AI+数据双护城河</span>
     </div>
-    <div style="text-align:right;flex-shrink:0;margin-left:0.8rem;">
-      <div style="font-size:1.5rem;font-weight:900;color:var(--gold);line-height:1;">D<span id="day-count">?</span></div>
-      <div style="font-size:0.6rem;color:var(--muted);margin-top:0.15rem;">规划第N天</div>
+  </div>
+
+  <!-- ── 今日看板 sub-header ── -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;">
+    <div style="font-size:0.62rem;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;font-weight:600;">今日看板</div>
+    <div style="display:flex;align-items:center;gap:0.4rem;">
+      <div style="font-size:1.1rem;font-weight:900;color:var(--gold);line-height:1;">D<span id="day-count">?</span></div>
+      <div style="font-size:0.6rem;color:var(--muted);">规划第N天</div>
     </div>
   </div>
 
@@ -464,10 +473,49 @@
     <div class="decision-m-result">目标：10个家庭，NPS&gt;8分，30%低收入长者。融资话语权来自真实数据，而非PPT。</div>
   </div>
 
+  <!-- ── 产品四级体系速览 ── -->
+  <div style="font-size:0.6rem;letter-spacing:0.16em;color:var(--gold);text-transform:uppercase;margin-bottom:0.55rem;font-weight:600;">服务产品 · 开元四级体系</div>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.6rem;margin-bottom:0.85rem;">
+    <div style="background:var(--dark-2);border:1px solid rgba(138,143,158,0.3);border-top:2px solid #8A8F9E;border-radius:12px;padding:0.85rem;">
+      <div style="font-size:0.58rem;color:var(--muted);letter-spacing:0.1em;margin-bottom:0.2rem;">启元级 · 基础照护</div>
+      <div style="font-size:0.9rem;font-weight:800;">¥1,500<span style="font-size:0.65rem;font-weight:400;color:var(--muted);">元起/月</span></div>
+      <div style="font-size:0.68rem;color:var(--muted);margin-top:0.2rem;line-height:1.5;">清洁 · 进餐 · 洗浴<br/>辅助行走 · 体征记录</div>
+      <div style="font-size:0.6rem;color:var(--green);margin-top:0.3rem;">✓ 长护险报销</div>
+    </div>
+    <div style="background:var(--dark-2);border:1px solid rgba(74,158,255,0.25);border-top:2px solid var(--blue);border-radius:12px;padding:0.85rem;">
+      <div style="font-size:0.58rem;color:var(--blue);letter-spacing:0.1em;margin-bottom:0.2rem;">兴元级 · 健康管理</div>
+      <div style="font-size:0.9rem;font-weight:800;color:var(--blue);">¥3,000<span style="font-size:0.65rem;font-weight:400;color:var(--muted);">元起/月</span></div>
+      <div style="font-size:0.68rem;color:var(--muted);margin-top:0.2rem;line-height:1.5;">基础+血压血糖监测<br/>康复训练 · 健康档案</div>
+      <div style="font-size:0.6rem;color:var(--green);margin-top:0.3rem;">✓ 长护险+差额自付</div>
+    </div>
+    <div style="background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(201,168,76,0.03));border:1px solid rgba(201,168,76,0.4);border-top:2px solid var(--gold);border-radius:12px;padding:0.85rem;position:relative;">
+      <div style="position:absolute;top:-1px;right:0.6rem;font-size:0.5rem;padding:0.12rem 0.45rem;background:var(--gold);color:var(--dark);border-radius:0 0 4px 4px;font-weight:700;letter-spacing:0.05em;">推荐</div>
+      <div style="font-size:0.58rem;color:var(--gold);letter-spacing:0.1em;margin-bottom:0.2rem;">开元级 · 全程安心</div>
+      <div style="font-size:0.9rem;font-weight:800;color:var(--gold);">¥4,500<span style="font-size:0.65rem;font-weight:400;color:var(--muted);">元起/月</span></div>
+      <div style="font-size:0.68rem;color:var(--muted);margin-top:0.2rem;line-height:1.5;">兴元级+24h应急响应<br/>家属实时报告 · 管家负责</div>
+      <div style="font-size:0.6rem;color:var(--green);margin-top:0.3rem;">✓ 补贴后实付约¥1,500</div>
+    </div>
+    <div style="background:var(--dark-2);border:1px solid rgba(181,128,232,0.25);border-top:2px solid var(--purple);border-radius:12px;padding:0.85rem;">
+      <div style="font-size:0.58rem;color:var(--purple);letter-spacing:0.1em;margin-bottom:0.2rem;">昌元级 · 尊享定制</div>
+      <div style="font-size:0.9rem;font-weight:800;">¥8,000<span style="font-size:0.65rem;font-weight:400;color:var(--muted);">元起/月</span></div>
+      <div style="font-size:0.68rem;color:var(--muted);margin-top:0.2rem;line-height:1.5;">专属护理师(不轮换)<br/>适老化改造 · 年度评估</div>
+      <div style="font-size:0.6rem;color:var(--green);margin-top:0.3rem;">✓ 含适老化改造补贴</div>
+    </div>
+  </div>
+
+  <!-- ── 政府补贴叠加提示 ── -->
+  <div style="background:rgba(61,214,140,0.06);border:1px solid rgba(61,214,140,0.25);border-radius:10px;padding:0.8rem 1rem;margin-bottom:0.85rem;display:flex;align-items:flex-start;gap:0.7rem;">
+    <span style="font-size:1rem;flex-shrink:0;">💴</span>
+    <div style="font-size:0.72rem;color:var(--muted);line-height:1.65;">
+      <strong style="color:var(--green);">三重补贴可叠加 · 零自付方案：</strong>
+      长护险最高¥3,000/月 + 民政失能补贴¥800/月 + 养老金上调，开元级家庭<strong style="color:var(--text);">实付低至¥1,500</strong>。
+    </div>
+  </div>
+
   <!-- ── PC版入口（收尾，不抢眼） ── -->
   <div style="display:flex;align-items:center;gap:0.6rem;margin-top:0.3rem;padding:0.7rem 0.9rem;background:rgba(74,158,255,0.04);border:1px solid rgba(74,158,255,0.15);border-radius:10px;">
     <span style="font-size:0.9rem;">🖥</span>
-    <div style="font-size:0.72rem;color:var(--muted);">完整工作台 · <a href="index.html" style="color:var(--blue);text-decoration:none;">PC版</a>（多栏仪表盘 · 研究院 · 交付库）</div>
+    <div style="font-size:0.72rem;color:var(--muted);">完整工作台 · <a href="index.html" style="color:var(--blue);text-decoration:none;">PC版</a>（产品详情 · 研究院 · 交付库）</div>
   </div>
 </div>
 
@@ -534,8 +582,43 @@
     </div>
   </div>
 
-  <!-- 核心班子成员 -->
-  <div style="font-size:0.62rem;letter-spacing:0.16em;color:var(--gold);text-transform:uppercase;margin-bottom:0.7rem;margin-top:0.3rem;">核心班子 · 成员</div>
+  <!-- 联创三角（核心竞争力核心） -->
+  <div style="font-size:0.62rem;letter-spacing:0.16em;color:var(--gold);text-transform:uppercase;margin-bottom:0.7rem;margin-top:0.3rem;">联创三角 · 核心护城河</div>
+
+  <div style="background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.3);border-radius:14px;padding:1.1rem;margin-bottom:0.85rem;">
+    <div style="font-size:0.7rem;color:var(--muted);line-height:1.75;margin-bottom:0.9rem;">开元的核心竞争力不是团队规模，而是<strong style="color:var(--text);">人负责信任、AI负责运营</strong>的分工逻辑——两大护城河构成竞争对手难以复制的壁垒。</div>
+    <div style="display:flex;flex-direction:column;gap:0.6rem;">
+      <div style="display:flex;align-items:flex-start;gap:0.8rem;background:var(--dark-2);border-radius:10px;padding:0.8rem;">
+        <div style="width:32px;height:32px;border-radius:50%;background:rgba(201,168,76,0.15);border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:0.8rem;flex-shrink:0;">👑</div>
+        <div>
+          <div style="font-size:0.62rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.2rem;">CEO · 王晶晶</div>
+          <div style="font-size:0.85rem;font-weight:700;margin-bottom:0.2rem;">愿景 · 品牌 · 最终决策</div>
+          <div style="font-size:0.72rem;color:var(--muted);">美团10年产品运营积累，把复杂服务标准化并规模化；居委会家人资源，首个试点家庭直接入口</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:0.8rem;background:var(--dark-2);border-radius:10px;padding:0.8rem;">
+        <div style="width:32px;height:32px;border-radius:50%;background:rgba(61,214,140,0.12);border:1px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:0.8rem;flex-shrink:0;">🏥</div>
+        <div>
+          <div style="font-size:0.62rem;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.2rem;">联创COO · 护理标准×人才</div>
+          <div style="font-size:0.85rem;font-weight:700;margin-bottom:0.2rem;">人才护城河 · 定点院校培训</div>
+          <div style="font-size:0.72rem;color:var(--muted);">与本地护理职业院校合作，开元化培训标准；护理员从入口就是开元体系的人，竞对无法整体挖角</div>
+          <span style="display:inline-block;margin-top:0.4rem;font-size:0.6rem;padding:0.1rem 0.45rem;border-radius:4px;background:rgba(61,214,140,0.1);color:var(--green);border:1px solid rgba(61,214,140,0.25);">🔍 招募中</span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:0.8rem;background:var(--dark-2);border-radius:10px;padding:0.8rem;">
+        <div style="width:32px;height:32px;border-radius:50%;background:rgba(74,158,255,0.12);border:1px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:0.8rem;flex-shrink:0;">🤖</div>
+        <div>
+          <div style="font-size:0.62rem;color:var(--blue);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.2rem;">联创CTO · AI×数据</div>
+          <div style="font-size:0.85rem;font-weight:700;margin-bottom:0.2rem;">技术护城河 · 照护数据积累</div>
+          <div style="font-size:0.72rem;color:var(--muted);">AI系统持续积累每位长者健康行为数据，形成个性化档案；数据无法迁移——换服务商等于放弃所有历史积累</div>
+          <span style="display:inline-block;margin-top:0.4rem;font-size:0.6rem;padding:0.1rem 0.45rem;border-radius:4px;background:rgba(74,158,255,0.1);color:var(--blue);border:1px solid rgba(74,158,255,0.25);">🔍 招募中</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 核心班子成员（AI决策班子） -->
+  <div style="font-size:0.62rem;letter-spacing:0.16em;color:var(--gold);text-transform:uppercase;margin-bottom:0.7rem;margin-top:0.3rem;">AI决策班子 · 三省六部制</div>
 
   <div class="team-m-card ceo">
     <div class="team-m-role ceo">CEO · 首席执行官</div>
@@ -547,35 +630,27 @@
     </div>
     <div class="team-m-fn" style="margin-top:0.5rem;">
       <strong>已知盲区</strong>
-      易把愿景当执行、高估政策落地速度、倾向快速推进——班子专门设计来挑战这三点。
+      易把愿景当执行、高估政策落地速度——班子专门设计来挑战这两点。
     </div>
     <span class="team-m-tag">最终决策权</span>
   </div>
 
   <div class="team-m-card cfo">
     <div class="team-m-role cfo">CFO · 首席财务官</div>
-    <div class="team-m-name">财务官</div>
+    <div class="team-m-name">AI财务官</div>
     <div class="team-m-sub">现金流守护者 · 冷血的数字人</div>
     <div class="team-m-fn">
-      <strong>核心职责</strong>
-      6个月生存线守护；封驳所有现金流不清晰的决策；财务模型维护。
-    </div>
-    <div class="team-m-fn" style="margin-top:0.5rem;">
       <strong>固定质问</strong>
-      "6个月后我们账上还剩多少钱？这个决策的现金流假设是否成立？"
+      "6个月后账上还剩多少钱？这个决策的现金流假设是否成立？"
     </div>
     <span class="team-m-tag">封驳权</span>
   </div>
 
   <div class="team-m-card coo">
     <div class="team-m-role coo">COO · 首席运营官</div>
-    <div class="team-m-name">运营官</div>
-    <div class="team-m-sub">落地机器 · 执行力最强的人</div>
+    <div class="team-m-name">AI运营官</div>
+    <div class="team-m-sub">落地机器 · 护理标准制定者</div>
     <div class="team-m-fn">
-      <strong>核心职责</strong>
-      服务标准制定与执行；护理员招募与留存；单城市试点运营。
-    </div>
-    <div class="team-m-fn" style="margin-top:0.5rem;">
       <strong>固定质问</strong>
       "这个决策，第一周谁来做、做什么、怎么验收？"
     </div>
@@ -584,30 +659,22 @@
 
   <div class="team-m-card cso">
     <div class="team-m-role cso">CSO · 首席战略官</div>
-    <div class="team-m-name">战略官</div>
-    <div class="team-m-sub">方向定制者 · 研究驱动</div>
+    <div class="team-m-name">AI战略官</div>
+    <div class="team-m-sub">方向定制者 · 苏格拉底质询者</div>
     <div class="team-m-fn">
-      <strong>核心职责</strong>
-      竞争分析与战略规划；行业研究深度报告；苏格拉底质询主持。
-    </div>
-    <div class="team-m-fn" style="margin-top:0.5rem;">
       <strong>固定质问</strong>
-      "这个决策的核心假设是什么？如果假设错了，后果是什么？我们凭什么？"
+      "核心假设是什么？如果假设错了后果是什么？我们凭什么赢？"
     </div>
     <span class="team-m-tag">决策质量把关</span>
   </div>
 
   <div class="team-m-card cgo">
     <div class="team-m-role cgo">CGO · 首席政府关系官</div>
-    <div class="team-m-name">政府关系官</div>
+    <div class="team-m-name">AI政府关系官</div>
     <div class="team-m-sub">政策翻译者 · 合规护航</div>
     <div class="team-m-fn">
-      <strong>核心职责</strong>
-      政策解读与资质申报；长护险/民政系统对接；政府关系网络建设。
-    </div>
-    <div class="team-m-fn" style="margin-top:0.5rem;">
       <strong>固定质问</strong>
-      "这条政策能在广外街道实际落地吗？补贴到账要多久？谁负责对接？"
+      "这条政策能在广外街道实际落地吗？补贴到账要多久？"
     </div>
     <span class="team-m-tag">合规底线</span>
   </div>
@@ -1009,11 +1076,42 @@
     <div class="sec-desc">融资不是目的，而是让普惠照护成为可能的工具。我们用事实说话，而非PPT说话。</div>
   </div>
 
+  <!-- 核心品牌定位（最新版） -->
+  <div style="background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.03));border:1px solid rgba(201,168,76,0.4);border-radius:16px;padding:1.3rem;margin-bottom:0.85rem;">
+    <div style="font-size:0.58rem;letter-spacing:0.16em;color:var(--gold);text-transform:uppercase;margin-bottom:0.5rem;font-weight:700;">核心定位 · 2026年3月 最新版</div>
+    <div style="font-size:0.95rem;font-weight:800;line-height:1.45;margin-bottom:0.7rem;color:var(--text);">
+      「我们是<span style="color:var(--gold);">AI时代的医养服务公司</span>，<br/>每个有长者家庭<span style="color:var(--gold);">最专业、最具性价比的私人服务管家</span>。」
+    </div>
+    <div style="font-size:0.75rem;color:var(--muted);line-height:1.75;margin-bottom:0.8rem;">
+      AI把运营成本压到传统养老机构的五分之一，把服务质量做到私人健康管家的水准——<strong style="color:var(--text);">用AI把好服务的成本打下来，让更多长者买得起。</strong>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:0.7rem;margin-top:0.7rem;">
+      <div style="font-size:0.68rem;color:var(--muted);line-height:1.75;">我们不只是养老服务公司——我们是AI陪伴与具身智能时代，<strong style="color:var(--text);">最早积累真实居家照护数据的创业者</strong>。1000个家庭的健康/行为/认知数据，是科技公司愿意合作的战略资产。每一个被服务的家庭，都是这个时代最稀缺的数据资产。</div>
+    </div>
+  </div>
+
   <!-- 核心叙事 -->
   <div class="pitch-card">
     <div class="pitch-stage">融资故事 · 第一句话</div>
     <div class="pitch-title">"中国有3.2亿长者，只有1%的人能住得起养老院。我们要做剩下99%的家庭的选择。"</div>
-    <p style="font-size:0.78rem;color:var(--muted);line-height:1.7;margin-top:0.6rem;">这不只是养老服务公司。我们是AI陪伴与具身智能时代，<strong style="color:var(--gold);">最早积累真实居家照护数据</strong>的创业者——1000个家庭的数据，是科技公司愿意合作的战略资产。</p>
+    <div style="font-size:0.75rem;color:var(--muted);line-height:1.7;margin-top:0.6rem;">
+      开元的差异化不是更便宜、也不是更贵——而是<strong style="color:var(--text);">固定护理员+AI数据档案</strong>形成的转换成本。离开开元，就等于放弃所有照护历史记录。这才是真正的护城河。
+    </div>
+  </div>
+
+  <!-- 双护城河 -->
+  <div style="font-size:0.62rem;letter-spacing:0.16em;color:var(--gold);text-transform:uppercase;margin-bottom:0.7rem;">双护城河 · 竞争壁垒</div>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.65rem;margin-bottom:0.85rem;">
+    <div style="background:var(--dark-2);border:1px solid rgba(61,214,140,0.3);border-top:2px solid var(--green);border-radius:12px;padding:0.9rem;">
+      <div style="font-size:1.1rem;margin-bottom:0.4rem;">👥</div>
+      <div style="font-size:0.72rem;font-weight:800;color:var(--green);margin-bottom:0.35rem;">人才护城河</div>
+      <div style="font-size:0.68rem;color:var(--muted);line-height:1.6;">定点院校培训，护理员从入口就是开元体系；竞对平台无法整体挖角</div>
+    </div>
+    <div style="background:var(--dark-2);border:1px solid rgba(74,158,255,0.3);border-top:2px solid var(--blue);border-radius:12px;padding:0.9rem;">
+      <div style="font-size:1.1rem;margin-bottom:0.4rem;">🤖</div>
+      <div style="font-size:0.72rem;font-weight:800;color:var(--blue);margin-bottom:0.35rem;">技术护城河</div>
+      <div style="font-size:0.68rem;color:var(--muted);line-height:1.6;">AI持续积累每位长者个性化档案；数据无法迁移，换服务商成本极高</div>
+    </div>
   </div>
 
   <!-- 融资路径 -->
@@ -1102,27 +1200,29 @@
   <!-- 三阶段路径 -->
   <div class="section-header" style="margin-top:0.5rem;">
     <div class="sec-label">Roadmap · 三阶段路径</div>
-    <div class="sec-title">增长路径</div>
+    <div class="sec-title">服务×科技双螺旋增长</div>
   </div>
 
   <div class="stage-m s1">
     <div class="stage-m-phase">阶段一 · 2027年 → 2028年</div>
     <div class="stage-m-title">自营验证 · 找到第一个真正被改变的故事</div>
     <ul class="stage-m-items">
-      <li><strong>地点</strong>北京市西城区广外街道</li>
-      <li><strong>目标</strong>10个家庭，NPS>8分，30%低收入长者</li>
-      <li><strong>科技</strong>AI陪伴接入，ARPU提升至3000+元</li>
+      <li><strong>地点</strong>北京西城区广外街道（发改委两会文件点名标杆场域）</li>
+      <li><strong>目标</strong>10个家庭，NPS>8分，30%低收入长者补贴可达</li>
+      <li><strong>产品</strong>开元级为主力，三重补贴叠加实付低至¥1,500/月</li>
+      <li><strong>科技</strong>AI陪伴接入，照护数据档案从第一天开始积累</li>
       <li><strong>融资</strong>「中国第一批真实居家照护数据」天使叙事</li>
     </ul>
   </div>
 
   <div class="stage-m s2">
     <div class="stage-m-phase">阶段二 · 2028年 → 2030年</div>
-    <div class="stage-m-title">标准化赋能 · 科技降本 · 100家社区</div>
+    <div class="stage-m-title">标准化赋能 · 科技降本 · 物业+养老快速铺量</div>
     <ul class="stage-m-items">
-      <li><strong>目标</strong>1000个家庭，进入长护险定点</li>
-      <li><strong>科技</strong>具身智能辅助，单护理员服务5→15家</li>
-      <li><strong>融资</strong>「服务×数据双飞轮」B轮</li>
+      <li><strong>目标</strong>1000个家庭，进入长护险定点，护理员合作社建制</li>
+      <li><strong>渠道</strong>宣房物业等物业企业合作，比传统审批快3-6个月入局</li>
+      <li><strong>科技</strong>具身智能辅助，单护理员服务5→15家，毛利率40%+</li>
+      <li><strong>融资</strong>「服务×数据双飞轮」B轮，目标估值5-8亿</li>
     </ul>
   </div>
 
@@ -1130,10 +1230,16 @@
     <div class="stage-m-phase">阶段三 · 2030年以后</div>
     <div class="stage-m-title">生态构建 · 人机协作 · 全国复制</div>
     <ul class="stage-m-items">
-      <li><strong>护理员</strong>合作社持股，利润共享，有尊严工作</li>
-      <li><strong>科技</strong>数据版税收入，从服务收费跃升平台级</li>
-      <li><strong>兑现</strong>每位长者，无论贫富，有尊严地在家老去</li>
+      <li><strong>数据</strong>照护数据版税收入，从服务收费跃升平台级护城河</li>
+      <li><strong>护理员</strong>合作社持股，利润共享，有尊严工作，行业最低流失率</li>
+      <li><strong>使命</strong>每位长者，无论贫富，有尊严地在家老去</li>
     </ul>
+  </div>
+
+  <!-- 北极星 -->
+  <div style="margin-top:0.5rem;text-align:center;padding:1.2rem;background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.2);border-radius:14px;">
+    <div style="font-size:0.6rem;letter-spacing:0.16em;color:var(--gold);text-transform:uppercase;margin-bottom:0.4rem;">北极星使命</div>
+    <div style="font-size:0.88rem;font-weight:700;line-height:1.6;color:var(--text);">莫道桑榆晚，开元正当时。<br/>每一位长者，无论贫富，<br/>都能有尊严地老去。</div>
   </div>
 
 </div>
