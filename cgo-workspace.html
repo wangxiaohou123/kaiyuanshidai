@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>开元时代 · 增长司（CGO）工作台</title>
+<style>
+  :root{
+    --bg:#FAFAF8;--bg2:#F4F3EE;--bg3:#ECEAE3;--bg4:#E5E2DA;
+    --gold:#8B6914;--gold-light:#B8940F;
+    --red:#C0392B;--green:#1D7A45;--blue:#1A56A8;--amber:#C87D0E;--purple:#6B3FA0;
+    --muted:#6C6C70;--border:rgba(139,105,20,0.15);--text:#1C1C1E;
+    --shadow:0 2px 12px rgba(0,0,0,0.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);color:var(--text);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+    padding:0 0 100px;font-size:16px;line-height:1.8;
+  }
+
+  /* ── 顶部导航 ── */
+  .top-nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(250,250,248,0.97);backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--border);
+    padding:0 2rem;height:52px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .nav-brand{font-size:0.85rem;font-weight:800;color:var(--gold);}
+  .nav-back{font-size:0.8rem;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:0.3rem;}
+  .nav-back:hover{color:var(--gold);}
+
+  /* ── Hero ── */
+  .hero{
+    background:linear-gradient(135deg,#1C1C1E 0%,#2C2416 100%);
+    border-bottom:1px solid rgba(139,105,20,0.3);
+    padding:2.5rem 2rem 2rem;position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(184,148,15,0.18),transparent);
+    pointer-events:none;
+  }
+  .hero-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;position:relative;}
+  .hero-left .eyebrow{font-size:0.72rem;letter-spacing:3px;color:#B8940F;text-transform:uppercase;margin-bottom:0.5rem;}
+  .hero-left h1{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:800;color:#EAE6D8;}
+  .hero-left .sub{font-size:0.88rem;color:rgba(234,230,216,0.6);margin-top:0.4rem;}
+
+  .hero-stats{display:flex;gap:0.8rem;flex-wrap:wrap;align-items:flex-end;position:relative;}
+  .stat{
+    background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
+    border-radius:12px;padding:0.7rem 1.1rem;text-align:center;
+  }
+  .stat-num{font-size:1.5rem;font-weight:800;}
+  .stat-label{font-size:0.68rem;color:rgba(234,230,216,0.5);margin-top:0.1rem;}
+
+  .role-badge{
+    margin-top:1.2rem;position:relative;
+    background:rgba(184,148,15,0.1);border:1px solid rgba(184,148,15,0.3);
+    border-radius:10px;padding:0.75rem 1rem;font-size:0.84rem;color:#ddc879;
+    display:flex;gap:0.5rem;align-items:flex-start;
+  }
+
+  /* ── 主容器 ── */
+  .container{max-width:1000px;margin:0 auto;padding:2rem 1.5rem;}
+
+  /* ── 章节标题 ── */
+  .section-title{
+    font-size:0.72rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;
+    padding:0.5rem 0;margin:1.5rem 0 0.8rem;
+    border-bottom:1px solid var(--border);
+    display:flex;align-items:center;gap:0.5rem;
+  }
+
+  /* ── 渠道卡片 ── */
+  .channel-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;}
+  @media(max-width:640px){.channel-grid{grid-template-columns:1fr;}}
+
+  .channel-card{
+    background:#FFFFFF;border-radius:16px;
+    border:1px solid var(--border);
+    box-shadow:0 1px 4px rgba(0,0,0,0.05);
+    padding:1.3rem;
+    transition:box-shadow .2s,border-color .2s;
+  }
+  .channel-card:hover{box-shadow:0 4px 16px rgba(139,105,20,0.1);border-color:rgba(139,105,20,0.3);}
+  .channel-card.active{border-left:4px solid var(--green);}
+  .channel-card.pending{border-left:4px solid var(--amber);}
+  .channel-card.planned{border-left:4px solid var(--purple);}
+
+  .channel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem;}
+  .channel-name{font-size:0.95rem;font-weight:800;color:var(--text);}
+
+  .tag{
+    display:inline-flex;align-items:center;gap:0.2rem;
+    padding:0.18rem 0.55rem;border-radius:5px;font-size:0.7rem;font-weight:700;letter-spacing:0.3px;
+  }
+  .tag-done{background:rgba(29,122,69,0.1);color:var(--green);border:1px solid rgba(29,122,69,0.25);}
+  .tag-inprog{background:rgba(200,125,14,0.1);color:var(--amber);border:1px solid rgba(200,125,14,0.3);}
+  .tag-pending{background:rgba(107,63,160,0.08);color:var(--purple);border:1px solid rgba(107,63,160,0.2);}
+
+  .channel-desc{font-size:0.87rem;color:var(--muted);line-height:1.7;}
+  .channel-metric{
+    margin-top:0.7rem;display:flex;gap:0.6rem;flex-wrap:wrap;
+  }
+  .c-metric{
+    background:var(--bg2);border-radius:6px;padding:0.25rem 0.6rem;
+    font-size:0.78rem;color:var(--text);
+  }
+  .c-metric strong{color:var(--gold);}
+
+  /* ── 已完成成果 ── */
+  .achievement-card{
+    background:#FFFFFF;border-radius:16px;
+    border:1px solid var(--border);
+    box-shadow:0 1px 4px rgba(0,0,0,0.05);
+    overflow:hidden;
+  }
+  .achievement-item{
+    padding:1.1rem 1.3rem;border-left:4px solid var(--green);
+    border-bottom:1px solid var(--border);
+    display:flex;gap:1rem;align-items:flex-start;
+  }
+  .achievement-item:last-child{border-bottom:none;}
+  .ach-icon{font-size:1.3rem;flex-shrink:0;margin-top:0.1rem;}
+  .ach-content{}
+  .ach-title{font-size:0.95rem;font-weight:800;color:var(--text);margin-bottom:0.25rem;}
+  .ach-desc{font-size:0.87rem;color:var(--muted);line-height:1.7;}
+
+  /* ── 飞轮图 ── */
+  .flywheel-card{
+    background:#FFFFFF;border-radius:16px;
+    border:1px solid var(--border);
+    padding:1.3rem;
+    box-shadow:0 1px 4px rgba(0,0,0,0.05);
+  }
+  .flywheel-card h3{
+    font-size:0.88rem;font-weight:800;color:var(--text);
+    margin-bottom:1rem;
+  }
+  .flywheel-steps{
+    display:flex;align-items:center;gap:0;flex-wrap:wrap;
+    justify-content:center;
+  }
+  .flywheel-step{
+    background:var(--bg2);border:1px solid var(--border);
+    border-radius:10px;padding:0.6rem 0.8rem;
+    text-align:center;font-size:0.8rem;font-weight:700;
+    color:var(--text);min-width:100px;
+    flex:1;
+  }
+  .flywheel-step .step-num{
+    font-size:0.65rem;color:var(--gold);font-weight:600;
+    margin-bottom:0.2rem;letter-spacing:1px;
+  }
+  .flywheel-arrow{
+    font-size:1.2rem;color:var(--gold);flex-shrink:0;padding:0 0.3rem;
+  }
+  @media(max-width:640px){
+    .flywheel-steps{flex-direction:column;}
+    .flywheel-arrow{transform:rotate(90deg);}
+  }
+
+  /* ── 社区地图 ── */
+  .map-card{
+    background:#FFFFFF;border-radius:16px;
+    border:1px solid var(--border);
+    padding:1.3rem;
+    box-shadow:0 1px 4px rgba(0,0,0,0.05);
+  }
+  .map-card h3{
+    font-size:0.72rem;letter-spacing:1.5px;color:var(--gold);
+    text-transform:uppercase;font-weight:700;margin-bottom:0.8rem;
+  }
+  .map-zones{display:grid;grid-template-columns:repeat(3,1fr);gap:0.6rem;}
+  @media(max-width:500px){.map-zones{grid-template-columns:1fr 1fr;}}
+  .map-zone{
+    background:var(--bg2);border-radius:10px;padding:0.7rem 0.8rem;
+    border:1px solid var(--border);
+    font-size:0.82rem;text-align:center;
+  }
+  .map-zone .zone-name{font-weight:700;color:var(--text);margin-bottom:0.2rem;}
+  .map-zone .zone-status{font-size:0.72rem;}
+  .zone-activated{color:var(--green);}
+  .zone-pending{color:var(--amber);}
+  .zone-plan{color:var(--muted);}
+
+  /* ── 使用提示 ── */
+  .usage-tip{
+    background:rgba(139,105,20,0.06);border:1px solid rgba(139,105,20,0.2);
+    border-radius:12px;padding:1rem 1.2rem;
+    font-size:0.88rem;color:var(--text);line-height:1.75;
+    display:flex;gap:0.7rem;align-items:flex-start;margin-top:2rem;
+  }
+  .usage-tip-icon{font-size:1.1rem;flex-shrink:0;margin-top:0.05rem;}
+  .usage-tip strong{color:var(--gold);}
+
+  /* ── Footer ── */
+  .footer{
+    text-align:center;color:var(--muted);font-size:0.82rem;
+    padding:2rem 0;border-top:1px solid var(--border);margin-top:2rem;
+  }
+  .footer a{color:var(--gold);text-decoration:none;}
+  .footer a:hover{text-decoration:underline;}
+
+  @media(max-width:640px){
+    .hero{padding:2rem 1.2rem 1.5rem;}
+    .container{padding:1.5rem 1rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ── 顶部导航 ── -->
+<div class="top-nav">
+  <span class="nav-brand">开元时代 · 增长司（CGO）工作台</span>
+  <a class="nav-back" href="index.html">← 返回总指挥台</a>
+</div>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="hero-top">
+    <div class="hero-left">
+      <div class="eyebrow">开元时代 · 人机协作系统</div>
+      <h1>增长司（CGO）工作台</h1>
+      <p class="sub">社区渗透 · 获客飞轮设计 · 口碑传播 · 信任是一切增长的基础</p>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num" style="color:#2ED573;">3</div>
+        <div class="stat-label">已完成</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" style="color:#B8940F;">1</div>
+        <div class="stat-label">渗透社区</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" style="color:#EAE6D8;">0</div>
+        <div class="stat-label">获客成本（¥）</div>
+      </div>
+    </div>
+  </div>
+  <div class="role-badge">
+    <span>🚀</span>
+    <span>
+      <strong>角色职责：</strong>负责社区渗透、获客飞轮设计、口碑传播；信任是一切增长的基础。
+      在飞书发「CGO：[问题/指令]」即可触发增长司响应。
+    </span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ── 已完成成果 ── -->
+  <div class="section-title">✅ 已完成成果</div>
+  <div class="achievement-card">
+
+    <div class="achievement-item">
+      <div class="ach-icon">💬</div>
+      <div class="ach-content">
+        <div class="ach-title">双补零自付话术体系 V2</div>
+        <div class="ach-desc">
+          完整的「双补零自付」用户沟通话术体系，覆盖初次接触、疑虑处理、签约引导三阶段。
+          核心话术：「我们帮您把国家给的800元补贴申领出来，服务费从补贴里出，您自己一分不用花。」
+          V2 版增加了常见疑虑（补贴真实性、机构可信度）的标准应答。
+        </div>
+      </div>
+    </div>
+
+    <div class="achievement-item">
+      <div class="ach-icon">🗺️</div>
+      <div class="ach-content">
+        <div class="ach-title">社区渗透地图（广外街道）</div>
+        <div class="ach-desc">
+          完成广安门外街道社区渗透路线图，标注重点小区（老龄化率 &gt;30%）、居委会联络人信息、
+          社区活动节点（老年日间照料站、广场舞聚集点）。分三波次渗透策略：居委会激活 → 口碑转介 → 社区活动触达。
+        </div>
+      </div>
+    </div>
+
+    <div class="achievement-item">
+      <div class="ach-icon">🏘️</div>
+      <div class="ach-content">
+        <div class="ach-title">居委会激活话术</div>
+        <div class="ach-desc">
+          面向居委会工作人员的激活话术，定位为「帮居委会完成民政任务、帮辖区老人申领应得补贴的志愿者」。
+          不谈商业合作，只谈为辖区老人服务。已通过 CEO 家人（广外居委会）渠道进行初步验证，反馈正向。
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── 获客飞轮 ── -->
+  <div class="section-title">🌀 获客飞轮设计</div>
+  <div class="flywheel-card">
+    <h3>⚡ 信任驱动的增长飞轮（储备期验证中）</h3>
+    <div class="flywheel-steps">
+      <div class="flywheel-step">
+        <div class="step-num">STEP 1</div>
+        居委会背书<br/>获取家庭线索
+      </div>
+      <div class="flywheel-arrow">→</div>
+      <div class="flywheel-step">
+        <div class="step-num">STEP 2</div>
+        免费协助<br/>申领800元补贴
+      </div>
+      <div class="flywheel-arrow">→</div>
+      <div class="flywheel-step">
+        <div class="step-num">STEP 3</div>
+        服务体验<br/>建立信任
+      </div>
+      <div class="flywheel-arrow">→</div>
+      <div class="flywheel-step">
+        <div class="step-num">STEP 4</div>
+        家庭口碑<br/>转介新客户
+      </div>
+      <div class="flywheel-arrow">→</div>
+      <div class="flywheel-step">
+        <div class="step-num">STEP 5</div>
+        飞轮加速<br/>零广告费增长
+      </div>
+    </div>
+    <div style="margin-top:1rem;padding:0.8rem;background:rgba(139,105,20,0.05);border-radius:8px;border:1px solid rgba(139,105,20,0.15);font-size:0.85rem;color:var(--muted);">
+      💡 <strong style="color:var(--gold);">飞轮核心逻辑：</strong>信任 &gt; 补贴 &gt; 服务体验 &gt; 口碑 → 每个满意家庭平均转介 1.5 户新客户，口碑获客成本接近零。
+    </div>
+  </div>
+
+  <!-- ── 社区渗透进度 ── -->
+  <div class="section-title">📍 社区渗透进度（广外街道）</div>
+  <div class="map-card">
+    <h3>🗺️ 广安门外街道社区渗透状态</h3>
+    <div class="map-zones">
+      <div class="map-zone">
+        <div class="zone-name">广外大街社区</div>
+        <div class="zone-status zone-activated">✅ 居委会已激活</div>
+      </div>
+      <div class="map-zone">
+        <div class="zone-name">白纸坊社区</div>
+        <div class="zone-status zone-pending">🔄 待接触</div>
+      </div>
+      <div class="map-zone">
+        <div class="zone-name">莲花河社区</div>
+        <div class="zone-status zone-plan">📋 排期中</div>
+      </div>
+      <div class="map-zone">
+        <div class="zone-name">红居南街社区</div>
+        <div class="zone-status zone-plan">📋 排期中</div>
+      </div>
+      <div class="map-zone">
+        <div class="zone-name">枣林前街社区</div>
+        <div class="zone-status zone-plan">📋 排期中</div>
+      </div>
+      <div class="map-zone">
+        <div class="zone-name">三义里社区</div>
+        <div class="zone-status zone-plan">📋 排期中</div>
+      </div>
+    </div>
+    <div style="margin-top:0.8rem;font-size:0.8rem;color:var(--muted);">
+      当前重点聚焦广外大街社区，首批2户家庭目标从此社区产生。其余社区待首批服务验证后启动第二波渗透。
+    </div>
+  </div>
+
+  <!-- ── 渠道状态 ── -->
+  <div class="section-title">📡 获客渠道状态</div>
+  <div class="channel-grid">
+
+    <div class="channel-card active">
+      <div class="channel-head">
+        <span class="channel-name">居委会渠道</span>
+        <span class="tag tag-done">✅ 激活</span>
+      </div>
+      <div class="channel-desc">通过 CEO 家人（居委会任职）建立的直连渠道。已完成初步探问，等待居委会转介具体家庭线索。</div>
+      <div class="channel-metric">
+        <span class="c-metric">信任度 <strong>极高</strong></span>
+        <span class="c-metric">获客成本 <strong>≈ ¥0</strong></span>
+      </div>
+    </div>
+
+    <div class="channel-card pending">
+      <div class="channel-head">
+        <span class="channel-name">社区巡访渠道</span>
+        <span class="tag tag-inprog">🔄 进行中</span>
+      </div>
+      <div class="channel-desc">CEO 自然巡访广外小区，识别推轮椅、照护疲惫等信号，用双补话术切入。目标本周登记 2 户。</div>
+      <div class="channel-metric">
+        <span class="c-metric">信任度 <strong>中等</strong></span>
+        <span class="c-metric">转化周期 <strong>1-2周</strong></span>
+      </div>
+    </div>
+
+    <div class="channel-card planned">
+      <div class="channel-head">
+        <span class="channel-name">口碑转介</span>
+        <span class="tag tag-pending">⏳ 飞轮启动后</span>
+      </div>
+      <div class="channel-desc">首批家庭满意后自动激活。每个家庭预计转介 1-2 个邻居/亲属，获客成本为零。</div>
+      <div class="channel-metric">
+        <span class="c-metric">信任度 <strong>最高</strong></span>
+        <span class="c-metric">预计倍增比 <strong>1.5x</strong></span>
+      </div>
+    </div>
+
+    <div class="channel-card planned">
+      <div class="channel-head">
+        <span class="channel-name">物业合作渠道</span>
+        <span class="tag tag-pending">⏳ 第二阶段</span>
+      </div>
+      <div class="channel-desc">待社区信任模型验证后（目标10户），以白皮书形式向物业公司提案规模化合作，作为增长第二曲线。</div>
+      <div class="channel-metric">
+        <span class="c-metric">进入条件 <strong>10户案例</strong></span>
+        <span class="c-metric">潜在规模 <strong>极大</strong></span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── 使用提示 ── -->
+  <div class="usage-tip">
+    <span class="usage-tip-icon">💬</span>
+    <div>
+      在飞书发 <strong>「CGO：[你的问题]」</strong> 让增长司 AI 角色立即响应。<br/>
+      例：「CGO：居委会阿姨说有2户需要，帮我设计下次拜访的话术」「CGO：第一户签约了，怎么引导她帮我转介邻居？」
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>开元时代 AI 工作台 · 增长司自动维护</p>
+    <p style="margin-top:0.4rem;">
+      <a href="index.html">← 返回总指挥台</a>
+    </p>
+  </div>
+</div>
+
+</body>
+</html>

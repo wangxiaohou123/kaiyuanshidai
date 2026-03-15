@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>开元时代 · 尚书省·运营司（COO）工作台</title>
+<style>
+  :root{
+    --bg:#FAFAF8;--bg2:#F4F3EE;--bg3:#ECEAE3;--bg4:#E5E2DA;
+    --gold:#8B6914;--gold-light:#B8940F;
+    --red:#C0392B;--green:#1D7A45;--blue:#1A56A8;--amber:#C87D0E;--purple:#6B3FA0;
+    --muted:#6C6C70;--border:rgba(139,105,20,0.15);--text:#1C1C1E;
+    --shadow:0 2px 12px rgba(0,0,0,0.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);color:var(--text);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+    padding:0 0 100px;font-size:16px;line-height:1.8;
+  }
+
+  /* ── 顶部导航 ── */
+  .top-nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(250,250,248,0.97);backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--border);
+    padding:0 2rem;height:52px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .nav-brand{font-size:0.85rem;font-weight:800;color:var(--gold);}
+  .nav-back{font-size:0.8rem;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:0.3rem;}
+  .nav-back:hover{color:var(--gold);}
+
+  /* ── Hero ── */
+  .hero{
+    background:linear-gradient(135deg,#1C1C1E 0%,#2C2416 100%);
+    border-bottom:1px solid rgba(139,105,20,0.3);
+    padding:2.5rem 2rem 2rem;position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(184,148,15,0.18),transparent);
+    pointer-events:none;
+  }
+  .hero-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;position:relative;}
+  .hero-left .eyebrow{font-size:0.72rem;letter-spacing:3px;color:#B8940F;text-transform:uppercase;margin-bottom:0.5rem;}
+  .hero-left h1{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:800;color:#EAE6D8;}
+  .hero-left .sub{font-size:0.88rem;color:rgba(234,230,216,0.6);margin-top:0.4rem;}
+
+  .hero-stats{display:flex;gap:0.8rem;flex-wrap:wrap;align-items:flex-end;position:relative;}
+  .stat{
+    background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
+    border-radius:12px;padding:0.7rem 1.1rem;text-align:center;
+  }
+  .stat-num{font-size:1.5rem;font-weight:800;}
+  .stat-label{font-size:0.68rem;color:rgba(234,230,216,0.5);margin-top:0.1rem;}
+
+  .role-badge{
+    margin-top:1.2rem;position:relative;
+    background:rgba(184,148,15,0.1);border:1px solid rgba(184,148,15,0.3);
+    border-radius:10px;padding:0.75rem 1rem;font-size:0.84rem;color:#ddc879;
+    display:flex;gap:0.5rem;align-items:flex-start;
+  }
+
+  /* ── 主容器 ── */
+  .container{max-width:1000px;margin:0 auto;padding:2rem 1.5rem;}
+
+  /* ── 章节标题 ── */
+  .section-title{
+    font-size:0.72rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;
+    padding:0.5rem 0;margin:1.5rem 0 0.8rem;
+    border-bottom:1px solid var(--border);
+    display:flex;align-items:center;gap:0.5rem;
+  }
+
+  /* ── 任务卡片 ── */
+  .card-grid{display:flex;flex-direction:column;gap:0.9rem;}
+
+  .task-card{
+    background:#FFFFFF;border-radius:16px;overflow:hidden;
+    border:1px solid var(--border);
+    box-shadow:0 1px 4px rgba(0,0,0,0.05);
+    transition:box-shadow .2s,border-color .2s;
+  }
+  .task-card:hover{box-shadow:0 4px 16px rgba(139,105,20,0.1);border-color:rgba(139,105,20,0.3);}
+
+  .task-hd{
+    padding:1.1rem 1.3rem;border-left:4px solid transparent;
+    display:flex;gap:1rem;align-items:flex-start;
+  }
+  .task-left{flex:1}
+  .task-meta{display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;margin-bottom:0.5rem;}
+
+  .tag{
+    display:inline-flex;align-items:center;gap:0.2rem;
+    padding:0.18rem 0.55rem;border-radius:5px;font-size:0.7rem;font-weight:700;letter-spacing:0.3px;
+  }
+  .tag-done{background:rgba(29,122,69,0.1);color:var(--green);border:1px solid rgba(29,122,69,0.25);}
+  .tag-inprog{background:rgba(200,125,14,0.1);color:var(--amber);border:1px solid rgba(200,125,14,0.3);}
+  .tag-pending{background:rgba(107,63,160,0.08);color:var(--purple);border:1px solid rgba(107,63,160,0.2);}
+  .tag-blocked{background:rgba(192,57,43,0.08);color:var(--red);border:1px solid rgba(192,57,43,0.2);}
+  .tag-type{background:var(--bg3);color:var(--muted);border:1px solid var(--border);}
+
+  .task-title{font-size:1rem;font-weight:800;margin-bottom:0.3rem;color:var(--text);}
+  .task-desc{font-size:0.87rem;color:var(--muted);line-height:1.7;}
+  .task-trigger{
+    margin-top:0.5rem;font-size:0.8rem;
+    background:rgba(139,105,20,0.06);border:1px solid rgba(139,105,20,0.15);
+    border-radius:6px;padding:0.3rem 0.6rem;display:inline-flex;align-items:center;gap:0.3rem;
+    color:var(--gold);
+  }
+
+  .task-right{display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem;flex-shrink:0;padding-top:0.1rem;}
+  .status-dot{width:10px;height:10px;border-radius:50%;}
+  .s-done{background:var(--green);box-shadow:0 0 6px rgba(29,122,69,0.4);}
+  .s-inprog{background:var(--amber);box-shadow:0 0 6px rgba(200,125,14,0.4);}
+  .s-pending{background:var(--purple);box-shadow:0 0 6px rgba(107,63,160,0.35);}
+  .s-blocked{background:var(--red);box-shadow:0 0 6px rgba(192,57,43,0.4);}
+
+  /* ── 进度条 ── */
+  .progress-section{
+    background:#FFFFFF;border-radius:16px;
+    border:1px solid var(--border);
+    padding:1.3rem;
+    box-shadow:0 1px 4px rgba(0,0,0,0.05);
+  }
+  .progress-section h3{
+    font-size:0.72rem;letter-spacing:1.5px;color:var(--gold);
+    text-transform:uppercase;font-weight:700;margin-bottom:1rem;
+  }
+  .progress-item{margin-bottom:1rem;}
+  .progress-item:last-child{margin-bottom:0;}
+  .progress-label{
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:0.88rem;margin-bottom:0.35rem;
+  }
+  .progress-label span:first-child{color:var(--text);font-weight:600;}
+  .progress-label span:last-child{font-size:0.78rem;color:var(--muted);}
+  .progress-bar-bg{background:var(--bg3);border-radius:6px;height:7px;overflow:hidden;}
+  .progress-bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#B8940F,#E8D06A);transition:width .5s ease;}
+  .progress-bar-fill.green{background:linear-gradient(90deg,#1D7A45,#2ED573);}
+  .progress-bar-fill.amber{background:linear-gradient(90deg,#C87D0E,#F0A030);}
+
+  /* ── 质量准则 ── */
+  .quality-card{
+    background:#FFFBF0;border-radius:16px;
+    border:1px solid rgba(139,105,20,0.2);
+    padding:1.3rem;
+  }
+  .quality-card h3{
+    font-size:0.88rem;font-weight:800;color:var(--gold);
+    margin-bottom:0.8rem;padding-bottom:0.6rem;
+    border-bottom:1px solid rgba(139,105,20,0.15);
+  }
+  .quality-list{list-style:none;padding:0;}
+  .quality-list li{
+    display:flex;gap:0.5rem;font-size:0.9rem;
+    line-height:1.75;padding:0.25rem 0;
+  }
+  .quality-list li::before{content:"›";color:var(--gold);flex-shrink:0;font-size:1rem;}
+
+  /* ── 使用提示 ── */
+  .usage-tip{
+    background:rgba(139,105,20,0.06);border:1px solid rgba(139,105,20,0.2);
+    border-radius:12px;padding:1rem 1.2rem;
+    font-size:0.88rem;color:var(--text);line-height:1.75;
+    display:flex;gap:0.7rem;align-items:flex-start;margin-top:2rem;
+  }
+  .usage-tip-icon{font-size:1.1rem;flex-shrink:0;margin-top:0.05rem;}
+  .usage-tip strong{color:var(--gold);}
+
+  /* ── Footer ── */
+  .footer{
+    text-align:center;color:var(--muted);font-size:0.82rem;
+    padding:2rem 0;border-top:1px solid var(--border);margin-top:2rem;
+  }
+  .footer a{color:var(--gold);text-decoration:none;}
+  .footer a:hover{text-decoration:underline;}
+
+  @media(max-width:640px){
+    .hero{padding:2rem 1.2rem 1.5rem;}
+    .container{padding:1.5rem 1rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ── 顶部导航 ── -->
+<div class="top-nav">
+  <span class="nav-brand">开元时代 · 尚书省·运营司（COO）工作台</span>
+  <a class="nav-back" href="index.html">← 返回总指挥台</a>
+</div>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="hero-top">
+    <div class="hero-left">
+      <div class="eyebrow">开元时代 · 人机协作系统</div>
+      <h1>尚书省·运营司（COO）工作台</h1>
+      <p class="sub">服务SOP制定 · 护理员体系建设 · 落地执行 · 服务一致性高于效率</p>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num" style="color:#2ED573;">1</div>
+        <div class="stat-label">已完成</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" style="color:#C87D0E;">1</div>
+        <div class="stat-label">进行中</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" style="color:#6B3FA0;">2</div>
+        <div class="stat-label">待触发</div>
+      </div>
+    </div>
+  </div>
+  <div class="role-badge">
+    <span>⚙️</span>
+    <span>
+      <strong>角色职责：</strong>负责服务SOP制定、护理员体系建设、落地执行；质量底线：服务一致性高于效率。
+      在飞书发「COO：[问题/指令]」即可触发运营司响应。
+    </span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ── 整体进度 ── -->
+  <div class="section-title">📊 运营体系建设进度</div>
+  <div class="progress-section">
+    <h3>🏗️ 储备期运营体系建设</h3>
+    <div class="progress-item">
+      <div class="progress-label">
+        <span>护理员体系</span>
+        <span>话术V2已完成 · 培训方案排期中</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill amber" style="width:50%"></div>
+      </div>
+    </div>
+    <div class="progress-item">
+      <div class="progress-label">
+        <span>首批家庭登记（E06）</span>
+        <span>进行中 · 目标 2 户</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill amber" style="width:30%"></div>
+      </div>
+    </div>
+    <div class="progress-item">
+      <div class="progress-label">
+        <span>首次上门SOP</span>
+        <span>待 E06 触发</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" style="width:0%;background:var(--bg4)"></div>
+      </div>
+    </div>
+    <div class="progress-item" style="margin-bottom:0">
+      <div class="progress-label">
+        <span>护理员培训方案</span>
+        <span>排期中</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" style="width:10%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SOP进度 ── -->
+  <div class="section-title">📋 SOP 体系建设</div>
+  <div class="card-grid">
+
+    <div class="task-card">
+      <div class="task-hd" style="border-left-color:#1D7A45;">
+        <div class="task-left">
+          <div class="task-meta">
+            <span class="tag tag-done">✅ 完成</span>
+            <span class="tag tag-type">话术体系</span>
+          </div>
+          <div class="task-title">护理员招募话术 V2</div>
+          <div class="task-desc">面向兼职护理员的招募话术优化完成。覆盖「为什么选开元」「收入结构说明」「培训保障说明」三个核心疑虑，转化率预计较V1提升40%。</div>
+        </div>
+        <div class="task-right">
+          <div class="status-dot s-done"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-card">
+      <div class="task-hd" style="border-left-color:#C87D0E;">
+        <div class="task-left">
+          <div class="task-meta">
+            <span class="tag tag-inprog">🔄 进行中</span>
+            <span class="tag tag-type">家庭登记</span>
+          </div>
+          <div class="task-title">首批家庭登记 E06（目标 2 户）</div>
+          <div class="task-desc">E06 标准家庭信息登记表收集中。需要记录长者情况、主要联系人、照护需求、联系方式。CEO 社区巡访后将信息同步至 COO 整理归档。</div>
+          <div class="task-trigger">⚡ 当前由 CEO 执行社区巡访（T002）→ 结果同步至此</div>
+        </div>
+        <div class="task-right">
+          <div class="status-dot s-inprog"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-card">
+      <div class="task-hd" style="border-left-color:#6B3FA0;">
+        <div class="task-left">
+          <div class="task-meta">
+            <span class="tag tag-blocked">⛔ 待触发</span>
+            <span class="tag tag-type">SOP文档</span>
+          </div>
+          <div class="task-title">首次上门服务 SOP</div>
+          <div class="task-desc">
+            首次上门服务标准流程（含建立信任、评估失能等级、介绍服务内容、确认意向、离场礼仪）待 E06 有至少1户信息后触发制定。
+          </div>
+          <div class="task-trigger">🔒 解锁条件：E06 登记完成 ≥ 1 户</div>
+        </div>
+        <div class="task-right">
+          <div class="status-dot s-pending"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-card">
+      <div class="task-hd" style="border-left-color:#6B3FA0;">
+        <div class="task-left">
+          <div class="task-meta">
+            <span class="tag tag-pending">⏳ 排期中</span>
+            <span class="tag tag-type">培训体系</span>
+          </div>
+          <div class="task-title">护理员培训方案</div>
+          <div class="task-desc">包含入职培训（照护技能、服务礼仪、补贴申领协助）和持续督导机制。计划在首批护理员招募前完成，预计1周内输出初版。</div>
+          <div class="task-trigger">⏰ 预计下周启动，COO 自主执行</div>
+        </div>
+        <div class="task-right">
+          <div class="status-dot s-pending"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── 质量底线 ── -->
+  <div class="section-title">🛡️ 服务质量底线</div>
+  <div class="quality-card">
+    <h3>⚙️ 运营司质量准则（不可妥协）</h3>
+    <ul class="quality-list">
+      <li>服务一致性高于效率：每个家庭收到的服务体验必须遵循同一套SOP，不允许护理员自由发挥。</li>
+      <li>首次上门必须有COO或CEO在场（远程协调亦可），确保信任建立符合标准流程。</li>
+      <li>护理员上岗前必须通过入职培训考核，不合格者不得独立服务。</li>
+      <li>服务日志每日提交，异常情况（长者状况变化、家属投诉）4小时内上报。</li>
+    </ul>
+  </div>
+
+  <!-- ── 使用提示 ── -->
+  <div class="usage-tip">
+    <span class="usage-tip-icon">💬</span>
+    <div>
+      在飞书发 <strong>「COO：[你的问题]」</strong> 让运营司 AI 角色立即响应。<br/>
+      例：「COO：E06已登记1户，帮我生成首次上门SOP」「COO：护理员面试今天有人来，帮我出一套评估标准」
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>开元时代 AI 工作台 · 运营司自动维护</p>
+    <p style="margin-top:0.4rem;">
+      <a href="index.html">← 返回总指挥台</a>
+    </p>
+  </div>
+</div>
+
+</body>
+</html>
