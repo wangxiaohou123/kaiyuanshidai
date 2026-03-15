@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>开元研究院 · 知识库</title>
+  <style>
+    :root {
+      --gold: #C9A84C; --gold-light: #E8C97A; --dark: #0E1117;
+      --dark-2: #161B24; --dark-3: #1E2530; --border: rgba(201,168,76,0.18);
+      --text: #EAE6D8; --muted: #8A8F9E; --green: #3DD68C; --blue: #4A9EFF;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif; background:var(--dark); color:var(--text); min-height:100vh; }
+    header { background:var(--dark-2); border-bottom:1px solid var(--border); padding:1.5rem 2rem; display:flex; align-items:center; justify-content:space-between; }
+    .logo { font-size:1.1rem; font-weight:700; color:var(--gold); letter-spacing:0.08em; }
+    .logo span { color:var(--muted); font-weight:400; font-size:0.8rem; margin-left:0.8rem; }
+    .badge { font-size:0.65rem; padding:0.2rem 0.6rem; border-radius:100px; background:rgba(61,214,140,0.12); color:var(--green); border:1px solid rgba(61,214,140,0.3); }
+    main { max-width:960px; margin:0 auto; padding:2rem 1.5rem; }
+    h2 { font-size:0.7rem; letter-spacing:0.18em; color:var(--gold); text-transform:uppercase; margin-bottom:1.2rem; margin-top:2.4rem; display:flex; align-items:center; gap:0.6rem; }
+    h2::after { content:''; flex:1; height:1px; background:var(--border); }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1rem; }
+    .card {
+      background:var(--dark-2); border:1px solid var(--border); border-radius:14px;
+      padding:1.4rem; text-decoration:none; color:var(--text);
+      transition:border-color 0.2s, transform 0.15s; display:block;
+    }
+    .card:hover { border-color:var(--gold); transform:translateY(-2px); }
+    .card-icon { font-size:1.6rem; margin-bottom:0.7rem; }
+    .card-title { font-size:0.92rem; font-weight:600; margin-bottom:0.4rem; color:var(--gold-light); }
+    .card-desc { font-size:0.78rem; color:var(--muted); line-height:1.6; }
+    .card-meta { font-size:0.68rem; color:var(--muted); margin-top:0.8rem; display:flex; align-items:center; gap:0.4rem; }
+    .tag { font-size:0.62rem; padding:0.15rem 0.45rem; border-radius:4px; }
+    .tag-green { background:rgba(61,214,140,0.1); color:var(--green); border:1px solid rgba(61,214,140,0.25); }
+    .tag-blue { background:rgba(74,158,255,0.1); color:var(--blue); border:1px solid rgba(74,158,255,0.25); }
+    .tag-gold { background:rgba(201,168,76,0.1); color:var(--gold); border:1px solid rgba(201,168,76,0.25); }
+    .stat-row { display:flex; gap:1rem; margin-bottom:2rem; flex-wrap:wrap; }
+    .stat { background:var(--dark-2); border:1px solid var(--border); border-radius:12px; padding:1rem 1.4rem; flex:1; min-width:140px; }
+    .stat-val { font-size:1.6rem; font-weight:700; color:var(--gold); }
+    .stat-lbl { font-size:0.72rem; color:var(--muted); margin-top:0.2rem; }
+    footer { text-align:center; padding:2rem; color:var(--muted); font-size:0.72rem; border-top:1px solid var(--border); margin-top:3rem; }
+    a.card[href^="file"] .card-title::after { content:" ↗"; opacity:0.5; font-size:0.75rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">🔬 开元研究院 <span>知识库导航</span></div>
+  </div>
+  <div style="display:flex;gap:0.8rem;align-items:center;">
+    <span style="font-size:0.72rem;color:var(--muted);">2026-03-12 更新</span>
+    <span class="badge">储备期运转中</span>
+  </div>
+</header>
+
+<main>
+
+  <div class="stat-row" style="margin-top:1.5rem;">
+    <div class="stat"><div class="stat-val">9</div><div class="stat-lbl">知识文档</div></div>
+    <div class="stat"><div class="stat-val">5</div><div class="stat-lbl">研究主题</div></div>
+    <div class="stat"><div class="stat-val">Day 2</div><div class="stat-lbl">储备期进度</div></div>
+    <div class="stat"><div class="stat-val">T01–T09</div><div class="stat-lbl">研究框架</div></div>
+  </div>
+
+  <!-- 今日产出 -->
+  <h2>⚡ 今日产出（2026-03-12）</h2>
+  <div class="grid">
+
+    <a class="card" href="file:///Users/wangjingjing/.xiaomei-workspace/knowledge/product/service-intro-v1.md" onclick="openMd(this.href);return false;">
+      <div class="card-icon">📦</div>
+      <div class="card-title">产品服务介绍 V1</div>
+      <div class="card-desc">三级服务包（启元/兴元/开元）·评估驱动差异化·广外街道客户画像·服务SOP流程</div>
+      <div class="card-meta"><span class="tag tag-green">CSO出品</span><span class="tag tag-gold">今日新增</span></div>
+    </a>
+
+    <a class="card" href="file:///Users/wangjingjing/.xiaomei-workspace/knowledge/finance/pricing-model-v1.md" onclick="openMd(this.href);return false;">
+      <div class="card-icon">💰</div>
+      <div class="card-title">定价推演模型 V1</div>
+      <div class="card-desc">三情景成本拆解·家庭自付1600元/月·基准毛利32%·盈亏平衡仅需1户·10户=月净利6500元</div>
+      <div class="card-meta"><span class="tag tag-green">CFO出品</span><span class="tag tag-gold">今日新增</span></div>
+    </a>
+
+    <a class="card" href="file:///Users/wangjingjing/.xiaomei-workspace/knowledge/operations/caregiver-standard-v1.md" onclick="openMd(this.href);return false;">
+      <div class="card-icon">👩‍⚕️</div>
+      <div class="card-title">护理员标准体系 V1</div>
+      <div class="card-desc">招募硬门槛·8课时岗前培训大纲·考核机制·薪酬结构推演·服务3家庭月入4000-5000元</div>
+      <div class="card-meta"><span class="tag tag-green">COO出品</span><span class="tag tag-gold">今日新增</span></div>
+    </a>
+
+  </div>
+
+  <!-- 市场研究 -->
+  <h2>📊 市场研究</h2>
+  <div class="grid">
+
+    <a class="card" href="file:///Users/wangjingjing/.xiaomei-workspace/knowledge/market-research/competitive-landscape.md" onclick="openMd(this.href);return false;">
+      <div class="card-icon">🔍</div>
+      <div class="card-title">竞争格局分析</div>
+      <div class="card-desc">泰康之家·寸草春晖·慈仁堂·差异化公式确认·开元时代定位切入点</div>
+      <div class="card-meta"><span class="tag tag-blue">T02</span><span class="tag tag-green">初稿完成</span></div>
+    </a>
+
+    <a class="card" href="file:///Users/wangjingjing/.xiaomei-workspace/knowledge/products/service-matrix.md" onclick="openMd(this.href);return false;">
+      <div class="card-icon">📋</div>
+      <div class="card-title">服务矩阵</div>
+      <div class="card-desc">产品线全景图·各级服务内容对比·定价区间·适配人群分析</div>
+      <div class="card-meta"><span class="tag tag-blue">产品研究</span></div>
+    </a>
+
+  </div>
+
+  <!-- 政策与财务 -->
+  <h2>🏛️ 政策与财务</h2>
+  <div class="grid">
+
+    <a class="card" href="file:///Users/wangjingjing/.xiaomei-workspace/knowledge/government-docs/qualification-roadmap.md" onclick="openMd(this.href);return false;">
+      <div class="card-icon">📜</div>
+      <div class="card-title">资质申请路线图</div>
+      <div class="card-desc">5步申请序列·长护险评估标准·北京西城区政策资质路径推演</div>
+      <div class="card-meta"><span class="tag tag-blue">T03</span><span class="tag tag-gold">待验证细节</span></div>
+    </a>
+
+    <a class="card" href="file:///Users/wangjingjing/.xiaomei-workspace/knowledge/financial-models/startup-cost.md" onclick="openMd(this.href);return false;">
+      <div class="card-icon">📈</div>
+      <div class="card-title">启动成本模型</div>
+      <div class="card-desc">100万资金消耗节奏·前期一次性投入3-5万·各阶段现金流预测</div>
+      <div class="card-meta"><span class="tag tag-blue">财务模型</span></div>
+    </a>
+
+  </div>
+
+  <!-- 运营日志 -->
+  <h2>📅 运营日志</h2>
+  <div class="grid">
+
+    <a class="card" href="file:///Users/wangjingjing/.xiaomei-workspace/knowledge/daily-logs/2026-03-11.md" onclick="openMd(this.href);return false;">
+      <div class="card-icon">📓</div>
+      <div class="card-title">2026-03-11 · Day 1</div>
+      <div class="card-desc">公司成立准备·班子建制·苏格拉底决策机制建立·官网v1上线·首战城市确认</div>
+      <div class="card-meta"><span class="tag tag-green">归档</span></div>
+    </a>
+
+    <a class="card" href="file:///Users/wangjingjing/.xiaomei-workspace/knowledge/decisions/README.md" onclick="openMd(this.href);return false;">
+      <div class="card-icon">🗂️</div>
+      <div class="card-title">决策记录索引</div>
+      <div class="card-desc">#001–#004 决策记录卡汇总·苏格拉底质询过程·CEO确认事项</div>
+      <div class="card-meta"><span class="tag tag-gold">核心文档</span></div>
+    </a>
+
+  </div>
+
+  <!-- 快速入口 -->
+  <h2>🔗 快速入口</h2>
+  <div class="grid">
+
+    <a class="card" href="file:///Users/wangjingjing/.xiaomei-workspace/yanglao-ceo-plan/index.html" onclick="window.open('file:///Users/wangjingjing/.xiaomei-workspace/yanglao-ceo-plan/index.html');return false;">
+      <div class="card-icon">🌐</div>
+      <div class="card-title">战略官网（本地版）</div>
+      <div class="card-desc">开元时代完整战略页·时间线·三省六部制工作台·KPI仪表板</div>
+      <div class="card-meta"><span class="tag tag-green">实时更新</span></div>
+    </a>
+
+    <a class="card" href="file:///Users/wangjingjing/.xiaomei-workspace/commands.md" onclick="openMd(this.href);return false;">
+      <div class="card-icon">📥</div>
+      <div class="card-title">指令收件箱</div>
+      <div class="card-desc">待执行指令 · 已完成归档 · 固定偏好设定</div>
+      <div class="card-meta"><span class="tag tag-gold">实时同步</span></div>
+    </a>
+
+  </div>
+
+</main>
+
+<footer>
+  开元研究院 · 知识库导航 · 2026-03-12 · 储备期自动更新
+</footer>
+
+<script>
+function openMd(href) {
+  // 用系统默认程序打开 md 文件
+  const path = href.replace('file://', '');
+  fetch('').catch(()=>{});
+  window.open(href, '_blank');
+}
+// 点击战略官网直接新标签打开
+document.querySelectorAll('.card').forEach(c => {
+  c.addEventListener('click', function(e) {
+    e.preventDefault();
+    const href = this.getAttribute('href');
+    if (href && href.startsWith('file://')) {
+      window.open(href, '_blank');
+    }
+  });
+});
+</script>
+
+</body>
+</html>

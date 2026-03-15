@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>开元时代 · 人+AI协同机制升级报告</title>
+<style>
+  :root {
+    --bg: #0f0f13; --dark2: #16161e; --dark3: #1c1c26;
+    --gold: #C9A84C; --gold-dim: rgba(201,168,76,0.3);
+    --green: #3dd68c; --amber: #f59e0b; --red: #ef4444;
+    --muted: #8a8a9a; --border: rgba(255,255,255,0.07);
+    --text: #e8e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, 'PingFang SC', sans-serif; padding: 2rem 1rem; }
+  .container { max-width: 860px; margin: 0 auto; }
+  .header { text-align: center; margin-bottom: 3rem; }
+  .header h1 { font-size: 1.6rem; color: var(--gold); margin-bottom: 0.5rem; }
+  .header .sub { color: var(--muted); font-size: 0.85rem; }
+  .header .badge { display: inline-block; background: var(--dark3); border: 1px solid var(--gold-dim); border-radius: 100px; padding: 0.3rem 1rem; font-size: 0.78rem; color: var(--gold); margin-top: 0.8rem; }
+
+  /* 问题诊断 */
+  .section { margin-bottom: 2.5rem; }
+  .section-title { font-size: 0.7rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+
+  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+  .problem-card { background: var(--dark2); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem; }
+  .problem-card.critical { border-color: rgba(239,68,68,0.3); }
+  .problem-card.major { border-color: rgba(245,158,11,0.3); }
+  .problem-badge { font-size: 0.65rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 100px; margin-bottom: 0.6rem; display: inline-block; }
+  .badge-critical { background: rgba(239,68,68,0.15); color: var(--red); }
+  .badge-major { background: rgba(245,158,11,0.15); color: var(--amber); }
+  .problem-title { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .problem-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+
+  /* Before/After */
+  .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .ba-card { background: var(--dark2); border-radius: 14px; padding: 1.4rem; }
+  .ba-card.before { border: 1px solid rgba(239,68,68,0.25); }
+  .ba-card.after { border: 1px solid rgba(61,214,140,0.25); }
+  .ba-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+  .ba-card.before .ba-label { color: var(--red); }
+  .ba-card.after .ba-label { color: var(--green); }
+  .ba-item { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.82rem; color: var(--muted); margin-bottom: 0.6rem; line-height: 1.6; }
+  .ba-icon { flex-shrink: 0; font-size: 0.8rem; }
+
+  /* 修复清单 */
+  .fix-list { display: flex; flex-direction: column; gap: 0.8rem; }
+  .fix-item { background: var(--dark2); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.4rem; display: flex; align-items: flex-start; gap: 1rem; }
+  .fix-item.done { border-color: rgba(61,214,140,0.25); }
+  .fix-check { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .fix-title { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .fix-detail { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+  .fix-metric { font-size: 0.72rem; color: var(--green); margin-top: 0.3rem; font-weight: 600; }
+
+  /* 24小时时间轴 */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .tl-item { display: flex; gap: 1rem; }
+  .tl-time { width: 80px; flex-shrink: 0; text-align: right; font-size: 0.78rem; color: var(--gold); font-weight: 600; padding-top: 0.9rem; }
+  .tl-connector { display: flex; flex-direction: column; align-items: center; gap: 0; width: 20px; flex-shrink: 0; }
+  .tl-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 1.1rem; }
+  .tl-dot.ai { background: var(--green); }
+  .tl-line { width: 1px; background: var(--border); flex: 1; min-height: 20px; }
+  .tl-content { flex: 1; padding: 0.7rem 0 1rem; }
+  .tl-actor { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.3rem; }
+  .tl-actor.human { color: var(--amber); }
+  .tl-actor.ai { color: var(--green); }
+  .tl-text { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+  /* KPI */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0.8rem; }
+  .kpi-card { background: var(--dark2); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; text-align: center; }
+  .kpi-val { font-size: 1.8rem; font-weight: 700; color: var(--gold); }
+  .kpi-label { font-size: 0.72rem; color: var(--muted); margin-top: 0.4rem; }
+
+  /* Serper提示 */
+  .alert { background: var(--dark2); border: 1px solid rgba(245,158,11,0.4); border-radius: 14px; padding: 1.4rem; margin-bottom: 1rem; }
+  .alert-title { color: var(--amber); font-weight: 700; font-size: 0.88rem; margin-bottom: 0.6rem; }
+  .alert-body { color: var(--muted); font-size: 0.82rem; line-height: 1.7; }
+  .alert-body code { background: rgba(255,255,255,0.08); padding: 0.15rem 0.4rem; border-radius: 4px; font-family: monospace; color: var(--text); }
+
+  @media (max-width: 600px) {
+    .problem-grid, .ba-grid, .kpi-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;margin-bottom:0.6rem;">开元时代 · 治理体系升级</div>
+    <h1>人 + AI 协同机制 · 修复报告</h1>
+    <div class="sub">2026年3月13日 · 小美班子完成执行</div>
+    <div class="badge">🏛️ Day 3 · 基础设施里程碑</div>
+  </div>
+
+  <!-- 问题诊断 -->
+  <div class="section">
+    <div class="section-title">问题诊断 · 7大断点</div>
+    <div class="problem-grid">
+      <div class="problem-card critical">
+        <div class="problem-badge badge-critical">🔴 P0 致命</div>
+        <div class="problem-title">AI只在"开口时"工作</div>
+        <div class="problem-desc">无对话=无产出。kaiyuan-agent.py虽存在但触发不可靠，搜索模块结构性失败。</div>
+      </div>
+      <div class="problem-card critical">
+        <div class="problem-badge badge-critical">🔴 P0 致命</div>
+        <div class="problem-title">指令黑洞 · 无反馈闭环</div>
+        <div class="problem-desc">王总写指令→Agent执行→结果没有主动通知，王总不知道做了什么、有没有做。</div>
+      </div>
+      <div class="problem-card major">
+        <div class="problem-badge badge-major">🟠 P1 严重</div>
+        <div class="problem-title">搜索模块双重失效</div>
+        <div class="problem-desc">Serper Key是占位符，DuckDuckGo国内超时，每次等90秒后用AI基础知识兜底。</div>
+      </div>
+      <div class="problem-card major">
+        <div class="problem-badge badge-major">🟠 P1 严重</div>
+        <div class="problem-title">对话产出不沉淀</div>
+        <div class="problem-desc">研究结论停留在聊天记录，没有写入官网和知识库，重要决策上下文丢失。</div>
+      </div>
+      <div class="problem-card major">
+        <div class="problem-badge badge-major">🟡 P2 一般</div>
+        <div class="problem-title">三省六部是组织图不是工作流</div>
+        <div class="problem-desc">六部角色无任务分配机制、无产出标准，实际只有"王总找小美"一条执行链。</div>
+      </div>
+      <div class="problem-card major">
+        <div class="problem-badge badge-major">🟡 P2 一般</div>
+        <div class="problem-title">每次对话重建上下文</div>
+        <div class="problem-desc">记忆不连续，每次相当于"新员工上班"，历史研究无法积累复用。</div>
+      </div>
+      <div class="problem-card major" style="grid-column: span 2;">
+        <div class="problem-badge badge-major">🟡 P2 一般</div>
+        <div class="problem-title">王总时间消耗在监督AI上（本末倒置）</div>
+        <div class="problem-desc">AI应该释放人的时间，而不是要求人持续监督——核心目标是让王总只做"战略意图输入"和"结果审阅"。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Before / After -->
+  <div class="section">
+    <div class="section-title">修复前后对比</div>
+    <div class="ba-grid">
+      <div class="ba-card before">
+        <div class="ba-label">❌ 修复前</div>
+        <div class="ba-item"><span class="ba-icon">✗</span>搜索每次等90秒超时，最终用AI基础知识兜底</div>
+        <div class="ba-item"><span class="ba-icon">✗</span>LaunchAgent只有08:00一次触发，且SERPER_KEY写的"待填入"</div>
+        <div class="ba-item"><span class="ba-icon">✗</span>Agent跑完→王总不知道→要主动去翻文件</div>
+        <div class="ba-item"><span class="ba-icon">✗</span>工作成果停留在聊天，官网3月12日以后没有更新</div>
+      </div>
+      <div class="ba-card after">
+        <div class="ba-label">✅ 修复后</div>
+        <div class="ba-item"><span class="ba-icon">✓</span>搜索命中缓存0秒，小美搭档对话时实时写入，Agent独立读取</div>
+        <div class="ba-item"><span class="ba-icon">✓</span>LaunchAgent升级为3次/天（06:30 / 12:00 / 20:00）</div>
+        <div class="ba-item"><span class="ba-icon">✓</span>Agent完成→自动写入pending-push.md→下次对话推送大象</div>
+        <div class="ba-item"><span class="ba-icon">✓</span>今日工作成果写入官网Day3日志，commands.md自动化规则更新</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 修复清单 -->
+  <div class="section">
+    <div class="section-title">修复清单 · 今日执行</div>
+    <div class="fix-list">
+      <div class="fix-item done">
+        <div class="fix-check">✅</div>
+        <div>
+          <div class="fix-title">搜索缓存桥接机制建立</div>
+          <div class="fix-detail">新建 search-cache.json，小美搭档对话时写入，kaiyuan-agent.py优先读取缓存（max_age=20h）。写入今日6条政策动态。</div>
+          <div class="fix-metric">搜索时间：90秒超时 → 0秒命中 · 提升 ∞</div>
+        </div>
+      </div>
+      <div class="fix-item done">
+        <div class="fix-check">✅</div>
+        <div>
+          <div class="fix-title">搜索编码Bug修复（httpx中文ascii错误）</div>
+          <div class="fix-detail">kaiyuan-agent.py Serper调用从 json= 改为 content=json.dumps(..., ensure_ascii=False).encode('utf-8')，避免中文查询报ascii codec错误。</div>
+          <div class="fix-metric">Serper API 现可正常调用（需配置真实Key）</div>
+        </div>
+      </div>
+      <div class="fix-item done">
+        <div class="fix-check">✅</div>
+        <div>
+          <div class="fix-title">LaunchAgent升级：1次/天 → 3次/天</div>
+          <div class="fix-detail">新建 com.kaiyuan.agent-runner.plist，StartCalendarInterval数组配置06:30 / 12:00 / 20:00三个触发点，去掉SERPER_KEY硬编码（改为.env读取）。</div>
+          <div class="fix-metric">日产出频次提升3倍 · 覆盖早/午/晚三个时段</div>
+        </div>
+      </div>
+      <div class="fix-item done">
+        <div class="fix-check">✅</div>
+        <div>
+          <div class="fix-title">待推送队列建立（指令黑洞闭环）</div>
+          <div class="fix-detail">kaiyuan-agent.py每次运行完成，自动将日报内容+指令结果写入 pending-push.md。commands.md更新自动化规则：每日首次对话检查并发送推送队列。</div>
+          <div class="fix-metric">王总无需主动查文件 · 信息自动流向王总</div>
+        </div>
+      </div>
+      <div class="fix-item done">
+        <div class="fix-check">✅</div>
+        <div>
+          <div class="fix-title">官网日志更新（Day3工作沉淀）</div>
+          <div class="fix-detail">今日修复成果已写入官网 #log 板块 Day3条目，包含7大断点识别、修复清单、KPI数据，官网保持活跃状态。</div>
+          <div class="fix-metric">官网最新日志：2026-03-13 · 不再停在2026-03-12</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 24小时工作设计 -->
+  <div class="section">
+    <div class="section-title">目标：24小时工作节奏（已实现框架）</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-time">06:30</div>
+        <div class="tl-connector"><div class="tl-dot ai"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-actor ai">🤖 AI自动</div>
+          <div class="tl-text">kaiyuan-agent.py触发：读取搜索缓存→生成今日行业日报→写入pending-push.md</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">08:00</div>
+        <div class="tl-connector"><div class="tl-dot" style="background:var(--amber)"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-actor human">👤 王总</div>
+          <div class="tl-text">打开小美搭档→自动检查pending-push.md→发大象推送日报→5分钟完成审阅</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">09:00–12:00</div>
+        <div class="tl-connector"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-actor" style="color:var(--muted)">💼 美团工作</div>
+          <div class="tl-text">王总美团本职工作，开元时代AI班子在后台自主推进研究任务</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">12:00</div>
+        <div class="tl-connector"><div class="tl-dot ai"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-actor ai">🤖 AI自动</div>
+          <div class="tl-text">第二次触发：执行commands.md待处理指令+更新搜索缓存</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">20:00</div>
+        <div class="tl-connector"><div class="tl-dot ai"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-actor ai">🤖 AI自动</div>
+          <div class="tl-text">第三次触发：生成日终报告，写入待推送队列</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">21:00</div>
+        <div class="tl-connector"><div class="tl-dot" style="background:var(--amber)"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-actor human">👤 王总</div>
+          <div class="tl-text">打开小美搭档→审阅当日产出→写入明日commands.md指令→5分钟完成日终check</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KPI -->
+  <div class="section">
+    <div class="section-title">机制升级 · 关键指标</div>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-val" style="color:var(--green)">3×</div>
+        <div class="kpi-label">Agent每日触发次数</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">0s</div>
+        <div class="kpi-label">搜索命中时间（缓存）</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val" style="color:var(--amber)">自动</div>
+        <div class="kpi-label">结果推送机制</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val" style="color:var(--green)">6条</div>
+        <div class="kpi-label">今日写入搜索缓存</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 遗留待办 -->
+  <div class="section">
+    <div class="section-title">⚠️ 遗留问题 · 需王总配合</div>
+    <div class="alert">
+      <div class="alert-title">🔑 Serper API Key 待配置（搜索升级的最后一步）</div>
+      <div class="alert-body">
+        当前搜索依赖"小美搭档写缓存"方案，无对话时Agent用AI基础知识兜底。<br>
+        若需Agent独立获取实时新闻，需在 <code>~/.xiaomei-workspace/.env</code> 中配置真实Serper Key：<br><br>
+        1. 访问 <strong>https://serper.dev</strong> 免费注册（2500次/月）<br>
+        2. 复制 API Key（约40位字符）<br>
+        3. 修改 .env 文件：<code>SERPER_API_KEY=你的真实Key</code><br>
+        4. 告知小美，小美更新 LaunchAgent 配置
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:2rem;color:var(--muted);font-size:0.78rem;border-top:1px solid var(--border);">
+    王晶晶AI助理 · 开元时代班子 · 2026-03-13 自动生成
+  </div>
+
+</div>
+</body>
+</html>
