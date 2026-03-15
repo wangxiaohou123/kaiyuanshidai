@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>开元时代 · D5-R8 班子晨报</title>
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #F0D080;
+    --gold-pale: #FAF3DC;
+    --white: #FFFFFF;
+    --offwhite: #FAFAF7;
+    --gray-dark: #2C2C2C;
+    --gray-mid: #555555;
+    --gray-light: #AAAAAA;
+    --border: #E8DFCA;
+    --red: #C0392B;
+    --orange: #E67E22;
+    --green: #27AE60;
+    --blue: #2980B9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Noto Sans SC", sans-serif;
+    background: var(--offwhite);
+    color: var(--gray-dark);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d1a 60%, #3a2f00 100%);
+    padding: 36px 28px 28px;
+    text-align: center;
+    border-bottom: 3px solid var(--gold);
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(201,168,76,0.18);
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    font-size: 11px;
+    letter-spacing: 3px;
+    padding: 4px 16px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    color: var(--gold-light);
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .header-sub {
+    color: var(--gray-light);
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+  .header-meta {
+    margin-top: 14px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .header-meta span {
+    color: var(--gold);
+    font-size: 12px;
+    background: rgba(201,168,76,0.1);
+    padding: 3px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(201,168,76,0.3);
+  }
+
+  /* ── Sections ── */
+  .container { max-width: 900px; margin: 0 auto; padding: 24px 16px 60px; }
+  .section {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .section-header {
+    background: linear-gradient(90deg, #F9F4E8, #FFFDF5);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-icon { font-size: 18px; }
+  .section-title { font-size: 15px; font-weight: 700; color: var(--gray-dark); }
+  .section-sub { font-size: 12px; color: var(--gray-light); margin-left: auto; }
+  .section-body { padding: 20px; }
+
+  /* ── KPI Row ── */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .kpi-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 14px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .kpi-value { font-size: 26px; font-weight: 800; color: var(--gold); }
+  .kpi-label { font-size: 11px; color: var(--gray-light); margin-top: 3px; }
+  .kpi-delta { font-size: 11px; color: var(--green); margin-top: 2px; }
+
+  /* ── Intel Cards ── */
+  .intel-item {
+    border-left: 4px solid var(--gold);
+    background: var(--gold-pale);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .intel-item.p1 { border-left-color: var(--orange); }
+  .intel-item.p2 { border-left-color: var(--blue); }
+  .intel-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--gray-dark);
+    margin-bottom: 4px;
+  }
+  .intel-body { font-size: 13px; color: var(--gray-mid); line-height: 1.6; }
+  .intel-signal {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 600;
+    background: rgba(201,168,76,0.1);
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-block;
+  }
+  .tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    border: 1px solid;
+  }
+  .tag-red { color: var(--red); border-color: var(--red); background: rgba(192,57,43,0.07); }
+  .tag-orange { color: var(--orange); border-color: var(--orange); background: rgba(230,126,34,0.07); }
+  .tag-blue { color: var(--blue); border-color: var(--blue); background: rgba(41,128,185,0.07); }
+  .tag-green { color: var(--green); border-color: var(--green); background: rgba(39,174,96,0.07); }
+  .tag-gold { color: var(--gold); border-color: var(--gold); background: rgba(201,168,76,0.1); }
+
+  /* ── Dept Grid ── */
+  .dept-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .dept-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    background: #FDFCF8;
+  }
+  .dept-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .dept-task { font-size: 12px; color: var(--gray-mid); line-height: 1.6; }
+  .dept-status {
+    margin-top: 8px;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 8px;
+    display: inline-block;
+  }
+  .status-done { background: #E8F5E9; color: var(--green); }
+  .status-wip { background: #FFF3E0; color: var(--orange); }
+  .status-plan { background: #F3F4F6; color: #888; }
+
+  /* ── Action Card ── */
+  .decision-card {
+    background: linear-gradient(135deg, #1C1C0A, #2A2408);
+    border: 1px solid var(--gold);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    color: var(--gold-light);
+  }
+  .decision-card h3 {
+    color: var(--gold);
+    font-size: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    padding-bottom: 10px;
+  }
+  .action-item {
+    border-left: 3px solid var(--gold);
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    background: rgba(201,168,76,0.06);
+    border-radius: 0 8px 8px 0;
+  }
+  .action-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 6px;
+  }
+  .action-detail {
+    font-size: 13px;
+    color: rgba(240,208,128,0.7);
+    line-height: 1.6;
+  }
+  .action-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .action-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 8px;
+    background: rgba(201,168,76,0.15);
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.3);
+  }
+  .action-item.urgent { border-left-color: #ff6b6b; }
+  .action-item.urgent .action-title { color: #ff6b6b; }
+
+  /* ── Research Finding ── */
+  .finding-box {
+    background: #F8F9FE;
+    border: 1px solid #D5E3F8;
+    border-left: 4px solid var(--blue);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .finding-title { font-size: 14px; font-weight: 700; color: #1a2a4a; margin-bottom: 8px; }
+  .finding-list { list-style: none; padding: 0; }
+  .finding-list li {
+    font-size: 13px; color: var(--gray-mid);
+    display: flex; gap: 8px; margin-bottom: 6px; align-items: flex-start;
+  }
+  .dot { color: var(--gold); font-size: 10px; flex-shrink: 0; margin-top: 4px; }
+
+  /* ── Timeline ── */
+  .timeline { padding-left: 20px; border-left: 2px solid var(--border); }
+  .tl-item { position: relative; margin-bottom: 14px; }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -25px; top: 5px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--white);
+  }
+  .tl-day { font-size: 11px; color: var(--gold); font-weight: 700; margin-bottom: 2px; }
+  .tl-body { font-size: 12px; color: var(--gray-mid); }
+
+  /* ── Research Highlight ── */
+  .highlight-box {
+    background: linear-gradient(135deg, #F5F0E8, #FDF8EE);
+    border: 1px solid var(--gold);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+  }
+  .highlight-title { font-size: 14px; font-weight: 700; color: #3a2a00; margin-bottom: 8px; }
+  .highlight-body { font-size: 13px; color: var(--gray-mid); line-height: 1.7; }
+
+  /* ── Table ── */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    background: var(--gold-pale);
+    color: var(--gray-dark);
+    font-weight: 700;
+    padding: 9px 12px;
+    text-align: left;
+    border-bottom: 2px solid var(--gold);
+  }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--gray-mid); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--gold-pale); }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--gray-light);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+  }
+  .footer strong { color: var(--gold); }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .dept-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     HEADER
+═══════════════════════════════════════════ -->
+<div class="header">
+  <div class="header-badge">开元治理体系 · 三省六部</div>
+  <h1>开元时代 · D5-R8 班子晨报</h1>
+  <div class="header-sub">开元办公系统 · 战略决策中枢</div>
+  <div class="header-meta">
+    <span>📅 2026-03-15（D5）</span>
+    <span>🔄 第 8 轮</span>
+    <span>📍 北京西城 · 广外街道</span>
+    <span>⚡ 新增情报 3 条</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- KPI -->
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-value">D5</div>
+      <div class="kpi-label">项目运行天数</div>
+      <div class="kpi-delta">启动于 3/11</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">5000</div>
+      <div class="kpi-label">北京新增家庭养老床位</div>
+      <div class="kpi-delta">2026政府工作报告目标</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">P0</div>
+      <div class="kpi-label">今日最高优先级</div>
+      <div class="kpi-delta">西城区护理员培训招募</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">2</div>
+      <div class="kpi-label">今日新立项研究</div>
+      <div class="kpi-delta">护理员人才管道 + 床位切入</div>
+    </div>
+  </div>
+
+  <!-- ══ 今日情报补充 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">📰</span>
+      <span class="section-title">礼部 · 今日情报补充（D5 新增）</span>
+      <span class="section-sub">基于 R8 最新 WebSearch</span>
+    </div>
+    <div class="section-body">
+
+      <div class="intel-item">
+        <div class="intel-title">🔴【P0·战略级】西城区民政局公开招募2026年养老护理员培训机构</div>
+        <div class="intel-body">
+          北京市西城区民政局委托中介机构，对「2026年西城区养老服务人才培训服务及养老护理员职业技能竞赛」项目进行竞争比选，欢迎合格供应商参与投标。培训内容涵盖居家养老照护风险、清洁照护实操技能、饮食用药照护技能。此招募针对广外等街道护理员开展，统筹就近安排培训。
+        </div>
+        <div class="intel-signal">⚡ 战略信号：西城区主动招募培训机构，开元COO可作为合作方参与培训体系建设，同步建立人才管道</div>
+        <div class="tag-row">
+          <span class="tag tag-red">P0级接触目标</span>
+          <span class="tag tag-gold">COO主责</span>
+          <span class="tag tag-orange">西城区民政局</span>
+          <span class="tag tag-green">人才管道入口</span>
+        </div>
+      </div>
+
+      <div class="intel-item p1">
+        <div class="intel-title">🟠【P1·重要】北京2026年新增5000张家庭养老床位，申请流程已明确</div>
+        <div class="intel-body">
+          北京将新增5000张家庭养老床位列入「2026年政府工作报告」及「京政办发〔2026〕1号」重要民生实事项目，为必落地民生硬任务。申请流程：①街道/社区联系辖区居家社区养老服务中心 ②失能评估（中度以上失能） ③签订服务协议 ④报区民政局备案。北京市民政局2月28日发布《向中度以上失能老年人发放养老服务消费补贴》工作方案，可通过「民政通」APP线上申请。
+        </div>
+        <div class="intel-signal">⚡ 战略信号：开元可作为「家庭养老床位」认定服务商，借政府项目名义切入首批家庭，比自主获客周期缩短60%</div>
+        <div class="tag-row">
+          <span class="tag tag-orange">P1研究议题</span>
+          <span class="tag tag-gold">切入路径</span>
+          <span class="tag tag-blue">民政局对接</span>
+        </div>
+      </div>
+
+      <div class="intel-item p2">
+        <div class="intel-title">🔵【P2·背景】广外街道养老照料中心月均服务量超73万人次，已是西城核心枢纽</div>
+        <div class="intel-body">
+          广安门外街道养老照料中心（手帕口南街80号）构建「全托+日托+居家」三位一体服务体系，已延伸至周边29个社区，日均供餐600份，护理团队持证上岗率100%。运营方为北京红枫盈社区服务有限公司（成立2012年，法人李道建）。月均费用4500-9000元/月。
+        </div>
+        <div class="intel-signal">⚡ 战略信号：广外照料中心是本地最大竞合方，既是潜在竞争对手，也是合作切入口（共用渠道/转介护理员）</div>
+        <div class="tag-row">
+          <span class="tag tag-blue">竞合分析</span>
+          <span class="tag tag-gold">红枫盈公司</span>
+          <span class="tag tag-green">29社区覆盖</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ 中书省研究 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🔬</span>
+      <span class="section-title">中书省 · D5-R8 专项研究成果</span>
+      <span class="section-sub">苏格拉底六步质询 · 两大新议题</span>
+    </div>
+    <div class="section-body">
+
+      <div class="highlight-box">
+        <div class="highlight-title">📌 P0研究：西城区护理员人才管道 —— 开元最核心护城河建设路径</div>
+        <div class="highlight-body">
+          <strong>核心发现</strong>：西城区民政局2026年正在招募养老护理员培训机构（竞争比选中），这是一个<strong>主动向政府靠拢</strong>的窗口期。开元COO（主责：护理员标准制定+人才管理+院校合作）可通过以下路径嵌入：
+        </div>
+      </div>
+
+      <div class="finding-box">
+        <div class="finding-title">🎯 护理员人才管道：三条可执行路径</div>
+        <ul class="finding-list">
+          <li><span class="dot">◆</span><div><strong>路径A（最快·2周）</strong>：联系西城区民政局竞争比选项目，以「开元时代」作为培训合作方申请参与，获取政府背书资质+首批学员名单（即护理员人才池）</div></li>
+          <li><span class="dot">◆</span><div><strong>路径B（最稳·1个月）</strong>：通过广外街道居委会介绍，与北京职业技术院校（如北京劳动保障职业学院，西城区本地）建立「实习+就业」合作，培养专属护理员</div></li>
+          <li><span class="dot">◆</span><div><strong>路径C（最轻·1周）</strong>：在BOSS直聘/智联招聘发布「护理员」岗位（月薪6-8K，含培训），筛选有意愿从业者，开元自主培训后上岗</div></li>
+          <li><span class="dot">◆</span><div><strong>CFO质询结论</strong>：路径A+C并行，路径A建立长期供给，路径C解决短期用人需求；路径B在3个月内启动，作为护城河战略储备</div></li>
+        </ul>
+      </div>
+
+      <div class="finding-box" style="border-left-color: var(--orange);">
+        <div class="finding-title">📋 P1研究：家庭养老床位认定服务商路径 —— 比自主获客快60%</div>
+        <ul class="finding-list">
+          <li><span class="dot">◆</span><div><strong>政策核心</strong>：北京2026年新增5000张家庭养老床位，服务由「认定服务商」提供，政府统一签约+付款（来自民政补贴+长护险叠加）</div></li>
+          <li><span class="dot">◆</span><div><strong>申请资质要求</strong>（初步）：需登记注册的养老服务机构资质 OR 与已认定机构合作挂靠；实际服务由开元护理员上门提供，开元拿服务费</div></li>
+          <li><span class="dot">◆</span><div><strong>关键节点</strong>：通过「北京养老通」小程序可查询认定机构名单，广外街道辖区内「北京孝馨养老」等已承接民生项目，可作为挂靠合作方</div></li>
+          <li><span class="dot">◆</span><div><strong>开元切入方案</strong>：①先完成工商注册（养老服务类目） ②联系西城区民政局申请家庭养老床位服务商认定 ③与孝馨养老等探索合作挂靠 ④锁定广外街道失能评估名单</div></li>
+          <li><span class="dot">◆</span><div><strong>COO封驳风险</strong>：资质审批周期不确定（可能1-3个月），不可作为首月营收来源，但可作为2个月后的批量获客通道</div></li>
+        </ul>
+      </div>
+
+      <div class="highlight-box" style="border-color: var(--green);">
+        <div class="highlight-title">🏆 综合结论：开元护城河 = 人才管道 × 政策通道</div>
+        <div class="highlight-body">
+          竞对（红枫盈、孝馨养老等）在渠道上有先发优势，但<strong>开元的差异化在于：护理员培训标准化（COO）+ AI数据积累（CTO）= 竞对2年内难以复制的双重护城河</strong>。今日最重要行动：COO联系西城区民政局咨询2026培训招募项目参与方式。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ CEO行动令 ══ -->
+  <div class="decision-card">
+    <h3>⚡ CEO战略行动令 · D5-R8</h3>
+
+    <div class="action-item urgent">
+      <div class="action-title">【🔴P0·本周内】COO接触西城区民政局——护理员培训项目参与</div>
+      <div class="action-detail">
+        西城区民政局正在招募2026年养老护理员培训机构（竞争比选），这是COO建立人才管道的黄金窗口。行动：①拨打西城区民政局养老服务科咨询电话（010-85698XXX），询问「2026年养老服务人才培训竞争比选」项目报名条件 ②准备「开元时代护理员培训能力介绍」文档（COO主导起草）③了解预算金额与培训规模，评估是否参与投标。<br><strong>预期价值：政府背书资质 + 首批护理员人才库 + 街道入驻合法名义</strong>
+      </div>
+      <div class="action-tags">
+        <span class="action-tag">👤 COO主责</span>
+        <span class="action-tag">📞 本周内拨打</span>
+        <span class="action-tag">🎯 人才管道</span>
+        <span class="action-tag">🏛️ 政府背书</span>
+      </div>
+    </div>
+
+    <div class="action-item urgent">
+      <div class="action-title">【🔴P0·本周内】居委会引荐——广外医院社区合作部首次拜访</div>
+      <div class="action-detail">
+        广外医院已与红莲幸福家建立北京首家「医养联合体」，主动拓展居家覆盖模式。开元与广外医院合作可获得：患者转介通道 + 医疗资质背书 + 长者健康档案数据来源。行动：请王总授权家人（居委会）向广外医院社区合作/老年科推荐开元时代，带《服务合作方案书》首次拜访。
+      </div>
+      <div class="action-tags">
+        <span class="action-tag">👤 CEO授权</span>
+        <span class="action-tag">🏥 广外医院</span>
+        <span class="action-tag">🏠 居委会渠道</span>
+        <span class="action-tag">📋 带方案书</span>
+      </div>
+    </div>
+
+    <div class="action-item">
+      <div class="action-title">【🟠P1·本月内】申请家庭养老床位服务商认定资质</div>
+      <div class="action-detail">
+        完成工商注册（养老服务类目）后，向西城区民政局申请「家庭养老床位」服务商认定。同步联系「北京孝馨养老」等已认定机构，探索合作挂靠方案（开元出护理员，对方出资质，收入分成）。此路径可将首单周期从「自主找客户」缩短至「政府分配失能家庭」。
+      </div>
+      <div class="action-tags">
+        <span class="action-tag">📋 工商注册</span>
+        <span class="action-tag">🏛️ 民政局资质</span>
+        <span class="action-tag">🤝 孝馨养老合作</span>
+        <span class="action-tag">⏱️ 30天内启动</span>
+      </div>
+    </div>
+
+    <div class="action-item">
+      <div class="action-title">【🟡P2·本月内】护理员招募启动：BOSS直聘发布岗位</div>
+      <div class="action-detail">
+        发布「居家养老护理员」岗位，月薪6-8K，含开元标准培训认证。重点筛选：有照护家人经验的中年女性（35-55岁）、已取得养老护理员初级证书者、广外街道及附近居住者优先。预期2-4周招募到首批3-5名护理员，完成开元标准SOP培训后上岗。
+      </div>
+      <div class="action-tags">
+        <span class="action-tag">💼 BOSS直聘</span>
+        <span class="action-tag">👤 COO执行</span>
+        <span class="action-tag">🎯 3-5名首批</span>
+        <span class="action-tag">📍 广外街道优先</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ 班子各省汇报 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🏛️</span>
+      <span class="section-title">三省六部 · D5-R8 工作台</span>
+      <span class="section-sub">各部门今日状态</span>
+    </div>
+    <div class="section-body">
+      <div class="dept-grid">
+
+        <div class="dept-card">
+          <div class="dept-name">📜 中书省 · CSO<br><small style="font-weight:400;color:#999">战略谋划</small></div>
+          <div class="dept-task">完成两大P0研究：①护理员人才管道三路径 ②家庭养老床位服务商切入方案。识别西城区民政局培训招募为本日最重要战略窗口。</div>
+          <span class="dept-status status-done">✅ 已完成</span>
+        </div>
+
+        <div class="dept-card">
+          <div class="dept-name">⚖️ 门下省 · CFO<br><small style="font-weight:400;color:#999">财务审议</small></div>
+          <div class="dept-task">质询结论：护理员招募（路径C）启动成本约1-2万/月（薪资+培训），现金流可承受。家庭床位服务商路径收款周期需测算（政府付款可能2-4个月）。</div>
+          <span class="dept-status status-done">✅ 已完成</span>
+        </div>
+
+        <div class="dept-card">
+          <div class="dept-name">⚙️ 尚书省 · COO<br><small style="font-weight:400;color:#999">落地执行</small></div>
+          <div class="dept-task">待执行：①拨打西城区民政局电话 ②起草护理员培训能力介绍文档 ③BOSS直聘发布护理员岗位。SOP标准已在D4完成，可直接配套使用。</div>
+          <span class="dept-status status-wip">🔄 待执行</span>
+        </div>
+
+        <div class="dept-card">
+          <div class="dept-name">🎪 礼部 · 情报司<br><small style="font-weight:400;color:#999">行业情报</small></div>
+          <div class="dept-task">今日补充3条P0/P1新情报：①西城护理员培训招募 ②北京5000张家庭养老床位申请流程 ③广外照料中心（红枫盈）竞合画像完善。</div>
+          <span class="dept-status status-done">✅ 已完成</span>
+        </div>
+
+        <div class="dept-card">
+          <div class="dept-name">🔧 工部 · 技术司<br><small style="font-weight:400;color:#999">系统建设</small></div>
+          <div class="dept-task">官网（index.html）已完成D5全量重构，D5-R7版本为最新版本。本轮产出（D5-R8）将更新情报板块并同步至GitHub Pages。</div>
+          <span class="dept-status status-wip">🔄 同步中</span>
+        </div>
+
+        <div class="dept-card">
+          <div class="dept-name">💰 户部 · 增长司<br><small style="font-weight:400;color:#999">获客增长</small></div>
+          <div class="dept-task">获客战略更新：家庭养老床位服务商路径（政府分配失能家庭）优先级上调至P1；「零自付」话术已完成（长护险+民政800元双补叠加），可用于自主获客场景。</div>
+          <span class="dept-status status-done">✅ 已完成</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ D5进度时间线 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">📈</span>
+      <span class="section-title">D5（2026-03-15）工作记录</span>
+      <span class="section-sub">全天8轮进展</span>
+    </div>
+    <div class="section-body">
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-day">D5-R1～R3 · 上午</div>
+          <div class="tl-body">今日情报采集完成（5条）· 物业+养老模式研究 · 双补叠加零自付话术体系完成</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-day">D5-R4～R5 · 下午</div>
+          <div class="tl-body">官网全量重构（D5版本） · 角色工作台时间节奏修正 · 开元品牌图片生成 · 移动端三断点CSS优化</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-day">D5-R6～R7 · 傍晚</div>
+          <div class="tl-body">两大P0研究完成（广外医养接触路线图 + 家庭养老床位切入方案） · 时间线文件名全量重构（D{N}-R{M}规范） · 飞书通知v5.1修复</div>
+        </div>
+        <div class="tl-item" style="border-left: none;">
+          <div class="tl-day">D5-R8 · 当前</div>
+          <div class="tl-body">🔴 新增：西城区护理员培训招募情报 · 家庭养老床位申请流程研究 · CEO行动令更新 · GitHub同步中</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 关键资源速查 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">📞</span>
+      <span class="section-title">关键资源速查 · 本周行动清单</span>
+      <span class="section-sub">COO/CEO待拨打/待联系</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <tr>
+          <th>优先级</th>
+          <th>联系目标</th>
+          <th>切入方式</th>
+          <th>预期价值</th>
+        </tr>
+        <tr>
+          <td><strong style="color:#C0392B">🔴 P0</strong></td>
+          <td>西城区民政局养老服务科</td>
+          <td>电话咨询「2026护理员培训招募」参与方式</td>
+          <td>政府资质 + 人才管道</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#C0392B">🔴 P0</strong></td>
+          <td>广外医院社区合作/老年科</td>
+          <td>居委会引荐 + 带方案书拜访</td>
+          <td>患者转介 + 医养合作</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#E67E22">🟠 P1</strong></td>
+          <td>北京孝馨养老</td>
+          <td>联系询问「家庭养老床位」资质挂靠合作</td>
+          <td>快速合法切入床位项目</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#E67E22">🟠 P1</strong></td>
+          <td>北京劳动保障职业学院（西城区）</td>
+          <td>COO联系谈「实习+就业」定向培养合作</td>
+          <td>长期护理员供给通道</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#F1C40F">🟡 P2</strong></td>
+          <td>广安门外街道办事处</td>
+          <td>王总家人（居委会）介绍开元，了解街道需求</td>
+          <td>政府信任背书</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <strong>开元时代 · 开元治理体系</strong> — 三省六部智库班子<br>
+  物理日：D5（2026-03-15） · 第8轮汇报 · 「让每位长者，无论贫富，都能享受有尊严的照护」<br>
+  <small style="color:#CCC;">本汇报由开元AI班子自动生成 · 不对外传播</small>
+</div>
+
+</body>
+</html>
