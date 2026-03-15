@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>开元时代 · D5-R9 班子战报</title>
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C876;
+      --gold-pale: #F5E6C0;
+      --pearl: #FAFAF7;
+      --cream: #F7F5EE;
+      --ink: #2C2C2C;
+      --ink-mid: #5A5A5A;
+      --ink-light: #8A8A8A;
+      --red: #C0392B;
+      --red-soft: #E74C3C;
+      --green: #27AE60;
+      --blue: #2980B9;
+      --border: #E8E0C8;
+      --shadow: 0 2px 12px rgba(201,168,76,0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--pearl);
+      color: var(--ink);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    /* ── TOP BANNER ── */
+    .top-banner {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2510 50%, #1a1510 100%);
+      padding: 28px 32px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .top-banner::before {
+      content: "";
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(201,168,76,0.03) 30px, rgba(201,168,76,0.03) 31px);
+    }
+    .banner-inner { position: relative; z-index: 1; }
+    .banner-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--gold-light);
+      letter-spacing: 2px;
+    }
+    .banner-sub {
+      font-size: 13px;
+      color: rgba(240,208,128,0.65);
+      margin-top: 4px;
+    }
+    .banner-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(201,168,76,0.18);
+      border: 1px solid rgba(201,168,76,0.35);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 12px;
+      color: var(--gold);
+      margin-top: 10px;
+    }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 820px; margin: 0 auto; padding: 28px 20px 60px; }
+
+    /* ── CARDS ── */
+    .card {
+      background: white;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .card-header {
+      background: linear-gradient(90deg, var(--cream) 0%, white 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .card-icon { font-size: 18px; }
+    .card-title { font-size: 15px; font-weight: 700; color: var(--ink); }
+    .card-meta { font-size: 12px; color: var(--ink-light); margin-left: auto; }
+    .card-body { padding: 18px 20px; }
+
+    /* ── INTEL ITEMS ── */
+    .intel-item {
+      border-left: 4px solid var(--gold);
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      background: var(--cream);
+      border-radius: 0 8px 8px 0;
+    }
+    .intel-item.p0 { border-left-color: var(--red); }
+    .intel-item.p1 { border-left-color: var(--blue); }
+    .intel-item.p2 { border-left-color: var(--green); }
+    .intel-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 5px;
+    }
+    .intel-body { font-size: 13px; color: var(--ink-mid); line-height: 1.65; }
+    .intel-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .tag {
+      font-size: 11px;
+      padding: 2px 9px;
+      border-radius: 10px;
+      background: rgba(201,168,76,0.12);
+      color: var(--gold);
+      border: 1px solid rgba(201,168,76,0.25);
+      font-weight: 600;
+    }
+    .tag.red { background: rgba(192,57,43,0.1); color: var(--red); border-color: rgba(192,57,43,0.25); }
+    .tag.blue { background: rgba(41,128,185,0.1); color: var(--blue); border-color: rgba(41,128,185,0.25); }
+    .tag.green { background: rgba(39,174,96,0.1); color: var(--green); border-color: rgba(39,174,96,0.25); }
+
+    /* ── ACTION ITEMS ── */
+    .action-item {
+      border-left: 4px solid var(--gold);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      background: var(--cream);
+      border-radius: 0 10px 10px 0;
+    }
+    .action-item.urgent { border-left-color: var(--red-soft); }
+    .action-item.high { border-left-color: var(--blue); }
+    .action-item.medium { border-left-color: var(--green); }
+    .action-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .action-detail { font-size: 13px; color: var(--ink-mid); line-height: 1.65; }
+    .action-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+
+    /* ── STRATEGY BOX ── */
+    .strategy-box {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2a2010 100%);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(201,168,76,0.3);
+    }
+    .strategy-title { font-size: 13px; font-weight: 700; color: var(--gold-light); margin-bottom: 8px; }
+    .strategy-body { font-size: 13px; color: rgba(240,208,128,0.75); line-height: 1.7; }
+
+    /* ── DATA TABLE ── */
+    .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .data-table th {
+      background: var(--cream);
+      color: var(--ink-mid);
+      font-weight: 600;
+      padding: 9px 12px;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+    }
+    .data-table td { padding: 9px 12px; border-bottom: 1px solid #F0EBE0; color: var(--ink); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: var(--cream); }
+
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+
+    /* ── BADGE ── */
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .badge-red { background: rgba(192,57,43,0.12); color: var(--red); }
+    .badge-gold { background: rgba(201,168,76,0.15); color: var(--gold); }
+    .badge-blue { background: rgba(41,128,185,0.12); color: var(--blue); }
+    .badge-green { background: rgba(39,174,96,0.12); color: var(--green); }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight-box {
+      background: linear-gradient(90deg, rgba(201,168,76,0.08) 0%, rgba(201,168,76,0.03) 100%);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+    }
+    .highlight-label { font-size: 11px; font-weight: 700; color: var(--gold); margin-bottom: 5px; letter-spacing: 1px; }
+    .highlight-content { font-size: 13px; color: var(--ink); line-height: 1.7; }
+
+    /* ── FOOTER ── */
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: var(--ink-light);
+      border-top: 1px solid var(--border);
+      margin-top: 30px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .top-banner { padding: 20px 16px; }
+      .banner-title { font-size: 18px; }
+      .container { padding: 16px 12px 40px; }
+      .card-body { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ TOP BANNER ══ -->
+<div class="top-banner">
+  <div class="banner-inner">
+    <div class="banner-title">开元时代 · 班子战报</div>
+    <div class="banner-sub">三省六部 · 高维战略协同 · 2026年3月15日（星期日）</div>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+      <span class="banner-badge">📅 物理日 D5</span>
+      <span class="banner-badge">🔄 今日第 R9 轮</span>
+      <span class="banner-badge">🏛️ 储备期进行中</span>
+      <span class="banner-badge">🎯 首战城市·北京广外</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ══ 今日情报摘要 ══ -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-icon">📰</span>
+      <span class="card-title">礼部·今日行业情报</span>
+      <span class="card-meta">D5 晚间更新版</span>
+    </div>
+    <div class="card-body">
+
+      <div class="intel-item p0">
+        <div class="intel-title">🔴【P0·极高】北京发改委点名「广外街道+广外医院」智慧康养模式</div>
+        <div class="intel-body">
+          北京市发改委2026年计划报告明确指出：西城区广外街道区域养老服务中心与广外医院共同打造<strong>智慧康养模式</strong>，被列为北京市医养结合标杆案例。2026年北京市将启动医养结合促进行动，推动街道医疗机构与养老服务设施同址或毗邻建设。
+        </div>
+        <div class="intel-tags">
+          <span class="tag red">⭐⭐⭐ 极高相关</span>
+          <span class="tag">广外首战场域</span>
+          <span class="tag">广外医院=P0接触目标</span>
+          <span class="tag">政策聚光灯下</span>
+        </div>
+      </div>
+
+      <div class="intel-item p0">
+        <div class="intel-title">🔴【P0·高相关】《北京市养老服务条例》2026年7月1日起施行·家庭养老床位入法</div>
+        <div class="intel-body">
+          《北京市养老服务条例》确定2026年7月1日起施行。条例明确：符合条件的失能长者家庭可申请<strong>「家庭养老床位」</strong>，获得居家适老化改造、智能化配置、上门照护等服务；推出「家政+养老」融合模式，明确医养结合路径。北京市将<strong>新增家庭养老床位5000张</strong>。
+        </div>
+        <div class="intel-tags">
+          <span class="tag red">⭐⭐⭐ 高相关</span>
+          <span class="tag">7月1日施行</span>
+          <span class="tag">开元切入法律依据</span>
+          <span class="tag">5000张新增床位</span>
+        </div>
+      </div>
+
+      <div class="intel-item p1">
+        <div class="intel-title">🟠【P1】失能补贴800元/月·北京西城已落地·「零自付」话术成立</div>
+        <div class="intel-body">
+          2026年1月1日起，民政部、财政部新政：中度及以上失能长者每月最高800元养老服务消费补贴（电子消费券形式）。北京西城区居民已有成功申领案例报道。结合长护险居家护理报销70-75%，多地失能长者居家护理费<strong>可实现「零自付」</strong>。
+        </div>
+        <div class="intel-tags">
+          <span class="tag">⭐⭐⭐ 高相关</span>
+          <span class="tag">800元/月落地</span>
+          <span class="tag">C端销售最强话术</span>
+          <span class="tag">零自付模型</span>
+        </div>
+      </div>
+
+      <div class="intel-item p1">
+        <div class="intel-title">🟠【P1】广外街道「1+6+29养老服务模式」·嵌入式格局已成型</div>
+        <div class="intel-body">
+          广外街道养老照料中心（手帕口南街80号）已持有《养老机构设立许可证》+《医疗机构执业许可证》，2025年通过ISO9001认证，床位入住率95%以上，被列为<strong>《西城区养老服务设施建设指南》标杆案例</strong>。广外"家政服务超市"2026-02-09正式开启，覆盖保洁、养老、陪诊服务。
+        </div>
+        <div class="intel-tags">
+          <span class="tag blue">⭐⭐ 中高相关</span>
+          <span class="tag">竞对分析</span>
+          <span class="tag">嵌入式格局</span>
+          <span class="tag">1+6+29模式</span>
+        </div>
+      </div>
+
+      <div class="intel-item p2">
+        <div class="intel-title">🟡【P2】「两新」政策将适老化改造纳入大规模设备更新补贴</div>
+        <div class="intel-body">
+          国家发改委、财政部通知将适老化改造列为核心支持方向，覆盖设备更新补贴、消费品以旧换新、适老化产品专项支持三类，可降低客户决策门槛，配合开元T11硬件BOM优化。
+        </div>
+        <div class="intel-tags">
+          <span class="tag green">⭐ 中相关</span>
+          <span class="tag">两新补贴</span>
+          <span class="tag">T11辅助</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ 中书省·战略洞察 ══ -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-icon">🏛️</span>
+      <span class="card-title">中书省·D5战略洞察</span>
+      <span class="card-meta">CSO · 苏格拉底质询</span>
+    </div>
+    <div class="card-body">
+
+      <div class="strategy-box">
+        <div class="strategy-title">🔮 核心判断：广外街道已是「政策+市场+媒体」三重聚光灯下的最优首战场域</div>
+        <div class="strategy-body">
+          北京发改委官方点名广外街道+广外医院 → 这意味着政府已主动为该街道的医养结合模式背书。<br>
+          开元选择广外首战，不是「碰巧」，而是正处于2026年北京养老政策的「风口聚焦区」。<br><br>
+          关键战略转变：从「找客户」思维，转向「进入已被政策加持的生态位」思维。
+          开元以「居家上门服务商」身份进入，与官方倡导的「医养结合+家庭养老床位」完全契合。
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-label">⚡ 7月1日窗口期战略意义</div>
+        <div class="highlight-content">
+          《北京市养老服务条例》7月1日施行，「家庭养老床位」有法律依据。<br>
+          当前（3月）距施行还有<strong>3.5个月</strong>——这是开元以「家庭养老床位服务商」身份预注册、建立合规档案的最佳窗口期。<br>
+          <strong>先发优势：</strong>在7月1日前完成资质对接，即可在条例施行时同步推出合规服务，获得首批政策红利。
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-label">💰 「零自付」话术验证</div>
+        <div class="highlight-content">
+          失能补贴800元/月（全国统一）+ 长护险居家报销70-75% + 两新适老化改造补贴 → 组合计算：<br>
+          以中度失能长者月照护费用3000元为例：800元补贴 + 长护险报销约1500元 = 实际自付约700元。<br>
+          <strong>结论：「实际自付低至700元/月」是真实且可验证的销售话术核心。</strong>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ CEO行动令 ══ -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-icon">⚡</span>
+      <span class="card-title">CEO战略行动令 · D5-R9</span>
+      <span class="card-meta">优先级排序版</span>
+    </div>
+    <div class="card-body">
+
+      <div class="action-item urgent">
+        <div class="action-title">【🔴 P0·本周内】联系广外医院——医养合作意向探测</div>
+        <div class="action-detail">
+          北京发改委已将广外医院+广外街道列为官方标杆，这是天赐的「政策背书合作方」。行动步骤：<br>
+          ① 确认广外医院（广安门外大街269号）联系方式，拨打行政/合作部门<br>
+          ② 话术：「我们是开元时代居家养老服务公司，了解到贵院与广外街道正在推进智慧康养合作，希望探讨居家上门护理服务的协同可能」<br>
+          ③ 目标：获得一次15分钟的面谈机会，了解医院侧对居家服务商的需求<br>
+          <strong>预期价值：医疗背书 + 转介绍渠道 + 政策合规性提升</strong>
+        </div>
+        <div class="action-tags">
+          <span class="tag red">👤 CEO/COO主责</span>
+          <span class="tag red">📞 本周内接触</span>
+          <span class="tag">🏥 广外医院</span>
+          <span class="tag">🤝 医养合作</span>
+        </div>
+      </div>
+
+      <div class="action-item urgent">
+        <div class="action-title">【🔴 P0·3月底前】完成「家庭养老床位」资质预准备</div>
+        <div class="action-detail">
+          《北京市养老服务条例》7月1日施行，「家庭养老床位」有法律依据。当前3.5个月是先发窗口期。行动步骤：<br>
+          ① 研究北京民政局「家庭养老床位」申请条件（资质要求、服务标准、备案流程）<br>
+          ② COO起草「开元时代居家照护服务标准」对标家庭养老床位要求<br>
+          ③ CFO核算：家庭养老床位政府补贴单价 × 预期规模 → 现金流模型<br>
+          <strong>预期价值：7月1日政策红利首发资格 + 法律合规经营身份</strong>
+        </div>
+        <div class="action-tags">
+          <span class="tag red">👤 COO+CFO协作</span>
+          <span class="tag red">📅 3月底前完成</span>
+          <span class="tag">📋 资质准备</span>
+          <span class="tag">⚖️ 法律合规</span>
+        </div>
+      </div>
+
+      <div class="action-item high">
+        <div class="action-title">【🔵 P1·下周内】整理「零自付」C端销售话术并写入SOP</div>
+        <div class="action-detail">
+          800元失能补贴+长护险组合，「实际自付低至700元/月」是最强获客钩子。COO将此写入《开元时代居家服务销售SOP》B章节（C端转化）。<br>
+          话术示例：「阿姨您符合条件的话，政府每月补贴800元，长护险还能报销70%，您实际每月只需要付700元左右，就能有专业护理员每周上门5次。」<br>
+          <strong>要求：用初中文化水平的家属能听懂的语言表达，不用术语。</strong>
+        </div>
+        <div class="action-tags">
+          <span class="tag blue">👤 COO主责</span>
+          <span class="tag blue">📅 下周内</span>
+          <span class="tag">📝 写入SOP</span>
+          <span class="tag">💬 C端话术</span>
+        </div>
+      </div>
+
+      <div class="action-item high">
+        <div class="action-title">【🔵 P1·下周内】CTO启动心言「巴布」陪伴机器人选型评估（补充T11课题）</div>
+        <div class="action-detail">
+          全国政协委员提案将合规适老型陪伴机器人纳入政府采购目录，心言集团「巴布」已在北京台春晚亮相。若补贴目录落地，开元CTO提前完成选型可获得先发优势。<br>
+          CTO任务：① 查询心言「巴布」技术规格、月租/购买价格、API开放程度；② 评估与开元AI陪伴系统的集成可行性；③ 若价格合理，列为T11课题备选方案。
+        </div>
+        <div class="action-tags">
+          <span class="tag blue">👤 CTO主责</span>
+          <span class="tag blue">📅 下周内</span>
+          <span class="tag">🤖 硬件选型</span>
+          <span class="tag">🎯 T11课题</span>
+        </div>
+      </div>
+
+      <div class="action-item medium">
+        <div class="action-title">【🟢 P2·本月内】研究广外街道「1+6+29模式」竞对格局，找差异化切入缝隙</div>
+        <div class="action-detail">
+          广外街道养老照料中心（官方）已有50张床位、95%入住率、多项资质。开元不与之正面竞争，而是<strong>找缝隙</strong>：<br>
+          ① 官方中心服务范围盲区（接待能力有限，居家上门服务覆盖率低）<br>
+          ② 等待时间长的家庭（机构入住排队，居家服务即时可约）<br>
+          ③ 中高端家庭（800-1500元/次的专业护理，官方中心定位中低端）<br>
+          <strong>目标：找到3-5个官方体系服务不到的精准细分场景。</strong>
+        </div>
+        <div class="action-tags">
+          <span class="tag green">👤 CSO主责</span>
+          <span class="tag green">📅 本月内</span>
+          <span class="tag">🔍 竞对研究</span>
+          <span class="tag">🎯 差异化定位</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ D5全日进展总结 ══ -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-icon">📊</span>
+      <span class="card-title">D5全日进展总结</span>
+      <span class="card-meta">R1→R9 · 今日总结</span>
+    </div>
+    <div class="card-body">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>轮次</th>
+            <th>主要产出</th>
+            <th>状态</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-gold">R1-R3</span></td>
+            <td>班子晨报系列、双部制架构研究、物业渠道调研</td>
+            <td><span class="badge badge-green">✅ 完成</span></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-gold">R4-R5</span></td>
+            <td>系统架构重构、移动端全面改写、双部制研究深化</td>
+            <td><span class="badge badge-green">✅ 完成</span></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-gold">R6-R7</span></td>
+            <td>品牌图片生成、全量汇报、开元AI陪伴系统规划</td>
+            <td><span class="badge badge-green">✅ 完成</span></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-gold">R8</span></td>
+            <td>班子晨报（含西城区民政局护理培训P0行动令）</td>
+            <td><span class="badge badge-green">✅ 完成</span></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-red">R9（本轮）</span></td>
+            <td>晚间情报整合 + 广外医院P0行动令 + 7月法规窗口期布局</td>
+            <td><span class="badge badge-blue">🔄 进行中</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr class="divider">
+
+      <div class="highlight-box">
+        <div class="highlight-label">🏆 D5核心里程碑</div>
+        <div class="highlight-content">
+          • 系统命名正式确认：「开元治理体系」三省六部已运行<br>
+          • 联创团队架构确认：CEO + 联创COO（人才护城河）+ 联创CTO（技术护城河）<br>
+          • 品牌定位升级：AI时代医养服务公司 · 居家照护数据基础设施提供者<br>
+          • 首战场域验证：广外街道获北京发改委官方背书，战略选择正确<br>
+          • 关键政策窗口发现：7月1日《北京市养老服务条例》施行前的3.5个月先发期
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 明日预案 ══ -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-icon">🌅</span>
+      <span class="card-title">D6（明日·3月16日）预案</span>
+      <span class="card-meta">中书省·规划</span>
+    </div>
+    <div class="card-body">
+
+      <div class="intel-item">
+        <div class="intel-title">📋 D6开盘三件事（优先级排序）</div>
+        <div class="intel-body">
+          1. 【礼部·自动】采集D6行业情报日报（若当日未采集）<br>
+          2. 【中书省·研究】深度研究「家庭养老床位」北京落地政策·开元切入路线图<br>
+          3. 【中书省·研究】广外医院接触话术设计·COO拜访准备材料
+        </div>
+        <div class="intel-tags">
+          <span class="tag">📅 明日D6</span>
+          <span class="tag">🏛️ 中书省主导</span>
+        </div>
+      </div>
+
+      <div class="strategy-box">
+        <div class="strategy-title">⚡ D6核心议题推荐（中书省立项）</div>
+        <div class="strategy-body">
+          议题A（P0）：「家庭养老床位」北京落地政策 × 开元资质准备路线图<br>
+          议题B（P0）：广外医院接触方案 · 话术设计 · 预约模板<br>
+          议题C（P1）：「零自付」销售话术 × C端转化SOP B章节初稿<br><br>
+          建议CEO确认优先级后，中书省D6开盘即启动研究。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    开元时代 · 三省六部班子 · D5-R9 · 2026年3月15日晚<br>
+    <span style="color:var(--gold)">「让每一位长者，无论贫富，都能享受有尊严的照护」</span>
+  </div>
+
+</div>
+</body>
+</html>
