@@ -2,6 +2,7 @@
 
 ## 一、研究院课题（T系列 · 一手数据研究）
 
+- **2026-03-15** | Day17 P1研究完成：双补叠加零自付获客话术体系+四场景标准化话术+双补计算器物料设计 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | Day17班子汇报：物业+养老入局路径研究+双补零自付话术体系+今日情报5条 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | Day17中书省专项研究：物业+养老广外入局路径分析+今日情报5条 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | Day16班子汇报：北京家庭养老床位准入路径研究+双补商业模型+今日情报日报 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
