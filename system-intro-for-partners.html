@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>开元时代 · 人机协同系统介绍 · 2026-03-15</title>
+<style>
+  :root {
+    --gold: #9B6A1A; --gold-light: #C4892A;
+    --bg: #FAFAF8; --bg2: #F2F1ED; --bg3: #ECEAE4;
+    --text: #1C1C1E; --muted: #6C6C70; --border: rgba(139,105,20,0.15);
+    --green: #1D7A45; --blue: #1A56A8; --red: #C0392B; --amber: #C87D0E;
+    --purple: #6B3FA0;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text); line-height:1.75; }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(160deg, #1C1008 0%, #3A2410 40%, #5A3C1C 70%, #2C1F0A 100%);
+    color: #F0E6D2; padding: 60px 48px 48px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; top: -60px; right: -60px;
+    width: 320px; height: 320px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,137,42,0.12) 0%, transparent 70%);
+  }
+  .hero-tag { font-size: 11px; letter-spacing: 5px; color: #C4892A; margin-bottom: 16px; text-transform: uppercase; }
+  .hero h1 { font-size: 38px; font-weight: 800; letter-spacing: 1px; margin-bottom: 10px; }
+  .hero h1 span { color: #C4892A; }
+  .hero .tagline { font-size: 16px; color: #C8B890; margin-bottom: 32px; max-width: 600px; line-height: 1.8; }
+  .hero-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero-meta span { background: rgba(196,137,42,0.15); border: 1px solid rgba(196,137,42,0.35); border-radius: 20px; padding: 5px 16px; font-size: 12px; color: #C4892A; }
+
+  /* ── 布局 ── */
+  .container { max-width: 960px; margin: 0 auto; padding: 48px 40px; }
+  .section { margin-bottom: 56px; }
+  h2 { font-size: 22px; font-weight: 700; margin-bottom: 20px; padding-left: 14px; border-left: 4px solid var(--gold); display: flex; align-items: center; gap: 10px; }
+  h3 { font-size: 16px; font-weight: 700; margin: 24px 0 12px; color: var(--text); }
+  p { font-size: 14px; color: var(--muted); margin-bottom: 12px; }
+  strong { color: var(--text); }
+
+  /* ── 架构图 ── */
+  .arch-diagram {
+    background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 32px;
+    margin: 20px 0; display: grid; grid-template-columns: 1fr; gap: 12px;
+  }
+  .arch-layer { display: flex; gap: 10px; align-items: stretch; }
+  .arch-label { writing-mode: vertical-rl; text-orientation: mixed; font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); min-width: 24px; text-align: center; padding: 8px 0; background: var(--bg2); border-radius: 6px; }
+  .arch-nodes { flex: 1; display: flex; gap: 10px; flex-wrap: wrap; }
+  .arch-node { flex: 1; min-width: 120px; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; }
+  .arch-node.highlight { background: rgba(155,106,26,0.08); border-color: rgba(155,106,26,0.3); }
+  .arch-node .icon { font-size: 18px; margin-bottom: 4px; }
+  .arch-node h4 { font-size: 12px; font-weight: 700; margin-bottom: 3px; }
+  .arch-node p { font-size: 11px; color: var(--muted); margin: 0; }
+
+  /* ── 能力卡片网格 ── */
+  .cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }
+  .cap-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .cap-card .cap-icon { font-size: 24px; margin-bottom: 10px; }
+  .cap-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .cap-card p { font-size: 12px; color: var(--muted); margin: 0; line-height: 1.6; }
+  .cap-card .cap-status { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 600; padding: 2px 10px; border-radius: 20px; }
+  .status-live { background: rgba(29,122,69,0.1); color: var(--green); }
+  .status-wip { background: rgba(200,125,14,0.1); color: var(--amber); }
+  .status-plan { background: rgba(26,86,168,0.1); color: var(--blue); }
+  @media(max-width:680px){ .cap-grid{ grid-template-columns: 1fr; } }
+
+  /* ── 流程步骤 ── */
+  .flow { display: flex; gap: 0; margin: 20px 0; flex-wrap: nowrap; overflow-x: auto; }
+  .flow-step { flex: 1; min-width: 120px; background: var(--bg2); border: 1px solid var(--border); padding: 16px 14px; text-align: center; position: relative; }
+  .flow-step + .flow-step { border-left: none; }
+  .flow-step:first-child { border-radius: 10px 0 0 10px; }
+  .flow-step:last-child { border-radius: 0 10px 10px 0; }
+  .flow-step .step-num { font-size: 10px; color: var(--muted); margin-bottom: 4px; }
+  .flow-step h4 { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+  .flow-step p { font-size: 11px; color: var(--muted); margin: 0; }
+  .flow-step.active { background: rgba(155,106,26,0.08); border-color: var(--gold); }
+  .flow-arrow { display: flex; align-items: center; color: var(--muted); font-size: 16px; padding: 0 4px; flex-shrink: 0; }
+
+  /* ── 数字统计 ── */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 20px 0; }
+  .stat-box { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+  .stat-box .n { font-size: 36px; font-weight: 800; color: var(--gold); }
+  .stat-box .u { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+  @media(max-width:680px){ .stats{ grid-template-columns: repeat(2,1fr); } }
+
+  /* ── 路线图 ── */
+  .roadmap { margin: 20px 0; }
+  .rm-phase { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-bottom: 12px; display: flex; gap: 20px; align-items: flex-start; }
+  .rm-phase-tag { min-width: 90px; padding: 6px 12px; border-radius: 8px; text-align: center; font-size: 11px; font-weight: 700; }
+  .phase-now { background: rgba(29,122,69,0.1); color: var(--green); }
+  .phase-q2 { background: rgba(155,106,26,0.1); color: var(--gold); }
+  .phase-q3 { background: rgba(26,86,168,0.1); color: var(--blue); }
+  .phase-2027 { background: rgba(107,63,160,0.1); color: var(--purple); }
+  .rm-content h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .rm-content p { font-size: 13px; color: var(--muted); margin: 0; }
+  .rm-content ul { margin: 6px 0 0 16px; }
+  .rm-content li { font-size: 13px; color: var(--muted); margin-bottom: 3px; }
+
+  /* ── 引用 ── */
+  .quote-box {
+    background: linear-gradient(135deg, rgba(155,106,26,0.06), rgba(155,106,26,0.02));
+    border: 1px solid rgba(155,106,26,0.2); border-left: 4px solid var(--gold);
+    border-radius: 12px; padding: 24px 28px; margin: 20px 0;
+  }
+  .quote-box p { font-size: 15px; color: var(--text); font-style: italic; margin-bottom: 8px; line-height: 1.8; }
+  .quote-box .author { font-size: 12px; color: var(--muted); }
+
+  /* ── 系统详情表 ── */
+  .sys-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 16px 0; }
+  .sys-table th { background: var(--bg2); padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); font-size: 12px; color: var(--muted); }
+  .sys-table td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .sys-table tr:last-child td { border-bottom: none; }
+  .tag { display: inline-block; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+  .tag-green { background: rgba(29,122,69,0.1); color: var(--green); }
+  .tag-amber { background: rgba(200,125,14,0.1); color: var(--amber); }
+  .tag-blue { background: rgba(26,86,168,0.1); color: var(--blue); }
+
+  .divider { height: 1px; background: var(--border); margin: 48px 0; }
+  .disclaimer { font-size: 11px; color: var(--muted); text-align: center; padding: 32px; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="hero-tag">开元时代 · 系统能力介绍 · 2026-03-15</div>
+  <h1>人机协同 · <span>开元操作系统</span></h1>
+  <div class="tagline">
+    一个人 × 一套AI系统 × 一个使命——<br>
+    让每一位长者，无论贫富，都能有尊严地老去。<br>
+    <strong style="color:#E8C87A">以下是开元时代储备期已建成的完整人机协同能力体系。</strong>
+  </div>
+  <div class="hero-meta">
+    <span>📅 储备期第18天</span>
+    <span>🏛️ 三省六部制治理</span>
+    <span>🤖 AI 24小时在线</span>
+    <span>📊 每日自动产出</span>
+    <span>🌐 GitHub Pages 公开站</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ── 一句话定位 ── -->
+  <div class="section">
+    <div class="quote-box">
+      <p>「开元时代」不只是一个养老创业项目，它是中国第一个由 CEO + AI 班子共同运营的「人机协同创业实验」——在正式启动前的储备期，我们已经建立了一套完整的自动化情报、研究、决策和沟通系统。</p>
+      <div class="author">—— 王晶晶，开元时代 CEO，2026年3月</div>
+    </div>
+  </div>
+
+  <!-- ── 系统架构图 ── -->
+  <div class="section">
+    <h2>🏗️ 系统整体架构</h2>
+    <p>开元操作系统分为四层，从外部情报输入到内部决策执行，全链路自动化：</p>
+
+    <div class="arch-diagram">
+      <div class="arch-layer">
+        <div class="arch-label">感知层</div>
+        <div class="arch-nodes">
+          <div class="arch-node highlight">
+            <div class="icon">📡</div>
+            <h4>行业情报采集</h4>
+            <p>搜狗微信/百度新闻自动抓取，每日3次触发</p>
+          </div>
+          <div class="arch-node highlight">
+            <div class="icon">📜</div>
+            <h4>政策监测</h4>
+            <p>两会/民政部/西城区政策实时追踪</p>
+          </div>
+          <div class="arch-node highlight">
+            <div class="icon">🔍</div>
+            <h4>竞对监测</h4>
+            <p>大众点评/天眼查竞争对手动态</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-layer">
+        <div class="arch-label">思考层</div>
+        <div class="arch-nodes">
+          <div class="arch-node highlight">
+            <div class="icon">🏛️</div>
+            <h4>三省六部 Multi-Agent</h4>
+            <p>中书省(CSO)·门下省(CFO)·尚书省六部，AI扮演各角色独立分析</p>
+          </div>
+          <div class="arch-node highlight">
+            <div class="icon">🧠</div>
+            <h4>苏格拉底质询引擎</h4>
+            <p>起草→质询→突破→修正结论，每个结论都经过四线交叉验证</p>
+          </div>
+          <div class="arch-node highlight">
+            <div class="icon">🔬</div>
+            <h4>研究院知识库</h4>
+            <p>九大主题T01-T09，每题双版本(v1原稿+v2质询修正)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-layer">
+        <div class="arch-label">产出层</div>
+        <div class="arch-nodes">
+          <div class="arch-node">
+            <div class="icon">📊</div>
+            <h4>可视化HTML汇报</h4>
+            <p>每日班子汇报，珍珠白主题，自动生成</p>
+          </div>
+          <div class="arch-node">
+            <div class="icon">📰</div>
+            <h4>行业日报</h4>
+            <p>每日养老行业精选3条，自动推送</p>
+          </div>
+          <div class="arch-node">
+            <div class="icon">🌐</div>
+            <h4>官网工作台</h4>
+            <p>GitHub Pages，密码保护，PC/移动双端</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-layer">
+        <div class="arch-label">执行层</div>
+        <div class="arch-nodes">
+          <div class="arch-node">
+            <div class="icon">📲</div>
+            <h4>飞书机器人</h4>
+            <p>小猴伙伴，接收指令+推送结果，双向闭环</p>
+          </div>
+          <div class="arch-node">
+            <div class="icon">⚙️</div>
+            <h4>LaunchAgent 调度</h4>
+            <p>macOS系统级定时触发，每日自动执行</p>
+          </div>
+          <div class="arch-node">
+            <div class="icon">🔄</div>
+            <h4>CEO反馈闭环</h4>
+            <p>任务反馈→AI分析→迭代改进，持续学习</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 已建成系统数字 ── -->
+  <div class="section">
+    <h2>📊 储备期18天，系统已产出</h2>
+    <div class="stats">
+      <div class="stat-box"><div class="n">18</div><div class="u">天连续班子汇报<br>每天自动生成</div></div>
+      <div class="stat-box"><div class="n">9</div><div class="u">大研究主题<br>双版本质询完成</div></div>
+      <div class="stat-box"><div class="n">44+</div><div class="u">官网文件/交付物<br>全部可公开访问</div></div>
+      <div class="stat-box"><div class="n">3×</div><div class="u">每日自动触发<br>AI自主完成任务</div></div>
+    </div>
+  </div>
+
+  <!-- ── 核心系统能力详情 ── -->
+  <div class="section">
+    <h2>⚡ 六大核心系统能力</h2>
+    <div class="cap-grid">
+
+      <div class="cap-card">
+        <div class="cap-icon">🤖</div>
+        <h4>① 三省六部 Multi-Agent</h4>
+        <p>AI同时扮演CSO（战略）、CFO（财务）、COO（运营）、CGO（政府）、CMO（市场）、CTO（科技）、CLO（法务）七个角色，就同一议题从不同视角独立分析，再苏格拉底质询交叉验证。</p>
+        <span class="cap-status status-live">✅ 已上线</span>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-icon">📡</div>
+        <h4>② 行业情报双轨机制</h4>
+        <p>每日自动抓取搜狗微信、百度新闻、今日头条的养老行业动态，生成精选日报（3条核心信息）+ 中书省提炼P0级战略议题。完全无需人工搜索。</p>
+        <span class="cap-status status-live">✅ 已上线</span>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-icon">📲</div>
+        <h4>③ 飞书指令-结果双向闭环</h4>
+        <p>「小猴伙伴」机器人监听飞书消息：王总发指令 → AI解析执行 → 结果推送回飞书。支持「帮我、生成、搜索、分析」等触发词，形成人机交互闭环。</p>
+        <span class="cap-status status-live">✅ 已上线</span>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-icon">🌐</div>
+        <h4>④ 官网工作台（GitHub Pages）</h4>
+        <p>密码保护的PC+移动双端官网，每次AI产出自动同步。包含工作日志、交付库、研究院、团队介绍、年度作战计划五大模块。随时可向合作伙伴/投资人分享。</p>
+        <span class="cap-status status-live">✅ 已上线</span>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-icon">📚</div>
+        <h4>⑤ 飞书知识库</h4>
+        <p>六大分类知识库：班子汇报、行业日报、研究院九大主题、团队建设、财务规划、政策追踪。全部连接飞书云文档，支持多人协作编辑和权限管控。</p>
+        <span class="cap-status status-live">✅ 已上线</span>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-icon">🔄</div>
+        <h4>⑥ CEO反馈自动分析引擎</h4>
+        <p>王总对任务打分/备注 → AI读取反馈 → 分析问题根因 → 生成改进行动计划 → 写入待执行队列。系统会持续学习CEO偏好并自动优化输出质量。</p>
+        <span class="cap-status status-live">✅ 已上线（Day18新增）</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── 每日工作流程 ── -->
+  <div class="section">
+    <h2>⏰ 每日自动执行流程</h2>
+    <p>以下是AI在无人干预情况下，每天自动完成的工作链路：</p>
+
+    <div class="flow">
+      <div class="flow-step active">
+        <div class="step-num">08:00</div>
+        <h4>情报采集</h4>
+        <p>搜狗/百度抓取养老新闻</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step active">
+        <div class="step-num">08:05</div>
+        <h4>班子分析</h4>
+        <p>三省六部各角色解读</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step active">
+        <div class="step-num">08:15</div>
+        <h4>汇报生成</h4>
+        <p>珍珠白HTML可视化</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step active">
+        <div class="step-num">08:20</div>
+        <h4>官网同步</h4>
+        <p>Git提交至GitHub Pages</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step active">
+        <div class="step-num">08:25</div>
+        <h4>飞书推送</h4>
+        <p>小猴伙伴发送给王总</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="step-num">随时</div>
+        <h4>CEO反馈</h4>
+        <p>王总打分/批注</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="step-num">自动</div>
+        <h4>迭代改进</h4>
+        <p>AI分析反馈，优化下次</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 系统组件详情 ── -->
+  <div class="section">
+    <h2>🔧 已部署系统组件清单</h2>
+    <table class="sys-table">
+      <tr>
+        <th>组件名称</th>
+        <th>功能描述</th>
+        <th>技术实现</th>
+        <th>状态</th>
+      </tr>
+      <tr>
+        <td><strong>kaiyuan-agent.py</strong></td>
+        <td>核心AI代理，协调三省六部多角色分析，生成班子汇报</td>
+        <td>Python + Anthropic API</td>
+        <td><span class="tag tag-green">运行中</span></td>
+      </tr>
+      <tr>
+        <td><strong>kaiyuan-multi-agent.py</strong></td>
+        <td>多智能体协作版，支持并行多角色同时工作</td>
+        <td>Python + 多线程</td>
+        <td><span class="tag tag-green">运行中</span></td>
+      </tr>
+      <tr>
+        <td><strong>feishu/feishu_bot.py</strong></td>
+        <td>小猴伙伴飞书机器人，监听指令+推送结果</td>
+        <td>Lark OpenAPI + WebSocket</td>
+        <td><span class="tag tag-green">运行中</span></td>
+      </tr>
+      <tr>
+        <td><strong>LaunchAgent × 3</strong></td>
+        <td>macOS系统级定时任务，每日3次触发AI自动作业</td>
+        <td>macOS LaunchAgent plist</td>
+        <td><span class="tag tag-green">运行中</span></td>
+      </tr>
+      <tr>
+        <td><strong>GitHub Pages 官网</strong></td>
+        <td>密码保护工作台，PC+移动双端，每日自动更新</td>
+        <td>HTML/CSS/JS + GitHub Actions</td>
+        <td><span class="tag tag-green">运行中</span></td>
+      </tr>
+      <tr>
+        <td><strong>飞书知识库</strong></td>
+        <td>六大分类，49个文档，支持多人协作</td>
+        <td>Feishu Drive API</td>
+        <td><span class="tag tag-green">运行中</span></td>
+      </tr>
+      <tr>
+        <td><strong>研究院 T01-T09</strong></td>
+        <td>九大主题可视化HTML报告，含苏格拉底质询记录</td>
+        <td>Python 生成 + 本地HTTP服务</td>
+        <td><span class="tag tag-green">完成</span></td>
+      </tr>
+      <tr>
+        <td><strong>search-bridge.py</strong></td>
+        <td>搜索引擎桥接，支持搜狗微信/百度/Tavily多源</td>
+        <td>Python requests + BeautifulSoup</td>
+        <td><span class="tag tag-green">运行中</span></td>
+      </tr>
+      <tr>
+        <td><strong>CEO反馈分析引擎</strong></td>
+        <td>读取任务反馈，自动生成改进计划，写入待执行队列</td>
+        <td>Python + Anthropic API</td>
+        <td><span class="tag tag-amber">新上线</span></td>
+      </tr>
+      <tr>
+        <td><strong>双补计算器</strong></td>
+        <td>民政补贴+长护险叠加计算工具，含四场景话术库</td>
+        <td>HTML + JavaScript</td>
+        <td><span class="tag tag-green">完成</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── 下一步计划 ── -->
+  <div class="section">
+    <h2>🗺️ 下一步建设计划（2026 Q1-Q3）</h2>
+
+    <div class="roadmap">
+      <div class="rm-phase">
+        <div class="rm-phase-tag phase-now">当前<br>3月</div>
+        <div class="rm-content">
+          <h4>系统深化期 · 储备期尾声</h4>
+          <ul>
+            <li>完善飞书知识库：班子汇报+行业日报板块按新标准重建</li>
+            <li>AI图标生成：开元时代品牌视觉完善（Gemini图像）</li>
+            <li>双端官网优化：PC工作台 vs 移动名片页彻底分离</li>
+            <li>合伙人体系文档：社区服务官招募SOP完成</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rm-phase">
+        <div class="rm-phase-tag phase-q2">2026 Q2<br>4-6月</div>
+        <div class="rm-content">
+          <h4>系统验证期 · 真实服务接入</h4>
+          <ul>
+            <li><strong>P0：找到第一个服务家庭</strong>（通过居委会人脉）</li>
+            <li>AI系统接入真实服务数据：护理员排班、服务记录、家属反馈</li>
+            <li>双补申请系统：B1资质办理，长护险申请流程自动化</li>
+            <li>护理员管理系统：招募评估、三层留存机制落地</li>
+            <li>系统稳定性：从「每次对话触发」升级为「完全自主运行」</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rm-phase">
+        <div class="rm-phase-tag phase-q3">2026 Q3<br>7-9月</div>
+        <div class="rm-content">
+          <h4>规模复制期 · 10户验证目标</h4>
+          <ul>
+            <li>服务10个家庭，NPS > 8分</li>
+            <li>AI客服系统：自动接受家庭咨询，初步筛选意向家庭</li>
+            <li>财务自动化：每月P&L自动生成，补贴到账追踪</li>
+            <li>知识库对外版：可向投资人/合作伙伴展示的精选版</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rm-phase">
+        <div class="rm-phase-tag phase-2027">2027年<br>正式启动</div>
+        <div class="rm-content">
+          <h4>全面运营期 · 100万资金到位</h4>
+          <ul>
+            <li>完整AI运营中台：排班、财务、质量监控全自动化</li>
+            <li>联创团队接入：系统支持多人协作，权限分级管理</li>
+            <li>Phase 2目标：西城区100家社区，1,000个服务家庭</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 给大熊的话 ── -->
+  <div class="section">
+    <h2>💬 给大熊的说明</h2>
+    <div class="quote-box">
+      <p>以上是开元时代在正式启动前18天建成的完整人机协同系统。这套系统的核心价值不是「替代人」，而是「放大人」——让王总一个人可以同时拥有七个专业角色的思考视角、每日自动的情报洞察、和随时可以展示的专业产出。</p>
+      <p style="margin-top:12px">我们相信，未来的养老创业不是拼资本规模，而是拼「执行速度 × 学习迭代」。开元已经在储备期建立了这个能力底座，等资金到位，我们可以以极低的运营成本快速验证和扩张。</p>
+      <p style="margin-top:12px"><strong style="color:var(--text)">官网访问：</strong><a href="https://wangxiaohou123.github.io/kaiyuanshidai/" style="color:var(--blue)">wangxiaohou123.github.io/kaiyuanshidai</a>（密码：见王总）</p>
+      <div class="author">—— 小美搭档，代王晶晶整理，2026年3月15日</div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    © 2026 开元时代 · 内部资料 · 仅供合作伙伴参考 · 严禁对外传播
+  </div>
+</div>
+
+</body>
+</html>
