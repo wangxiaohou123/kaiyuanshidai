@@ -484,6 +484,71 @@ const TASKS = [
     ]
   },
 
+  {
+    id: "T001-A",
+    priority: "p0",
+    type: "服务",
+    timeline: "本周",
+    timeHint: "本周内（T001线索自动生成）",
+    title: "安排首次上门拜访 · 与赵奶奶家确认服务意向",
+    desc: "T001 已获取家庭线索，下一步是确认服务意向，安排首次上门拜访。",
+    why: "第一个家庭是开元的原点故事，上门见面才能建立真实信任。",
+    howto: [
+      "通过家人（居委会）约定见面时间",
+      "上门时带上：服务介绍单页 + 申领补贴流程说明",
+      "目标：长者家属表示有意向，留下联系方式",
+    ],
+    feedbackFields: [
+      { key:"visit_result", label:"上门结果", type:"select", placeholder:"", options:["未安排", "已约定时间", "已上门·有意向", "已上门·无意向", "已上门·直接签约"] },
+      { key:"family_info", label:"家庭详情（补充）", type:"textarea", placeholder:"长者情况、主要联系人、联系方式…" },
+      { key:"note", label:"备注", type:"textarea", placeholder:"" },
+    ]
+  },
+
+  {
+    id: "T003-A",
+    priority: "p0",
+    type: "文档",
+    timeline: "本周",
+    timeHint: "T003完成后自动生成",
+    title: "E05 政策核查表定稿 · 触发CFO定价建模",
+    desc: "将5个电话问题的答案录入 E05 标准核查表，CFO据此启动定价策略与现金流模型。",
+    why: "CFO封驳原则：未经书面确认的政策补贴不得进入财务模型。E05是解锁CFO工作的钥匙。",
+    howto: [
+      "在任务卡片填写5个问题的答案",
+      "小美自动生成 E05 核查表 HTML",
+      "CFO启动三情景财务模型（激进/中性/保守）",
+    ],
+    feedbackFields: [
+      { key:"confirm_q1", label:"最终确认：800元补贴已落地？", type:"select", placeholder:"", options:["未确认", "是，正常受理", "暂未受理，预计XX月"] },
+      { key:"confirm_q2", label:"申领条件（失能等级要求）", type:"input", placeholder:"例：中度以上，需三级鉴定机构证明" },
+      { key:"confirm_q3", label:"到账周期", type:"input", placeholder:"例：审核10工作日，通过后5工作日到账" },
+      { key:"confirm_q4", label:"代办可行性", type:"select", placeholder:"", options:["未确认", "可代办·需委托书", "不可代办·本人到场"] },
+      { key:"note", label:"其他发现", type:"textarea", placeholder:"" },
+    ]
+  },
+
+  {
+    id: "T004-A",
+    priority: "p1",
+    type: "人脉",
+    timeline: "本月",
+    timeHint: "T004完成后自动生成",
+    title: "启动COO联创寻访 · 建立候选人名单",
+    desc: "资金节点已确认（2027Q1），COO需在2026年底到位，现在开始建立候选人名单。",
+    why: "COO是开元最急缺的联创。招募周期3-6个月，现在启动不算早。",
+    howto: [
+      "领英搜索「居家养老运营总监」「养老机构护理部主任」",
+      "联系认识的养老行业从业者，问是否认识想创业的中层管理者",
+      "目标：本月建立5人候选名单",
+    ],
+    feedbackFields: [
+      { key:"list_count", label:"已建立候选人数量", type:"select", placeholder:"", options:["0人", "1-2人", "3-5人", "5人以上"] },
+      { key:"top_candidate", label:"最有潜力候选人简述", type:"textarea", placeholder:"背景、联系状态、初步印象" },
+      { key:"note", label:"困难或需要支持", type:"textarea", placeholder:"" },
+    ]
+  },
+
 ];
 
 // ─────────────────────────────────────────────
