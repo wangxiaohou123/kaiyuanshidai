@@ -2,6 +2,7 @@
 
 ## 一、研究院课题（T系列 · 一手数据研究）
 
+- **2026-03-15** | D5-R8晨报：西城区护理员培训招募情报+家庭养老床位申请流程研究+CEO行动令更新 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | 固化文件命名规范到长期记忆：user-preferences.md + commands.md 双写，防止再次出现虚假day编号 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | 【编号重构】方案A：全部文件按D{物理日}-R{轮次}双层编号重命名，官网所有引用同步更新，废弃虚假day20等编号 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | Day 20全量班子汇报：广外街道医养战略突破+两大P0研究+家庭养老床位切入方案+CEO行动令 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
