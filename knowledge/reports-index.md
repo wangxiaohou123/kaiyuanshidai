@@ -2,6 +2,7 @@
 
 ## 一、研究院课题（T系列 · 一手数据研究）
 
+- **2026-03-15** | Day19 双课题研究：物业+养老快速入局路径 × 双补零自付话术体系 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | 日志交互优化：旧条目折叠+标题行嵌入详情链接，D5.7默认展开摘要 2026-03-15 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | 修复虚假Day编号：全站改为D1~D5物理日+轮次格式(D4.1~D4.11) 2026-03-15 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | 官网内容布局优化：修复2个404入口+交付库全量重建 2026-03-15 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
