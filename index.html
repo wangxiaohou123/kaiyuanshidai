@@ -602,465 +602,98 @@
 <section id="team">
   <div class="section-label">Governance · 人机协同治理体系</div>
   <h2 class="section-title">开元治理体系</h2>
-  <p class="section-desc">开元的治理核心是「人机协同」——人专注于只有人类能做好的事：与长者建立信任、在社区生根；AI 承担一切可以自动化的工作：情报、研究、决策辅助、运营管理。两者分工明确，共同构成一支全天候运转的团队。</p>
+  <p class="section-desc">开元的核心不是团队规模，而是<strong>分工逻辑</strong>——人负责建立信任，AI 负责一切可以自动化的工作。两大壁垒构成竞争对手难以复制的护城河。</p>
 
-  <!-- 全局架构图 · 内嵌 -->
-  <style>
-  .sys-map { font-family: inherit; }
-  
-:root {
-  --gold:#9B6A1A; --gold-l:#C4892A; --gold-xl:#E8C97A; --gold-bg:rgba(155,106,26,0.06);
-  --bg:#F7F5F0; --bg2:#EFECE4; --white:#FFFFFF;
-  --text:#1C1C1E; --muted:#6C6C70; --border:rgba(139,105,20,0.12);
-  --green:#1D7A45; --green-l:rgba(29,122,69,0.12); --green-b:rgba(29,122,69,0.3);
-  --blue:#1A56A8; --blue-l:rgba(26,86,168,0.1); --blue-b:rgba(26,86,168,0.28);
-  --purple:#6B3FA0; --purple-l:rgba(107,63,160,0.09); --purple-b:rgba(107,63,160,0.28);
-  --teal:#0E7A6E; --teal-l:rgba(14,122,110,0.07);
-  --shadow-sm: 0 1px 4px rgba(0,0,0,0.07);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.09);
-}
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
-  background: var(--bg); color: var(--text); padding: 40px 28px; line-height:1;
-}
+  <!-- 人机协同核心分工 -->
+  <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:1.2rem;align-items:center;margin:2rem 0;">
 
-/* ────── 页面标题 ────── */
-.page-title {
-  text-align: center; margin-bottom: 36px;
-}
-.page-title .label {
-  display: inline-block; font-size: 10px; letter-spacing: 5px; font-weight: 700;
-  color: var(--gold); background: rgba(155,106,26,0.08);
-  border: 1px solid rgba(155,106,26,0.2); border-radius: 20px;
-  padding: 4px 16px; margin-bottom: 12px;
-}
-.page-title h1 { font-size: 28px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 6px; }
-.page-title p { font-size: 13px; color: var(--muted); }
+    <!-- 人的职责 -->
+    <div style="background:var(--dark-2);border:1px solid var(--border);border-radius:14px;padding:1.6rem;">
+      <div style="font-size:0.65rem;letter-spacing:0.18em;color:var(--gold);font-weight:700;margin-bottom:1rem;text-transform:uppercase;">👥 人的团队</div>
 
-/* ────── 图容器 ────── */
-.diagram { max-width: 980px; margin: 0 auto; display: flex; flex-direction: column; gap: 6px; }
-
-/* ────── 层标签 ────── */
-.layer-tag {
-  font-size: 9.5px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
-  display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
-}
-.layer-tag::after { content:""; flex:1; height:1px; background: var(--border); }
-
-/* ────── 顾客层 ────── */
-.customers-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.cust-card {
-  border-radius: 14px; padding: 16px 20px;
-  display: flex; align-items: center; gap: 14px;
-  box-shadow: var(--shadow-md);
-}
-.cust-card.elder { background: linear-gradient(135deg, #1E3A8A 0%, #3B6CC8 100%); color:#fff; }
-.cust-card.family { background: linear-gradient(135deg, #1A5A7A 0%, #2E8FB8 100%); color:#fff; }
-.cust-card .ic { font-size: 32px; flex-shrink: 0; }
-.cust-card h3 { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
-.cust-card p { font-size: 11px; opacity: 0.8; line-height: 1.5; }
-
-/* 双向箭头行 */
-.arrows-row {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 4px 8px; gap: 10px;
-}
-.arr-item {
-  flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
-  background: var(--teal-l); border: 1px dashed rgba(14,122,110,0.22);
-  border-radius: 8px; padding: 6px 12px;
-}
-.arr-icon { font-size: 14px; color: var(--teal); }
-.arr-text { font-size: 10.5px; color: var(--teal); font-weight: 600; }
-
-/* ────── 服务执行层 ────── */
-.service-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.svc-box {
-  border-radius: 14px; padding: 16px 18px; box-shadow: var(--shadow-sm);
-}
-.svc-box.human {
-  background: linear-gradient(160deg, rgba(29,122,69,0.08) 0%, var(--white) 60%);
-  border: 1.5px solid var(--green-b);
-}
-.svc-box.tech {
-  background: linear-gradient(160deg, var(--purple-l) 0%, var(--white) 60%);
-  border: 1.5px solid var(--purple-b);
-}
-.svc-head { font-size: 10.5px; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
-.svc-head.g { color: var(--green); }
-.svc-head.p { color: var(--purple); }
-.chips { display: flex; flex-wrap: wrap; gap: 5px; }
-.chip {
-  font-size: 11px; padding: 4px 10px; border-radius: 6px;
-  background: rgba(255,255,255,0.75); border: 1px solid rgba(0,0,0,0.07);
-  white-space: nowrap; box-shadow: 0 1px 2px rgba(0,0,0,0.04);
-}
-
-/* 数据流带 */
-.data-belt {
-  background: linear-gradient(90deg, var(--teal-l), rgba(14,122,110,0.04), var(--teal-l));
-  border: 1px dashed rgba(14,122,110,0.25); border-radius: 8px;
-  padding: 9px 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-}
-.db-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--teal); flex-shrink: 0; }
-.db-flow { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
-.db-node {
-  font-size: 11px; background: rgba(255,255,255,0.85); border: 1px solid rgba(14,122,110,0.18);
-  border-radius: 5px; padding: 3px 10px; color: var(--teal);
-}
-.db-arr { color: rgba(14,122,110,0.5); font-size: 12px; }
-
-/* ────── 治理核心 ────── */
-.gov-wrap {
-  background: var(--white); border: 2px solid rgba(155,106,26,0.22);
-  border-radius: 18px; padding: 22px 24px; box-shadow: var(--shadow-md);
-  position: relative;
-}
-.gov-badge {
-  position: absolute; top: -13px; left: 24px;
-  background: var(--white); padding: 0 12px;
-  font-size: 10px; font-weight: 800; letter-spacing: 4px; color: var(--gold);
-  border: 1px solid rgba(155,106,26,0.3); border-radius: 20px;
-}
-
-/* 治理主体：三列 */
-.gov-body { display: grid; grid-template-columns: 1fr 44px 1fr; gap: 0; margin-bottom: 16px; }
-
-/* 人员卡 */
-.team-col { display: flex; flex-direction: column; gap: 7px; }
-.team-head { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; color: var(--green); margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
-.member {
-  border-radius: 10px; padding: 10px 13px; border-left: 3px solid;
-  background: rgba(29,122,69,0.05); border-color: var(--green);
-  box-shadow: var(--shadow-sm);
-}
-.member.coo { background: rgba(29,122,69,0.04); border-color: var(--green); }
-.member.cto { background: var(--blue-l); border-color: var(--blue); }
-.m-role { font-size: 9.5px; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 3px; }
-.m-role.g { color: var(--green); }
-.m-role.b { color: var(--blue); }
-.m-name { font-size: 13px; font-weight: 800; margin-bottom: 5px; }
-.m-tags { display: flex; flex-wrap: wrap; gap: 4px; }
-.m-tag {
-  font-size: 10px; padding: 2px 7px; border-radius: 4px;
-  background: rgba(29,122,69,0.08); color: var(--green);
-}
-.m-tag.b { background: var(--blue-l); color: var(--blue); }
-
-/* 协同柱 */
-.sync-col {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 0 4px; gap: 6px;
-}
-.sync-line {
-  flex: 1; width: 1px; background: linear-gradient(to bottom, transparent, rgba(155,106,26,0.3), transparent);
-}
-.sync-icon { font-size: 20px; color: var(--gold); }
-.sync-label { font-size: 9px; letter-spacing: 1px; color: var(--muted); }
-
-/* AI模块列 */
-.ai-col { }
-.ai-head { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; color: var(--blue); margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
-.ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
-.ai-mod {
-  border-radius: 9px; padding: 9px 10px; text-align: center;
-  background: var(--blue-l); border: 1px solid var(--blue-b); box-shadow: var(--shadow-sm);
-}
-.am-ic { font-size: 15px; margin-bottom: 3px; }
-.am-nm { font-size: 10.5px; font-weight: 700; color: var(--blue); }
-.am-ds { font-size: 9.5px; color: var(--muted); margin-top: 1px; line-height: 1.35; }
-
-/* 决策机制 */
-.dec-row {
-  border-top: 1px solid var(--border); padding-top: 14px;
-  display: flex; align-items: center; gap: 8px;
-}
-.dec-label {
-  font-size: 9.5px; font-weight: 700; letter-spacing: 2px; color: var(--gold-l);
-  flex-shrink: 0; white-space: nowrap;
-}
-.dec-steps { display: flex; gap: 0; flex: 1; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
-.dec-step {
-  flex: 1; padding: 7px 4px; text-align: center;
-  background: var(--bg2); border-right: 1px solid var(--border); min-width: 0;
-}
-.dec-step:last-child { border-right: none; }
-.dec-step.ceo-step { background: var(--gold-bg); }
-.ds-n { font-size: 9px; color: var(--muted); margin-bottom: 2px; }
-.ds-name { font-size: 10.5px; font-weight: 700; white-space: nowrap; }
-.ds-sub { font-size: 9px; color: var(--muted); margin-top: 1px; }
-
-/* ────── 壁垒层 ────── */
-.moats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.moat-card {
-  border-radius: 14px; padding: 16px 18px; box-shadow: var(--shadow-sm);
-  display: flex; gap: 12px; align-items: flex-start;
-}
-.moat-card.g { background: linear-gradient(135deg, rgba(29,122,69,0.07) 0%, var(--white) 60%); border: 1.5px solid var(--green-b); }
-.moat-card.b { background: linear-gradient(135deg, var(--blue-l) 0%, var(--white) 60%); border: 1.5px solid var(--blue-b); }
-.moat-icon { font-size: 26px; flex-shrink: 0; }
-.moat-title { font-size: 12.5px; font-weight: 800; margin-bottom: 5px; }
-.moat-card.g .moat-title { color: var(--green); }
-.moat-card.b .moat-title { color: var(--blue); }
-.moat-desc { font-size: 11px; color: var(--muted); line-height: 1.65; }
-.moat-tag {
-  display: inline-block; font-size: 9.5px; font-weight: 700; padding: 2px 8px;
-  border-radius: 4px; margin-top: 6px;
-}
-.moat-card.g .moat-tag { background: rgba(29,122,69,0.1); color: var(--green); }
-.moat-card.b .moat-tag { background: var(--blue-l); color: var(--blue); }
-
-/* 版权 */
-.footer { text-align: center; font-size: 10px; color: var(--muted); margin-top: 24px; }
-
-/* 响应式 */
-@media (max-width: 660px) {
-  .customers-row, .service-row, .moats-row { grid-template-columns: 1fr; }
-  .gov-body { grid-template-columns: 1fr; }
-  .sync-col, .sync-line { display: none; }
-  .ai-grid { grid-template-columns: repeat(3, 1fr); }
-}
-
-  /* 覆盖：重置 body 样式，改为 section 内使用 */
-  .sys-map body { padding: 0; background: transparent; }
-  </style>
-  <div class="sys-map" style="margin-top: 2rem;">
-  <div class="page-title">
-  <div class="label">KAIYUAN · SYSTEM ARCHITECTURE · 2026</div>
-  <h1>开元时代 · 全局架构图</h1>
-  <p>治理体系 × 服务体系 × 两大壁垒 · 人机协同一体化</p>
-</div>
-
-<div class="diagram">
-
-  <!-- ① 顾客层 -->
-  <div class="layer-tag" style="color:var(--blue);">SERVICE TARGETS · 服务对象</div>
-  <div class="customers-row">
-    <div class="cust-card elder">
-      <div class="ic">👴👵</div>
-      <div>
-        <h3>长者</h3>
-        <p>服务接受者 · 尊严体验者<br>在家享受高质量照护</p>
+      <div style="display:flex;flex-direction:column;gap:0.7rem;">
+        <div style="border-left:2px solid var(--gold);padding-left:0.9rem;">
+          <div style="font-size:0.65rem;color:var(--gold);font-weight:700;letter-spacing:0.1em;margin-bottom:0.2rem;">CEO</div>
+          <div style="font-size:0.8rem;color:var(--text);">社区关系 · 政府人脉 · 使命坚守 · 最终拍板</div>
+        </div>
+        <div style="border-left:2px solid var(--green);padding-left:0.9rem;">
+          <div style="font-size:0.65rem;color:var(--green);font-weight:700;letter-spacing:0.1em;margin-bottom:0.2rem;">联创 COO <span style="color:var(--muted);font-weight:400;">（招募中）</span></div>
+          <div style="font-size:0.8rem;color:var(--text);">护理标准 · 人才筛选 · 定点院校合作</div>
+        </div>
+        <div style="border-left:2px solid var(--blue);padding-left:0.9rem;">
+          <div style="font-size:0.65rem;color:var(--blue);font-weight:700;letter-spacing:0.1em;margin-bottom:0.2rem;">联创 CTO <span style="color:var(--muted);font-weight:400;">（招募中）</span></div>
+          <div style="font-size:0.8rem;color:var(--text);">AI陪伴系统 · 硬件接入 · 数据沉淀</div>
+        </div>
       </div>
     </div>
-    <div class="cust-card family">
-      <div class="ic">👨‍👩‍👧</div>
-      <div>
-        <h3>家属</h3>
-        <p>付费决策者 · 安心监督者<br>实时收到服务报告与健康趋势</p>
+
+    <!-- 协同符号 -->
+    <div style="text-align:center;padding:0.5rem;">
+      <div style="font-size:1.5rem;color:var(--gold);margin-bottom:0.3rem;">⇄</div>
+      <div style="font-size:0.6rem;color:var(--muted);letter-spacing:0.1em;">协同</div>
+    </div>
+
+    <!-- AI 职责 -->
+    <div style="background:var(--dark-2);border:1px solid var(--border);border-radius:14px;padding:1.6rem;">
+      <div style="font-size:0.65rem;letter-spacing:0.18em;color:var(--gold);font-weight:700;margin-bottom:1rem;text-transform:uppercase;">🤖 AI 班子（24h 在线）</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
+        <div style="background:var(--dark-3);border-radius:8px;padding:0.65rem 0.75rem;">
+          <div style="font-size:0.65rem;color:var(--gold);font-weight:700;margin-bottom:0.15rem;">中书省 CSO</div>
+          <div style="font-size:0.75rem;color:var(--muted);">战略研究·起草</div>
+        </div>
+        <div style="background:var(--dark-3);border-radius:8px;padding:0.65rem 0.75rem;">
+          <div style="font-size:0.65rem;color:var(--gold);font-weight:700;margin-bottom:0.15rem;">门下省 CFO</div>
+          <div style="font-size:0.75rem;color:var(--muted);">财务审议·守护</div>
+        </div>
+        <div style="background:var(--dark-3);border-radius:8px;padding:0.65rem 0.75rem;">
+          <div style="font-size:0.65rem;color:var(--gold);font-weight:700;margin-bottom:0.15rem;">尚书省 COO</div>
+          <div style="font-size:0.75rem;color:var(--muted);">运营执行·落地</div>
+        </div>
+        <div style="background:var(--dark-3);border-radius:8px;padding:0.65rem 0.75rem;">
+          <div style="font-size:0.65rem;color:var(--gold);font-weight:700;margin-bottom:0.15rem;">兵部 CGO</div>
+          <div style="font-size:0.75rem;color:var(--muted);">政策追踪·关系</div>
+        </div>
+        <div style="background:var(--dark-3);border-radius:8px;padding:0.65rem 0.75rem;">
+          <div style="font-size:0.65rem;color:var(--gold);font-weight:700;margin-bottom:0.15rem;">礼部 CMO</div>
+          <div style="font-size:0.75rem;color:var(--muted);">情报日报·品牌</div>
+        </div>
+        <div style="background:var(--dark-3);border-radius:8px;padding:0.65rem 0.75rem;">
+          <div style="font-size:0.65rem;color:var(--gold);font-weight:700;margin-bottom:0.15rem;">工部 CTO</div>
+          <div style="font-size:0.75rem;color:var(--muted);">AI系统·产品</div>
+        </div>
       </div>
     </div>
+
   </div>
 
-  <!-- 连接箭头 -->
-  <div class="arrows-row">
-    <div class="arr-item">
-      <span class="arr-icon">⬇</span>
-      <span class="arr-text">服务需求 · 付费 · 反馈评价</span>
+  <!-- 两大壁垒 · 重点突出 -->
+  <div style="margin:0 0 1.2rem;font-size:0.65rem;letter-spacing:0.18em;color:var(--gold);font-weight:700;text-transform:uppercase;">两大核心壁垒</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.6rem;">
+
+    <div style="background:var(--dark-2);border:1px solid var(--border);border-radius:14px;padding:1.6rem;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:-10px;top:-10px;font-size:3.5rem;opacity:0.06;">🏫</div>
+      <div style="font-size:0.65rem;color:var(--green);font-weight:700;letter-spacing:0.12em;margin-bottom:0.5rem;">人才护城河 · COO 主导</div>
+      <div style="font-size:1rem;font-weight:800;margin-bottom:0.6rem;">定点院校 · 开元化培训</div>
+      <div style="font-size:0.82rem;color:var(--muted);line-height:1.75;">与本地护理职业院校合作，建立开元专属培训标准。护理员从入口就被培养成开元体系的人，竞对平台无法整体挖角。</div>
     </div>
-    <div class="arr-item">
-      <span class="arr-icon">⬆</span>
-      <span class="arr-text">服务报告 · 健康趋势 · AI实时推送</span>
+
+    <div style="background:var(--dark-2);border:1px solid var(--border);border-radius:14px;padding:1.6rem;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:-10px;top:-10px;font-size:3.5rem;opacity:0.06;">🤖</div>
+      <div style="font-size:0.65rem;color:var(--blue);font-weight:700;letter-spacing:0.12em;margin-bottom:0.5rem;">技术护城河 · CTO 主导</div>
+      <div style="font-size:1rem;font-weight:800;margin-bottom:0.6rem;">AI 数据积累 · 越用越懂</div>
+      <div style="font-size:0.82rem;color:var(--muted);line-height:1.75;">AI系统持续积累每位长者的健康与行为数据，形成个性化档案。这份数据无法迁移——换服务商等于放弃所有历史积累。</div>
     </div>
+
   </div>
 
-  <!-- ② 服务执行层 -->
-  <div class="layer-tag" style="color:var(--green);">SERVICE DELIVERY · 服务执行层</div>
-  <div class="service-row">
-    <div class="svc-box human">
-      <div class="svc-head g">🧑‍⚕️ 护理员 · 情感与身体服务</div>
-      <div class="chips">
-        <span class="chip">💙 情感陪伴</span>
-        <span class="chip">🍱 助餐助浴</span>
-        <span class="chip">🏠 生活照护</span>
-        <span class="chip">💊 康复辅助</span>
-        <span class="chip">📷 服务记录</span>
-        <span class="chip">🤝 家庭信任</span>
-      </div>
-    </div>
-    <div class="svc-box tech">
-      <div class="svc-head p">🤖 AI+硬件 · 技术增强服务</div>
-      <div class="chips">
-        <span class="chip">🎙️ AI情感陪伴</span>
-        <span class="chip">❤️ 健康实时监测</span>
-        <span class="chip">🧠 阿兹海默早筛</span>
-        <span class="chip">⚠️ 跌倒异常预警</span>
-        <span class="chip">📊 健康趋势周报</span>
-        <span class="chip">👁️ 家属透明平台</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- 数据流 -->
-  <div class="data-belt">
-    <span class="db-label">⇅ 数据流</span>
-    <div class="db-flow">
-      <span class="db-node">护理员打卡记录</span>
-      <span class="db-arr">→</span>
-      <span class="db-node">AI结构化整理</span>
-      <span class="db-arr">→</span>
-      <span class="db-node">长者健康档案积累</span>
-      <span class="db-arr">→</span>
-      <span class="db-node">越用越懂每位长者</span>
-      <span class="db-arr">→</span>
-      <span class="db-node">服务质量持续提升</span>
-    </div>
-  </div>
-
-  <!-- ③ 治理核心 -->
-  <div class="layer-tag" style="color:var(--gold);">GOVERNANCE · 开元治理体系（人机协同）</div>
-  <div class="gov-wrap">
-    <div class="gov-badge">GOVERNANCE CORE</div>
-
-    <div class="gov-body">
-      <!-- 人的团队 -->
-      <div class="team-col">
-        <div class="team-head">👥 人的团队</div>
-
-        <div class="member">
-          <div class="m-role g">CEO · 使命守护者</div>
-          <div class="m-name">王晶晶</div>
-          <div class="m-tags">
-            <span class="m-tag">社区人脉</span>
-            <span class="m-tag">政府关系</span>
-            <span class="m-tag">使命坚守</span>
-            <span class="m-tag">最终拍板</span>
-          </div>
-        </div>
-
-        <div class="member coo">
-          <div class="m-role g">联创 COO · 人才负责人</div>
-          <div class="m-name" style="color:var(--muted);font-size:12px;">招募中</div>
-          <div class="m-tags">
-            <span class="m-tag">护理标准制定</span>
-            <span class="m-tag">定点院校合作</span>
-            <span class="m-tag">人才培养体系</span>
-          </div>
-        </div>
-
-        <div class="member cto">
-          <div class="m-role b">联创 CTO · 技术负责人</div>
-          <div class="m-name" style="color:var(--muted);font-size:12px;">招募中</div>
-          <div class="m-tags">
-            <span class="m-tag b">AI陪伴研发</span>
-            <span class="m-tag b">硬件接入</span>
-            <span class="m-tag b">数据沉淀</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 协同柱 -->
-      <div class="sync-col">
-        <div class="sync-line"></div>
-        <div class="sync-icon">⇄</div>
-        <div class="sync-label">协同</div>
-        <div class="sync-line"></div>
-      </div>
-
-      <!-- AI班子 -->
-      <div class="ai-col">
-        <div class="ai-head">🤖 AI 班子（24h × 7 在线）</div>
-        <div class="ai-grid">
-          <div class="ai-mod">
-            <div class="am-ic">🖋</div>
-            <div class="am-nm">中书省 CSO</div>
-            <div class="am-ds">战略研究<br>议题起草</div>
-          </div>
-          <div class="ai-mod">
-            <div class="am-ic">⚖️</div>
-            <div class="am-nm">门下省 CFO</div>
-            <div class="am-ds">财务审议<br>现金流守护</div>
-          </div>
-          <div class="ai-mod">
-            <div class="am-ic">⚡</div>
-            <div class="am-nm">尚书省 COO</div>
-            <div class="am-ds">运营执行<br>服务落地</div>
-          </div>
-          <div class="ai-mod">
-            <div class="am-ic">🏛️</div>
-            <div class="am-nm">兵部 CGO</div>
-            <div class="am-ds">政策追踪<br>政府关系</div>
-          </div>
-          <div class="ai-mod">
-            <div class="am-ic">📢</div>
-            <div class="am-nm">礼部 CMO</div>
-            <div class="am-ds">情报日报<br>品牌传播</div>
-          </div>
-          <div class="ai-mod">
-            <div class="am-ic">🔬</div>
-            <div class="am-nm">工部 CTO</div>
-            <div class="am-ds">科技系统<br>产品规划</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 决策机制 -->
-    <div class="dec-row">
-      <span class="dec-label">苏格拉底<br>决策机制</span>
-      <div class="dec-steps">
-        <div class="dec-step ceo-step">
-          <div class="ds-n">①</div>
-          <div class="ds-name">CEO陈述</div>
-          <div class="ds-sub">判断+理由</div>
-        </div>
-        <div class="dec-step">
-          <div class="ds-n">②</div>
-          <div class="ds-name">CFO质询</div>
-          <div class="ds-sub">钱从哪来</div>
-        </div>
-        <div class="dec-step">
-          <div class="ds-n">③</div>
-          <div class="ds-name">CGO质询</div>
-          <div class="ds-sub">政策真实</div>
-        </div>
-        <div class="dec-step">
-          <div class="ds-n">④</div>
-          <div class="ds-name">COO质询</div>
-          <div class="ds-sub">能执行吗</div>
-        </div>
-        <div class="dec-step">
-          <div class="ds-n">⑤</div>
-          <div class="ds-name">CSO提炼</div>
-          <div class="ds-sub">核心假设</div>
-        </div>
-        <div class="dec-step ceo-step">
-          <div class="ds-n">⑥</div>
-          <div class="ds-name">CEO拍板</div>
-          <div class="ds-sub">决策记录卡</div>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /gov-wrap -->
-
-  <!-- ④ 两大壁垒 -->
-  <div class="layer-tag" style="color:var(--muted);">COMPETITIVE MOATS · 两大服务壁垒</div>
-  <div class="moats-row">
-    <div class="moat-card g">
-      <div class="moat-icon">🏫</div>
-      <div>
-        <div class="moat-title">人才护城河</div>
-        <div class="moat-desc">COO 联系本地定点护理院校，建立开元专属培训标准。护理员从入口就被开元化，竞对平台无法批量挖角，形成可持续的本地人才供给链。</div>
-        <span class="moat-tag">COO 主导</span>
-      </div>
-    </div>
-    <div class="moat-card b">
-      <div class="moat-icon">🤖</div>
-      <div>
-        <div class="moat-title">技术护城河</div>
-        <div class="moat-desc">CTO 主导 AI 系统持续积累每位长者的健康与行为数据，形成「越用越懂你」的个性化档案。这份数据资产无法转移，是服务越长越深度绑定的核心。</div>
-        <span class="moat-tag">CTO 主导</span>
-      </div>
-    </div>
-  </div>
-
-</div><!-- /diagram -->
-
-<div class="footer">
-  © 2026 开元时代 · 全局架构设计 v2 · 治理体系 × 服务体系 · 人机协同一体化
-</div>
+  <!-- 查看详细架构图 -->
+  <div style="text-align:center;">
+    <a href="kaiyuan-system-map.html" target="_blank"
+       style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.65rem 1.4rem;border:1px solid var(--border);border-radius:8px;font-size:0.82rem;color:var(--muted);text-decoration:none;background:var(--dark-2);transition:all 0.2s;"
+       onmouseover="this.style.borderColor='var(--gold-dim)';this.style.color='var(--text)'"
+       onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">
+      🗺️ 查看完整架构图（治理 × 服务 × 数据流）
+    </a>
   </div>
 </section>
 </section>
