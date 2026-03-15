@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>开元时代 · 中书省·战略司（CSO）工作台</title>
+<style>
+  :root{
+    --bg:#FAFAF8;--bg2:#F4F3EE;--bg3:#ECEAE3;--bg4:#E5E2DA;
+    --gold:#8B6914;--gold-light:#B8940F;
+    --red:#C0392B;--green:#1D7A45;--blue:#1A56A8;--amber:#C87D0E;--purple:#6B3FA0;
+    --muted:#6C6C70;--border:rgba(139,105,20,0.15);--text:#1C1C1E;
+    --shadow:0 2px 12px rgba(0,0,0,0.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);color:var(--text);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+    padding:0 0 100px;font-size:16px;line-height:1.8;
+  }
+
+  /* ── 顶部导航 ── */
+  .top-nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(250,250,248,0.97);backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--border);
+    padding:0 2rem;height:52px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .nav-brand{font-size:0.85rem;font-weight:800;color:var(--gold);}
+  .nav-back{font-size:0.8rem;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:0.3rem;}
+  .nav-back:hover{color:var(--gold);}
+
+  /* ── Hero ── */
+  .hero{
+    background:linear-gradient(135deg,#1C1C1E 0%,#2C2416 100%);
+    border-bottom:1px solid rgba(139,105,20,0.3);
+    padding:2.5rem 2rem 2rem;position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(184,148,15,0.18),transparent);
+    pointer-events:none;
+  }
+  .hero-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;position:relative;}
+  .hero-left .eyebrow{font-size:0.72rem;letter-spacing:3px;color:#B8940F;text-transform:uppercase;margin-bottom:0.5rem;}
+  .hero-left h1{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:800;color:#EAE6D8;}
+  .hero-left .sub{font-size:0.88rem;color:rgba(234,230,216,0.6);margin-top:0.4rem;}
+
+  .hero-stats{display:flex;gap:0.8rem;flex-wrap:wrap;align-items:flex-end;position:relative;}
+  .stat{
+    background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
+    border-radius:12px;padding:0.7rem 1.1rem;text-align:center;
+  }
+  .stat-num{font-size:1.5rem;font-weight:800;}
+  .stat-label{font-size:0.68rem;color:rgba(234,230,216,0.5);margin-top:0.1rem;}
+
+  .role-badge{
+    margin-top:1.2rem;position:relative;
+    background:rgba(184,148,15,0.1);border:1px solid rgba(184,148,15,0.3);
+    border-radius:10px;padding:0.75rem 1rem;font-size:0.84rem;color:#ddc879;
+    display:flex;gap:0.5rem;align-items:flex-start;
+  }
+  .role-badge-icon{flex-shrink:0;margin-top:0.05rem;}
+
+  /* ── 主容器 ── */
+  .container{max-width:1000px;margin:0 auto;padding:2rem 1.5rem;}
+
+  /* ── 章节标题 ── */
+  .section-title{
+    font-size:0.72rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;
+    padding:0.5rem 0;margin:1.5rem 0 0.8rem;
+    border-bottom:1px solid var(--border);
+    display:flex;align-items:center;gap:0.5rem;
+  }
+
+  /* ── 卡片网格 ── */
+  .card-grid{display:flex;flex-direction:column;gap:0.9rem;}
+  .card-grid.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;}
+  @media(max-width:640px){.card-grid.grid-2{grid-template-columns:1fr;}}
+
+  /* ── 任务卡片 ── */
+  .task-card{
+    background:#FFFFFF;border-radius:16px;overflow:hidden;
+    border:1px solid var(--border);
+    box-shadow:0 1px 4px rgba(0,0,0,0.05);
+    transition:box-shadow .2s,border-color .2s;
+  }
+  .task-card:hover{box-shadow:0 4px 16px rgba(139,105,20,0.1);border-color:rgba(139,105,20,0.3);}
+
+  .task-hd{
+    padding:1.1rem 1.3rem;border-left:4px solid transparent;
+    display:flex;gap:1rem;align-items:flex-start;
+  }
+  .task-left{flex:1}
+  .task-meta{display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;margin-bottom:0.5rem;}
+
+  .tag{
+    display:inline-flex;align-items:center;gap:0.2rem;
+    padding:0.18rem 0.55rem;border-radius:5px;font-size:0.7rem;font-weight:700;letter-spacing:0.3px;
+  }
+  .tag-done{background:rgba(29,122,69,0.1);color:var(--green);border:1px solid rgba(29,122,69,0.25);}
+  .tag-inprog{background:rgba(200,125,14,0.1);color:var(--amber);border:1px solid rgba(200,125,14,0.3);}
+  .tag-pending{background:rgba(107,63,160,0.08);color:var(--purple);border:1px solid rgba(107,63,160,0.2);}
+  .tag-type{background:var(--bg3);color:var(--muted);border:1px solid var(--border);}
+  .tag-id{background:rgba(139,105,20,0.08);color:var(--gold);border:1px solid rgba(139,105,20,0.2);font-family:monospace;}
+
+  .task-title{font-size:1rem;font-weight:800;margin-bottom:0.3rem;color:var(--text);}
+  .task-desc{font-size:0.87rem;color:var(--muted);line-height:1.7;}
+
+  .task-right{display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem;flex-shrink:0;padding-top:0.1rem;}
+  .status-dot{width:10px;height:10px;border-radius:50%;}
+  .s-done{background:var(--green);box-shadow:0 0 6px rgba(29,122,69,0.4);}
+  .s-inprog{background:var(--amber);box-shadow:0 0 6px rgba(200,125,14,0.4);}
+  .s-pending{background:var(--purple);box-shadow:0 0 6px rgba(107,63,160,0.35);}
+
+  /* ── 结论积累卡片 ── */
+  .conclusion-card{
+    background:#FFFFFF;border-radius:16px;
+    border:1px solid var(--border);
+    box-shadow:0 1px 4px rgba(0,0,0,0.05);
+    padding:1.3rem;
+  }
+  .conclusion-card h3{
+    font-size:0.88rem;font-weight:800;color:var(--text);
+    margin-bottom:0.8rem;padding-bottom:0.6rem;
+    border-bottom:1px solid var(--border);
+    display:flex;align-items:center;gap:0.5rem;
+  }
+  .conclusion-card h3 .cn-icon{color:var(--gold);}
+  .conclusion-list{list-style:none;padding:0;}
+  .conclusion-list li{
+    display:flex;gap:0.5rem;font-size:0.9rem;
+    line-height:1.75;padding:0.3rem 0;
+    border-bottom:1px solid rgba(139,105,20,0.07);
+  }
+  .conclusion-list li:last-child{border-bottom:none;}
+  .conclusion-list li::before{content:"›";color:var(--gold);flex-shrink:0;font-size:1rem;}
+
+  /* ── 使用提示 ── */
+  .usage-tip{
+    background:rgba(139,105,20,0.06);border:1px solid rgba(139,105,20,0.2);
+    border-radius:12px;padding:1rem 1.2rem;
+    font-size:0.88rem;color:var(--text);line-height:1.75;
+    display:flex;gap:0.7rem;align-items:flex-start;margin-top:2rem;
+  }
+  .usage-tip-icon{font-size:1.1rem;flex-shrink:0;margin-top:0.05rem;}
+  .usage-tip strong{color:var(--gold);}
+
+  /* ── Footer ── */
+  .footer{
+    text-align:center;color:var(--muted);font-size:0.82rem;
+    padding:2rem 0;border-top:1px solid var(--border);margin-top:2rem;
+  }
+  .footer a{color:var(--gold);text-decoration:none;}
+  .footer a:hover{text-decoration:underline;}
+
+  @media(max-width:640px){
+    .hero{padding:2rem 1.2rem 1.5rem;}
+    .container{padding:1.5rem 1rem;}
+    .hero-stats{gap:0.5rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ── 顶部导航 ── -->
+<div class="top-nav">
+  <span class="nav-brand">开元时代 · 中书省·战略司（CSO）工作台</span>
+  <a class="nav-back" href="index.html">← 返回总指挥台</a>
+</div>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="hero-top">
+    <div class="hero-left">
+      <div class="eyebrow">开元时代 · 人机协作系统</div>
+      <h1>中书省·战略司（CSO）工作台</h1>
+      <p class="sub">战略谋划 · 行业研究 · 议题立项 · 苏格拉底质询法驱动决策</p>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num" style="color:#2ED573;">3</div>
+        <div class="stat-label">已完成课题</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" style="color:#B8940F;">1</div>
+        <div class="stat-label">排期中</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" style="color:#EAE6D8;">5</div>
+        <div class="stat-label">战略结论</div>
+      </div>
+    </div>
+  </div>
+  <div class="role-badge">
+    <span class="role-badge-icon">🏛️</span>
+    <span>
+      <strong>角色职责：</strong>负责战略谋划、行业研究、议题立项；用苏格拉底质询法驱动决策。
+      在飞书发「CSO：[问题/指令]」即可触发战略司响应。
+    </span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ── 研究课题 ── -->
+  <div class="section-title">📚 当前研究课题</div>
+  <div class="card-grid">
+
+    <div class="task-card">
+      <div class="task-hd" style="border-left-color:#1D7A45;">
+        <div class="task-left">
+          <div class="task-meta">
+            <span class="tag tag-id">T00</span>
+            <span class="tag tag-done">✅ 完成</span>
+            <span class="tag tag-type">行业研究</span>
+          </div>
+          <div class="task-title">行业全景研究</div>
+          <div class="task-desc">完成中国居家养老市场规模、政策红利、竞争格局初步扫描；输出核心机会判断：广外街道失能老人家庭是最佳切入点。</div>
+        </div>
+        <div class="task-right">
+          <div class="status-dot s-done"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-card">
+      <div class="task-hd" style="border-left-color:#1D7A45;">
+        <div class="task-left">
+          <div class="task-meta">
+            <span class="tag tag-id">T10</span>
+            <span class="tag tag-done">✅ 完成</span>
+            <span class="tag tag-type">竞争分析</span>
+          </div>
+          <div class="task-title">竞争格局分析</div>
+          <div class="task-desc">梳理北京西城区现有居家照护服务主体（政府购买、机构外派、家政型、互联网型）；识别差异化空间：双补零自付 + 高信任 + 社区渗透模式无人复制。</div>
+        </div>
+        <div class="task-right">
+          <div class="status-dot s-done"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── 议题立项 ── -->
+  <div class="section-title">⚖️ 议题立项状态</div>
+  <div class="card-grid">
+
+    <div class="task-card">
+      <div class="task-hd" style="border-left-color:#1D7A45;">
+        <div class="task-left">
+          <div class="task-meta">
+            <span class="tag tag-done">✅ 完成</span>
+            <span class="tag tag-type">议题立项</span>
+          </div>
+          <div class="task-title">物业+养老入局路径</div>
+          <div class="task-desc">战略司质询结论：以「补贴申领助理」身份切入，低成本验证需求，绕开重资产，形成可复制的社区信任模型后再谈物业战略合作。议题正式立项，进入执行。</div>
+        </div>
+        <div class="task-right">
+          <div class="status-dot s-done"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-card">
+      <div class="task-hd" style="border-left-color:#6B3FA0;">
+        <div class="task-left">
+          <div class="task-meta">
+            <span class="tag tag-pending">⏳ 排期中</span>
+            <span class="tag tag-type">战略叙事</span>
+          </div>
+          <div class="task-title">路演BP战略叙事优化</div>
+          <div class="task-desc">现有BP侧重运营细节，战略叙事层的「为什么是开元、为什么是现在、为什么是西城」尚不清晰。待COO完成首批服务验证后，CSO启动BP战略层重写。</div>
+        </div>
+        <div class="task-right">
+          <div class="status-dot s-pending"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── 战略结论积累 ── -->
+  <div class="section-title">💡 战略结论积累</div>
+  <div class="conclusion-card">
+    <h3><span class="cn-icon">📌</span>已沉淀的核心战略判断</h3>
+    <ul class="conclusion-list">
+      <li>北京西城区失能老人家庭月均刚性照护需求≥160小时，现有供给严重不足，入局窗口期3-5年。</li>
+      <li>「双补零自付」（政府补贴800元/月 + 医保喘息服务）是唯一能让家庭零成本体验的话术，竞争对手无法快速复制。</li>
+      <li>物业渠道进入成本高、决策链长；居委会激活路径成本更低，应优先验证居委会模式。</li>
+      <li>CEO人脉（居委会亲属）是最快的冷启动杠杆，也是最难以规模化的依赖；增长飞轮设计必须去个人化。</li>
+      <li>现阶段最大战略风险：政策核查（E05）未完成导致财务模型不可信，融资叙事存在漏洞。</li>
+    </ul>
+  </div>
+
+  <!-- ── 使用提示 ── -->
+  <div class="usage-tip">
+    <span class="usage-tip-icon">💬</span>
+    <div>
+      在飞书发 <strong>「CSO：[你的问题]」</strong> 让战略司 AI 角色立即响应。<br/>
+      例：「CSO：帮我质询一下这个定价方案的逻辑漏洞」「CSO：我们的护城河是什么，投资人会怎么问？」
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>开元时代 AI 工作台 · 战略司自动维护</p>
+    <p style="margin-top:0.4rem;">
+      <a href="index.html">← 返回总指挥台</a>
+    </p>
+  </div>
+</div>
+
+</body>
+</html>
