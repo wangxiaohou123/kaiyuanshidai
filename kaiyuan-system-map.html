@@ -3,459 +3,611 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>开元时代 · 全局架构图</title>
+<title>开元时代 · 全局架构与能力地图</title>
 <style>
+/* ── 官网同款暖沙配色 ── */
 :root {
-  --gold:#9B6A1A; --gold-l:#C4892A; --gold-xl:#E8C97A; --gold-bg:rgba(155,106,26,0.06);
-  --bg:#F7F5F0; --bg2:#EFECE4; --white:#FFFFFF;
-  --text:#1C1C1E; --muted:#6C6C70; --border:rgba(139,105,20,0.12);
-  --green:#1D7A45; --green-l:rgba(29,122,69,0.12); --green-b:rgba(29,122,69,0.3);
-  --blue:#1A56A8; --blue-l:rgba(26,86,168,0.1); --blue-b:rgba(26,86,168,0.28);
-  --purple:#6B3FA0; --purple-l:rgba(107,63,160,0.09); --purple-b:rgba(107,63,160,0.28);
-  --teal:#0E7A6E; --teal-l:rgba(14,122,110,0.07);
-  --shadow-sm: 0 1px 4px rgba(0,0,0,0.07);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.09);
+  --gold: #9B6A1A; --gold-l: #C4892A; --gold-dim: #7A5215; --gold-xl: #E8C97A;
+  --gold-bg: rgba(155,106,26,0.07); --gold-bg2: rgba(155,106,26,0.12);
+  --dark: #FDF8F0; --dark-2: #F5EDE0; --dark-3: #EDE3D3; --dark-4: #E4D8C6;
+  --text: #2C1F10; --muted: #7A6650; --muted-l: #A89278;
+  --border: rgba(155,106,26,0.18); --border-l: rgba(155,106,26,0.10);
+  --green: #2D6A3F; --green-l: rgba(45,106,63,0.10); --green-b: rgba(45,106,63,0.25);
+  --shadow: 0 2px 8px rgba(44,31,16,0.08); --shadow-l: 0 1px 3px rgba(44,31,16,0.05);
 }
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 body {
   font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
-  background: var(--bg); color: var(--text); padding: 40px 28px; line-height:1;
+  background: var(--dark); color: var(--text); line-height:1.6;
 }
 
-/* ────── 页面标题 ────── */
-.page-title {
-  text-align: center; margin-bottom: 36px;
+/* ── 顶部 Hero ── */
+.hero {
+  background: linear-gradient(160deg, #2C1F10 0%, #4A3218 50%, #3A2410 100%);
+  color: #F0E6D2; padding: 52px 48px 44px; position: relative; overflow: hidden;
 }
-.page-title .label {
-  display: inline-block; font-size: 10px; letter-spacing: 5px; font-weight: 700;
-  color: var(--gold); background: rgba(155,106,26,0.08);
-  border: 1px solid rgba(155,106,26,0.2); border-radius: 20px;
-  padding: 4px 16px; margin-bottom: 12px;
+.hero::before {
+  content:""; position:absolute; right:-80px; top:-80px;
+  width:360px; height:360px; border-radius:50%;
+  background: radial-gradient(circle, rgba(196,137,42,0.1) 0%, transparent 70%);
 }
-.page-title h1 { font-size: 28px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 6px; }
-.page-title p { font-size: 13px; color: var(--muted); }
+.hero-tag { font-size:10px; letter-spacing:5px; color:var(--gold-xl); margin-bottom:14px; }
+.hero h1 { font-size:34px; font-weight:800; margin-bottom:8px; letter-spacing:0.5px; }
+.hero h1 em { color:var(--gold-xl); font-style:normal; }
+.hero .sub { font-size:14px; color:#C8B48A; margin-bottom:28px; max-width:620px; line-height:1.8; }
+.hero-pills { display:flex; gap:10px; flex-wrap:wrap; }
+.hero-pill {
+  background:rgba(196,137,42,0.14); border:1px solid rgba(196,137,42,0.32);
+  border-radius:20px; padding:4px 14px; font-size:11px; color:var(--gold-xl);
+}
+.back-btn {
+  position:absolute; top:20px; right:24px;
+  background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+  border-radius:8px; padding:6px 14px; font-size:12px; color:#D4C4A0;
+  text-decoration:none; transition:all 0.2s;
+}
+.back-btn:hover { background:rgba(255,255,255,0.14); }
 
-/* ────── 图容器 ────── */
-.diagram { max-width: 980px; margin: 0 auto; display: flex; flex-direction: column; gap: 6px; }
+/* ── 主体容器 ── */
+.body { max-width:1000px; margin:0 auto; padding:44px 32px 64px; }
 
-/* ────── 层标签 ────── */
-.layer-tag {
-  font-size: 9.5px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
-  display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+/* ── 章节标题 ── */
+.sec-title {
+  font-size:18px; font-weight:800; margin:48px 0 6px;
+  padding-left:14px; border-left:3px solid var(--gold);
+  display:flex; align-items:center; gap:10px;
 }
-.layer-tag::after { content:""; flex:1; height:1px; background: var(--border); }
+.sec-desc { font-size:13px; color:var(--muted); margin-bottom:20px; line-height:1.75; }
 
-/* ────── 顾客层 ────── */
-.customers-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.cust-card {
-  border-radius: 14px; padding: 16px 20px;
-  display: flex; align-items: center; gap: 14px;
-  box-shadow: var(--shadow-md);
-}
-.cust-card.elder { background: linear-gradient(135deg, #1E3A8A 0%, #3B6CC8 100%); color:#fff; }
-.cust-card.family { background: linear-gradient(135deg, #1A5A7A 0%, #2E8FB8 100%); color:#fff; }
-.cust-card .ic { font-size: 32px; flex-shrink: 0; }
-.cust-card h3 { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
-.cust-card p { font-size: 11px; opacity: 0.8; line-height: 1.5; }
-
-/* 双向箭头行 */
-.arrows-row {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 4px 8px; gap: 10px;
-}
-.arr-item {
-  flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
-  background: var(--teal-l); border: 1px dashed rgba(14,122,110,0.22);
-  border-radius: 8px; padding: 6px 12px;
-}
-.arr-icon { font-size: 14px; color: var(--teal); }
-.arr-text { font-size: 10.5px; color: var(--teal); font-weight: 600; }
-
-/* ────── 服务执行层 ────── */
-.service-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.svc-box {
-  border-radius: 14px; padding: 16px 18px; box-shadow: var(--shadow-sm);
-}
-.svc-box.human {
-  background: linear-gradient(160deg, rgba(29,122,69,0.08) 0%, var(--white) 60%);
-  border: 1.5px solid var(--green-b);
-}
-.svc-box.tech {
-  background: linear-gradient(160deg, var(--purple-l) 0%, var(--white) 60%);
-  border: 1.5px solid var(--purple-b);
-}
-.svc-head { font-size: 10.5px; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
-.svc-head.g { color: var(--green); }
-.svc-head.p { color: var(--purple); }
-.chips { display: flex; flex-wrap: wrap; gap: 5px; }
-.chip {
-  font-size: 11px; padding: 4px 10px; border-radius: 6px;
-  background: rgba(255,255,255,0.75); border: 1px solid rgba(0,0,0,0.07);
-  white-space: nowrap; box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+/* ── 卡片通用 ── */
+.card {
+  background: var(--dark-2); border:1px solid var(--border);
+  border-radius:14px; padding:20px 22px; box-shadow:var(--shadow-l);
 }
 
-/* 数据流带 */
-.data-belt {
-  background: linear-gradient(90deg, var(--teal-l), rgba(14,122,110,0.04), var(--teal-l));
-  border: 1px dashed rgba(14,122,110,0.25); border-radius: 8px;
-  padding: 9px 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+/* ══════════════════════════════════════
+   ① 核心逻辑框架
+══════════════════════════════════════ */
+.logic-row {
+  display:grid; grid-template-columns:1fr 44px 1fr; gap:0; margin:20px 0;
+  align-items:stretch;
 }
-.db-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--teal); flex-shrink: 0; }
-.db-flow { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
-.db-node {
-  font-size: 11px; background: rgba(255,255,255,0.85); border: 1px solid rgba(14,122,110,0.18);
-  border-radius: 5px; padding: 3px 10px; color: var(--teal);
+.logic-col { background:var(--dark-2); border:1px solid var(--border); border-radius:14px; padding:20px 22px; }
+.logic-col.left { border-right:none; border-radius:14px 0 0 14px; }
+.logic-col.right { border-left:none; border-radius:0 14px 14px 0; }
+.logic-sync {
+  background:var(--dark-3); border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
 }
-.db-arr { color: rgba(14,122,110,0.5); font-size: 12px; }
+.logic-head { font-size:10px; font-weight:700; letter-spacing:2.5px; margin-bottom:12px; }
+.logic-head.g { color:var(--green); }
+.logic-head.gold { color:var(--gold); }
+.logic-items { display:flex; flex-direction:column; gap:8px; }
+.logic-item { display:flex; align-items:flex-start; gap:10px; }
+.li-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; margin-top:5px; }
+.li-dot.gold { background:var(--gold); }
+.li-dot.green { background:var(--green); }
+.li-txt strong { font-size:13px; font-weight:700; display:block; margin-bottom:1px; }
+.li-txt span { font-size:12px; color:var(--muted); }
+.sync-icon { font-size:18px; color:var(--gold); }
+.sync-label { font-size:9px; letter-spacing:1px; color:var(--muted); }
 
-/* ────── 治理核心 ────── */
-.gov-wrap {
-  background: var(--white); border: 2px solid rgba(155,106,26,0.22);
-  border-radius: 18px; padding: 22px 24px; box-shadow: var(--shadow-md);
-  position: relative;
+/* ══════════════════════════════════════
+   ② 服务层
+══════════════════════════════════════ */
+.svc-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0; }
+.svc-card {
+  border-radius:14px; padding:20px 22px; border:1px solid var(--border);
+  position:relative; overflow:hidden;
+}
+.svc-card.human { background:linear-gradient(150deg, var(--green-l), var(--dark-2)); border-color:var(--green-b); }
+.svc-card.tech { background:linear-gradient(150deg, var(--gold-bg), var(--dark-2)); border-color:rgba(155,106,26,0.25); }
+.sc-bg { position:absolute; right:-12px; top:-8px; font-size:52px; opacity:0.06; }
+.sc-head { font-size:10px; font-weight:700; letter-spacing:2.5px; margin-bottom:12px; }
+.sc-head.g { color:var(--green); }
+.sc-head.gold { color:var(--gold); }
+.sc-items { display:flex; flex-direction:column; gap:6px; }
+.sc-item { display:flex; align-items:center; gap:9px; font-size:13px; }
+.sc-ic { font-size:14px; flex-shrink:0; }
+
+/* ══════════════════════════════════════
+   ③ 数据流
+══════════════════════════════════════ */
+.data-flow {
+  background:rgba(45,106,63,0.06); border:1px dashed var(--green-b);
+  border-radius:10px; padding:14px 20px; margin:14px 0;
+  display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+}
+.df-tag { font-size:10px; font-weight:700; letter-spacing:2px; color:var(--green); flex-shrink:0; }
+.df-nodes { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.df-n {
+  background:rgba(255,255,255,0.7); border:1px solid var(--green-b);
+  border-radius:5px; padding:3px 10px; font-size:12px; color:var(--green);
+}
+.df-arr { color:var(--green); opacity:0.5; font-size:12px; }
+
+/* ══════════════════════════════════════
+   ④ 治理体系
+══════════════════════════════════════ */
+.gov-box {
+  background:var(--dark-2); border:2px solid rgba(155,106,26,0.25);
+  border-radius:18px; padding:24px 26px; margin:20px 0; box-shadow:var(--shadow);
+  position:relative;
 }
 .gov-badge {
-  position: absolute; top: -13px; left: 24px;
-  background: var(--white); padding: 0 12px;
-  font-size: 10px; font-weight: 800; letter-spacing: 4px; color: var(--gold);
-  border: 1px solid rgba(155,106,26,0.3); border-radius: 20px;
+  position:absolute; top:-13px; left:22px;
+  background:var(--dark); padding:0 12px;
+  font-size:10px; font-weight:800; letter-spacing:3.5px; color:var(--gold);
+  border:1px solid rgba(155,106,26,0.28); border-radius:20px;
 }
+.gov-grid { display:grid; grid-template-columns:1fr 40px 1fr; gap:0; margin-bottom:18px; }
 
-/* 治理主体：三列 */
-.gov-body { display: grid; grid-template-columns: 1fr 44px 1fr; gap: 0; margin-bottom: 16px; }
+/* 人的团队 */
+.team-col { display:flex; flex-direction:column; gap:8px; }
+.team-label { font-size:10px; font-weight:700; letter-spacing:2.5px; color:var(--gold); margin-bottom:4px; }
+.member-card {
+  border-radius:10px; padding:11px 14px; border-left:3px solid;
+  background:var(--dark-3); box-shadow:var(--shadow-l);
+}
+.member-card.ceo { border-color:var(--gold); }
+.member-card.coo { border-color:var(--green); }
+.member-card.cto { border-color:var(--gold-dim); }
+.mc-role { font-size:9.5px; font-weight:700; letter-spacing:1.5px; margin-bottom:3px; }
+.mc-role.gold { color:var(--gold); }
+.mc-role.green { color:var(--green); }
+.mc-role.dim { color:var(--gold-dim); }
+.mc-name { font-size:13.5px; font-weight:800; margin-bottom:5px; }
+.mc-tags { display:flex; flex-wrap:wrap; gap:4px; }
+.mc-tag {
+  font-size:10px; padding:2px 7px; border-radius:4px;
+  background:var(--gold-bg); color:var(--gold-dim);
+}
+.mc-tag.g { background:var(--green-l); color:var(--green); }
 
-/* 人员卡 */
-.team-col { display: flex; flex-direction: column; gap: 7px; }
-.team-head { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; color: var(--green); margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
-.member {
-  border-radius: 10px; padding: 10px 13px; border-left: 3px solid;
-  background: rgba(29,122,69,0.05); border-color: var(--green);
-  box-shadow: var(--shadow-sm);
+/* 协同 */
+.sync-v {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:5px; padding:0 4px;
 }
-.member.coo { background: rgba(29,122,69,0.04); border-color: var(--green); }
-.member.cto { background: var(--blue-l); border-color: var(--blue); }
-.m-role { font-size: 9.5px; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 3px; }
-.m-role.g { color: var(--green); }
-.m-role.b { color: var(--blue); }
-.m-name { font-size: 13px; font-weight: 800; margin-bottom: 5px; }
-.m-tags { display: flex; flex-wrap: wrap; gap: 4px; }
-.m-tag {
-  font-size: 10px; padding: 2px 7px; border-radius: 4px;
-  background: rgba(29,122,69,0.08); color: var(--green);
-}
-.m-tag.b { background: var(--blue-l); color: var(--blue); }
+.sync-line-v { flex:1; width:1px; background:linear-gradient(to bottom, transparent, rgba(155,106,26,0.3), transparent); }
 
-/* 协同柱 */
-.sync-col {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 0 4px; gap: 6px;
-}
-.sync-line {
-  flex: 1; width: 1px; background: linear-gradient(to bottom, transparent, rgba(155,106,26,0.3), transparent);
-}
-.sync-icon { font-size: 20px; color: var(--gold); }
-.sync-label { font-size: 9px; letter-spacing: 1px; color: var(--muted); }
-
-/* AI模块列 */
+/* AI模块 */
 .ai-col { }
-.ai-head { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; color: var(--blue); margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
-.ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+.ai-label { font-size:10px; font-weight:700; letter-spacing:2.5px; color:var(--gold-l); margin-bottom:8px; }
+.ai-mods { display:grid; grid-template-columns:1fr 1fr; gap:5px; }
 .ai-mod {
-  border-radius: 9px; padding: 9px 10px; text-align: center;
-  background: var(--blue-l); border: 1px solid var(--blue-b); box-shadow: var(--shadow-sm);
+  border-radius:9px; padding:9px 11px;
+  background:var(--dark-3); border:1px solid var(--border);
+  text-align:center; box-shadow:var(--shadow-l);
 }
-.am-ic { font-size: 15px; margin-bottom: 3px; }
-.am-nm { font-size: 10.5px; font-weight: 700; color: var(--blue); }
-.am-ds { font-size: 9.5px; color: var(--muted); margin-top: 1px; line-height: 1.35; }
+.am-icon { font-size:14px; margin-bottom:3px; }
+.am-name { font-size:10.5px; font-weight:700; color:var(--gold); margin-bottom:1px; }
+.am-desc { font-size:9.5px; color:var(--muted); line-height:1.3; }
 
 /* 决策机制 */
-.dec-row {
-  border-top: 1px solid var(--border); padding-top: 14px;
-  display: flex; align-items: center; gap: 8px;
-}
-.dec-label {
-  font-size: 9.5px; font-weight: 700; letter-spacing: 2px; color: var(--gold-l);
-  flex-shrink: 0; white-space: nowrap;
-}
-.dec-steps { display: flex; gap: 0; flex: 1; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+.dec-wrap { border-top:1px solid var(--border); padding-top:14px; }
+.dec-title { font-size:10px; font-weight:700; letter-spacing:2px; color:var(--gold-l); margin-bottom:8px; }
+.dec-steps { display:flex; gap:0; border-radius:8px; overflow:hidden; border:1px solid var(--border); }
 .dec-step {
-  flex: 1; padding: 7px 4px; text-align: center;
-  background: var(--bg2); border-right: 1px solid var(--border); min-width: 0;
+  flex:1; padding:8px 4px; text-align:center;
+  background:var(--dark-3); border-right:1px solid var(--border);
+  min-width:0;
 }
-.dec-step:last-child { border-right: none; }
-.dec-step.ceo-step { background: var(--gold-bg); }
-.ds-n { font-size: 9px; color: var(--muted); margin-bottom: 2px; }
-.ds-name { font-size: 10.5px; font-weight: 700; white-space: nowrap; }
-.ds-sub { font-size: 9px; color: var(--muted); margin-top: 1px; }
+.dec-step:last-child { border-right:none; }
+.dec-step.hi { background:var(--gold-bg); }
+.ds-n { font-size:9px; color:var(--muted); margin-bottom:1px; }
+.ds-nm { font-size:10.5px; font-weight:700; }
+.ds-sub { font-size:9px; color:var(--muted); margin-top:1px; }
 
-/* ────── 壁垒层 ────── */
-.moats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.moat-card {
-  border-radius: 14px; padding: 16px 18px; box-shadow: var(--shadow-sm);
-  display: flex; gap: 12px; align-items: flex-start;
+/* ══════════════════════════════════════
+   ⑤ 两大壁垒（核心）
+══════════════════════════════════════ */
+.moats { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:20px 0; }
+.moat {
+  border-radius:16px; padding:24px 26px;
+  position:relative; overflow:hidden; box-shadow:var(--shadow);
 }
-.moat-card.g { background: linear-gradient(135deg, rgba(29,122,69,0.07) 0%, var(--white) 60%); border: 1.5px solid var(--green-b); }
-.moat-card.b { background: linear-gradient(135deg, var(--blue-l) 0%, var(--white) 60%); border: 1.5px solid var(--blue-b); }
-.moat-icon { font-size: 26px; flex-shrink: 0; }
-.moat-title { font-size: 12.5px; font-weight: 800; margin-bottom: 5px; }
-.moat-card.g .moat-title { color: var(--green); }
-.moat-card.b .moat-title { color: var(--blue); }
-.moat-desc { font-size: 11px; color: var(--muted); line-height: 1.65; }
-.moat-tag {
-  display: inline-block; font-size: 9.5px; font-weight: 700; padding: 2px 8px;
-  border-radius: 4px; margin-top: 6px;
+.moat.talent {
+  background:linear-gradient(150deg, rgba(45,106,63,0.1) 0%, var(--dark-2) 60%);
+  border:1.5px solid var(--green-b);
 }
-.moat-card.g .moat-tag { background: rgba(29,122,69,0.1); color: var(--green); }
-.moat-card.b .moat-tag { background: var(--blue-l); color: var(--blue); }
+.moat.tech {
+  background:linear-gradient(150deg, var(--gold-bg2) 0%, var(--dark-2) 60%);
+  border:1.5px solid rgba(155,106,26,0.3);
+}
+.moat-bg-icon { position:absolute; right:-6px; top:-6px; font-size:60px; opacity:0.05; }
+.moat-label { font-size:10px; font-weight:700; letter-spacing:2.5px; margin-bottom:8px; }
+.moat.talent .moat-label { color:var(--green); }
+.moat.tech .moat-label { color:var(--gold); }
+.moat-title { font-size:18px; font-weight:800; margin-bottom:10px; }
+.moat.talent .moat-title { color:var(--green); }
+.moat.tech .moat-title { color:var(--gold); }
+.moat-desc { font-size:13px; color:var(--muted); line-height:1.75; margin-bottom:14px; }
+.moat-why { font-size:11.5px; font-weight:700; color:var(--text); margin-bottom:6px; }
+.moat-points { display:flex; flex-direction:column; gap:5px; }
+.moat-pt { font-size:12px; color:var(--muted); display:flex; align-items:flex-start; gap:7px; }
+.moat-pt::before { content:"✦"; color:var(--gold); flex-shrink:0; font-size:10px; margin-top:2px; }
+.moat.talent .moat-pt::before { color:var(--green); }
+.moat-owner {
+  display:inline-block; margin-top:12px; font-size:11px; font-weight:700;
+  padding:3px 12px; border-radius:20px;
+}
+.moat.talent .moat-owner { background:var(--green-l); color:var(--green); }
+.moat.tech .moat-owner { background:var(--gold-bg); color:var(--gold); }
 
-/* 版权 */
-.footer { text-align: center; font-size: 10px; color: var(--muted); margin-top: 24px; }
+/* ══════════════════════════════════════
+   ⑥ AI自动化能力详情
+══════════════════════════════════════ */
+.caps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:20px 0; }
+.cap {
+  border-radius:12px; padding:16px 18px;
+  background:var(--dark-2); border:1px solid var(--border);
+  box-shadow:var(--shadow-l);
+}
+.cap-icon { font-size:22px; margin-bottom:8px; }
+.cap-name { font-size:13px; font-weight:700; margin-bottom:5px; color:var(--text); }
+.cap-desc { font-size:12px; color:var(--muted); line-height:1.65; }
+.cap-status {
+  display:inline-block; margin-top:8px; font-size:10px; font-weight:700;
+  padding:2px 9px; border-radius:10px;
+}
+.s-live { background:rgba(45,106,63,0.1); color:var(--green); }
+.s-q2 { background:var(--gold-bg); color:var(--gold); }
+.s-q3 { background:rgba(122,82,21,0.08); color:var(--muted); }
 
-/* 响应式 */
-@media (max-width: 660px) {
-  .customers-row, .service-row, .moats-row { grid-template-columns: 1fr; }
-  .gov-body { grid-template-columns: 1fr; }
-  .sync-col, .sync-line { display: none; }
-  .ai-grid { grid-template-columns: repeat(3, 1fr); }
+/* ══════════════════════════════════════
+   ⑦ 宣言
+══════════════════════════════════════ */
+.manifesto {
+  background:linear-gradient(135deg, var(--gold-bg), rgba(155,106,26,0.02));
+  border:1px solid rgba(155,106,26,0.2); border-left:4px solid var(--gold);
+  border-radius:14px; padding:26px 30px; margin:32px 0;
+}
+.manifesto p { font-size:15px; font-style:italic; line-height:1.9; margin-bottom:8px; }
+.manifesto .attr { font-size:11px; color:var(--muted); }
+
+/* ── 分隔线 ── */
+.divider { height:1px; background:var(--border); margin:40px 0; }
+
+/* ── 页脚 ── */
+.footer { text-align:center; font-size:11px; color:var(--muted); padding:24px; border-top:1px solid var(--border); }
+.footer a { color:var(--gold); text-decoration:none; }
+
+/* ── 响应式 ── */
+@media(max-width:700px){
+  .svc-grid,.moats,.caps-grid,.logic-row,.gov-grid{ grid-template-columns:1fr; }
+  .logic-col.left,.logic-col.right{ border-radius:14px; border:1px solid var(--border); }
+  .logic-sync,.sync-v{ display:none; }
+  .ai-mods{ grid-template-columns:repeat(3,1fr); }
+  .hero{ padding:36px 24px; }
+  .body{ padding:32px 20px 48px; }
+  .caps-grid{ grid-template-columns:repeat(2,1fr); }
 }
 </style>
 </head>
 <body>
 
-<div class="page-title">
-  <div class="label">KAIYUAN · SYSTEM ARCHITECTURE · 2026</div>
-  <h1>开元时代 · 全局架构图</h1>
-  <p>治理体系 × 服务体系 × 两大壁垒 · 人机协同一体化</p>
+<!-- Hero -->
+<div class="hero">
+  <a href="index.html" class="back-btn">← 返回官网</a>
+  <div class="hero-tag">KAIYUAN · SYSTEM ARCHITECTURE · 2026</div>
+  <h1>开元时代 · <em>全局架构与能力地图</em></h1>
+  <div class="sub">
+    完整呈现开元的治理逻辑、服务体系、两大护城河与 AI 自动化能力。<br>
+    这不是一家传统养老公司——这是用 AI 重新定义居家养老的创业实验。
+  </div>
+  <div class="hero-pills">
+    <span class="hero-pill">🏛️ 人机协同治理</span>
+    <span class="hero-pill">🧑‍⚕️ 情感+技术双服务</span>
+    <span class="hero-pill">🏫 人才护城河</span>
+    <span class="hero-pill">🤖 技术护城河</span>
+    <span class="hero-pill">📡 24h AI 在线</span>
+  </div>
 </div>
 
-<div class="diagram">
+<div class="body">
 
-  <!-- ① 顾客层 -->
-  <div class="layer-tag" style="color:var(--blue);">SERVICE TARGETS · 服务对象</div>
-  <div class="customers-row">
-    <div class="cust-card elder">
-      <div class="ic">👴👵</div>
-      <div>
-        <h3>长者</h3>
-        <p>服务接受者 · 尊严体验者<br>在家享受高质量照护</p>
-      </div>
-    </div>
-    <div class="cust-card family">
-      <div class="ic">👨‍👩‍👧</div>
-      <div>
-        <h3>家属</h3>
-        <p>付费决策者 · 安心监督者<br>实时收到服务报告与健康趋势</p>
-      </div>
-    </div>
-  </div>
+<!-- ══ ① 核心逻辑框架 ══ -->
+<div class="sec-title">① 核心逻辑框架</div>
+<div class="sec-desc">开元最本质的分工：人做「只有人能做好的事」，AI 做「一切可以自动化的事」。两者协同，缺一不可。</div>
 
-  <!-- 连接箭头 -->
-  <div class="arrows-row">
-    <div class="arr-item">
-      <span class="arr-icon">⬇</span>
-      <span class="arr-text">服务需求 · 付费 · 反馈评价</span>
-    </div>
-    <div class="arr-item">
-      <span class="arr-icon">⬆</span>
-      <span class="arr-text">服务报告 · 健康趋势 · AI实时推送</span>
-    </div>
-  </div>
-
-  <!-- ② 服务执行层 -->
-  <div class="layer-tag" style="color:var(--green);">SERVICE DELIVERY · 服务执行层</div>
-  <div class="service-row">
-    <div class="svc-box human">
-      <div class="svc-head g">🧑‍⚕️ 护理员 · 情感与身体服务</div>
-      <div class="chips">
-        <span class="chip">💙 情感陪伴</span>
-        <span class="chip">🍱 助餐助浴</span>
-        <span class="chip">🏠 生活照护</span>
-        <span class="chip">💊 康复辅助</span>
-        <span class="chip">📷 服务记录</span>
-        <span class="chip">🤝 家庭信任</span>
+<div class="logic-row">
+  <div class="logic-col left">
+    <div class="logic-head gold">👤 人的分工</div>
+    <div class="logic-items">
+      <div class="logic-item">
+        <div class="li-dot gold"></div>
+        <div class="li-txt"><strong>与长者、家属建立信任</strong><span>这是养老服务的核心资产，AI 无法替代</span></div>
       </div>
-    </div>
-    <div class="svc-box tech">
-      <div class="svc-head p">🤖 AI+硬件 · 技术增强服务</div>
-      <div class="chips">
-        <span class="chip">🎙️ AI情感陪伴</span>
-        <span class="chip">❤️ 健康实时监测</span>
-        <span class="chip">🧠 阿兹海默早筛</span>
-        <span class="chip">⚠️ 跌倒异常预警</span>
-        <span class="chip">📊 健康趋势周报</span>
-        <span class="chip">👁️ 家属透明平台</span>
+      <div class="logic-item">
+        <div class="li-dot gold"></div>
+        <div class="li-txt"><strong>社区人脉与政府关系</strong><span>广外街道居委会资源，政策窗口期的关键入口</span></div>
+      </div>
+      <div class="logic-item">
+        <div class="li-dot gold"></div>
+        <div class="li-txt"><strong>护理员团队管理</strong><span>招募、培训、激励、留存，COO 专属职责</span></div>
+      </div>
+      <div class="logic-item">
+        <div class="li-dot gold"></div>
+        <div class="li-txt"><strong>技术路线与数据应用</strong><span>AI硬件选型、陪伴系统研发，CTO 主导</span></div>
+      </div>
+      <div class="logic-item">
+        <div class="li-dot gold"></div>
+        <div class="li-txt"><strong>使命方向与最终拍板</strong><span>苏格拉底六步质询后，CEO 做最终判断</span></div>
       </div>
     </div>
   </div>
 
-  <!-- 数据流 -->
-  <div class="data-belt">
-    <span class="db-label">⇅ 数据流</span>
-    <div class="db-flow">
-      <span class="db-node">护理员打卡记录</span>
-      <span class="db-arr">→</span>
-      <span class="db-node">AI结构化整理</span>
-      <span class="db-arr">→</span>
-      <span class="db-node">长者健康档案积累</span>
-      <span class="db-arr">→</span>
-      <span class="db-node">越用越懂每位长者</span>
-      <span class="db-arr">→</span>
-      <span class="db-node">服务质量持续提升</span>
+  <div class="logic-sync">
+    <div class="sync-icon">⇄</div>
+    <div class="sync-label">协同</div>
+  </div>
+
+  <div class="logic-col right">
+    <div class="logic-head g">🤖 AI 的分工</div>
+    <div class="logic-items">
+      <div class="logic-item">
+        <div class="li-dot green"></div>
+        <div class="li-txt"><strong>行业情报 24h 自动采集</strong><span>搜狗微信/百度/学城，每日三次触发</span></div>
+      </div>
+      <div class="logic-item">
+        <div class="li-dot green"></div>
+        <div class="li-txt"><strong>多角色研究与交叉质询</strong><span>七个 AI 角色独立分析，苏格拉底六步验证</span></div>
+      </div>
+      <div class="logic-item">
+        <div class="li-dot green"></div>
+        <div class="li-txt"><strong>每日可视化汇报自动生成</strong><span>HTML 汇报 → GitHub Pages → 飞书推送</span></div>
+      </div>
+      <div class="logic-item">
+        <div class="li-dot green"></div>
+        <div class="li-txt"><strong>运营数据监控与预警</strong><span>服务质量、财务状况、补贴到账全程跟踪</span></div>
+      </div>
+      <div class="logic-item">
+        <div class="li-dot green"></div>
+        <div class="li-txt"><strong>知识库积累与文档自动同步</strong><span>研究成果、决策记录实时沉淀，飞书知识库</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ② 服务执行层 ══ -->
+<div class="divider"></div>
+<div class="sec-title">② 服务执行层</div>
+<div class="sec-desc">开元的服务由「护理员情感层」和「AI技术增强层」共同构成——两者叠加，才是真正有壁垒的养老服务。</div>
+
+<div class="svc-grid">
+  <div class="svc-card human">
+    <div class="sc-bg">🧑‍⚕️</div>
+    <div class="sc-head g">护理员 · 情感与身体服务层</div>
+    <div class="sc-items">
+      <div class="sc-item"><span class="sc-ic">💙</span>情感陪伴——日常交流、情绪支持、心理慰藉</div>
+      <div class="sc-item"><span class="sc-ic">🍱</span>生活照护——助餐助浴、家务协助、出行陪同</div>
+      <div class="sc-item"><span class="sc-ic">💊</span>健康辅助——服药提醒、康复协助、AI设备辅助操作</div>
+      <div class="sc-item"><span class="sc-ic">📷</span>服务记录——1张照片+10秒语音，AI自动整理为档案</div>
+      <div class="sc-item"><span class="sc-ic">🤝</span>家庭信任——固定护理员、深度关系、社区口碑</div>
     </div>
   </div>
 
-  <!-- ③ 治理核心 -->
-  <div class="layer-tag" style="color:var(--gold);">GOVERNANCE · 开元治理体系（人机协同）</div>
-  <div class="gov-wrap">
-    <div class="gov-badge">GOVERNANCE CORE</div>
+  <div class="svc-card tech">
+    <div class="sc-bg">🤖</div>
+    <div class="sc-head gold">AI + 硬件 · 技术增强服务层</div>
+    <div class="sc-items">
+      <div class="sc-item"><span class="sc-ic">🎙️</span>AI情感陪伴——智能音箱+大模型，夜间陪伴/情绪检测</div>
+      <div class="sc-item"><span class="sc-ic">🧠</span>阿尔兹海默早筛——每日认知训练+语言分析+早期预警</div>
+      <div class="sc-item"><span class="sc-ic">❤️</span>24h健康监测——可穿戴设备心率/血氧/睡眠实时分析</div>
+      <div class="sc-item"><span class="sc-ic">⚠️</span>跌倒/异常预警——室内传感器，即时推送护理员和家属</div>
+      <div class="sc-item"><span class="sc-ic">📊</span>家属透明平台——健康趋势周报，服务记录实时可查</div>
+    </div>
+  </div>
+</div>
 
-    <div class="gov-body">
-      <!-- 人的团队 -->
-      <div class="team-col">
-        <div class="team-head">👥 人的团队</div>
+<!-- 数据流 -->
+<div class="data-flow">
+  <span class="df-tag">⇅ 数据流</span>
+  <div class="df-nodes">
+    <span class="df-n">护理员服务记录</span>
+    <span class="df-arr">→</span>
+    <span class="df-n">AI结构化档案</span>
+    <span class="df-arr">→</span>
+    <span class="df-n">健康趋势分析</span>
+    <span class="df-arr">→</span>
+    <span class="df-n">服务升级推荐</span>
+    <span class="df-arr">→</span>
+    <span class="df-n">越用越懂每位长者</span>
+  </div>
+</div>
 
-        <div class="member">
-          <div class="m-role g">CEO · 使命守护者</div>
-          <div class="m-name">王晶晶</div>
-          <div class="m-tags">
-            <span class="m-tag">社区人脉</span>
-            <span class="m-tag">政府关系</span>
-            <span class="m-tag">使命坚守</span>
-            <span class="m-tag">最终拍板</span>
-          </div>
-        </div>
+<!-- ══ ③ 治理体系 ══ -->
+<div class="divider"></div>
+<div class="sec-title">③ 开元治理体系</div>
+<div class="sec-desc">三角核心团队 + 六模块 AI 班子，共同构成全天候运转的决策与执行体系。</div>
 
-        <div class="member coo">
-          <div class="m-role g">联创 COO · 人才负责人</div>
-          <div class="m-name" style="color:var(--muted);font-size:12px;">招募中</div>
-          <div class="m-tags">
-            <span class="m-tag">护理标准制定</span>
-            <span class="m-tag">定点院校合作</span>
-            <span class="m-tag">人才培养体系</span>
-          </div>
-        </div>
+<div class="gov-box">
+  <div class="gov-badge">GOVERNANCE CORE · 治理核心</div>
 
-        <div class="member cto">
-          <div class="m-role b">联创 CTO · 技术负责人</div>
-          <div class="m-name" style="color:var(--muted);font-size:12px;">招募中</div>
-          <div class="m-tags">
-            <span class="m-tag b">AI陪伴研发</span>
-            <span class="m-tag b">硬件接入</span>
-            <span class="m-tag b">数据沉淀</span>
-          </div>
+  <div class="gov-grid">
+    <!-- 人员 -->
+    <div class="team-col">
+      <div class="team-label">👥 人的团队</div>
+
+      <div class="member-card ceo">
+        <div class="mc-role gold">CEO · 使命守护者</div>
+        <div class="mc-name">王晶晶</div>
+        <div class="mc-tags">
+          <span class="mc-tag">广外社区人脉</span>
+          <span class="mc-tag">政府关系</span>
+          <span class="mc-tag">使命坚守</span>
+          <span class="mc-tag">最终拍板</span>
         </div>
       </div>
 
-      <!-- 协同柱 -->
-      <div class="sync-col">
-        <div class="sync-line"></div>
-        <div class="sync-icon">⇄</div>
-        <div class="sync-label">协同</div>
-        <div class="sync-line"></div>
+      <div class="member-card coo">
+        <div class="mc-role green">联创 COO · 人才负责人</div>
+        <div class="mc-name" style="color:var(--muted);font-size:12px;">招募中</div>
+        <div class="mc-tags">
+          <span class="mc-tag g">护理标准制定</span>
+          <span class="mc-tag g">定点院校合作</span>
+          <span class="mc-tag g">人才培养体系</span>
+          <span class="mc-tag g">服务质量底线</span>
+        </div>
       </div>
 
-      <!-- AI班子 -->
-      <div class="ai-col">
-        <div class="ai-head">🤖 AI 班子（24h × 7 在线）</div>
-        <div class="ai-grid">
-          <div class="ai-mod">
-            <div class="am-ic">🖋</div>
-            <div class="am-nm">中书省 CSO</div>
-            <div class="am-ds">战略研究<br>议题起草</div>
-          </div>
-          <div class="ai-mod">
-            <div class="am-ic">⚖️</div>
-            <div class="am-nm">门下省 CFO</div>
-            <div class="am-ds">财务审议<br>现金流守护</div>
-          </div>
-          <div class="ai-mod">
-            <div class="am-ic">⚡</div>
-            <div class="am-nm">尚书省 COO</div>
-            <div class="am-ds">运营执行<br>服务落地</div>
-          </div>
-          <div class="ai-mod">
-            <div class="am-ic">🏛️</div>
-            <div class="am-nm">兵部 CGO</div>
-            <div class="am-ds">政策追踪<br>政府关系</div>
-          </div>
-          <div class="ai-mod">
-            <div class="am-ic">📢</div>
-            <div class="am-nm">礼部 CMO</div>
-            <div class="am-ds">情报日报<br>品牌传播</div>
-          </div>
-          <div class="ai-mod">
-            <div class="am-ic">🔬</div>
-            <div class="am-nm">工部 CTO</div>
-            <div class="am-ds">科技系统<br>产品规划</div>
-          </div>
+      <div class="member-card cto">
+        <div class="mc-role dim">联创 CTO · 技术负责人</div>
+        <div class="mc-name" style="color:var(--muted);font-size:12px;">招募中</div>
+        <div class="mc-tags">
+          <span class="mc-tag">AI陪伴研发</span>
+          <span class="mc-tag">硬件选型接入</span>
+          <span class="mc-tag">数据沉淀应用</span>
+          <span class="mc-tag">技术上限提升</span>
         </div>
       </div>
     </div>
 
-    <!-- 决策机制 -->
-    <div class="dec-row">
-      <span class="dec-label">苏格拉底<br>决策机制</span>
-      <div class="dec-steps">
-        <div class="dec-step ceo-step">
-          <div class="ds-n">①</div>
-          <div class="ds-name">CEO陈述</div>
-          <div class="ds-sub">判断+理由</div>
-        </div>
-        <div class="dec-step">
-          <div class="ds-n">②</div>
-          <div class="ds-name">CFO质询</div>
-          <div class="ds-sub">钱从哪来</div>
-        </div>
-        <div class="dec-step">
-          <div class="ds-n">③</div>
-          <div class="ds-name">CGO质询</div>
-          <div class="ds-sub">政策真实</div>
-        </div>
-        <div class="dec-step">
-          <div class="ds-n">④</div>
-          <div class="ds-name">COO质询</div>
-          <div class="ds-sub">能执行吗</div>
-        </div>
-        <div class="dec-step">
-          <div class="ds-n">⑤</div>
-          <div class="ds-name">CSO提炼</div>
-          <div class="ds-sub">核心假设</div>
-        </div>
-        <div class="dec-step ceo-step">
-          <div class="ds-n">⑥</div>
-          <div class="ds-name">CEO拍板</div>
-          <div class="ds-sub">决策记录卡</div>
-        </div>
-      </div>
+    <!-- 协同 -->
+    <div class="sync-v">
+      <div class="sync-line-v"></div>
+      <div class="sync-icon">⇄</div>
+      <div class="sync-label" style="font-size:9px;color:var(--muted);">协同</div>
+      <div class="sync-line-v"></div>
     </div>
 
-  </div><!-- /gov-wrap -->
-
-  <!-- ④ 两大壁垒 -->
-  <div class="layer-tag" style="color:var(--muted);">COMPETITIVE MOATS · 两大服务壁垒</div>
-  <div class="moats-row">
-    <div class="moat-card g">
-      <div class="moat-icon">🏫</div>
-      <div>
-        <div class="moat-title">人才护城河</div>
-        <div class="moat-desc">COO 联系本地定点护理院校，建立开元专属培训标准。护理员从入口就被开元化，竞对平台无法批量挖角，形成可持续的本地人才供给链。</div>
-        <span class="moat-tag">COO 主导</span>
-      </div>
-    </div>
-    <div class="moat-card b">
-      <div class="moat-icon">🤖</div>
-      <div>
-        <div class="moat-title">技术护城河</div>
-        <div class="moat-desc">CTO 主导 AI 系统持续积累每位长者的健康与行为数据，形成「越用越懂你」的个性化档案。这份数据资产无法转移，是服务越长越深度绑定的核心。</div>
-        <span class="moat-tag">CTO 主导</span>
+    <!-- AI班子 -->
+    <div class="ai-col">
+      <div class="ai-label">🤖 AI 班子（24h × 7 在线）</div>
+      <div class="ai-mods">
+        <div class="ai-mod"><div class="am-icon">🖋</div><div class="am-name">中书省 CSO</div><div class="am-desc">战略研究<br>议题起草</div></div>
+        <div class="ai-mod"><div class="am-icon">⚖️</div><div class="am-name">门下省 CFO</div><div class="am-desc">财务审议<br>现金流守护</div></div>
+        <div class="ai-mod"><div class="am-icon">⚡</div><div class="am-name">尚书省 COO</div><div class="am-desc">运营执行<br>服务落地</div></div>
+        <div class="ai-mod"><div class="am-icon">🏛️</div><div class="am-name">兵部 CGO</div><div class="am-desc">政策追踪<br>政府关系</div></div>
+        <div class="ai-mod"><div class="am-icon">📢</div><div class="am-name">礼部 CMO</div><div class="am-desc">情报日报<br>品牌传播</div></div>
+        <div class="ai-mod"><div class="am-icon">🔬</div><div class="am-name">工部 CTO</div><div class="am-desc">AI系统<br>产品规划</div></div>
       </div>
     </div>
   </div>
 
-</div><!-- /diagram -->
+  <!-- 决策机制 -->
+  <div class="dec-wrap">
+    <div class="dec-title">苏格拉底六步质询决策机制 · 没有经过质询的结论不进入执行体系</div>
+    <div class="dec-steps">
+      <div class="dec-step hi"><div class="ds-n">①</div><div class="ds-nm">CEO陈述</div><div class="ds-sub">判断+理由</div></div>
+      <div class="dec-step"><div class="ds-n">②</div><div class="ds-nm">CFO质询</div><div class="ds-sub">钱从哪来？</div></div>
+      <div class="dec-step"><div class="ds-n">③</div><div class="ds-nm">CGO质询</div><div class="ds-sub">政策真实？</div></div>
+      <div class="dec-step"><div class="ds-n">④</div><div class="ds-nm">COO质询</div><div class="ds-sub">能执行吗？</div></div>
+      <div class="dec-step"><div class="ds-n">⑤</div><div class="ds-nm">CSO提炼</div><div class="ds-sub">核心假设</div></div>
+      <div class="dec-step hi"><div class="ds-n">⑥</div><div class="ds-nm">CEO拍板</div><div class="ds-sub">决策记录卡</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ④ 两大壁垒 ══ -->
+<div class="divider"></div>
+<div class="sec-title">④ 两大核心壁垒</div>
+<div class="sec-desc">开元的护城河不来自资本规模，而来自两种竞争对手很难快速复制的积累——人才与数据。</div>
+
+<div class="moats">
+  <div class="moat talent">
+    <div class="moat-bg-icon">🏫</div>
+    <div class="moat-label">人才护城河 · COO 主导</div>
+    <div class="moat-title">定点院校 + 开元化培训</div>
+    <div class="moat-desc">COO 与本地护理职业院校合作，建立「开元标准」培训体系。护理员从入职前就被培养成认可开元服务理念的人，而不是从市场上招聘再磨合。</div>
+    <div class="moat-why">为什么竞对难以复制：</div>
+    <div class="moat-points">
+      <div class="moat-pt">定点院校合作需要时间积累与本地政府背书</div>
+      <div class="moat-pt">开元化护理员一旦培养完成，平台无法整体挖角</div>
+      <div class="moat-pt">院校合作形成人才供给渠道的稳定壁垒</div>
+    </div>
+    <span class="moat-owner">COO 主导建设</span>
+  </div>
+
+  <div class="moat tech">
+    <div class="moat-bg-icon">🤖</div>
+    <div class="moat-label">技术护城河 · CTO 主导</div>
+    <div class="moat-title">AI 数据积累 + 越用越懂</div>
+    <div class="moat-desc">CTO 主导 AI 陪伴系统和健康监测设备。每位长者的服务数据持续积累，形成「越用越懂这个人」的个性化健康档案——这是服务深度绑定的核心机制。</div>
+    <div class="moat-why">为什么竞对难以复制：</div>
+    <div class="moat-points">
+      <div class="moat-pt">健康档案、认知基线、行为习惯数据不可迁移</div>
+      <div class="moat-pt">换服务商等于放弃所有历史积累，家庭不愿意</div>
+      <div class="moat-pt">阿尔兹海默早筛能力，是纯家政平台没有的</div>
+    </div>
+    <span class="moat-owner">CTO 主导建设</span>
+  </div>
+</div>
+
+<!-- ══ ⑤ AI自动化能力 ══ -->
+<div class="divider"></div>
+<div class="sec-title">⑤ AI 自动化能力详情</div>
+<div class="sec-desc">储备期已上线的能力与规划中的能力——AI 承担的越多，CEO 专注人的工作的时间就越多。</div>
+
+<div class="caps-grid">
+  <div class="cap">
+    <div class="cap-icon">📡</div>
+    <div class="cap-name">行业情报自动采集</div>
+    <div class="cap-desc">搜狗微信、百度、今日头条每日三次自动抓取养老行业动态，生成精选日报和战略议题</div>
+    <span class="cap-status s-live">✅ 已上线</span>
+  </div>
+  <div class="cap">
+    <div class="cap-icon">🏛️</div>
+    <div class="cap-name">三省六部 Multi-Agent</div>
+    <div class="cap-desc">七个 AI 角色就同一议题独立分析，苏格拉底六步质询交叉验证，输出决策记录卡</div>
+    <span class="cap-status s-live">✅ 已上线</span>
+  </div>
+  <div class="cap">
+    <div class="cap-icon">📊</div>
+    <div class="cap-name">每日班子汇报自动生成</div>
+    <div class="cap-desc">可视化 HTML 汇报自动生成，同步至 GitHub Pages，飞书机器人推送给 CEO</div>
+    <span class="cap-status s-live">✅ 已上线</span>
+  </div>
+  <div class="cap">
+    <div class="cap-icon">📲</div>
+    <div class="cap-name">飞书指令双向闭环</div>
+    <div class="cap-desc">CEO 飞书发指令 → AI 解析执行 → 结果推送回飞书。支持「帮我/生成/搜索/分析」等触发词</div>
+    <span class="cap-status s-live">✅ 已上线</span>
+  </div>
+  <div class="cap">
+    <div class="cap-icon">📚</div>
+    <div class="cap-name">飞书知识库自动同步</div>
+    <div class="cap-desc">研究报告、班子汇报、行业日报自动归档至飞书六大知识库，支持多人协作查阅</div>
+    <span class="cap-status s-live">✅ 已上线</span>
+  </div>
+  <div class="cap">
+    <div class="cap-icon">🔄</div>
+    <div class="cap-name">CEO 反馈自动分析</div>
+    <div class="cap-desc">CEO 打分/备注 → AI 分析问题根因 → 生成改进计划 → 写入待执行队列，持续学习</div>
+    <span class="cap-status s-live">✅ 已上线</span>
+  </div>
+  <div class="cap">
+    <div class="cap-icon">🎙️</div>
+    <div class="cap-name">AI 情感陪伴系统</div>
+    <div class="cap-desc">智能音箱+大模型，夜间陪伴对话，情绪低落检测，孤独感预警触发护理员上门</div>
+    <span class="cap-status s-q2">⏳ 2026 Q2 引入</span>
+  </div>
+  <div class="cap">
+    <div class="cap-icon">🧠</div>
+    <div class="cap-name">阿尔兹海默早筛系统</div>
+    <div class="cap-desc">每日对话语言分析+认知训练+记忆测试，建立个人认知基线，提前3-6个月预警</div>
+    <span class="cap-status s-q2">⏳ 2026 Q2 引入</span>
+  </div>
+  <div class="cap">
+    <div class="cap-icon">❤️</div>
+    <div class="cap-name">24h 健康监测</div>
+    <div class="cap-desc">可穿戴设备+室内传感器，心率/血压/血氧/跌倒实时监测，异常即时推送家属</div>
+    <span class="cap-status s-q2">⏳ 2026 Q2 引入</span>
+  </div>
+</div>
+
+<!-- ══ 宣言 ══ -->
+<div class="manifesto">
+  <p>「开元提供的不是家政服务——我们提供的是『有尊严地老去』这件事本身。AI 把运营成本压到传统养老机构的五分之一，同时把服务质量做到私人健康管家的水准。这就是开元的价值主张：用 AI 把好服务的成本打下来，让更多长者买得起。」</p>
+  <div class="attr">— 开元时代 · 服务架构设计原则 · 2026年3月</div>
+</div>
+
+</div><!-- /body -->
 
 <div class="footer">
-  © 2026 开元时代 · 全局架构设计 v2 · 治理体系 × 服务体系 · 人机协同一体化
+  © 2026 开元时代 · 全局架构与能力地图 · 仅供内部参考 ·
+  <a href="index.html">← 返回官网</a>
 </div>
 
 </body>
