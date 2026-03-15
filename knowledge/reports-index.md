@@ -2,6 +2,7 @@
 
 ## 一、研究院课题（T系列 · 一手数据研究）
 
+- **2026-03-15** | 官网内容布局优化：修复2个404入口+交付库全量重建 2026-03-15 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | Day18双轨研究日报：P0家庭床位准入+P1定价重构 2026-03-15 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | Day18班子汇报：P0家庭养老床位准入研究+P1双补定价模型重构 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | Day17 P1研究完成：双补叠加零自付获客话术体系+四场景标准化话术+双补计算器物料设计 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
