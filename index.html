@@ -1164,13 +1164,16 @@
   <!-- ── 2026-03-15 D5.7 双轨研究日报 ── -->
   <div class="log-entry" style="border-color:rgba(201,168,76,0.8);">
     <div class="log-entry-hd" onclick="toggleLog('log-day18',this)" style="background:rgba(201,168,76,0.07);">
-      <div>
+      <div style="flex:1;min-width:0;">
         <div class="log-date">2026-03-15 · D5.7 · 家庭床位准入路径 × 定价模型重构</div>
         <div style="font-size:0.78rem;color:var(--muted);margin-top:0.25rem;">礼部5条情报 · P0准入研究 · P1定价重构 · 苏格拉底六步质询完整</div>
       </div>
-      <span style="color:var(--gold);font-size:0.75rem;">▶ 展开</span>
+      <div style="display:flex;align-items:center;gap:0.6rem;flex-shrink:0;" onclick="event.stopPropagation()">
+        <a href="day18-briefing-2026-03-15.html" target="_blank" style="background:var(--gold);color:#1a1a1a;font-size:0.7rem;font-weight:700;padding:4px 12px;border-radius:6px;text-decoration:none;white-space:nowrap;">📄 完整日报 ↗</a>
+      </div>
+      <span class="log-arrow" style="transform:rotate(0deg);">▼</span>
     </div>
-    <div id="log-day18" style="display:none;padding:1.4rem 1.6rem;background:var(--dark-2);">
+    <div id="log-day18" style="display:block;padding:1.4rem 1.6rem;background:var(--dark-2);">
       <h4 style="color:var(--gold);font-size:0.88rem;margin-bottom:1rem;">📰 礼部 · 今日情报（2026-03-15）</h4>
       <ul style="list-style:none;margin-bottom:1.2rem;">
         <li style="padding:0.3rem 0;font-size:0.83rem;color:var(--muted);">🔴 十五五纲要通过，养老质量指标入核心民生</li>
@@ -1215,8 +1218,11 @@
         <span class="badge badge-gold">兵部V1</span>
         <span class="badge badge-gold">政策窗口</span>
       </div>
+    
+      <a href="day4-briefing-0314.html" target="_blank" onclick="event.stopPropagation()" style="background:rgba(155,106,26,0.1);color:var(--gold);font-size:0.68rem;font-weight:600;padding:3px 10px;border-radius:5px;text-decoration:none;white-space:nowrap;border:1px solid rgba(155,106,26,0.28);">D4.1 详情 ↗</a>
+      <span class="log-arrow">▼</span>
     </div>
-    <div id="log-day4-0314" class="log-body" style="display:block;">
+    <div id="log-day4-0314" class="log-body" style="display:none;">
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0.8rem;margin-bottom:1.2rem;">
         <div style="background:rgba(155,106,26,0.05);border:1px solid rgba(155,106,26,0.25);border-radius:10px;padding:0.9rem;">
           <div style="font-size:0.72rem;color:var(--gold);margin-bottom:0.4rem;">📡 情报#1 · 相关度⭐⭐⭐</div>
@@ -1257,7 +1263,10 @@
   <div class="log-entry" style="border-color:rgba(155,106,26,0.6);">
     <div class="log-entry-hd" onclick="toggleLog('log-day15',this)" style="background:rgba(155,106,26,0.06);">
       <div>
-        <div class="log-date">2026-03-14 · D4.11 · 养老服务师新职业政策 · 驿站招募窗口</div>
+        <div class="log-date">2026-03-14 · D4.11 · 养老服务师新职业政策 · 驿站招募窗口
+      <a href="day15-briefing-0314.html" target="_blank" onclick="event.stopPropagation()" style="background:rgba(155,106,26,0.1);color:var(--gold);font-size:0.68rem;font-weight:600;padding:3px 10px;border-radius:5px;text-decoration:none;white-space:nowrap;border:1px solid rgba(155,106,26,0.28);">D4.11 详情 ↗</a>
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D4.11 · 3月14日 第11轮 · 中书省议题研究启动</div>
         <div class="log-title">养老服务师三级认定正式确认 · 西城区驿站招募第一批 · 上海物业+养老试点落地 · 开元人才战略升级</div>
       </div>
@@ -1336,7 +1345,10 @@
   <div class="log-entry" style="border-color:rgba(155,106,26,0.6);">
     <div class="log-entry-hd" onclick="toggleLog('log-day13',this)" style="background:rgba(155,106,26,0.05);">
       <div class="log-meta">
-        <div class="log-date">2026-03-14 · D4.9 · 两会闭幕日 · 情报转行动</div>
+        <div class="log-date">2026-03-14 · D4.9 · 两会闭幕日 · 情报转行动
+      <a href="day14-briefing-0314.html" target="_blank" onclick="event.stopPropagation()" style="background:rgba(155,106,26,0.1);color:var(--gold);font-size:0.68rem;font-weight:600;padding:3px 10px;border-radius:5px;text-decoration:none;white-space:nowrap;border:1px solid rgba(155,106,26,0.28);">D4.10 详情 ↗</a>
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D4.9 · 3月14日 第9轮</div>
         <div class="log-title">长护险全面推行确认 · 养老服务师国家认证启动 · 西城区竞对格局研判 · 六部行动令下达</div>
       </div>
@@ -1375,7 +1387,10 @@
   <div class="log-entry" style="border-color:rgba(155,106,26,0.3);">
     <div class="log-entry-hd" onclick="toggleLog('log-day12',this)" style="background:rgba(155,106,26,0.05);">
       <div class="log-meta">
-        <div class="log-date">2026-03-14 · D4.8 · CEO决策日 · D4.7三项授权落地执行启动</div>
+        <div class="log-date">2026-03-14 · D4.8 · CEO决策日 · D4.7三项授权落地执行启动
+      <a href="day13-briefing-0314.html" target="_blank" onclick="event.stopPropagation()" style="background:rgba(155,106,26,0.1);color:var(--gold);font-size:0.68rem;font-weight:600;padding:3px 10px;border-radius:5px;text-decoration:none;white-space:nowrap;border:1px solid rgba(155,106,26,0.28);">D4.9 详情 ↗</a>
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D4.8 · 3月14日 第8轮</div>
         <div class="log-title">红枫驿站接触方案制定 · 养老服务师嵌入留存路径 · 长护险定点合作财务模型V2启动 · 北京《养老服务条例》新法入效</div>
       </div>
@@ -1385,7 +1400,7 @@
         <span style="font-size:0.8rem;color:var(--muted);">▾</span>
       </div>
     </div>
-    <div class="log-body" id="log-day12" style="display:block;">
+    <div class="log-body" id="log-day12" style="display:none;">
       <div class="log-sec">
         <h4>📡 礼部 · 今日情报战报（2026-03-14）</h4>
         <p>
@@ -1437,7 +1452,10 @@
   <div class="log-entry" style="border-color:rgba(155,106,26,0.3);">
     <div class="log-entry-hd" onclick="toggleLog('log-day11',this)" style="background:rgba(155,106,26,0.05);">
       <div class="log-meta">
-        <div class="log-date">2026-03-14 · D4.7 · 驿站入场窗口期确认 · 养老服务师认定体系落地</div>
+        <div class="log-date">2026-03-14 · D4.7 · 驿站入场窗口期确认 · 养老服务师认定体系落地
+      <a href="day11-briefing-0314.html" target="_blank" onclick="event.stopPropagation()" style="background:rgba(155,106,26,0.1);color:var(--gold);font-size:0.68rem;font-weight:600;padding:3px 10px;border-radius:5px;text-decoration:none;white-space:nowrap;border:1px solid rgba(155,106,26,0.28);">D4.7 详情 ↗</a>
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D4.7 · 3月14日 第7轮</div>
         <div class="log-title">西城区驿站招募开启 · 广外家政超市2月上线 · 养老服务师三级认定体系启动 · 长护险合作入驻路径确立</div>
       </div>
@@ -1447,7 +1465,7 @@
         <span style="font-size:0.8rem;color:var(--muted);">▾</span>
       </div>
     </div>
-    <div class="log-body" id="log-day11" style="display:block;">
+    <div class="log-body" id="log-day11" style="display:none;">
       <div class="log-sec">
         <h4>📡 礼部 · 今日情报战报（双轨制·轨道一）</h4>
         <p>
@@ -1485,7 +1503,10 @@
   <div class="log-entry" style="border-color:rgba(155,106,26,0.5);">
     <div class="log-entry-hd" onclick="toggleLog('log-day10',this)" style="background:rgba(155,106,26,0.07);">
       <div class="log-meta">
-        <div class="log-date">2026-03-14 · D4.6 · 补贴叠加政策深化 · 养老服务师职业正式推进</div>
+        <div class="log-date">2026-03-14 · D4.6 · 补贴叠加政策深化 · 养老服务师职业正式推进
+      <a href="day10-briefing-0314.html" target="_blank" onclick="event.stopPropagation()" style="background:rgba(155,106,26,0.1);color:var(--gold);font-size:0.68rem;font-weight:600;padding:3px 10px;border-radius:5px;text-decoration:none;white-space:nowrap;border:1px solid rgba(155,106,26,0.28);">D4.6 详情 ↗</a>
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D4.6 · 3月14日 第6轮</div>
         <div class="log-title">养老服务师纳入新职业 · 800元补贴叠加长护险落地北京 · 供给侧空缺即蓝海 · 广外红枫驿站竞对确认</div>
       </div>
@@ -1496,7 +1517,7 @@
         <span class="tag">补贴定价研究</span>
       </div>
     </div>
-    <div class="log-body" id="log-day10" style="display:block;">
+    <div class="log-body" id="log-day10" style="display:none;">
       <div style="font-size:0.82rem; color:var(--text); line-height:1.7; margin-bottom:1rem;">
         礼部今日采集5条核心情报，中书省识别2个P0级议题建议立项。
       </div>
@@ -1531,7 +1552,10 @@
   <div class="log-entry" style="border-color:rgba(155,106,26,0.3);">
     <div class="log-entry-hd" onclick="toggleLog('log-day9',this)" style="background:rgba(155,106,26,0.05);">
       <div class="log-meta">
-        <div class="log-date">2026-03-14 · D4.5 · 两会收官后政策红利转化期</div>
+        <div class="log-date">2026-03-14 · D4.5 · 两会收官后政策红利转化期
+      <a href="day9-briefing-0314.html" target="_blank" onclick="event.stopPropagation()" style="background:rgba(155,106,26,0.1);color:var(--gold);font-size:0.68rem;font-weight:600;padding:3px 10px;border-radius:5px;text-decoration:none;white-space:nowrap;border:1px solid rgba(155,106,26,0.28);">D4.5 详情 ↗</a>
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D4.5 · 3月14日 第5轮</div>
         <div class="log-title">京东入局居家养老 · 长护险全面建制 · 北京条例7月施行 · 广外驿站合作窗口期确认</div>
       </div>
@@ -1541,7 +1565,7 @@
         <span style="font-size:0.8rem;color:var(--muted);">▾</span>
       </div>
     </div>
-    <div class="log-body" id="log-day9" style="display:block;">
+    <div class="log-body" id="log-day9" style="display:none;">
       <div class="log-sec">
         <h4>📡 礼部 · 今日情报战报（双轨制·轨道一）</h4>
         <p>
@@ -1578,7 +1602,10 @@
   <div class="log-entry" style="border-color:rgba(155,106,26,0.3);">
     <div class="log-entry-hd" onclick="toggleLog('log-day8',this)" style="background:rgba(155,106,26,0.05);">
       <div class="log-meta">
-        <div class="log-date">2026-03-14 · D4.4 · 政策落地执行期</div>
+        <div class="log-date">2026-03-14 · D4.4 · 政策落地执行期
+      <a href="day8-briefing-0314.html" target="_blank" onclick="event.stopPropagation()" style="background:rgba(155,106,26,0.1);color:var(--gold);font-size:0.68rem;font-weight:600;padding:3px 10px;border-radius:5px;text-decoration:none;white-space:nowrap;border:1px solid rgba(155,106,26,0.28);">D4.4 详情 ↗</a>
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D4.4 · 3月14日 第4轮</div>
         <div class="log-title">北京"家政+养老"新政落地 · 驿站合作通道开放 · 补贴叠加最高1400元/月</div>
       </div>
@@ -1588,7 +1615,7 @@
         <span style="font-size:0.8rem;color:var(--muted);">▾</span>
       </div>
     </div>
-    <div class="log-body" id="log-day8" style="display:block;">
+    <div class="log-body" id="log-day8" style="display:none;">
       <div class="log-sec">
         <h4>📡 CSO · 今日情报战报（苏格拉底三轮质询版）</h4>
         <p>
@@ -1630,7 +1657,10 @@
   <div class="log-entry" style="border-color:rgba(155,106,26,0.3);">
     <div class="log-entry-hd" onclick="toggleLog('log-day7',this)" style="background:rgba(155,106,26,0.05);">
       <div class="log-meta">
-        <div class="log-date">2026-03-14 · D4.3 · 政策落地执行期</div>
+        <div class="log-date">2026-03-14 · D4.3 · 政策落地执行期
+      <a href="day7-briefing-0314.html" target="_blank" onclick="event.stopPropagation()" style="background:rgba(155,106,26,0.1);color:var(--gold);font-size:0.68rem;font-weight:600;padding:3px 10px;border-radius:5px;text-decoration:none;white-space:nowrap;border:1px solid rgba(155,106,26,0.28);">D4.3 详情 ↗</a>
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D4.3 · 3月14日 第3轮</div>
         <div class="log-title">广外竞品全景浮现 · 驿站合作立项 · 800元补贴全国验证 · 三省六部调度令下达</div>
       </div>
@@ -1696,7 +1726,10 @@
   <div class="log-entry" style="border-color:rgba(155,106,26,0.3);">
     <div class="log-entry-hd" onclick="toggleLog('log-day6',this)" style="background:rgba(155,106,26,0.05);">
       <div class="log-meta">
-        <div class="log-date">2026-03-15 · D5.1 · 政策落地执行期第2日</div>
+        <div class="log-date">2026-03-15 · D5.1 · 政策落地执行期第2日
+      <a href="day6-briefing-0315.html" target="_blank" onclick="event.stopPropagation()" style="background:rgba(155,106,26,0.1);color:var(--gold);font-size:0.68rem;font-weight:600;padding:3px 10px;border-radius:5px;text-decoration:none;white-space:nowrap;border:1px solid rgba(155,106,26,0.28);">D5.1 详情 ↗</a>
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D5.1 · 3月15日 第1轮</div>
         <div class="log-title">驿站合作路径深化 · 养老服务师资质布局 · CFO垫付决策模型 + CGO居委会激活SOP + COO服务标准V1框架</div>
       </div>
@@ -1766,7 +1799,10 @@
   <div class="log-entry" style="border-color:rgba(155,106,26,0.4);">
     <div class="log-entry-hd" onclick="toggleLog('log-day5',this)" style="background:rgba(155,106,26,0.07);">
       <div class="log-meta">
-        <div class="log-date">2026-03-15 · D5.2 · 两会收官第二日</div>
+        <div class="log-date">2026-03-15 · D5.2 · 两会收官第二日
+      <a href="day16-briefing-0315.html" target="_blank" onclick="event.stopPropagation()" style="background:rgba(155,106,26,0.1);color:var(--gold);font-size:0.68rem;font-weight:600;padding:3px 10px;border-radius:5px;text-decoration:none;white-space:nowrap;border:1px solid rgba(155,106,26,0.28);">D5.2 详情 ↗</a>
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D5.2 · 3月15日 第2轮</div>
         <div class="log-title">政策落地执行期开启 · 驿站入局窗口确认 · COO拜访话术V2 + CFO补贴申报模型 + CGO首户锁定计划</div>
       </div>
@@ -1827,7 +1863,10 @@
   <div class="log-entry" style="border-color:rgba(155,106,26,0.3);">
     <div class="log-entry-hd" onclick="toggleLog('log-day4-morning',this)" style="background:rgba(155,106,26,0.05);">
       <div class="log-meta">
-        <div class="log-date">2026-03-14 · D4.2 · 两会收官首日</div>
+        <div class="log-date">2026-03-14 · D4.2 · 两会收官首日
+      <a href="day4-briefing-0314.html" target="_blank" onclick="event.stopPropagation()" style="background:rgba(155,106,26,0.1);color:var(--gold);font-size:0.68rem;font-weight:600;padding:3px 10px;border-radius:5px;text-decoration:none;white-space:nowrap;border:1px solid rgba(155,106,26,0.28);">D4.2 详情 ↗</a>
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D4.2 · 3月14日 第2轮</div>
         <div class="log-title">三省六部自主作业 · 现金流V2 + 话术卡V1 + 首家获取策略 + T10政策研究建档</div>
       </div>
@@ -1862,7 +1901,9 @@
   <div class="log-entry" style="border-color:rgba(155,106,26,0.3);">
     <div class="log-entry-hd" onclick="toggleLog('log-day3-evening',this)" style="background:rgba(155,106,26,0.05);">
       <div class="log-meta">
-        <div class="log-date">2026-03-13 · 晚间CEO战报</div>
+        <div class="log-date">2026-03-13 · 晚间CEO战报
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D3.4 · 3月13日 第4轮</div>
         <div class="log-title">两会收官·政策加码 · CEO今日行动计划 · 班子三线推进</div>
       </div>
@@ -2072,7 +2113,9 @@
   <div class="log-entry" style="border-color:rgba(155,106,26,0.3);">
     <div class="log-entry-hd" onclick="toggleLog('log-day3-readiness',this)" style="background:rgba(155,106,26,0.05);">
       <div class="log-meta">
-        <div class="log-date">2026-03-13 · 班子战略审议</div>
+        <div class="log-date">2026-03-13 · 班子战略审议
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D3.3 · 3月13日 第3轮</div>
         <div class="log-title">决策记录卡 #005 · 开工储备文件全景审议 + 开元周检制度建立</div>
       </div>
@@ -2143,7 +2186,9 @@
   <div class="log-entry" style="border-color:rgba(155,106,26,0.5);">
     <div class="log-entry-hd" onclick="toggleLog('log-day3-afternoon',this)" style="background:rgba(155,106,26,0.06);">
       <div class="log-meta">
-        <div class="log-date">2026-03-13 · 下午战略日报</div>
+        <div class="log-date">2026-03-13 · 下午战略日报
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D3.2 · 3月13日 第2轮</div>
         <div class="log-title">2026两会政策红利解码 · 居家照护消费券800元/月全国落地 · Day3班子作业分发</div>
       </div>
@@ -2260,7 +2305,9 @@
   <div class="log-entry" style="border-color:rgba(155,106,26,0.4);">
     <div class="log-entry-hd" onclick="toggleLog('log-day3-infra',this)" style="background:var(--dark-2);">
       <div class="log-meta">
-        <div class="log-date">2026-03-13 · 01:00–02:00</div>
+        <div class="log-date">2026-03-13 · 01:00–02:00
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D3.1 · 3月13日 第1轮</div>
         <div class="log-title">人+AI协同机制全面升级 · 24小时自主运行能力建立</div>
       </div>
@@ -2311,7 +2358,9 @@
   <div class="log-entry" style="border-color:rgba(155,106,26,0.3);">
     <div class="log-entry-hd" onclick="toggleLog('log-day3-action',this)" style="background:var(--dark-2);">
       <div class="log-meta">
-        <div class="log-date">2026-03-13 · 晨</div>
+        <div class="log-date">2026-03-13 · 晨
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D3.0 · 3月13日 总览</div>
         <div class="log-title">两会政策红利窗口期 · 广外街道首次接触计划启动 🚀</div>
       </div>
@@ -2384,7 +2433,9 @@
   <div class="log-entry" style="border-color:rgba(155,106,26,0.4);">
     <div class="log-entry-hd" onclick="toggleLog('log-day2-1830',this)" style="background:var(--dark-2);">
       <div class="log-meta">
-        <div class="log-date">2026-03-12 · 18:30</div>
+        <div class="log-date">2026-03-12 · 18:30
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D2.3 · 3月12日 晚</div>
         <div class="log-title">班子三省联动产出 · 产品/定价/护理员体系三文档完成 🏛️</div>
       </div>
@@ -2426,7 +2477,9 @@
   <div class="log-entry" style="border-color:rgba(155,106,26,0.3);">
     <div class="log-entry-hd" onclick="toggleLog('log-day2-pm',this)" style="background:var(--dark-2);">
       <div class="log-meta">
-        <div class="log-date">2026-03-12 · 15:00–16:30</div>
+        <div class="log-date">2026-03-12 · 15:00–16:30
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D2.2 · 3月12日 下午</div>
         <div class="log-title">CEO战略复盘 · 今日行动计划制定 · 行业动态分析 · 官网时间线更新 🔄</div>
       </div>
@@ -2497,7 +2550,9 @@
   <div class="log-entry">
     <div class="log-entry-hd" onclick="toggleLog('log-day2',this)">
       <div class="log-meta">
-        <div class="log-date">2026-03-12 · 00:00–02:20</div>
+        <div class="log-date">2026-03-12 · 00:00–02:20
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D2.1 · 3月12日</div>
         <div class="log-title">官网全面重构 · 智库9大主题建立 · 科技叙事融入关键路径 · 三省六部工作台建立 🏛️</div>
       </div>
@@ -2572,7 +2627,9 @@
   <div class="log-entry">
     <div class="log-entry-hd" onclick="toggleLog('log-night2',this)">
       <div class="log-meta">
-        <div class="log-date">2026-03-12 · 00:00–00:32</div>
+        <div class="log-date">2026-03-12 · 00:00–00:32
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">深夜 · 三省六部联合产出</div>
         <div class="log-title">公司成立全量部署 · 产品体系 · 竞争格局 · 资质路径 · 知识库建立 🏛️</div>
       </div>
@@ -2793,7 +2850,9 @@
   <div class="log-entry">
     <div class="log-entry-hd" onclick="toggleLog('log1-night',this)">
       <div class="log-meta">
-        <div class="log-date">2026-03-11 · 23:30</div>
+        <div class="log-date">2026-03-11 · 23:30
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D1.3 · 3月11日 深夜</div>
         <div class="log-title">愿景路径重构 · 王总确认12个月节奏 · 班子四线夜间产出 🌙</div>
       </div>
@@ -2883,7 +2942,9 @@
   <div class="log-entry">
     <div class="log-entry-hd" onclick="toggleLog('log1-timeline',this)">
       <div class="log-meta">
-        <div class="log-date">2026-03-11 · 全天时间线</div>
+        <div class="log-date">2026-03-11 · 全天时间线
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D1 · 3月11日 完整记录</div>
         <div class="log-title">⏱ 13:00 → 23:40 · 班子小时级推进全记录</div>
       </div>
@@ -3053,7 +3114,9 @@
   <div class="log-entry">
     <div class="log-entry-hd" onclick="toggleLog('log1',this)">
       <div class="log-meta">
-        <div class="log-date">2026-03-11</div>
+        <div class="log-date">2026-03-11
+      <span class="log-arrow">▼</span>
+    </div>
         <div class="log-day">D1 · 3月11日 星期三</div>
         <div class="log-title">班子首次战略会议 · 推翻原计划 · 重建决策框架 ⚡</div>
       </div>
@@ -4423,7 +4486,9 @@
       <div class="log-entry-hd" onclick="toggleLog('tt-t01',this)" style="background:var(--dark-2);">
         <div class="log-meta">
           <div style="font-size:0.65rem;padding:0.15rem 0.5rem;border-radius:4px;background:rgba(155,106,26,0.05);color:var(--green);font-weight:700;">T01 · 需求洞察</div>
-          <div style="font-size:0.65rem;color:var(--green);">✅ 初稿已完成 · 2026-03-12</div>
+          <div style="font-size:0.65rem;color:var(--green);">✅ 初稿已完成 · 2026-03-12
+      <span class="log-arrow">▼</span>
+    </div>
           <div class="log-title">谁是我们的用户？他们真正需要什么？</div>
         </div>
         <div style="display:flex;gap:0.5rem;align-items:center;flex-shrink:0">
@@ -4475,7 +4540,9 @@
       <div class="log-entry-hd" onclick="toggleLog('tt-t02',this)" style="background:var(--dark-2);">
         <div class="log-meta">
           <div style="font-size:0.65rem;padding:0.15rem 0.5rem;border-radius:4px;background:rgba(155,106,26,0.05);color:var(--green);font-weight:700;">T02 · 竞争格局</div>
-          <div style="font-size:0.65rem;color:var(--green);">✅ 初稿已完成 · 2026-03-12</div>
+          <div style="font-size:0.65rem;color:var(--green);">✅ 初稿已完成 · 2026-03-12
+      <span class="log-arrow">▼</span>
+    </div>
           <div class="log-title">谁在做这件事？我们在哪里差异化？</div>
         </div>
         <div style="display:flex;gap:0.5rem;align-items:center;flex-shrink:0">
@@ -4545,7 +4612,9 @@
       <div class="log-entry-hd" onclick="toggleLog('tt-t03',this)" style="background:var(--dark-2);">
         <div class="log-meta">
           <div style="font-size:0.65rem;padding:0.15rem 0.5rem;border-radius:4px;background:rgba(155,106,26,0.06);color:var(--gold);font-weight:700;">T03 · 政策资质</div>
-          <div style="font-size:0.65rem;color:var(--gold);">🔄 进行中 · 持续更新</div>
+          <div style="font-size:0.65rem;color:var(--gold);">🔄 进行中 · 持续更新
+      <span class="log-arrow">▼</span>
+    </div>
           <div class="log-title">政府支持体系 · 长护险申请 · 补贴资质路径</div>
         </div>
         <div style="display:flex;gap:0.5rem;align-items:center;flex-shrink:0">
@@ -4596,7 +4665,9 @@
       <div class="log-entry-hd" onclick="toggleLog('tt-t05',this)" style="background:var(--dark-2);">
         <div class="log-meta">
           <div style="font-size:0.65rem;padding:0.15rem 0.5rem;border-radius:4px;background:rgba(155,106,26,0.05);color:var(--green);font-weight:700;">T05 · 财务模型</div>
-          <div style="font-size:0.65rem;color:var(--green);">✅ V2审议完成 · 2026-03-13</div>
+          <div style="font-size:0.65rem;color:var(--green);">✅ V2审议完成 · 2026-03-13
+      <span class="log-arrow">▼</span>
+    </div>
           <div class="log-title">100万启动资金 · 盈亏路径 · 补贴节奏 · 融资时机</div>
         </div>
         <div style="display:flex;gap:0.5rem;align-items:center;flex-shrink:0">
@@ -4645,7 +4716,9 @@
       <div class="log-entry-hd" onclick="toggleLog('tt-t06',this)" style="background:var(--dark-2);">
         <div class="log-meta">
           <div style="font-size:0.65rem;padding:0.15rem 0.5rem;border-radius:4px;background:rgba(155,106,26,0.05);color:var(--green);font-weight:700;">T06 · 国际模式</div>
-          <div style="font-size:0.65rem;color:var(--green);">✅ V2审议完成 · 2026-03-13</div>
+          <div style="font-size:0.65rem;color:var(--green);">✅ V2审议完成 · 2026-03-13
+      <span class="log-arrow">▼</span>
+    </div>
           <div class="log-title">日本介护制度深度拆解 · 中国镜鉴 · 开元三大启示</div>
         </div>
         <div style="display:flex;gap:0.5rem;align-items:center;flex-shrink:0">
@@ -4693,7 +4766,9 @@
       <div class="log-entry-hd" onclick="toggleLog('tt-t07',this)" style="background:var(--dark-2);">
         <div class="log-meta">
           <div style="font-size:0.65rem;padding:0.15rem 0.5rem;border-radius:4px;background:rgba(155,106,26,0.05);color:var(--green);font-weight:700;">T07 · 科技赋能</div>
-          <div style="font-size:0.65rem;color:var(--green);">✅ V2审议完成 · 2026-03-13</div>
+          <div style="font-size:0.65rem;color:var(--green);">✅ V2审议完成 · 2026-03-13
+      <span class="log-arrow">▼</span>
+    </div>
           <div class="log-title">三阶段科技路线图 · AI陪伴 · 具身智能 · 数据资产策略（降级）</div>
         </div>
         <div style="display:flex;gap:0.5rem;align-items:center;flex-shrink:0">
@@ -4726,7 +4801,9 @@
       <div class="log-entry-hd" onclick="toggleLog('tt-t08',this)" style="background:var(--dark-2);">
         <div class="log-meta">
           <div style="font-size:0.65rem;padding:0.15rem 0.5rem;border-radius:4px;background:rgba(155,106,26,0.05);color:var(--green);font-weight:700;">T08 · 合伙人+ESG</div>
-          <div style="font-size:0.65rem;color:var(--green);">✅ V2审议完成 · 2026-03-13</div>
+          <div style="font-size:0.65rem;color:var(--green);">✅ V2审议完成 · 2026-03-13
+      <span class="log-arrow">▼</span>
+    </div>
           <div class="log-title">社区服务官体系 · 防分裂三重机制 · ESG影响力投资路径</div>
         </div>
         <div style="display:flex;gap:0.5rem;align-items:center;flex-shrink:0">
@@ -4758,7 +4835,9 @@
       <div class="log-entry-hd" onclick="toggleLog('tt-t09',this)" style="background:var(--dark-2);">
         <div class="log-meta">
           <div style="font-size:0.65rem;padding:0.15rem 0.5rem;border-radius:4px;background:rgba(155,106,26,0.05);color:var(--blue);font-weight:700;">T09 · 退出路径</div>
-          <div style="font-size:0.65rem;color:var(--green);">✅ V2审议完成 · 2026-03-13</div>
+          <div style="font-size:0.65rem;color:var(--green);">✅ V2审议完成 · 2026-03-13
+      <span class="log-arrow">▼</span>
+    </div>
           <div class="log-title">使命驱动 vs 投资驱动 · 三条退出路径优先级 · 社会价值数据体系</div>
         </div>
         <div style="display:flex;gap:0.5rem;align-items:center;flex-shrink:0">
@@ -4816,7 +4895,9 @@
       <div class="log-entry-hd" onclick="toggleLog('tt-006',this)">
         <div class="log-meta">
           <div class="log-date">2026-03-12 · 储备期研究</div>
-          <div style="font-size:0.65rem;padding:0.1rem 0.45rem;border-radius:4px;background:rgba(155,106,26,0.05);color:var(--green);">COO+礼部</div>
+          <div style="font-size:0.65rem;padding:0.1rem 0.45rem;border-radius:4px;background:rgba(155,106,26,0.05);color:var(--green);">COO+礼部
+      <span class="log-arrow">▼</span>
+    </div>
           <div class="log-title">居家照护需求桌面研究报告 · 北京西城区广外街道 · 三大核心洞察</div>
         </div>
         <div style="display:flex;gap:0.5rem;align-items:center;flex-shrink:0">
@@ -5588,10 +5669,26 @@
   function toggleLog(id, hd) {
     const b = document.getElementById(id);
     const a = hd.querySelector('.log-arrow');
-    const open = b.classList.contains('open');
-    b.classList.toggle('open'); b.style.display = open ? 'none' : 'block';
-    a.style.transform = open ? 'rotate(-90deg)' : 'rotate(0deg)';
+    // 判断当前是否展开：检查 display 状态（兼容初始 block 与 .open class）
+    const isOpen = b.style.display === 'block' || b.classList.contains('open');
+    b.classList.toggle('open', !isOpen);
+    b.style.display = isOpen ? 'none' : 'block';
+    if (a) a.style.transform = isOpen ? 'rotate(-90deg)' : 'rotate(0deg)';
   }
+  // 初始化：对所有默认展开的条目，设置箭头方向
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.log-entry-hd').forEach(hd => {
+      const fn = hd.getAttribute('onclick');
+      if (!fn) return;
+      const m = fn.match(/toggleLog\('([^']+)'/);
+      if (!m) return;
+      const b = document.getElementById(m[1]);
+      const a = hd.querySelector('.log-arrow');
+      if (b && a) {
+        a.style.transform = (b.style.display === 'block') ? 'rotate(0deg)' : 'rotate(-90deg)';
+      }
+    });
+  });
   function updateDate() {
     const el = document.getElementById('live-date');
     if (!el) return;
