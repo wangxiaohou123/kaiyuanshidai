@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>开元时代·D6班子晨报 | 2026-03-16</title>
+<style>
+  :root {
+    --gold: #B8960C;
+    --gold-light: #D4AF37;
+    --gold-pale: #F5E6A3;
+    --cream: #FEFCF3;
+    --white: #FFFFFF;
+    --gray-dark: #2C2C2C;
+    --gray-mid: #555555;
+    --gray-light: #888888;
+    --border: #E8D9A0;
+    --red-tag: #C0392B;
+    --yellow-tag: #E67E22;
+    --green-tag: #27AE60;
+    --blue-tag: #2980B9;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--cream);
+    color: var(--gray-dark);
+    line-height: 1.7;
+  }
+
+  /* ===== 顶部横幅 ===== */
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: white;
+    padding: 36px 24px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.3;
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(212,175,55,0.2);
+    border: 1px solid var(--gold-light);
+    color: var(--gold-pale);
+    font-size: 11px;
+    letter-spacing: 2px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .header h1 {
+    font-size: clamp(20px, 5vw, 28px);
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .header .subtitle {
+    color: var(--gold-pale);
+    font-size: 13px;
+    opacity: 0.9;
+  }
+  .header .day-badge {
+    display: inline-block;
+    background: var(--gold-light);
+    color: #1a1a2e;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 12px;
+    margin-top: 10px;
+    letter-spacing: 1px;
+  }
+
+  /* ===== 主容器 ===== */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+
+  /* ===== 卡片通用 ===== */
+  .card {
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(184,150,12,0.08);
+  }
+  .card-header {
+    background: linear-gradient(135deg, #faf6e8, #f5efc8);
+    border-bottom: 2px solid var(--gold);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-header .icon { font-size: 20px; }
+  .card-header h2 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gray-dark);
+    flex: 1;
+  }
+  .card-header .section-meta {
+    font-size: 11px;
+    color: var(--gold);
+    background: rgba(184,150,12,0.1);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .card-body { padding: 18px 20px; }
+
+  /* ===== CEO指令区 ===== */
+  .ceo-command {
+    background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(212,175,55,0.3);
+  }
+  .ceo-command .ceo-label {
+    color: var(--gold-pale);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .ceo-command h3 {
+    color: white;
+    font-size: 16px;
+    margin-bottom: 14px;
+  }
+  .cmd-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border-left: 3px solid var(--gold-light);
+  }
+  .cmd-item .cmd-num {
+    color: var(--gold-light);
+    font-size: 13px;
+    font-weight: 700;
+    min-width: 20px;
+  }
+  .cmd-item .cmd-text {
+    color: rgba(255,255,255,0.9);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .cmd-item .cmd-priority {
+    margin-left: auto;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 8px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .priority-p0 { background: rgba(192,57,43,0.3); color: #ff8a80; }
+  .priority-p1 { background: rgba(230,126,34,0.3); color: #ffcc80; }
+  .priority-p2 { background: rgba(39,174,96,0.3); color: #a5d6a7; }
+
+  /* ===== 情报条目 ===== */
+  .intel-item {
+    border-left: 4px solid var(--gold);
+    padding: 14px 16px;
+    background: #fafaf5;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 12px;
+  }
+  .intel-item:last-child { margin-bottom: 0; }
+  .intel-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gray-dark);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .intel-summary { font-size: 13px; color: var(--gray-mid); line-height: 1.6; margin-bottom: 6px; }
+  .intel-footer { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .intel-number { font-size: 11px; color: #b0967a; font-weight: 600; }
+  .tag {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    display: inline-block;
+  }
+  .tag-high { background: #fde8e8; color: var(--red-tag); }
+  .tag-mid { background: #fef3e8; color: var(--yellow-tag); }
+  .tag-low { background: #e8f5e9; color: var(--green-tag); }
+
+  /* ===== 议题立项 ===== */
+  .topic-box {
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 14px;
+    background: linear-gradient(135deg, #fffdf0, #fef9e0);
+  }
+  .topic-box .topic-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .topic-box .topic-tag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background: var(--gold-light);
+    color: #1a1a2e;
+  }
+  .topic-box h3 { font-size: 14px; font-weight: 700; color: var(--gray-dark); }
+  .topic-box p { font-size: 13px; color: var(--gray-mid); line-height: 1.6; margin-top: 6px; }
+  .topic-box .topic-value {
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-top: 8px;
+  }
+
+  /* ===== 班子六部状态 ===== */
+  .dept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 12px;
+  }
+  .dept-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    background: #fafaf5;
+  }
+  .dept-name { font-size: 13px; font-weight: 700; color: var(--gray-dark); margin-bottom: 6px; }
+  .dept-status { font-size: 12px; color: var(--gray-mid); line-height: 1.5; }
+  .dept-focus {
+    font-size: 11px;
+    margin-top: 8px;
+    padding: 4px 8px;
+    background: rgba(184,150,12,0.1);
+    border-radius: 6px;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* ===== 行动令 ===== */
+  .action-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    align-items: flex-start;
+  }
+  .action-icon { font-size: 18px; min-width: 24px; }
+  .action-body { flex: 1; }
+  .action-title { font-size: 13px; font-weight: 700; color: var(--gray-dark); margin-bottom: 4px; }
+  .action-desc { font-size: 12px; color: var(--gray-mid); line-height: 1.5; }
+  .action-meta { font-size: 11px; color: var(--gold); font-weight: 600; margin-top: 4px; }
+
+  /* ===== 项目进度 ===== */
+  .progress-bar-wrap {
+    background: #ede9d8;
+    border-radius: 8px;
+    height: 10px;
+    overflow: hidden;
+    margin: 6px 0 2px;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: 8px;
+    transition: width 0.5s ease;
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--gray-light);
+  }
+
+  /* ===== 底部 ===== */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--gray-light);
+    font-size: 11px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 600px) {
+    .card-body { padding: 14px; }
+    .dept-grid { grid-template-columns: 1fr; }
+    .header { padding: 24px 16px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶部横幅 -->
+<div class="header">
+  <div class="header-badge">开元时代 · 班子晨报</div>
+  <h1>D6 班子晨报</h1>
+  <div class="subtitle">2026年3月16日（项目第6天）· 三省六部班子执行日</div>
+  <div class="day-badge">D6-R1 · 礼部情报 + 中书省议题立项</div>
+</div>
+
+<div class="container">
+
+  <!-- CEO今日指令 -->
+  <div class="ceo-command">
+    <div class="ceo-label">⚡ CEO今日行动令</div>
+    <h3>王总·指令确认（2026-03-16）</h3>
+    <div class="cmd-item">
+      <span class="cmd-num">①</span>
+      <span class="cmd-text">阅读今日5条行业情报，确认中书省议题A（长护险定点资质路径）是否立项深度研究</span>
+      <span class="cmd-priority priority-p0">P0</span>
+    </div>
+    <div class="cmd-item">
+      <span class="cmd-num">②</span>
+      <span class="cmd-text">决策：本周是否启动「第一个服务家庭」招募计划（广外街道社区渠道试水）</span>
+      <span class="cmd-priority priority-p0">P0</span>
+    </div>
+    <div class="cmd-item">
+      <span class="cmd-num">③</span>
+      <span class="cmd-text">跟进COO联创候选人进展——护理员培训标准是人才护城河的关键输入</span>
+      <span class="cmd-priority priority-p1">P1</span>
+    </div>
+    <div class="cmd-item">
+      <span class="cmd-num">④</span>
+      <span class="cmd-text">CTO方向：评估「AI陪伴+健康数据采集」最小可用版本的启动方式（内部自研 or 外部接入）</span>
+      <span class="cmd-priority priority-p1">P1</span>
+    </div>
+  </div>
+
+  <!-- 今日情报日报 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">📡</span>
+      <h2>礼部·今日行业情报（D6 · 5条）</h2>
+      <span class="section-meta">2026-03-16采集</span>
+    </div>
+    <div class="card-body">
+
+      <div class="intel-item">
+        <div class="intel-title">
+          🏛️ 十五五规划纲要公布：养老服务五年蓝图出炉
+        </div>
+        <div class="intel-summary">
+          《十五五规划纲要》（2026-03-13）明确：逐步提高城乡居民基础养老金；社区养老服务机构覆盖率目标70%；推进居家社区机构协调发展；智慧养老成产业升级核心引擎。基本养老金今年已完成第八次上涨。
+        </div>
+        <div class="intel-footer">
+          <span class="intel-number">社区覆盖率目标70%</span>
+          <span class="tag tag-high">🔴 开元相关度·高</span>
+        </div>
+      </div>
+
+      <div class="intel-item">
+        <div class="intel-title">
+          🛡️ 长护险全民覆盖确认：每年千亿资金激活银发经济
+        </div>
+        <div class="intel-summary">
+          长护险连续第六年写入政府工作报告，十五五期间全面推开逐步覆盖全民。已覆盖近3亿人，基金支出破千亿，定点机构入住率普遍提升5-6个百分点。商业险协同基本险激活万亿照护市场。
+        </div>
+        <div class="intel-footer">
+          <span class="intel-number">定点机构入住率↑5-6%</span>
+          <span class="tag tag-high">🔴 开元相关度·高</span>
+        </div>
+      </div>
+
+      <div class="intel-item">
+        <div class="intel-title">
+          💰 民政部两会数据：居家消费补贴核销17.2亿，惠及89.2万人
+        </div>
+        <div class="intel-summary">
+          民政部长陆治原在3月7日两会记者会披露：中度以上失能长者养老服务消费补贴累计核销17.2亿元，居家补贴最高500元/月（可与长护险叠加）。全国8万助餐点，日均300万老年人就近吃热饭。
+        </div>
+        <div class="intel-footer">
+          <span class="intel-number">消费补贴最高500元/月（居家）</span>
+          <span class="tag tag-high">🔴 开元相关度·高</span>
+        </div>
+      </div>
+
+      <div class="intel-item">
+        <div class="intel-title">
+          👷 护理员人才政策升级：持证补贴+3000元，新职业"养老服务师"入目录
+        </div>
+        <div class="intel-summary">
+          人社部、民政部推出《养老服务技能人才专项培训方案》，"养老服务师"纳入新职业；初/中/高级持证补贴1000-3000元，部分省份入职奖补达1万元；培训课程全免费，政府每年对护理员全员轮训。
+        </div>
+        <div class="intel-footer">
+          <span class="intel-number">入职奖补最高1万元</span>
+          <span class="tag tag-mid">🟡 开元相关度·中</span>
+        </div>
+      </div>
+
+      <div class="intel-item">
+        <div class="intel-title">
+          ⚖️ 开封市《居家社区养老服务促进条例》3月施行——地方立法提速
+        </div>
+        <div class="intel-summary">
+          河南开封颁布全市首部居家养老地方法规（共35条，3月1日施行），明确民政、卫生健康、医保各部门职责。预示全国多地将跟进地方立法，为规范化居家养老服务机构提供法律背书。
+        </div>
+        <div class="intel-footer">
+          <span class="intel-number">35条地方法规</span>
+          <span class="tag tag-mid">🟡 开元相关度·中</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 中书省议题立项 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🎯</span>
+      <h2>中书省·今日议题立项建议</h2>
+      <span class="section-meta">待CEO确认</span>
+    </div>
+    <div class="card-body">
+
+      <div class="topic-box">
+        <div class="topic-header">
+          <span class="topic-tag">议题A · 强烈推荐</span>
+          <h3>长护险定点机构资质申请路径——开元如何进入政策资金池？</h3>
+        </div>
+        <p>
+          长护险全民覆盖意味着：成为长护险定点服务机构 = 稳定政策结算资金 + 入住率/服务量显著提升。
+          这是开元时代降低现金流风险、实现"政策兜底"的最直接路径。
+          研究内容：北京/西城区长护险定点资质申请条件、评估标准、认定周期、护理级别对应服务项目。
+        </p>
+        <div class="topic-value">⭐ 直接影响现金流安全 · 研究价值：极高</div>
+      </div>
+
+      <div class="topic-box" style="border-color: #ccc; background: linear-gradient(135deg, #fafafa, #f5f5f5);">
+        <div class="topic-header">
+          <span class="topic-tag" style="background: #ccc; color: #555;">议题B · 可选</span>
+          <h3>十五五"社区覆盖率70%"目标下的政府采购窗口——广外缺口有多大？</h3>
+        </div>
+        <p>
+          十五五规划要求社区养老服务机构覆盖率从当前水平提升至70%。政府必然大量购买服务，
+          广外街道嵌入式养老设施现状是否存在供给缺口，是开元争取政府合作的切入点。
+          研究内容：西城区/广外街道现有嵌入式养老机构数量、服务能力、政府采购记录。
+        </p>
+        <div class="topic-value">⭐ 影响进入路径 · 研究价值：高</div>
+      </div>
+
+      <div style="background: rgba(184,150,12,0.08); border-radius: 8px; padding: 12px 14px; font-size: 13px; color: var(--gray-mid);">
+        💡 <strong style="color:var(--gold);">建议CEO确认：</strong>
+        优先立项议题A（对现金流影响最直接），本轮R2由中书省启动深度研究，预计产出一份可操作的「长护险定点申请路径报告」。
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 班子六部D6工作状态 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🏛️</span>
+      <h2>三省六部·D6工作状态</h2>
+      <span class="section-meta">D6晨况</span>
+    </div>
+    <div class="card-body">
+      <div class="dept-grid">
+        <div class="dept-card">
+          <div class="dept-name">📜 中书省 · CSO（谋划司）</div>
+          <div class="dept-status">D5三大战略研究报告已完成。D6待启动：长护险定点路径专项研究（待CEO确认立项）</div>
+          <div class="dept-focus">D6重点：议题A立项研究</div>
+        </div>
+        <div class="dept-card">
+          <div class="dept-name">⚖️ 门下省 · CFO（审议司）</div>
+          <div class="dept-status">现金流三情景模型待更新（纳入长护险定点后的政策结算收入场景）</div>
+          <div class="dept-focus">D6重点：纳入长护险收入假设</div>
+        </div>
+        <div class="dept-card">
+          <div class="dept-name">⚙️ 尚书省 · COO（执行司）</div>
+          <div class="dept-status">D5服务SOP框架已备，护理员招募标准待联创COO参与完善；广外街道第一家庭招募启动时机待确认</div>
+          <div class="dept-focus">D6重点：护理员培训体系细化</div>
+        </div>
+        <div class="dept-card">
+          <div class="dept-name">📡 礼部（情报司）</div>
+          <div class="dept-status">D6情报采集完成，5条核心动态写入知识库</div>
+          <div class="dept-focus">D6完成 ✅</div>
+        </div>
+        <div class="dept-card">
+          <div class="dept-name">🤖 工部（技术司）</div>
+          <div class="dept-status">AI陪伴系统最小可用版本方案待评估；联创CTO选型方向讨论中（自研 vs 外部接入）</div>
+          <div class="dept-focus">D6重点：技术路径选型决策</div>
+        </div>
+        <div class="dept-card">
+          <div class="dept-name">🌐 鸿胪寺（对外司）</div>
+          <div class="dept-status">外部合作伙伴（tengbeibei等）按里程碑策略，筹备期暂不推送日常动态</div>
+          <div class="dept-focus">里程碑节点待触发</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 今日行动计划 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">⚡</span>
+      <h2>今日行动计划（D6·优先级排序）</h2>
+      <span class="section-meta">班子协同</span>
+    </div>
+    <div class="card-body">
+
+      <div class="action-item">
+        <span class="action-icon">🔴</span>
+        <div class="action-body">
+          <div class="action-title">【P0】CEO确认议题A立项 → 中书省启动长护险定点路径研究</div>
+          <div class="action-desc">长护险定点是现金流安全的最重要政策杠杆，本轮研究将输出可操作的申请路径方案，指导D6-D10的政府关系建立行动。</div>
+          <div class="action-meta">负责：CSO + CEO确认 · 本轮可完成</div>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <span class="action-icon">🔴</span>
+        <div class="action-body">
+          <div class="action-title">【P0】决策：广外街道第一家庭招募——时机是否成熟？</div>
+          <div class="action-desc">D5已完成服务SOP框架、护理员岗位说明书。广外街道社区渠道（家人在居委会任职）已就绪。本周是否开始走访第一个长者家庭？</div>
+          <div class="action-meta">负责：CEO决策 + COO执行 · 关键里程碑</div>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <span class="action-icon">🟡</span>
+        <div class="action-body">
+          <div class="action-title">【P1】CFO更新现金流模型：纳入长护险定点结算场景</div>
+          <div class="action-desc">原三情景模型基于自费+补贴，现需新增"长护险定点结算"情景，测算定点后的盈亏平衡点变化。</div>
+          <div class="action-meta">负责：CFO · 今日可启动</div>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <span class="action-icon">🟡</span>
+        <div class="action-body">
+          <div class="action-title">【P1】联创CTO方向：AI陪伴最小版本评估（内部自研 vs API接入）</div>
+          <div class="action-desc">技术护城河核心：健康数据积累。最小版本只需：健康问卷记录 + 日常打卡提醒 + 家属报告推送。评估开发成本和时间窗口。</div>
+          <div class="action-meta">负责：CTO + CEO拍板 · 本周完成评估</div>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <span class="action-icon">🟢</span>
+        <div class="action-body">
+          <div class="action-title">【P2】联创COO：完善护理员招募标准（结合今日人才政策新动态）</div>
+          <div class="action-desc">2026年护理员持证补贴1000-3000元，入职奖补最高1万元。开元招募护理员时可主动告知政策，作为吸引力加码。同步更新培训手册中的薪酬/奖励说明。</div>
+          <div class="action-meta">负责：COO · 本周内</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 项目总体进度 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">📊</span>
+      <h2>项目总体进度（D6·第6天）</h2>
+      <span class="section-meta">储备期进度</span>
+    </div>
+    <div class="card-body">
+      <div style="margin-bottom: 16px;">
+        <div class="progress-label"><span>战略规划完成度</span><span>80%</span></div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:80%"></div></div>
+        <div style="font-size:11px;color:#aaa;">三大战略研究报告D5完成，十五五政策已同步</div>
+      </div>
+      <div style="margin-bottom: 16px;">
+        <div class="progress-label"><span>落地配套作业准备</span><span>65%</span></div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:65%"></div></div>
+        <div style="font-size:11px;color:#aaa;">服务SOP/合同/评估表/培训手册已备，长护险路径待研究</div>
+      </div>
+      <div style="margin-bottom: 16px;">
+        <div class="progress-label"><span>联创团队建制</span><span>30%</span></div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:30%"></div></div>
+        <div style="font-size:11px;color:#aaa;">CEO已就位，COO/CTO联创候选人招募中</div>
+      </div>
+      <div style="margin-bottom: 0;">
+        <div class="progress-label"><span>第一个服务家庭招募</span><span>5%</span></div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:5%"></div></div>
+        <div style="font-size:11px;color:#aaa;">社区渠道就绪，等待CEO决策启动时机</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 北极星 -->
+  <div style="text-align:center; padding:24px 16px; background:linear-gradient(135deg,#fffdf0,#fef5d0); border-radius:12px; border:1px solid var(--border); margin-top:8px;">
+    <div style="font-size:22px;margin-bottom:8px;">⭐</div>
+    <div style="font-size:14px;color:var(--gold);font-weight:700;letter-spacing:1px;">开元北极星</div>
+    <div style="font-size:16px;color:var(--gray-dark);font-weight:600;margin-top:6px;line-height:1.7;">
+      每一位长者，无论贫富，<br>都能享受到基本的、有尊严的照护。
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  开元时代 · 班子晨报 · D6-R1 · 2026-03-16<br>
+  由小美搭档（王晶晶AI助理）自动生成 · 三省六部班子执行系统
+</div>
+
+</body>
+</html>
