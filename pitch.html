@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>开元时代 · 投资人路演手册</title>
+<style>
+  :root{
+    --bg:#FAFAF8;--bg2:#F4F3EE;--bg3:#ECEAE3;
+    --gold:#8B6914;--gold-light:#B8940F;
+    --text:#1C1C1E;--muted:#6C6C70;--border:rgba(139,105,20,0.15);
+    --green:#1D7A45;--blue:#1A56A8;--red:#C0392B;--amber:#C87D0E;--purple:#6B3FA0;
+    --green-bg:rgba(29,122,69,0.07);--blue-bg:rgba(26,86,168,0.07);
+    --red-bg:rgba(192,57,43,0.07);--amber-bg:rgba(200,125,14,0.07);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.8;font-size:16px;}
+
+  /* ── HEADER ── */
+  .cover{
+    background:linear-gradient(135deg,#1C1C1E 0%,#2C2416 100%);
+    padding:4rem 2rem 3.5rem;text-align:center;position:relative;overflow:hidden;
+  }
+  .cover::before{content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(184,148,15,0.2),transparent);
+    pointer-events:none;}
+  .cover-label{font-size:0.72rem;color:#B8940F;letter-spacing:4px;text-transform:uppercase;
+    margin-bottom:1rem;position:relative;}
+  .cover-title{font-size:clamp(2rem,5vw,3rem);font-weight:900;color:#EAE6D8;
+    line-height:1.2;margin-bottom:0.8rem;position:relative;}
+  .cover-title em{font-style:normal;color:#B8940F;}
+  .cover-sub{font-size:1rem;color:rgba(234,230,216,0.65);margin-bottom:2rem;position:relative;}
+  .cover-meta{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;position:relative;}
+  .cover-meta-item{font-size:0.78rem;color:rgba(234,230,216,0.5);}
+  .cover-meta-item strong{color:#B8940F;}
+
+  /* ── NAV ── */
+  .pitch-nav{
+    position:sticky;top:0;z-index:100;background:rgba(250,250,248,0.97);
+    backdrop-filter:blur(16px);border-bottom:1px solid var(--border);
+    padding:0 2rem;height:52px;display:flex;align-items:center;gap:2rem;
+    overflow-x:auto;
+  }
+  .pitch-nav a{font-size:0.8rem;color:var(--muted);text-decoration:none;
+    white-space:nowrap;transition:color .15s;}
+  .pitch-nav a:hover{color:var(--gold);}
+  .pitch-nav .update-badge{margin-left:auto;font-size:0.68rem;padding:0.2rem 0.7rem;
+    border-radius:100px;background:rgba(139,105,20,0.1);color:var(--gold);
+    border:1px solid rgba(139,105,20,0.25);white-space:nowrap;}
+
+  /* ── LAYOUT ── */
+  .container{max-width:960px;margin:0 auto;padding:0 1.5rem 4rem;}
+  .section{padding:3.5rem 0 2rem;}
+  .section-tag{font-size:0.68rem;color:var(--gold);letter-spacing:3px;
+    text-transform:uppercase;font-weight:700;margin-bottom:0.5rem;}
+  .section-title{font-size:1.6rem;font-weight:900;margin-bottom:0.6rem;}
+  .section-desc{font-size:0.95rem;color:var(--muted);line-height:1.8;margin-bottom:2rem;}
+  hr.divider{border:none;border-top:1px solid var(--border);margin:0;}
+
+  /* ── ONE-LINER ── */
+  .one-liner{
+    background:linear-gradient(135deg,rgba(139,105,20,0.1),rgba(139,105,20,0.03));
+    border:1.5px solid rgba(139,105,20,0.4);border-radius:20px;
+    padding:2.5rem;margin-bottom:2.5rem;text-align:center;
+  }
+  .one-liner-label{font-size:0.7rem;color:var(--gold);letter-spacing:3px;
+    text-transform:uppercase;margin-bottom:1rem;font-weight:700;}
+  .one-liner-text{font-size:1.25rem;font-weight:800;line-height:1.6;margin-bottom:0.8rem;}
+  .one-liner-sub{font-size:0.9rem;color:var(--muted);}
+
+  /* ── WHY NOW ── */
+  .policy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:1.5rem;}
+  .policy-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.3rem;}
+  .policy-card .num{font-size:1.8rem;font-weight:900;margin-bottom:0.2rem;}
+  .policy-card .label{font-size:0.82rem;color:var(--muted);line-height:1.6;}
+  .policy-card .source{font-size:0.7rem;color:var(--gold);margin-top:0.5rem;font-style:italic;}
+
+  /* ── MOAT 壁垒 ── */
+  .moat-grid{display:flex;flex-direction:column;gap:1.2rem;margin-bottom:2rem;}
+  .moat-card{background:#fff;border-radius:16px;padding:1.6rem;border:1px solid var(--border);}
+  .moat-card.moat-1{border-left:4px solid var(--gold);}
+  .moat-card.moat-2{border-left:4px solid var(--green);}
+  .moat-card.moat-3{border-left:4px solid var(--blue);}
+  .moat-header{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;}
+  .moat-icon{font-size:1.5rem;}
+  .moat-title{font-size:1.05rem;font-weight:800;}
+  .moat-tag{font-size:0.68rem;padding:0.15rem 0.6rem;border-radius:100px;font-weight:700;}
+  .moat-body{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.8rem;}
+  @media(max-width:640px){.moat-body{grid-template-columns:1fr;}}
+  .moat-col h4{font-size:0.7rem;color:var(--muted);letter-spacing:1px;
+    text-transform:uppercase;margin-bottom:0.4rem;font-weight:700;}
+  .moat-col p{font-size:0.88rem;line-height:1.7;color:var(--text);}
+  .moat-highlight{
+    margin-top:0.8rem;padding:0.6rem 1rem;
+    background:rgba(139,105,20,0.06);border-radius:8px;
+    font-size:0.82rem;color:var(--gold);font-style:italic;
+  }
+
+  /* ── UE 单客经济 ── */
+  .ue-box{background:#fff;border:1px solid var(--border);border-radius:16px;
+    padding:1.8rem;margin-bottom:1.5rem;}
+  .ue-title{font-size:1.05rem;font-weight:800;margin-bottom:1.2rem;}
+  .ue-flow{display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.2rem;}
+  .ue-item{background:var(--bg2);border-radius:10px;padding:0.6rem 1rem;
+    text-align:center;min-width:100px;}
+  .ue-item .v{font-size:1.2rem;font-weight:800;margin-bottom:0.1rem;}
+  .ue-item .l{font-size:0.72rem;color:var(--muted);}
+  .ue-arrow{font-size:1.2rem;color:var(--gold);font-weight:900;}
+  .ue-result{background:var(--green-bg);border:1px solid rgba(29,122,69,0.25);
+    border-radius:10px;padding:0.8rem 1.2rem;font-size:0.9rem;line-height:1.7;}
+  .ue-caveat{margin-top:0.8rem;font-size:0.8rem;color:var(--muted);
+    padding:0.5rem 0.8rem;background:var(--amber-bg);border-radius:8px;}
+
+  /* ── 路径 ── */
+  .path-timeline{position:relative;padding-left:2rem;margin-bottom:2rem;}
+  .path-timeline::before{content:'';position:absolute;left:0.5rem;top:0;bottom:0;
+    width:2px;background:linear-gradient(180deg,var(--gold),var(--green),var(--blue));
+    border-radius:2px;}
+  .path-item{position:relative;padding:0 0 2rem 1.5rem;}
+  .path-dot{position:absolute;left:-1rem;top:0.35rem;width:12px;height:12px;
+    border-radius:50%;border:2px solid var(--bg);}
+  .path-phase{font-size:0.72rem;font-weight:700;letter-spacing:2px;
+    text-transform:uppercase;margin-bottom:0.3rem;}
+  .path-title{font-size:1rem;font-weight:800;margin-bottom:0.4rem;}
+  .path-desc{font-size:0.9rem;color:var(--muted);line-height:1.75;}
+  .path-kpi{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.6rem;}
+  .kpi-badge{font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:6px;font-weight:600;}
+
+  /* ── Q&A ── */
+  .qa-list{display:flex;flex-direction:column;gap:1rem;}
+  .qa-item{background:#fff;border-radius:14px;border:1px solid var(--border);
+    overflow:hidden;}
+  .qa-q{padding:1rem 1.3rem;background:var(--bg2);font-size:0.92rem;
+    font-weight:700;cursor:pointer;display:flex;justify-content:space-between;
+    align-items:center;}
+  .qa-q .arrow{font-size:0.7rem;color:var(--muted);transition:transform .2s;}
+  .qa-a{padding:1.2rem 1.3rem;font-size:0.9rem;color:var(--text);
+    line-height:1.8;display:none;}
+  .qa-item.open .qa-a{display:block;}
+  .qa-item.open .arrow{transform:rotate(180deg);}
+  .qa-tag{font-size:0.65rem;padding:0.1rem 0.5rem;border-radius:4px;
+    font-weight:700;margin-right:0.5rem;}
+
+  /* ── 融资 ── */
+  .fund-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;}
+  .fund-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.2rem;}
+  .fund-stage{font-size:0.72rem;font-weight:700;letter-spacing:1px;
+    text-transform:uppercase;margin-bottom:0.4rem;}
+  .fund-amount{font-size:1.4rem;font-weight:900;margin-bottom:0.3rem;}
+  .fund-use{font-size:0.82rem;color:var(--muted);line-height:1.7;}
+
+  /* ── 每日更新标记 ── */
+  .daily-update{
+    background:rgba(29,122,69,0.06);border:1px solid rgba(29,122,69,0.2);
+    border-radius:10px;padding:0.7rem 1rem;font-size:0.8rem;color:var(--green);
+    margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;
+  }
+  .update-dot{width:8px;height:8px;border-radius:50%;background:var(--green);
+    flex-shrink:0;animation:pulse 2s ease infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+  /* ── FOOTER ── */
+  .pitch-footer{background:var(--bg3);border-top:1px solid var(--border);
+    padding:2rem;text-align:center;font-size:0.82rem;color:var(--muted);}
+  .pitch-footer strong{color:var(--gold);}
+
+  @media(max-width:640px){
+    .cover{padding:3rem 1.2rem 2.5rem;}
+    .container{padding:0 1rem 3rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ── COVER ── -->
+<div class="cover">
+  <div class="cover-label">Investor Pitch · 投资人路演手册</div>
+  <h1 class="cover-title">开元时代<br/><em>居家照护数据基础设施提供者</em></h1>
+  <p class="cover-sub">AI时代的医养服务公司 · 北京西城区广外街道 · 天使轮融资中</p>
+  <div class="cover-meta">
+    <span class="cover-meta-item"><strong>更新日期</strong> D6 · 2026-03-16</span>
+    <span class="cover-meta-item"><strong>阶段</strong> 储备期（路演准备中）</span>
+    <span class="cover-meta-item"><strong>融资需求</strong> 天使轮 300-500万</span>
+    <span class="cover-meta-item"><strong>联系</strong> CEO · 开元时代创始人</span>
+  </div>
+</div>
+
+<!-- ── NAV ── -->
+<div class="pitch-nav">
+  <a href="#why-us">为什么我们</a>
+  <a href="#why-now">为什么现在</a>
+  <a href="#moat">竞争壁垒</a>
+  <a href="#ue">单客经济</a>
+  <a href="#path">关键路径</a>
+  <a href="#qa">投资人Q&A</a>
+  <a href="#funding">融资规划</a>
+  <span class="update-badge">● D6已更新 · 2026-03-16</span>
+</div>
+
+<div class="container">
+
+  <!-- ── 0 · 每日更新标记 ── -->
+  <div class="section" id="update" style="padding-top:2rem;padding-bottom:0;">
+    <div class="daily-update">
+      <span class="update-dot"></span>
+      <span><strong>D6（2026-03-16）更新</strong>：十五五规划养老数据纳入、长护险全民覆盖确认、民政补贴17.2亿核销数据、护理员人才政策升级。详见「为什么现在」模块。</span>
+    </div>
+  </div>
+
+  <!-- ── 1 · 为什么我们 ── -->
+  <div class="section" id="why-us">
+    <div class="section-tag">Why Us · 为什么是开元</div>
+    <div class="section-title">三个「别人做不到」</div>
+
+    <div class="one-liner">
+      <div class="one-liner-label">One Line Pitch</div>
+      <div class="one-liner-text">我们是中国第一批系统化积累真实居家照护数据的创业者——<br/>不卖小时，卖「让子女安心、让长者有尊严」的完整照护服务</div>
+      <div class="one-liner-sub">AI时代的医养服务公司 · 数据护城河 · 政策红利期先入场</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-bottom:2rem;">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.4rem;border-top:3px solid var(--gold);">
+        <div style="font-size:0.72rem;color:var(--gold);letter-spacing:2px;font-weight:700;margin-bottom:0.5rem;">① 社区信任资本（不可购买）</div>
+        <div style="font-size:0.95rem;font-weight:800;margin-bottom:0.5rem;">居委会层级入场券</div>
+        <p style="font-size:0.88rem;color:var(--muted);line-height:1.75;">创始人家庭成员在广外街道居委会任职。第一批家庭由居委会直接引荐——信任成本为零。<strong style="color:var(--text);">任何外来竞争者无法复制，只有时间无法购买。</strong></p>
+        <div style="margin-top:0.7rem;font-size:0.78rem;color:var(--gold);font-style:italic;">「开元不是在找客户，是在被信任引荐到客户家里。」</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.4rem;border-top:3px solid var(--green);">
+        <div style="font-size:0.72rem;color:var(--green);letter-spacing:2px;font-weight:700;margin-bottom:0.5rem;">② 政策窗口先发优势</div>
+        <div style="font-size:0.95rem;font-weight:800;margin-bottom:0.5rem;">2026年是养老政策元年</div>
+        <p style="font-size:0.88rem;color:var(--muted);line-height:1.75;">十五五写入养老、长护险全民覆盖、民政补贴800元/月落地——<strong style="color:var(--text);">三重政策同步触发，先入场者有定价权和资质优先申请权。</strong></p>
+        <div style="margin-top:0.7rem;font-size:0.78rem;color:var(--green);font-style:italic;">「现在入场养老，就像2010年做外卖——政策点燃了市场。」</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.4rem;border-top:3px solid var(--blue);">
+        <div style="font-size:0.72rem;color:var(--blue);letter-spacing:2px;font-weight:700;margin-bottom:0.5rem;">③ AI时代数据战略</div>
+        <div style="font-size:0.95rem;font-weight:800;margin-bottom:0.5rem;">最早积累照护数据的人</div>
+        <p style="font-size:0.88rem;color:var(--muted);line-height:1.75;">每次上门服务产生的健康档案、行为数据、情绪基线，是训练「居家照护具身智能」的黄金训练集。<strong style="color:var(--text);">越做越难复制的技术护城河。</strong></p>
+        <div style="margin-top:0.7rem;font-size:0.78rem;color:var(--blue);font-style:italic;">「1000户数据后，开元是中国最懂长者情绪状态的服务数据库。」</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ── 2 · 为什么现在 ── -->
+  <div class="section" id="why-now">
+    <div class="section-tag">Why Now · 为什么是现在</div>
+    <div class="section-title">三重政策同步触发，窗口期约18个月</div>
+    <div class="section-desc">D6更新：十五五规划正式公布，长护险全民覆盖确认，民政补贴数据公开——这三条新闻同时出现在2026年3月，意味着政策红利的集中释放期正是现在。</div>
+
+    <div class="policy-grid">
+      <div class="policy-card">
+        <div class="num" style="color:var(--gold);">3.23亿</div>
+        <div class="label">60岁以上长者<br/>占全国人口22%</div>
+        <div class="source">国家统计局 2026</div>
+      </div>
+      <div class="policy-card">
+        <div class="num" style="color:var(--green);">3.2万亿</div>
+        <div class="label">居家养老市场规模<br/>年复合增速18.7%</div>
+        <div class="source">艾瑞咨询 2026</div>
+      </div>
+      <div class="policy-card">
+        <div class="num" style="color:var(--blue);">70%</div>
+        <div class="label">十五五社区养老覆盖率目标<br/>当前约45%，缺口巨大</div>
+        <div class="source">十五五规划纲要 2026-03-13</div>
+      </div>
+      <div class="policy-card">
+        <div class="num" style="color:var(--red);">17.2亿</div>
+        <div class="label">民政补贴累计核销金额<br/>惠及89.2万人</div>
+        <div class="source">民政部 两会记者会 2026-03-07</div>
+      </div>
+      <div class="policy-card">
+        <div class="num" style="color:var(--purple);">近3亿</div>
+        <div class="label">长护险覆盖人口<br/>基金支出突破千亿</div>
+        <div class="source">人社部 2026年</div>
+      </div>
+      <div class="policy-card">
+        <div class="num" style="color:var(--amber);">1000-3000元</div>
+        <div class="label">护理员持证政府补贴<br/>「养老服务师」纳入新职业</div>
+        <div class="source">人社部+民政部 2026-03</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(139,105,20,0.05);border:1px solid rgba(139,105,20,0.2);border-radius:14px;padding:1.4rem;margin-top:1rem;">
+      <strong style="color:var(--gold);font-size:0.9rem;">政策窗口核心判断：</strong>
+      <p style="font-size:0.9rem;color:var(--text);margin-top:0.5rem;line-height:1.8;">
+        2026年是「政策落地执行元年」，不是「政策讨论年」——补贴已在核销、长护险已在拨付、十五五已经签字。<strong>真正稀缺的不是政策，是政策落地期内能拿到「民政通入库资质」的服务商数量</strong>——而这个审批是先来先得的。
+      </p>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ── 3 · 竞争壁垒 ── -->
+  <div class="section" id="moat">
+    <div class="section-tag">Moat · 竞争壁垒</div>
+    <div class="section-title">三道护城河（为什么复制不了）</div>
+    <div class="section-desc">每道壁垒都不是单点优势，而是「积累越久越难攻破」的复合结构。</div>
+
+    <div class="moat-grid">
+
+      <!-- 壁垒1 -->
+      <div class="moat-card moat-1">
+        <div class="moat-header">
+          <span class="moat-icon">🏘️</span>
+          <span class="moat-title">壁垒一：社区信任资本（时间不可复制）</span>
+          <span class="moat-tag" style="background:var(--amber-bg);color:var(--amber);">先发×不可购买</span>
+        </div>
+        <div class="moat-body">
+          <div class="moat-col">
+            <h4>行业难题</h4>
+            <p>进入失能长者家庭需要居委会「信任背书」，冷启动成功率&lt;5%，客户极度不信任陌生服务商。</p>
+          </div>
+          <div class="moat-col">
+            <h4>开元的解法</h4>
+            <p>家庭成员在广外街道居委会任职。第一批家庭由居委会直接引荐，<strong>信任成本为零</strong>，这是任何资金都买不来的入场券。</p>
+          </div>
+          <div class="moat-col">
+            <h4>竞争者为什么复制不了</h4>
+            <p>建立居委会信任需要2-3年人情积累，且每个街道都是独立的信任生态。开元每服务一户，壁垒更深一分。</p>
+          </div>
+        </div>
+        <div class="moat-highlight">「开元的第一批家庭不是找来的，是被信任引荐进去的——这是开元最不可复制的原点故事。」</div>
+      </div>
+
+      <!-- 壁垒2 -->
+      <div class="moat-card moat-2">
+        <div class="moat-header">
+          <span class="moat-icon">💰</span>
+          <span class="moat-title">壁垒二：双补贴套利结构（政策窗口护城河）</span>
+          <span class="moat-tag" style="background:var(--green-bg);color:var(--green);">财务模型差异化</span>
+        </div>
+        <div class="moat-body">
+          <div class="moat-col">
+            <h4>行业现状</h4>
+            <p>大多数居家服务商不懂政策申报，民政消费券+长护险双补叠加机制只有极少数机构打通，家庭感知价格居高不下。</p>
+          </div>
+          <div class="moat-col">
+            <h4>开元的套利设计</h4>
+            <p>民政800元/月+长护险最高1044元/月叠加后，<strong>家庭自付仅需¥1,200/月</strong>（对标市价¥4,000）。「政府替你付了70%」是最强获客话术。</p>
+          </div>
+          <div class="moat-col">
+            <h4>先发为什么关键</h4>
+            <p>民政通入库是审批制，名额有限。2026年入库的机构享有签约优先权。越晚入场，审批越难，政策红利越少。</p>
+          </div>
+        </div>
+        <div class="moat-highlight" style="background:rgba(29,122,69,0.06);color:var(--green);">毛利测算：月单价¥4,000 → 补贴覆盖¥1,844 → 家庭自付¥1,200 → 护理员成本¥2,400（20h×¥120）→ <strong>毛利¥1,600/月/户，盈亏平衡仅需1户转正</strong></div>
+      </div>
+
+      <!-- 壁垒3 -->
+      <div class="moat-card moat-3">
+        <div class="moat-header">
+          <span class="moat-icon">📊</span>
+          <span class="moat-title">壁垒三：照护数据飞轮（AI时代技术护城河）</span>
+          <span class="moat-tag" style="background:var(--blue-bg);color:var(--blue);">长期×技术壁垒</span>
+        </div>
+        <div class="moat-body">
+          <div class="moat-col">
+            <h4>服务同质化困境</h4>
+            <p>居家照护本质是劳动力，极易被复制和价格战。行业NPS普遍低于6分，用户留存靠「没有更好选择」。</p>
+          </div>
+          <div class="moat-col">
+            <h4>开元的差异化</h4>
+            <p>每次上门留下「故事记录」——长者今天的状态、护理员的细节——形成家庭情感依赖。<strong>这是情感锁定，不是服务锁定。</strong></p>
+          </div>
+          <div class="moat-col">
+            <h4>长期技术价值</h4>
+            <p>故事+健康数据是训练「居家照护具身智能」的黄金标注数据集。1000户后，开元是中国最懂长者情绪状态的居家服务数据库。</p>
+          </div>
+        </div>
+        <div class="moat-highlight" style="background:rgba(26,86,168,0.05);color:var(--blue);">飞轮：故事记录 → 续约率↑ → 更多NPS口碑 → 更多新家庭 → 更多训练数据 → AI辅助更好 → 故事质量↑ → 飞轮加速</div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ── 4 · 单客经济 UE ── -->
+  <div class="section" id="ue">
+    <div class="section-tag">Unit Economics · 单客经济模型</div>
+    <div class="section-title">从第1户开始就能正毛利</div>
+    <div class="section-desc">
+      ⚠️ <strong style="color:var(--red);">重要说明</strong>：以下数字基于政策公开信息测算，E05政策核查（广外街道实地确认）完成前，标注「待核实」的数字不进入正式财务模型。核查完成后将实时更新。
+    </div>
+
+    <div class="ue-box">
+      <div class="ue-title">标准中度失能家庭 · 月度收入结构</div>
+      <div class="ue-flow">
+        <div class="ue-item">
+          <div class="v" style="color:var(--text);">¥4,000</div>
+          <div class="l">家庭月单价</div>
+        </div>
+        <div class="ue-arrow">=</div>
+        <div class="ue-item" style="background:var(--amber-bg);">
+          <div class="v" style="color:var(--amber);">¥800</div>
+          <div class="l">民政消费券<br/><span style="font-size:0.65rem;color:var(--red);">⚠️待核实</span></div>
+        </div>
+        <div class="ue-arrow">+</div>
+        <div class="ue-item" style="background:var(--blue-bg);">
+          <div class="v" style="color:var(--blue);">¥1,044</div>
+          <div class="l">长护险报销<br/><span style="font-size:0.65rem;color:var(--red);">⚠️待核实</span></div>
+        </div>
+        <div class="ue-arrow">+</div>
+        <div class="ue-item" style="background:var(--green-bg);">
+          <div class="v" style="color:var(--green);">¥1,156</div>
+          <div class="l">家庭自付<br/><span style="font-size:0.65rem;color:var(--green);">✅确认</span></div>
+        </div>
+      </div>
+      <div class="ue-flow">
+        <div class="ue-item">
+          <div class="v" style="color:var(--text);">¥4,000</div>
+          <div class="l">月收入</div>
+        </div>
+        <div class="ue-arrow">−</div>
+        <div class="ue-item" style="background:var(--red-bg);">
+          <div class="v" style="color:var(--red);">¥2,400</div>
+          <div class="l">护理员成本<br/>20h×¥120</div>
+        </div>
+        <div class="ue-arrow">−</div>
+        <div class="ue-item" style="background:var(--red-bg);">
+          <div class="v" style="color:var(--red);">¥200</div>
+          <div class="l">管理摊销<br/>运营成本</div>
+        </div>
+        <div class="ue-arrow">=</div>
+        <div class="ue-item" style="background:var(--green-bg);border:1.5px solid var(--green);">
+          <div class="v" style="color:var(--green);">¥1,400</div>
+          <div class="l">月毛利<br/>毛利率35%</div>
+        </div>
+      </div>
+      <div class="ue-result">
+        ✅ <strong>盈亏平衡点仅需 1 户转正</strong>——首批 2 户签约后，开元现金流即刻转正，无需烧钱扩张。<br/>
+        🎯 10户稳定服务 × ¥1,400/月毛利 = <strong>月毛利¥14,000</strong>，覆盖CEO薪资+运营成本，公司自给自足。
+      </div>
+      <div class="ue-caveat">
+        ⚠️ 风险提示：双补叠加的实际可行性、审核周期（预计4-6个月）待E05政策核查确认。补贴退坡情景下，家庭自付升至¥2,200/月（仍低于市价），毛利降至约¥600/月——仍可持续运营。
+      </div>
+    </div>
+
+    <!-- 补贴退坡压力测试 -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:center;">
+        <div style="font-size:0.7rem;color:var(--green);letter-spacing:1px;font-weight:700;margin-bottom:0.4rem;">激进情景</div>
+        <div style="font-size:1.3rem;font-weight:900;color:var(--green);">¥1,400/月/户</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem;">双补完整兑现<br/>家庭自付¥1,156</div>
+      </div>
+      <div style="background:#fff;border:1.5px solid var(--gold);border-radius:12px;padding:1.2rem;text-align:center;">
+        <div style="font-size:0.7rem;color:var(--gold);letter-spacing:1px;font-weight:700;margin-bottom:0.4rem;">中性情景（基准）</div>
+        <div style="font-size:1.3rem;font-weight:900;color:var(--gold);">¥900/月/户</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem;">仅民政800元补贴<br/>家庭自付¥2,000</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:center;">
+        <div style="font-size:0.7rem;color:var(--red);letter-spacing:1px;font-weight:700;margin-bottom:0.4rem;">保守情景</div>
+        <div style="font-size:1.3rem;font-weight:900;color:var(--red);">¥400/月/户</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem;">补贴全部退坡<br/>家庭自付¥4,000</div>
+      </div>
+    </div>
+    <p style="font-size:0.82rem;color:var(--muted);margin-top:0.8rem;">即使补贴全部退坡，<strong style="color:var(--text);">故事+数据+信任</strong>形成的情感依赖确保家庭愿意全额自付——核心价值不依赖补贴。</p>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ── 5 · 关键路径 ── -->
+  <div class="section" id="path">
+    <div class="section-tag">Key Path · 关键路径</div>
+    <div class="section-title">从1户故事到100城标准</div>
+    <div class="section-desc">不追求快，追求不可复制。每一阶段的资产，是下一阶段壁垒的基础。</div>
+
+    <div class="path-timeline">
+      <div class="path-item">
+        <div class="path-dot" style="background:var(--gold);"></div>
+        <div class="path-phase" style="color:var(--gold);">NOW · 储备期（2026年3月-2026年底）</div>
+        <div class="path-title">政策验证 + 首批家庭 + 路演准备</div>
+        <div class="path-desc">完成E05政策核查（广外街道打电话确认补贴可行性）；E06首批2户家庭登记；完成路演BP；开始联创COO/CFO寻访；个人100万启动资金到位确认。</div>
+        <div class="path-kpi">
+          <span class="kpi-badge" style="background:var(--amber-bg);color:var(--amber);">E05政策核查完成</span>
+          <span class="kpi-badge" style="background:var(--amber-bg);color:var(--amber);">E06首批2户登记</span>
+          <span class="kpi-badge" style="background:var(--amber-bg);color:var(--amber);">路演BP定稿</span>
+        </div>
+      </div>
+      <div class="path-item">
+        <div class="path-dot" style="background:var(--green);"></div>
+        <div class="path-phase" style="color:var(--green);">M1 · 阶段一（2027年1月-2028年初）</div>
+        <div class="path-title">10户完美故事 · 首战验证 · 天使轮交割</div>
+        <div class="path-desc">个人100万资金到位，正式启动；首批10户家庭，追求NPS≥8分、30%为低收入长者；COO+CFO两位联创到位；民政通入库资质申请完成；天使轮300-500万融资完成。</div>
+        <div class="path-kpi">
+          <span class="kpi-badge" style="background:var(--green-bg);color:var(--green);">10户NPS≥8分</span>
+          <span class="kpi-badge" style="background:var(--green-bg);color:var(--green);">民政通入库</span>
+          <span class="kpi-badge" style="background:var(--green-bg);color:var(--green);">天使轮300-500万</span>
+          <span class="kpi-badge" style="background:var(--green-bg);color:var(--green);">COO+CFO到位</span>
+        </div>
+      </div>
+      <div class="path-item">
+        <div class="path-dot" style="background:var(--blue);"></div>
+        <div class="path-phase" style="color:var(--blue);">M2 · 阶段二（2028-2030年）</div>
+        <div class="path-title">西城区100社区 · 1000家庭 · A轮</div>
+        <div class="path-desc">将10户完美SOP标准化；覆盖西城区100家社区，服务1000个家庭；护理员合作社建立；AI陪伴系统接入；数据资产初具规模，A轮估值锚：数据+口碑+政策资质。</div>
+        <div class="path-kpi">
+          <span class="kpi-badge" style="background:var(--blue-bg);color:var(--blue);">1000家庭</span>
+          <span class="kpi-badge" style="background:var(--blue-bg);color:var(--blue);">AI陪伴接入</span>
+          <span class="kpi-badge" style="background:var(--blue-bg);color:var(--blue);">A轮2000-5000万</span>
+        </div>
+      </div>
+      <div class="path-item" style="padding-bottom:0;">
+        <div class="path-dot" style="background:var(--purple);"></div>
+        <div class="path-phase" style="color:var(--purple);">M3+ · 阶段三（2030年+）</div>
+        <div class="path-title">100城 · 100万家庭 · 定义行业标准</div>
+        <div class="path-desc">开放加盟赋能平台；护理员合作社+具身智能双轨降本；具身智能训练数据提供者（B端融资）；政府产业基金介入；推动居家照护行业标准落地。<strong>北极星：每一位长者，无论贫富，都能享受有尊严的照护。</strong></div>
+        <div class="path-kpi">
+          <span class="kpi-badge" style="background:var(--purple-bg,rgba(107,63,160,0.07));color:var(--purple);">100城</span>
+          <span class="kpi-badge" style="background:var(--purple-bg,rgba(107,63,160,0.07));color:var(--purple);">行业标准制定</span>
+          <span class="kpi-badge" style="background:var(--purple-bg,rgba(107,63,160,0.07));color:var(--purple);">政府产业基金</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ── 6 · 投资人Q&A ── -->
+  <div class="section" id="qa">
+    <div class="section-tag">Q&A · 投资人高频问题</div>
+    <div class="section-title">苏格拉底自测：最硬核的质问</div>
+    <div class="section-desc">以下是我们预演过的最犀利的投资人追问，以及诚实的回答——包括我们现在不知道答案的部分。</div>
+
+    <div class="qa-list">
+
+      <div class="qa-item open">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span><span class="qa-tag" style="background:var(--red-bg);color:var(--red);">最硬核</span>补贴停了怎么办？你们的商业模式依赖政府补贴，不可持续。</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="qa-a">
+          <strong>诚实回答：补贴是加速器，不是引擎。</strong><br/><br/>
+          补贴让我们获客成本极低、现金流提前转正，但我们的核心价值是「故事感」和「子女安心感」——这是家庭情感需求，不依赖补贴。<br/><br/>
+          压力测试：补贴退坡后，家庭自付从¥1,200升至¥4,000。我们的问题不是「有多少人愿意付¥4,000」，而是「愿意为故事和专属管家付¥4,000的家庭在哪里」——这个市场存在且增长，见UE保守情景测算。<br/><br/>
+          <span style="color:var(--muted);font-size:0.85rem;">⚠️ 我们现在不知道的：真实家庭在补贴退坡情景下的留存率。这是我们首批10户验证期要测量的核心数据点。</span>
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span><span class="qa-tag" style="background:var(--amber-bg);color:var(--amber);">高频问题</span>护理员流失率35-45%，这是行业难题，你们怎么解决？</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="qa-a">
+          开元护理员是「合作伙伴」，不是「员工」——绩效与家庭续约率挂钩，「故事记录」让护理员有成就感和职业荣誉感。<br/><br/>
+          更关键的：2026年「养老服务师」已纳入新职业目录，政府持证补贴1000-3000元。开元同步布局成为北京首批认证合作机构，护理员持证率是我们的护城河，不是问题。<br/><br/>
+          <strong style="color:var(--text);">壁垒设计：固定护理员×固定家庭</strong>——同一位护理员服务同一个家庭，双向建立信任，流失率问题从制度设计层面被绕开。
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span><span class="qa-tag" style="background:var(--amber-bg);color:var(--amber);">高频问题</span>京东、美团这样的大公司入局，你们怎么竞争？</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="qa-a">
+          大平台的逻辑是「标准化×规模化」，开元的逻辑是「信任×专属化」。这两条路不冲突——大平台做的是通用护理，我们做的是「专属照护管家」。<br/><br/>
+          具体数据：京东已在北京西城区启动居家养老试点（2026.3），他们的优势是物流效率，劣势是社区人情味不足。广外居委会关系是开元核心壁垒——平台买不来这个信任，只有时间才能建立。<br/><br/>
+          <strong>关键洞察</strong>：大平台的进入是「市场教育者」——他们让更多家庭接受居家服务的概念，实际上在为开元做市场教育，短期是正向的。
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span><span class="qa-tag" style="background:var(--blue-bg);color:var(--blue);">核心追问</span>创始人凭什么做养老？你们团队现在只有一个人？</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="qa-a">
+          <strong>为什么是我：</strong>互联网服务产品化背景（深度参与过「服务从0到规模化」的全周期，知道如何把服务SOP化）+广外街道居委会层级社区信任资本（不可购买的第一公里入场券）+ 愿景驱动（不是在追市场，是在创造新的服务标准）。<br/><br/>
+          <strong>关于团队：</strong>储备期单人启动是刻意的——先验证政策核查和首批家庭，再用验证结果吸引最对的联创，而不是先组队再试错。COO+CFO的联创寻访已启动，目标2027年Q1引入。<br/><br/>
+          <strong>对投资人的承诺：</strong>天使轮资金的核心用途之一就是引入最对的COO（服务SOP守护者）——这个人的存在是天使轮完成的前提条件之一。
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q" onclick="this.parentElement.classList.toggle('open')">
+          <span><span class="qa-tag" style="background:var(--green-bg);color:var(--green);">新问题·D6</span>十五五写入养老覆盖率目标70%，意味着什么？开元如何卡位？</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="qa-a">
+          十五五明确：社区养老服务机构覆盖率目标70%（当前约45%，缺口25ppt）。这意味着<strong>未来五年，政府需要在全国补建大量社区养老服务点</strong>——而补建的核心是找到有资质的服务商。<br/><br/>
+          <strong>开元的卡位逻辑：</strong>
+          不是去「建点位」，而是成为已有点位的「服务内容提供者」。广外街道现有养老驿站需要的不是硬件，是标准化的居家照护服务内容——这恰好是开元的核心产品。<br/><br/>
+          具体行动：2026年内完成广外街道民政通入库申请，成为街道指定居家照护服务商，绑定政府的补建资源而非竞争。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ── 7 · 融资规划 ── -->
+  <div class="section" id="funding">
+    <div class="section-tag">Funding · 融资规划</div>
+    <div class="section-title">每一轮融资都对应一个可量化的里程碑</div>
+
+    <div class="fund-grid">
+      <div class="fund-card" style="border-top:3px solid var(--gold);">
+        <div class="fund-stage" style="color:var(--gold);">Pre-Seed · 现在</div>
+        <div class="fund-amount" style="color:var(--gold);">¥100万</div>
+        <div class="fund-use">个人出资<br/>储备期验证（E05+E06+路演BP）<br/>联创寻访启动</div>
+      </div>
+      <div class="fund-card" style="border-top:3px solid var(--green);position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),transparent);"></div>
+        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem;">
+          <div class="fund-stage" style="color:var(--green);margin-bottom:0;">天使轮 · <span style="animation:pulse 2.5s ease infinite;display:inline-block;">招募中</span></div>
+        </div>
+        <div class="fund-amount" style="color:var(--green);">300-500万</div>
+        <div class="fund-use">COO+CFO引入<br/>首批10户完美服务<br/>民政通入库资质申请<br/>SOP标准化</div>
+      </div>
+      <div class="fund-card" style="border-top:3px solid var(--blue);">
+        <div class="fund-stage" style="color:var(--blue);">A轮 · 预计2028年</div>
+        <div class="fund-amount" style="color:var(--blue);">2000-5000万</div>
+        <div class="fund-use">西城区100社区扩张<br/>AI陪伴系统接入<br/>护理员合作社建立<br/>数据资产价值化</div>
+      </div>
+      <div class="fund-card" style="border-top:3px solid var(--purple);">
+        <div class="fund-stage" style="color:var(--purple);">B轮+ · 预计2030年+</div>
+        <div class="fund-amount" style="color:var(--purple);">亿元级</div>
+        <div class="fund-use">全国复制<br/>具身智能数据平台<br/>政府产业基金<br/>行业标准定义</div>
+      </div>
+    </div>
+
+    <div style="margin-top:1.5rem;background:rgba(139,105,20,0.05);border:1px solid rgba(139,105,20,0.2);border-radius:14px;padding:1.4rem;">
+      <strong style="color:var(--gold);font-size:0.92rem;">天使轮估值锚（当前）：</strong>
+      <p style="font-size:0.9rem;color:var(--text);margin-top:0.5rem;line-height:1.8;">
+        无历史数据，估值基于「不可购买资产」定价：广外居委会社区信任资本 × 政策窗口期先发优势 × 创始人能力溢价。<br/>
+        参考：同类居家养老天使轮估值区间¥1,200-2,000万，开元定位¥1,500万估值（含Pre-Seed¥100万出资）。
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── FOOTER ── -->
+<div class="pitch-footer">
+  <strong>开元时代</strong> · 投资人路演手册 · D6版本 · 2026-03-16<br/>
+  <span style="margin-top:0.4rem;display:block;font-size:0.75rem;opacity:0.6;">
+    本文档每日基于最新政策数据和战略讨论自动更新 · 如有疑问请联系 CEO
+  </span>
+</div>
+
+<script>
+// Q&A 展开/折叠，初始第一条已展开
+// 点击已处理，无需额外 JS
+</script>
+</body>
+</html>
