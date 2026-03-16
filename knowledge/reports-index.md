@@ -2,6 +2,7 @@
 
 ## 一、研究院课题（T系列 · 一手数据研究）
 
+- **2026-03-16** | D6-R2 中书省战略研究：长护险定点机构申请路径+家庭养老床位切入策略 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-16** | D6-R2议题A研究报告：北京长护险定点申请完整路径（三阶段路径+资质清单+财务影响） | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-16** | D6-R1晨报：5条行业情报+长护险议题立项+D6班子行动令 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | D5-R9班子战报：广外医院P0行动令+7月法规窗口期布局+晚间情报整合 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
