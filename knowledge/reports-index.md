@@ -2,6 +2,7 @@
 
 ## 一、研究院课题（T系列 · 一手数据研究）
 
+- **2026-03-16** | D6-R1晨报：5条行业情报+长护险议题立项+D6班子行动令 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | D5-R9班子战报：广外医院P0行动令+7月法规窗口期布局+晚间情报整合 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | D5-R8晨报：西城区护理员培训招募情报+家庭养老床位申请流程研究+CEO行动令更新 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
 - **2026-03-15** | 固化文件命名规范到长期记忆：user-preferences.md + commands.md 双写，防止再次出现虚假day编号 | [GitHub Pages](https://wangxiaohou123.github.io/kaiyuanshidai/)
