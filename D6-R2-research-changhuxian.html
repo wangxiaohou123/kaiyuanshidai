@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>开元时代·长护险定点申请路径研究报告 | D6-R2</title>
+<style>
+  :root {
+    --gold: #B8960C;
+    --gold-light: #D4AF37;
+    --gold-pale: #F5E6A3;
+    --cream: #FEFCF3;
+    --white: #FFFFFF;
+    --gray-dark: #2C2C2C;
+    --gray-mid: #555555;
+    --gray-light: #888888;
+    --border: #E8D9A0;
+    --red: #C0392B;
+    --orange: #E67E22;
+    --green: #27AE60;
+    --blue: #2980B9;
+    --purple: #8E44AD;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--cream);
+    color: var(--gray-dark);
+    line-height: 1.7;
+  }
+
+  /* ===== 顶部 ===== */
+  .header {
+    background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 60%, #16213e 100%);
+    color: white;
+    padding: 36px 24px 28px;
+    text-align: center;
+    position: relative;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(212,175,55,0.2);
+    border: 1px solid var(--gold-light);
+    color: var(--gold-pale);
+    font-size: 11px;
+    letter-spacing: 2px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .header h1 { font-size: clamp(18px, 4vw, 24px); font-weight: 700; color: white; margin-bottom: 6px; }
+  .header .subtitle { color: var(--gold-pale); font-size: 13px; opacity: 0.9; margin-bottom: 10px; }
+  .header .meta-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+  .header .meta-tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+  .meta-dept { background: rgba(212,175,55,0.2); color: var(--gold-pale); }
+  .meta-level { background: rgba(192,57,43,0.3); color: #ff8a80; }
+  .meta-date { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); }
+
+  /* ===== 主容器 ===== */
+  .container { max-width: 960px; margin: 0 auto; padding: 28px 16px 60px; }
+
+  /* ===== 卡片 ===== */
+  .card {
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    margin-bottom: 22px;
+    overflow: hidden;
+    box-shadow: 0 2px 14px rgba(184,150,12,0.08);
+  }
+  .card-header {
+    background: linear-gradient(135deg, #faf6e8, #f5efc8);
+    border-bottom: 2px solid var(--gold);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-header .icon { font-size: 20px; }
+  .card-header h2 { font-size: 15px; font-weight: 700; color: var(--gray-dark); flex: 1; }
+  .card-header .badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    background: rgba(184,150,12,0.12);
+    color: var(--gold);
+  }
+  .card-body { padding: 20px; }
+
+  /* ===== 总结框 ===== */
+  .summary-box {
+    background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 22px;
+    border: 1px solid rgba(212,175,55,0.3);
+  }
+  .summary-box .label {
+    color: var(--gold-pale);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .summary-box .conclusion {
+    color: white;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .summary-box .conclusion strong { color: var(--gold-pale); }
+  .key-numbers {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+  }
+  .key-num-item {
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+  }
+  .key-num-item .num { font-size: 20px; font-weight: 700; color: var(--gold-light); }
+  .key-num-item .num-label { font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 4px; }
+
+  /* ===== 阶段路径 ===== */
+  .phase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+  .phase-card {
+    border-radius: 10px;
+    padding: 16px;
+    border: 2px solid;
+    position: relative;
+  }
+  .phase-1 { border-color: var(--green); background: #f0fff4; }
+  .phase-2 { border-color: var(--orange); background: #fff8f0; }
+  .phase-3 { border-color: var(--purple); background: #faf0ff; }
+  .phase-card .phase-num {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  .phase-1 .phase-num { background: var(--green); color: white; }
+  .phase-2 .phase-num { background: var(--orange); color: white; }
+  .phase-3 .phase-num { background: var(--purple); color: white; }
+  .phase-card h3 { font-size: 14px; font-weight: 700; color: var(--gray-dark); margin-bottom: 8px; }
+  .phase-card .phase-time { font-size: 12px; color: var(--gray-light); margin-bottom: 8px; font-style: italic; }
+  .phase-card ul { list-style: none; padding: 0; }
+  .phase-card ul li {
+    font-size: 13px;
+    color: var(--gray-mid);
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .phase-card ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 11px;
+  }
+
+  /* ===== 条件要求表 ===== */
+  .req-table { width: 100%; border-collapse: collapse; }
+  .req-table th {
+    background: linear-gradient(135deg, #faf6e8, #f0e8c0);
+    color: var(--gray-dark);
+    font-size: 12px;
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 2px solid var(--gold);
+    font-weight: 700;
+  }
+  .req-table td {
+    font-size: 13px;
+    padding: 10px 12px;
+    border-bottom: 1px solid #f0e8d0;
+    color: var(--gray-mid);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .req-table tr:nth-child(even) td { background: #fdfaf0; }
+  .req-table .req-category {
+    font-weight: 700;
+    color: var(--gray-dark);
+    white-space: nowrap;
+    min-width: 100px;
+  }
+  .req-star { color: var(--red); font-weight: 700; }
+  .tag-must { background: #fde8e8; color: var(--red); font-size: 10px; padding: 1px 6px; border-radius: 8px; font-weight: 600; margin-left: 6px; }
+  .tag-opt { background: #e8f5e9; color: var(--green); font-size: 10px; padding: 1px 6px; border-radius: 8px; font-weight: 600; margin-left: 6px; }
+
+  /* ===== 时间线 ===== */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), rgba(184,150,12,0.2));
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--gold-pale);
+  }
+  .timeline-item .tl-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .timeline-item .tl-step {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: var(--gold-pale);
+    color: #6b5900;
+  }
+  .timeline-item .tl-title { font-size: 14px; font-weight: 700; color: var(--gray-dark); }
+  .timeline-item .tl-time { font-size: 11px; color: var(--gray-light); margin-left: auto; }
+  .timeline-item .tl-body { font-size: 13px; color: var(--gray-mid); line-height: 1.6; }
+  .timeline-item .tl-detail {
+    margin-top: 6px;
+    background: #fafaf5;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: var(--gray-mid);
+    line-height: 1.6;
+    border-left: 3px solid var(--gold);
+  }
+
+  /* ===== 战略分析 ===== */
+  .strategy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  .strategy-item {
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .strategy-item .s-icon { font-size: 24px; margin-bottom: 8px; }
+  .strategy-item h4 { font-size: 13px; font-weight: 700; color: var(--gray-dark); margin-bottom: 6px; }
+  .strategy-item p { font-size: 12px; color: var(--gray-mid); line-height: 1.6; }
+
+  /* ===== 决策建议 ===== */
+  .decision-box {
+    background: linear-gradient(135deg, #fffdf0, #fef9e0);
+    border: 2px solid var(--gold);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .decision-box h3 { font-size: 15px; font-weight: 700; color: var(--gray-dark); margin-bottom: 12px; }
+  .decision-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .decision-options { grid-template-columns: 1fr; } }
+  .option-card {
+    border-radius: 8px;
+    padding: 14px;
+    border: 2px solid;
+  }
+  .option-a { border-color: var(--green); background: #f0fff4; }
+  .option-b { border-color: var(--blue); background: #f0f8ff; }
+  .option-card .opt-label {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+  .option-a .opt-label { background: var(--green); color: white; }
+  .option-b .opt-label { background: var(--blue); color: white; }
+  .option-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .option-card p { font-size: 12px; color: var(--gray-mid); line-height: 1.5; }
+  .option-card .opt-pros { font-size: 12px; color: var(--green); margin-top: 6px; }
+  .option-card .opt-cons { font-size: 12px; color: var(--red); margin-top: 4px; }
+
+  /* ===== 北京长护险现状 ===== */
+  .status-alert {
+    background: linear-gradient(135deg, #fff8e8, #fef3cc);
+    border: 2px solid var(--orange);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 16px;
+  }
+  .status-alert .alert-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--orange);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .status-alert p { font-size: 13px; color: var(--gray-mid); line-height: 1.6; }
+
+  /* ===== action items ===== */
+  .action-next {
+    display: flex;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    margin-bottom: 8px;
+    align-items: flex-start;
+  }
+  .action-next .an-icon { font-size: 18px; min-width: 24px; }
+  .action-next .an-body { flex: 1; }
+  .action-next .an-title { font-size: 13px; font-weight: 700; color: var(--gray-dark); margin-bottom: 4px; }
+  .action-next .an-desc { font-size: 12px; color: var(--gray-mid); line-height: 1.5; }
+  .action-next .an-meta { font-size: 11px; color: var(--gold); font-weight: 600; margin-top: 4px; }
+
+  /* ===== footer ===== */
+  .footer { text-align: center; padding: 20px; color: var(--gray-light); font-size: 11px; border-top: 1px solid var(--border); margin-top: 40px; }
+
+  @media (max-width: 600px) {
+    .card-body { padding: 14px; }
+    .key-numbers { grid-template-columns: 1fr 1fr; }
+    .phase-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶部横幅 -->
+<div class="header">
+  <div class="header-badge">中书省·专项研究报告</div>
+  <h1>北京长护险定点机构申请路径研究</h1>
+  <div class="subtitle">开元时代如何进入政策资金池——定点资质完整路径分析</div>
+  <div class="meta-row">
+    <span class="meta-tag meta-dept">D6-R2 · 中书省</span>
+    <span class="meta-tag meta-level">⭐ 战略级报告</span>
+    <span class="meta-tag meta-date">2026-03-16</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 核心结论总览 -->
+  <div class="summary-box">
+    <div class="label">📊 研究结论总览</div>
+    <div class="conclusion">
+      <strong>核心发现：</strong>北京市长护险目前仅石景山区试点，西城区尚未纳入，但已确认<strong>2026年全市推广</strong>（优先城镇职工），同步北京新增5000张家庭养老床位。开元时代当前阶段的最优路径是：<br><br>
+      ① 先完成<strong>机构合规基础建设</strong>（营业执照+民政备案+护理员持证）<br>
+      ② 接入<strong>北京家庭养老床位</strong>系统（已开放申请，有补贴），快速获得政府背书<br>
+      ③ <strong>等待西城区长护险扩面</strong>（预计2026年底前），届时已具备全部定点申请条件，可第一批切入
+    </div>
+    <div class="key-numbers">
+      <div class="key-num-item">
+        <div class="num">2026年</div>
+        <div class="num-label">北京长护险全市推广</div>
+      </div>
+      <div class="key-num-item">
+        <div class="num">180元/年</div>
+        <div class="num-label">职工参保费（单位+个人各90元）</div>
+      </div>
+      <div class="key-num-item">
+        <div class="num">~3000元/月</div>
+        <div class="num-label">基金支付护理费（70%报销）</div>
+      </div>
+      <div class="key-num-item">
+        <div class="num">5000张</div>
+        <div class="num-label">2026北京新增家庭养老床位</div>
+      </div>
+      <div class="key-num-item">
+        <div class="num">6个月</div>
+        <div class="num-label">失能持续时间认定门槛</div>
+      </div>
+      <div class="key-num-item">
+        <div class="num">30万元</div>
+        <div class="num-label">居家护理机构注册资本下限</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 北京长护险现状警示 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🗺️</span>
+      <h2>北京长护险覆盖现状——关键背景</h2>
+      <span class="badge">必读·地图</span>
+    </div>
+    <div class="card-body">
+      <div class="status-alert">
+        <div class="alert-title">⚠️ 重要：西城区目前未纳入长护险试点</div>
+        <p>
+          北京市长护险当前仅<strong>石景山区</strong>一区试点（2020年11月启动，覆盖约42万参保人）。
+          西城区、海淀区等曾有相关探索但未纳入国家试点体系。
+          <strong>2026年政府工作报告明确：全市计划扩面推广，优先覆盖城镇职工，预计2026年底至2027年初实现西城区覆盖。</strong>
+        </p>
+      </div>
+
+      <table class="req-table" style="margin-top: 8px;">
+        <tr>
+          <th style="width:140px">维度</th>
+          <th>北京长护险关键数据</th>
+        </tr>
+        <tr>
+          <td class="req-category">当前试点区</td>
+          <td>石景山区（全市唯一，2020年11月起）</td>
+        </tr>
+        <tr>
+          <td class="req-category">参保人数</td>
+          <td>约42万，累计6500+重度失能长者享待遇，2800+人正在享受服务</td>
+        </tr>
+        <tr>
+          <td class="req-category">报销标准</td>
+          <td>基金支付约70%，月均护理费约3000元（重度失能），机构护理略低于居家</td>
+        </tr>
+        <tr>
+          <td class="req-category">扩面时间表</td>
+          <td>2026年全市推广确认（北京政府工作报告），2026年底前西城区预计纳入</td>
+        </tr>
+        <tr>
+          <td class="req-category">西城区现状</td>
+          <td>未纳入长护险，但西城区部分养老照料中心（如颐寿轩展览路）已取得长护险定点资质（石景山区政策），可作为参照</td>
+        </tr>
+        <tr>
+          <td class="req-category">开元机会窗口</td>
+          <td><strong>2026年底西城区扩面时，第一批定点名额竞争窗口，现在开始备案是最佳时机</strong></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 定点申请条件 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">📋</span>
+      <h2>长护险定点服务机构·申请条件详解</h2>
+      <span class="badge">完整资质清单</span>
+    </div>
+    <div class="card-body">
+
+      <p style="font-size:13px;color:var(--gray-mid);margin-bottom:16px;">
+        综合北京石景山区、国家医保局2025年版、及各地共同标准，居家护理机构申请长护险定点的完整条件如下：
+      </p>
+
+      <table class="req-table">
+        <tr>
+          <th style="width:110px">条件类别</th>
+          <th>具体要求</th>
+          <th style="width:80px">开元当前状态</th>
+        </tr>
+        <tr>
+          <td class="req-category">法人资格<span class="req-star">*</span></td>
+          <td>
+            具有独立法人资格，依法在工商/民政部门登记注册；
+            居家护理机构须提供营业执照（经营范围含"居家养老""护理服务""生活照料"），
+            或民办非企业单位登记证<span class="tag-must">必须</span>
+          </td>
+          <td style="color: var(--orange); font-size:12px;">❌ 待注册</td>
+        </tr>
+        <tr>
+          <td class="req-category">注册资本<span class="req-star">*</span></td>
+          <td>居家护理服务机构注册资本 <strong>30万元以上</strong>，有固定经营场所<span class="tag-must">必须</span></td>
+          <td style="color: var(--orange); font-size:12px;">❌ 待设立</td>
+        </tr>
+        <tr>
+          <td class="req-category">民政备案<span class="req-star">*</span></td>
+          <td>
+            向区民政局办理养老服务机构备案，提交：营业执照、场地证明（5年以上租赁合同）、
+            消防验收证明、服务方案、法定代表人身份证；
+            备案后15个工作日内悬挂信息公开栏并归集至北京养老服务信息管理系统<span class="tag-must">必须</span>
+          </td>
+          <td style="color: var(--orange); font-size:12px;">❌ 待备案</td>
+        </tr>
+        <tr>
+          <td class="req-category">运营时长<span class="req-star">*</span></td>
+          <td>在现址正常开展服务 <strong>3个月以上</strong>（部分区域要求6个月）<span class="tag-must">必须</span></td>
+          <td style="color: var(--orange); font-size:12px;">⏳ 需累积</td>
+        </tr>
+        <tr>
+          <td class="req-category">人员资质<span class="req-star">*</span></td>
+          <td>
+            核心团队配备：持证养老护理员（各等级均可）、康复师（加分项）；
+            运营负责人有 2年以上养老机构管理经验；
+            服务主管通过《老年照护综合能力评估》培训；
+            护理员持证上岗率不低于 <strong>90%</strong><span class="tag-must">必须</span>
+          </td>
+          <td style="color: var(--orange); font-size:12px;">❌ 待招募</td>
+        </tr>
+        <tr>
+          <td class="req-category">管理制度<span class="req-star">*</span></td>
+          <td>
+            健全且完善的服务管理制度，包括：服务记录制度、安全管理制度、投诉处理制度、
+            突发事件处置制度；严格执行长护险试点相关规定<span class="tag-must">必须</span>
+          </td>
+          <td style="color: var(--green); font-size:12px;">✅ D5已备</td>
+        </tr>
+        <tr>
+          <td class="req-category">信息化系统</td>
+          <td>
+            能够对接医保部门长护险管理系统（联网结算），具备"一人一档"服务记录能力；
+            2025年国医保局要求：管理系统规范化，按统一文书格式记录服务<span class="tag-must">必须</span>
+          </td>
+          <td style="color: var(--orange); font-size:12px;">🔧 待对接</td>
+        </tr>
+        <tr>
+          <td class="req-category">场地要求</td>
+          <td>
+            有固定经营场所，通过消防安全验收；
+            居家护理机构无需大型场地，街道社区嵌入式场所可行<span class="tag-opt">可选</span>
+          </td>
+          <td style="color: var(--orange); font-size:12px;">❌ 待确定</td>
+        </tr>
+        <tr>
+          <td class="req-category">医疗许可</td>
+          <td>
+            若提供专业医疗护理（换药、吸痰、导尿等），须取得《医疗机构执业许可证》；
+            纯生活照料（助浴、助餐、助洁）不需要医疗资质<span class="tag-opt">视服务内容</span>
+          </td>
+          <td style="color: var(--green); font-size:12px;">✅ 初期不需</td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+
+  <!-- 申请材料清单 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">📁</span>
+      <h2>申请材料完整清单</h2>
+      <span class="badge">逐项对照</span>
+    </div>
+    <div class="card-body">
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;">
+        <div style="background:#fafaf5;border-radius:8px;padding:14px;border:1px solid var(--border);">
+          <div style="font-size:13px;font-weight:700;color:var(--gray-dark);margin-bottom:10px;">📄 基础法律文件</div>
+          <ul style="list-style:none;padding:0;">
+            <li style="font-size:12px;color:var(--gray-mid);padding:3px 0;padding-left:14px;position:relative;">
+              <span style="position:absolute;left:0;color:var(--gold)">▸</span>长期护理保险定点服务机构申请书
+            </li>
+            <li style="font-size:12px;color:var(--gray-mid);padding:3px 0;padding-left:14px;position:relative;">
+              <span style="position:absolute;left:0;color:var(--gold)">▸</span>营业执照副本原件+复印件（或民非登记证）
+            </li>
+            <li style="font-size:12px;color:var(--gray-mid);padding:3px 0;padding-left:14px;position:relative;">
+              <span style="position:absolute;left:0;color:var(--gold)">▸</span>法定代表人身份证复印件
+            </li>
+            <li style="font-size:12px;color:var(--gray-mid);padding:3px 0;padding-left:14px;position:relative;">
+              <span style="position:absolute;left:0;color:var(--gold)">▸</span>民政备案证明文件
+            </li>
+          </ul>
+        </div>
+        <div style="background:#fafaf5;border-radius:8px;padding:14px;border:1px solid var(--border);">
+          <div style="font-size:13px;font-weight:700;color:var(--gray-dark);margin-bottom:10px;">🏠 场地与设施</div>
+          <ul style="list-style:none;padding:0;">
+            <li style="font-size:12px;color:var(--gray-mid);padding:3px 0;padding-left:14px;position:relative;">
+              <span style="position:absolute;left:0;color:var(--gold)">▸</span>业务用房产权证明或租赁合同（原件+复印件）
+            </li>
+            <li style="font-size:12px;color:var(--gray-mid);padding:3px 0;padding-left:14px;position:relative;">
+              <span style="position:absolute;left:0;color:var(--gold)">▸</span>消防安全验收证明
+            </li>
+            <li style="font-size:12px;color:var(--gray-mid);padding:3px 0;padding-left:14px;position:relative;">
+              <span style="position:absolute;left:0;color:var(--gold)">▸</span>主要护理设备清单与服务能力介绍
+            </li>
+          </ul>
+        </div>
+        <div style="background:#fafaf5;border-radius:8px;padding:14px;border:1px solid var(--border);">
+          <div style="font-size:13px;font-weight:700;color:var(--gray-dark);margin-bottom:10px;">👤 人员资质</div>
+          <ul style="list-style:none;padding:0;">
+            <li style="font-size:12px;color:var(--gray-mid);padding:3px 0;padding-left:14px;position:relative;">
+              <span style="position:absolute;left:0;color:var(--gold)">▸</span>护理服务人员名单（含身份证+健康证明）
+            </li>
+            <li style="font-size:12px;color:var(--gray-mid);padding:3px 0;padding-left:14px;position:relative;">
+              <span style="position:absolute;left:0;color:var(--gold)">▸</span>护理员职业技能等级证书复印件
+            </li>
+            <li style="font-size:12px;color:var(--gray-mid);padding:3px 0;padding-left:14px;position:relative;">
+              <span style="position:absolute;left:0;color:var(--gold)">▸</span>运营负责人履历及管理经历证明
+            </li>
+          </ul>
+        </div>
+        <div style="background:#fafaf5;border-radius:8px;padding:14px;border:1px solid var(--border);">
+          <div style="font-size:13px;font-weight:700;color:var(--gray-dark);margin-bottom:10px;">📋 制度与服务</div>
+          <ul style="list-style:none;padding:0;">
+            <li style="font-size:12px;color:var(--gray-mid);padding:3px 0;padding-left:14px;position:relative;">
+              <span style="position:absolute;left:0;color:var(--gold)">▸</span>各项管理制度文件（服务/安全/投诉/应急）
+            </li>
+            <li style="font-size:12px;color:var(--gray-mid);padding:3px 0;padding-left:14px;position:relative;">
+              <span style="position:absolute;left:0;color:var(--gold)">▸</span>机构责任险等相关保险凭证
+            </li>
+            <li style="font-size:12px;color:var(--gray-mid);padding:3px 0;padding-left:14px;position:relative;">
+              <span style="position:absolute;left:0;color:var(--gold)">▸</span>服务项目及收费标准公示材料
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 三阶段路径 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🛤️</span>
+      <h2>开元时代·长护险定点三阶段路径</h2>
+      <span class="badge">可操作路线图</span>
+    </div>
+    <div class="card-body">
+      <div class="phase-grid">
+        <div class="phase-card phase-1">
+          <span class="phase-num">第一阶段 ✅</span>
+          <div class="phase-time">当前—2026年8月（约5个月）</div>
+          <h3>合规基础建设</h3>
+          <ul>
+            <li>注册公司：营业执照（经营范围含居家护理/养老服务），30万以上注册资本</li>
+            <li>向西城区民政局申请养老服务机构备案，确定场地（可先用小场地）</li>
+            <li>招募核心护理员，推动持证上岗（利用政府免费培训+1000-3000元持证补贴）</li>
+            <li>完善管理制度体系（D5已有SOP框架，进一步细化）</li>
+            <li>开始服务第一批家庭（积累3-6个月运营记录）</li>
+          </ul>
+        </div>
+        <div class="phase-card phase-2">
+          <span class="phase-num">第二阶段 🔄</span>
+          <div class="phase-time">2026年6-10月（等待窗口期）</div>
+          <h3>接入家庭养老床位+积累政府记录</h3>
+          <ul>
+            <li>向街道/区民政申请成为家庭养老床位运营机构（北京2026年新增5000张）</li>
+            <li>享受政府床位建设补贴，建立与民政部门的正式协议关系</li>
+            <li>同步跟进西城区长护险扩面政策动向（关注区医保局公告）</li>
+            <li>建立"一人一档"电子服务记录系统，为长护险联网结算做技术准备</li>
+            <li>积累真实服务案例（目标：10个家庭，NPS>8分）</li>
+          </ul>
+        </div>
+        <div class="phase-card phase-3">
+          <span class="phase-num">第三阶段 🎯</span>
+          <div class="phase-time">2026年底—2027年初（关键冲刺）</div>
+          <h3>申请长护险定点资质</h3>
+          <ul>
+            <li>西城区长护险扩面后，第一时间向区医保局提交定点申请</li>
+            <li>提交全套材料（含3-6个月运营记录、护理员持证情况、系统对接证明）</li>
+            <li>通过失能评估中心建立合作，扩大失能长者客源</li>
+            <li>获得定点资质后：月均3000元护理费70%由长护险基金结算，现金流安全大幅提升</li>
+            <li>测算盈亏平衡点：10户定点长者 × 2000元/月结算 = 2万元/月稳定收入</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 详细申请流程 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">⚙️</span>
+      <h2>长护险定点申请完整流程（石景山区参照）</h2>
+      <span class="badge">参照现行标准</span>
+    </div>
+    <div class="card-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="tl-header">
+            <span class="tl-step">Step 1</span>
+            <span class="tl-title">准备基础材料，向区医保局提出书面申请</span>
+            <span class="tl-time">约1周</span>
+          </div>
+          <div class="tl-body">向所在区医疗保障局提交《长期护理保险定点服务机构申请书》及基础材料清单</div>
+          <div class="tl-detail">关键联系部门：西城区医疗保障局（等扩面后）；现阶段可提前联系了解预审条件</div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-header">
+            <span class="tl-step">Step 2</span>
+            <span class="tl-title">材料审核与现场评估</span>
+            <span class="tl-time">7-15个工作日</span>
+          </div>
+          <div class="tl-body">区医保局对提交材料进行书面审核，并安排工作人员到机构现场核查（场地、设施、人员、制度）</div>
+          <div class="tl-detail">现场核查重点：护理员持证情况、服务记录台账、管理制度完整性、信息系统是否具备对接条件</div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-header">
+            <span class="tl-step">Step 3</span>
+            <span class="tl-title">协议谈判与签订</span>
+            <span class="tl-time">约1-2周</span>
+          </div>
+          <div class="tl-body">审核通过后，与区医保局经办机构（或受托商保公司）签订《长期护理保险定点服务协议》</div>
+          <div class="tl-detail">协议规定：服务项目范围、计费标准、结算方式（联网直接结算，参保人无需垫资）、服务质量要求、违约处理</div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-header">
+            <span class="tl-step">Step 4</span>
+            <span class="tl-title">系统对接与开通业务</span>
+            <span class="tl-time">约1周</span>
+          </div>
+          <div class="tl-body">完成长护险管理系统对接（POS终端或API接口），开始为持长护险待遇的参保人提供服务</div>
+          <div class="tl-detail">结算流程：服务完成→护理员在系统打卡确认→参保人签字→自动向医保基金申报结算→月底打款</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 战略分析：为什么现在就要准备 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🧠</span>
+      <h2>中书省苏格拉底质询：为什么现在就要备战？</h2>
+      <span class="badge">战略分析</span>
+    </div>
+    <div class="card-body">
+      <div class="strategy-grid">
+        <div class="strategy-item">
+          <div class="s-icon">⏰</div>
+          <h4>时间窗口稀缺</h4>
+          <p>西城区长护险扩面时，第一批定点名额有限。已具备条件的机构优先获批。从现在到扩面约6-8个月，正好是建立运营记录的最短周期。</p>
+        </div>
+        <div class="strategy-item">
+          <div class="s-icon">💰</div>
+          <h4>现金流安全</h4>
+          <p>成为定点机构后，长护险基金月均结算2000-3000元/户，10户客户即2-3万元/月稳定收入。与民政补贴叠加，盈亏平衡点大幅下降。</p>
+        </div>
+        <div class="strategy-item">
+          <div class="s-icon">🏆</div>
+          <h4>品牌背书</h4>
+          <p>"长护险定点单位"是政府信用背书，西城区颐寿轩等知名养老机构均以此为核心卖点，对失能家庭选择服务机构有决定性影响。</p>
+        </div>
+        <div class="strategy-item">
+          <div class="s-icon">🔗</div>
+          <h4>数据积累</h4>
+          <p>长护险要求"一人一档"记录，正是开元时代AI陪伴系统的天然切入点。数据越早沉淀，AI模型越精准，技术护城河越深。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 关键决策：两条路径 -->
+  <div class="decision-box">
+    <h3>🎯 CEO决策节点：备战路径如何选择？</h3>
+    <div class="decision-options">
+      <div class="option-card option-a">
+        <span class="opt-label">路径A · 推荐</span>
+        <h4>先民政备案→接家庭养老床位→等扩面申请长护险</h4>
+        <p>现在注册公司+民政备案，同步接入北京家庭养老床位系统（2026年新增5000张），建立政府协议关系，等待西城区长护险扩面后第一批申请。</p>
+        <div class="opt-pros">✅ 有补贴支撑、政府背书早、到时申请有运营记录</div>
+        <div class="opt-cons">⚠️ 需要先完成注册和场地确定</div>
+      </div>
+      <div class="option-card option-b">
+        <span class="opt-label">路径B · 备选</span>
+        <h4>先私单服务积累案例→扩面时快速申请定点</h4>
+        <p>先以私单模式服务第一批失能长者，建立服务口碑和记录，等西城区长护险正式扩面后再提交定点申请。</p>
+        <div class="opt-pros">✅ 灵活、启动资金要求低</div>
+        <div class="opt-cons">⚠️ 无政府背书、缺乏民政关系积累、补贴叠加难</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;background:rgba(184,150,12,0.1);border-radius:8px;padding:12px 14px;font-size:13px;color:var(--gray-mid);">
+      💡 <strong style="color:var(--gold);">建议：</strong>
+      路径A与路径B并不互斥，可以同步推进——路径B的私单服务即是积累运营记录的方式，路径A的民政备案则是拿到"门票"的必要条件。<strong>最快行动顺序：注册公司（1个月）→ 民政备案（1-2个月）→ 找第一个服务家庭（同步）→ 接家庭养老床位（3个月后）→ 长护险定点申请（2026年底）</strong>
+    </div>
+  </div>
+
+  <!-- 下一步行动 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">⚡</span>
+      <h2>尚书省·下一步具体行动（COO执行清单）</h2>
+      <span class="badge">可执行</span>
+    </div>
+    <div class="card-body">
+      <div class="action-next">
+        <span class="an-icon">🏢</span>
+        <div class="an-body">
+          <div class="an-title">【本月行动 · P0】注册公司</div>
+          <div class="an-desc">在北京市西城区注册公司，营业执照经营范围必须包含：居家养老服务、护理服务、生活照料、健康咨询。注册资本建议30万元以上（满足长护险定点下限）。可选有限责任公司形式（营利性），或民办非企业单位（非营利性，需民政登记）。</div>
+          <div class="an-meta">执行：CEO+COO · 时间：1个月内 · 成本：3000-5000元代理费</div>
+        </div>
+      </div>
+      <div class="action-next">
+        <span class="an-icon">📝</span>
+        <div class="an-body">
+          <div class="an-title">【1-2个月 · P0】西城区民政局养老服务机构备案</div>
+          <div class="an-desc">向西城区民政局提交备案申请：营业执照、场地证明（租赁合同5年以上）、消防验收证明、服务方案、法定代表人身份证。备案完成后获得官方养老机构资质，是申请家庭养老床位和长护险定点的前提。</div>
+          <div class="an-meta">执行：COO · 时间：注册公司后30-60天内 · 关键联系：西城区民政局养老服务科</div>
+        </div>
+      </div>
+      <div class="action-next">
+        <span class="an-icon">👩‍⚕️</span>
+        <div class="an-body">
+          <div class="an-title">【同步进行 · P1】护理员招募+持证培训</div>
+          <div class="an-desc">利用2026年政策红利：政府免费培训+初级持证补贴1000元/高级3000元+部分地区入职奖补1万元。招募广外街道及周边护理员，参加区民政/人社主办的免费培训，90%以上持证上岗（长护险定点硬性要求）。</div>
+          <div class="an-meta">执行：COO · 人才护城河建设核心 · 目标：3个月内2-3名持证护理员</div>
+        </div>
+      </div>
+      <div class="action-next">
+        <span class="an-icon">🏠</span>
+        <div class="an-body">
+          <div class="an-title">【3个月后 · P1】申请家庭养老床位运营资格</div>
+          <div class="an-desc">2026年北京新增5000张家庭养老床位，向街道/区民政申请成为运营机构，享受床位建设补贴，建立与政府的正式协议。广外街道家人在居委会任职的资源可作为重要渠道，加速申请和第一批长者对接。</div>
+          <div class="an-meta">执行：CEO（居委会资源激活）+ COO · 关键里程碑：进入政府补贴体系</div>
+        </div>
+      </div>
+      <div class="action-next">
+        <span class="an-icon">🤖</span>
+        <div class="an-body">
+          <div class="an-title">【同步 · P1】建立"一人一档"服务记录系统</div>
+          <div class="an-desc">长护险联网结算要求按统一文书格式记录服务。建议CTO先用简单的表单/数据库搭建最小版本，每次服务后记录：服务项目、时长、护理员、长者状态、家属反馈。这同时也是AI陪伴系统的数据基础设施。</div>
+          <div class="an-meta">执行：CTO · 最小版本可用简单工具（飞书多维表格/腾讯文档）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 财务影响 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">📈</span>
+      <h2>门下省·长护险定点后财务影响测算</h2>
+      <span class="badge">CFO参考</span>
+    </div>
+    <div class="card-body">
+      <table class="req-table">
+        <tr>
+          <th>指标</th>
+          <th>未定点（纯自费）</th>
+          <th>定点后（叠加长护险）</th>
+        </tr>
+        <tr>
+          <td class="req-category">客户月均付费</td>
+          <td>3000-5000元（全自费）</td>
+          <td>900-1500元（个人自付30%）</td>
+        </tr>
+        <tr>
+          <td class="req-category">政府结算收入</td>
+          <td>0</td>
+          <td>2100-3500元/月（基金支付70%）</td>
+        </tr>
+        <tr>
+          <td class="req-category">客户实际负担</td>
+          <td>高，获客难</td>
+          <td>低，需求旺盛（主动找上门）</td>
+        </tr>
+        <tr>
+          <td class="req-category">盈亏平衡点</td>
+          <td>约25-30个家庭</td>
+          <td><strong>约10-15个家庭</strong>（政府结算抬高收入下限）</td>
+        </tr>
+        <tr>
+          <td class="req-category">10户客户月收入</td>
+          <td>3-5万元（全靠自费）</td>
+          <td><strong>4-5万元</strong>（2-3.5万政府结算+1-1.5万自付）</td>
+        </tr>
+        <tr>
+          <td class="req-category">现金流风险</td>
+          <td>高（全依赖家庭支付能力）</td>
+          <td><strong>低</strong>（政府基金稳定结算，每月打款）</td>
+        </tr>
+      </table>
+      <div style="margin-top:14px;background:rgba(39,174,96,0.1);border-radius:8px;padding:12px 14px;font-size:13px;color:var(--gray-mid);">
+        ✅ <strong style="color:var(--green);">结论：</strong>成为长护险定点机构后，盈亏平衡点下降约40%，现金流安全性大幅提升，同时自费客户的付费门槛降低（客户实际支出减少70%），获客阻力显著减小。这是开元时代最重要的政策杠杆。
+      </div>
+    </div>
+  </div>
+
+  <!-- 关键联系信息 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">📞</span>
+      <h2>关键政府部门联系与对接方式</h2>
+      <span class="badge">行动支持</span>
+    </div>
+    <div class="card-body">
+      <table class="req-table">
+        <tr>
+          <th>部门</th>
+          <th>职责</th>
+          <th>联系方式/渠道</th>
+          <th>时机</th>
+        </tr>
+        <tr>
+          <td class="req-category">西城区民政局养老服务科</td>
+          <td>养老机构备案、家庭养老床位审批、养老服务补贴</td>
+          <td>西城区政府官网；可通过居委会家人资源约见</td>
+          <td>公司注册后立即对接</td>
+        </tr>
+        <tr>
+          <td class="req-category">西城区医疗保障局</td>
+          <td>长护险定点申请、失能评估协调、结算系统对接</td>
+          <td>西城区医保局官网；等扩面政策发布后对接</td>
+          <td>2026年底长护险扩面时</td>
+        </tr>
+        <tr>
+          <td class="req-category">广外街道办事处</td>
+          <td>社区养老服务协调、家庭养老床位需求对接、失能长者名单</td>
+          <td>通过居委会家人资源直接接触，是最重要的渠道</td>
+          <td>现在即可启动</td>
+        </tr>
+        <tr>
+          <td class="req-category">西城区人社局/民政局培训中心</td>
+          <td>养老护理员免费培训、持证补贴申领</td>
+          <td>西城区政务服务网；或通过民政局养老科了解培训安排</td>
+          <td>护理员招募后立即报名</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  开元时代·中书省专项研究报告 · D6-R2 · 2026-03-16<br>
+  研究员：小美搭档（王晶晶AI助理）· 议题A·长护险定点申请路径 · 中书省战略研究部
+</div>
+
+</body>
+</html>
